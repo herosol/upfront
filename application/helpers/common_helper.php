@@ -265,7 +265,8 @@ function get_default($value, $default = 'None') {
         return $value;
 }
 
-function showMsg($type = '', $msg = '') {
+function showMsg($type = '', $msg = '') 
+{
     global $CI;
     if (empty($type) && empty($msg)) {
         $type = $CI->session->userdata('f_type');

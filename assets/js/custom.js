@@ -18,7 +18,6 @@ $(document).ready(function() {
                 method: 'POST'
             })
             .done(function(rs) {
-                console.log(rs);
                 frmMsg.html(rs.msg).slideDown(500);
                 if (rs.scroll_to_msg)
                     $('html, body').animate({ scrollTop: frmMsg.offset().top - 300 }, 'slow');
@@ -33,7 +32,7 @@ $(document).ready(function() {
                         }
                         if (rs.hide_msg)
                             frmMsg.slideUp(500);
-                        frmIcon.addClass("hidden");
+                        // frmIcon.addClass("hidden");
                         if (rs.redirect_url) {
                             window.location.href = rs.redirect_url;
                         } else {

@@ -58,4 +58,12 @@ $route['become-a-model'] = 'pages/become_model';
 $route['help'] = 'pages/help';
 
 //AUTHENTICAION PAGES
+$route['signin'] = 'index/login'; //user login
 $route['signup'] = 'index/register'; //simple user register
+$route['verification/(:any)'] = 'index/verification/$1'; //email verification after register
+$route['forgot-password'] = 'index/forgot_password'; //forgot password
+$route['reset/(:any)'] = 'index/reset/$1';
+$route['reset-password'] = 'index/reset_password';
+
+//DASHBOARD
+$route['dashboard'] = 'account/dashboard';

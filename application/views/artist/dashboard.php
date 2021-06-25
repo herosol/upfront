@@ -14,15 +14,17 @@
 
         <section id="dash">
             <div class="contain-fluid">
+            <h1>HERE</h1>
                 <div class="blk topBlk">
-                    <div class="ico"><img src="<?= $base_url ?>images/users/3.jpg" alt=""></div>
+                    <div class="ico"><img src="<?= base_url() ?>assets/images/users/3.jpg" alt=""></div>
                     <div class="txt">
-                        <h3><span class="regular">Welcome,</span> Dear, Sofia Safinaz! <span class="regular">Nice to see you again.</span></h3>
+                        <h3><span class="regular">Welcome,</span> Dear, <?=$mem_data->user_fname.' '.$mem_data->user_lname?>! <span class="regular">Nice to see you again.</span></h3>
                     </div>
                     <div class="bTn">
                         <a href="<?= $base_url ?>artist/profile-settings.php" class="webBtn mdBtn">Edit Info</a>
                     </div>
                 </div>
+                <?php if($this->session->user_type != 'user'): ?>
                 <h4>Upcoming Bookings</h4>
                 <div class="bookBlk">
                     <ul class="lst">
@@ -160,9 +162,15 @@
                         <li class="price">$220</li>
                     </ul>
                 </div>
+                <?php endif; ?>
             </div>
         </section>
         <!-- dash -->
+        <script>
+            $( document ).ready(function() {
+
+            });
+        </script>
 
 
     </main>

@@ -10,11 +10,10 @@ class Master extends CI_Model
 
     public function getRow($table, $where = '', $array = false, $order_by = '')
     {
-
         if (!empty($where))
             $this->db->where($where);
              $query = $this->db->get($table);
-
+                
             if ($array):
                 if (!empty($order_by)):
                     $this->db->order_by("id", $order_by);

@@ -56,7 +56,7 @@
                     </form>
                     <div class="haveAccount text-center">
                         <span>Already have an account?</span>
-                        <a href="<?= $base_url ?>signin.php">Sign in</a>
+                        <a href="<?= base_url() ?>signin">Sign in</a>
                     </div>
                 </div>
             </div>

@@ -233,7 +233,7 @@ class User_model extends CRUD_Model
     {
         $this->db->where('user_email', $user_email);
         $this->db->where('user_status', '1');
-        $this->db->where('user_verified', '1');
+        $this->db->where('mem_verified', '1');
         $query = $this->db->get($this->table_name);
         return $query->row();
     }
@@ -277,7 +277,7 @@ class User_model extends CRUD_Model
     {
         if($user_id>0)
             $this->db->where('user_id', $user_id);
-        $this->db->where('user_code', $user_code);
+        $this->db->where('mem_code', $user_code);
         $query = $this->db->get($this->table_name);
         return $query->row();
     }

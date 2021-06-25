@@ -47,29 +47,235 @@ class Index extends MY_Controller {
                         'user_lname' => ucfirst($post['lname']),
                         'user_email' => $post['email'],
                         'user_pswd' => doEncode($post['password']),
-                        'user_last_login' => date('Y-m-d h:i:s')
+                        'user_last_login' => date('Y-m-d h:i:s'),
+                        'mem_code' => $rando
                     ];
 
                     $user_id = $this->user_model->save($save_data);
                     $this->session->set_userdata('user_id', $user_id);
                     $this->session->set_userdata('user_type', 'user');
 
+                    $verify_link  = site_url('verification/' .$rando);
+                    $user_data    = array('name' => ucfirst($post['fname']).' '.ucfirst($post['lname']), "email" => $post['email'], "link" => $verify_link);
+                    $is_email_send = $this->send_site_email($user_data, 'signup');
+
                     $res['msg'] = showMsg('success', 'Registered Successfully');
-
-                    $verify_link = site_url('verification/' .$rando);
-                    $mem_data    = array('name' => ucfirst($post['fname']).' '.ucfirst($post['lname']), "email" => $post['email'], "link" => $verify_link);
-                    $this->send_site_email($mem_data, 'signup');
-
                     $res['redirect_url'] = site_url('email-verification');
                     $res['status'] = 1;
                     $res['frm_reset'] = 1;
-                } else {
+                }
+                else
+                {
                     $res['msg'] = showMsg('error', 'E-mail Address Already In Use!');
                 }
             }
             exit(json_encode($res));
         }else{
             $this->load->view("profile/signup");
+        }
+    }
+
+    function login()
+    {
+        //$this->MemLogged();
+        if($this->input->post()) 
+        {
+            $res = array();
+            $res['frm_reset'] = 0;
+            $res['hide_msg'] = 0;
+            $res['scroll_to_msg'] = 0;
+            $res['status'] = 0;
+            $res['redirect_url'] = 0;
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+            if($this->form_validation->run() === FALSE)
+            {
+                $res['msg'] = validation_errors();
+            }
+            else
+            {
+                $data = $this->input->post();
+                $row  = $this->user_model->authenticate($data['email'], $data['password']);
+                if (count($row) > 0) 
+                {
+                    if($row->user_status== 0)
+                    {
+                        $res['msg'] = showMsg('error', showMsg('Your account has been blocked!'));
+                        exit(json_encode($res));
+                    }
+
+                    /*if($row->mem_verified== 0){
+                        $res['msg'] = showMsg('error', 'Please verify email to access your account!');
+                        exit(json_encode($res));
+                    }
+                    */
+                    $remember_token = '';
+                    if(isset($data['remeberMe']))
+                    {
+                        $remember_token = doEncode('member-'.$row->user_id);
+                        $cookie= array('name'   => 'remember', 'value'  => $remember_token, 'expire' => (86400*7));
+                        $this->input->set_cookie($cookie);
+                    }
+
+                    $this->user_model->update_last_login($row->user_id, $remember_token);
+                    $this->session->set_userdata('user_id', $row->user_id);
+                    $this->session->set_userdata('user_type', $row->user_type);
+
+                    if ($row->mem_verified == 0)
+                        $this->session->set_userdata('verification_status', true);
+
+                    $res['redirect_url'] = site_url('dashboard');
+                    $res['msg'] = showMsg('success', 'Login successful! Please wait.');
+                    $res['status'] = 1;
+                    $res['frm_reset'] = 1;
+                    $res['hide_msg'] = 1;
+                }
+                else
+                {
+                    $res['msg'] = showMsg('error', 'Invalid email or password');
+                }
+            }
+            exit(json_encode($res));
+        }
+        else
+        {
+            $this->load->view("profile/signin");
+        }
+    }
+
+    function verification($vcode = '')
+    {
+        // $this->MemLogged();
+        if ($row = $this->user_model->getMemCode($vcode, intval($this->session->user_id)))
+        {
+            if($this->session->has_userdata('user_id') && $this->session->user_id != $row->user_id)
+            {
+                setMsg('info', 'You are already logged in with different email!');
+                redirect('dashboard', 'refresh');
+                exit;
+            }
+            $this->user_model->save(array('mem_verified' => 1, 'mem_code' => ''), $row->user_id);
+            
+            // $redirect_url = $this->session->mem_type == 'buyer' ? 'account-settings' : 'dashboard';
+            setMsg('success', 'Your account has been successfully verified!');
+            redirect('dashboard', 'refresh');
+            exit;
+        }
+        else 
+        {
+            redirect('', 'refresh');
+            exit;
+        }
+    }
+
+    function forgot_password()
+    {
+        $this->MemLogged();
+        if ($this->input->post()) {
+            $res = array();
+            $res['hide_msg'] = 0;
+            $res['scroll_to_msg'] = 0;
+            $res['status'] = 0;
+            $res['frm_reset'] = 0;
+            $res['redirect_url'] = 0;
+
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            if($this->form_validation->run() === FALSE) {
+                $res['msg'] = validation_errors();
+                $res['status'] = 0;
+            } else {
+                $post = $this->input->post();
+                if ($mem = $this->user_model->forgotEmailExists($post['email']))
+                {
+                    // $settings = $this->data['site_settings'];
+                    $rando = doEncode(randCode(rand(15, 20)));
+                    $this->master->save('users', array('mem_code' => $rando), 'user_id', $mem->user_id);
+
+                    $reset_link = site_url('reset/' . $rando);
+                    $mem_data   = array('name' => $mem->user_fname.' '.$user->mem_lname, "email" => $mem->user_email, "link" => $reset_link);
+                    $this->send_site_email($mem_data, 'forgot_password');
+                    $res['msg'] = showMsg('success','We’ve sent a reset password link to the email address you entered to reset your password. If you don’t see the email, check your spam folder or email!');
+
+
+                    $res['status'] = 1;
+                    $res['frm_reset'] = 1;
+                } else {
+                    $res['msg'] = showMsg('error', 'No such email address exists. Please try again!');
+                    $res['status'] = 0;
+                }
+            }
+            exit(json_encode($res));
+        } else {
+            $this->load->view("profile/forgot-password");
+        }
+    }
+
+    function reset_password()
+    {
+        $reset_id = intval($this->session->userdata('reset_id'));
+        if ($row = $this->user_model->getMember($reset_id)) 
+        {
+            if ($this->input->post()) {
+                $res = array();
+                $res['hide_msg'] = 0;
+                $res['scroll_to_msg'] = 0;
+                $res['status'] = 0;
+                $res['frm_reset'] = 0;
+                $res['redirect_url'] = 0;
+
+                $reset_id = intval($this->session->userdata('reset_id'));
+                if ($row = $this->user_model->getMember($reset_id)) 
+                {
+                    $this->form_validation->set_rules('pswd', 'New Password', 'required');
+                    $this->form_validation->set_rules('cpswd', 'Confirm Password', 'required|matches[pswd]');
+                    if($this->form_validation->run() === FALSE)
+                    {
+                        $res['msg'] = validation_errors();
+                    }
+                    else
+                    {
+                        $post = html_escape($this->input->post());
+                        $this->user_model->save(array('user_pswd' => doEncode($post['pswd'])), $reset_id);
+                        $this->session->unset_userdata('reset_id');
+                        $res['msg'] = showMsg('success', 'You have successfully reset your password!');
+
+                        $res['redirect_url'] = site_url('signin');
+                        $res['status'] = 1;
+                        $res['frm_reset'] = 1;
+                        $res['hide_msg'] = 1;
+                    }
+                }
+                else
+                {
+                    $res['msg'] = showMsg('error', 'Something is wrong, try again later!');
+                }
+                exit(json_encode($res));
+            }
+            else
+            {
+                $this->load->view("profile/reset-password");
+            }
+        }
+        else
+        {
+            redirect('', 'refresh');
+            exit;
+        }
+    }
+
+    function reset($vcode)
+    {
+        if ($row = $this->user_model->getMemCode($vcode)) 
+        {
+            $this->user_model->save(array('mem_code' => ''), $row->user_id);
+            $this->session->set_userdata('reset_id', $row->user_id);
+            redirect('reset-password', 'refresh');
+            exit;
+        }
+        else
+        {
+            redirect('', 'refresh');
+            exit;
         }
     }
 }

@@ -26,6 +26,21 @@ $(document).ready(function() {
         return $(element).data('error');
     });
 
+    $('#frmLogin').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+            }
+        },
+        errorPlacement: function() {
+            return false; // suppresses error message text
+        }
+    });
+
     $('#frmSignup').validate({
         errorElement: 'div',
         rules: {
@@ -60,6 +75,53 @@ $(document).ready(function() {
             cpassword: {
                 required: "Confirm password required!",
                 equalTo: "Confirm password must be the as the password!"
+            }
+        },
+        errorPlacement: function(error, element) {
+            if ($.inArray(element.attr('id'), ['password', 'cpassword']) !== -1 && error.text() != 'This field is required.') {
+                error.addClass('alert alert-danger alert-sm')
+                error.appendTo(element.parents('form').find("div.alertMsg:first").show());
+                $("html, body").animate({ scrollTop: (element.parents('form').find("div.alertMsg:first").offset().top - 300) }, "slow");
+            }
+            return false;
+        }
+    });
+
+    $('#frmForgot').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        errorPlacement: function() {
+            return false; // suppresses error message text
+        }
+    })
+
+    $('#frmReset').validate({
+        errorElement: 'div',
+        rules: {
+            pswd: {
+                required: true,
+                minlength: 8,
+                pwcheck: true
+            },
+            cpswd: {
+                required: true,
+                minlength: 8,
+                pwcheck: true,
+                equalTo: '#pswd'
+            }
+        },
+        messages: {
+            pswd: {
+                required: "Password required!",
+                minlength: "Password must be at least 8 characters.",
+            },
+            cpswd: {
+                required: "Confirm password required!",
+                equalTo: "Confirm password must be the same as the password!"
             }
         },
         errorPlacement: function(error, element) {

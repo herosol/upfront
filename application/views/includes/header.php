@@ -29,7 +29,7 @@
                     <li class="<?php if ($page == "signin") {
                                     echo 'active';
                                 } ?>">
-                        <a href="<?= $base_url ?>signin.php">Sign in</a>
+                        <a href="<?= base_url() ?>signin">Sign in</a>
                     </li>
                     <li class="<?php if ($page == "signup") {
                                     echo 'active';
