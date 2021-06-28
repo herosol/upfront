@@ -873,7 +873,8 @@ class Sitecontent extends Admin_Controller
         }
 
         $this->data['row'] = $this->master->getRow($this->table_name, array('ckey' => 'player_signup'));
-        $this->data['row'] =unserialize($this->data['row']->code);
+        $this->data['row'] = unserialize($this->data['row']->code);
+        $this->data['cards'] = $this->master->getRows('affiliates_cards');
         $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
     }
 
@@ -884,7 +885,7 @@ class Sitecontent extends Admin_Controller
             $id = $this->input->post('id');
             if (isset($_FILES["image"]["name"]) && $_FILES["image"]["name"] != "")
             {
-                $image = upload_file(UPLOAD_PATH.'pages', 'affiliates');
+                $image = upload_file(UPLOAD_PATH.'pages/affiliates', 'image');
                 if (!empty($image['file_name'])) 
                 {
                     $vals['image'] = $image['file_name'];
@@ -900,8 +901,8 @@ class Sitecontent extends Admin_Controller
             $data = 
             [
                 'image' => $vals['image'],
-                'first_heading' => $vals['heading'],
-                'first_detail'  => $vals['description']
+                'heading' => $vals['first_heading'],
+                'description'  => $vals['first_detail']
             ];
 
             $this->master->save('affiliates_cards', $data, 'id', $id);

@@ -47,7 +47,6 @@
                 </div>
             </div>
         </form>
-
         <form role="form" action="<?= base_url().ADMIN ?>/sitecontent/save_affiliate"  method="post" class="form-horizontal form-groups-bordered validate" novalidate="novalidate" enctype="multipart/form-data">
             <h3> Add Affiliate Card</h3>
             <div class="form-group">
@@ -99,5 +98,44 @@
                 </div>
             </div>
         </form>
+
+        <table class="table table-bordered datatable" id="table-1">
+                <thead>
+                    <tr>
+                        <th width="5%" class="text-center">Sr#</th>
+                        <th width="60px">Image</th>
+                        <th width="20%">Heading</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (count($cards) > 0): $count = 0; ?>
+                        <?php foreach ($cards as $row): ?>
+                            <tr class="odd gradeX">
+                                <td class="text-center"><?= ++$count; ?></td>
+                                <td class="text-center">
+                                    <div class="icoRound">
+                                        <img src = "<?= base_url().UPLOAD_PATH.'pages/affiliates/'.$row->image?>" height = "60">
+                                    </div>
+                                </td>
+                                <td><b><?= $row->heading ?></b></td>
+                                <td><?= $row->description; ?></td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Action <span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-primary" role="menu">
+                                                <li><a href="<?= site_url(ADMIN); ?>/sitecontent/affiliates/<?= $row->id; ?>">Edit</a></li>
+                                                <?php if(access(10)):?>
+                                                    <li><a href="<?= site_url(ADMIN); ?>/buyers/delete/<?= $row->mem_id; ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
+                                                <?php endif?>
+                                    </ul>
+                                </div>  
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
