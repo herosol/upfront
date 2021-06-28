@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-if($_SERVER['HTTP_HOST']!='localhost'){
+if ($_SERVER['HTTP_HOST'] != 'localhost') {
 	$db['default'] = array(
 		'dsn'	=> '',
 		'hostname' => '',
@@ -80,13 +80,13 @@ if($_SERVER['HTTP_HOST']!='localhost'){
 		'password' => '',
 		'database' => ''
 	);
-}else{
+} else {
 	$db['default'] = array(
 		'dsn'	=> '',
 		'hostname' => 'localhost',
 		'username' => 'root',
 		'password' => '',
-		'database' => 'herosols_upfront'
+		'database' => 'upfront-master'
 	);
 }
 

@@ -5584,6 +5584,10 @@ aside~section>.contain-fluid {
     font-size: 14px;
 }
 
+#dash #verify .inBlk {
+    max-width: none;
+    margin-bottom: 20px;
+}
 
 /*
 |----------------------------------------------------------------------
@@ -6006,4 +6010,23 @@ ul.pagination>li>a.active {
     border-color: Red !important;
     border-style: solid;
     border-width: 1px;
+}
+
+/*
+|----------------------------------------------------------------------
+|       Verification
+|----------------------------------------------------------------------
+*/
+
+#verify .inBlk {
+	max-width: 600px;
+	/* background: #fbf7ed; */
+    /* padding: 25px; */
+    margin: 0 auto;
+    /* border-radius: 4px; */
+    /* overflow: hidden; */
+}
+
+#verify .inBlk p {
+	color: #8b9593;
 }
