@@ -392,12 +392,15 @@ class Sitecontent extends Admin_Controller
             if(!is_array($content_row))
                 $content_row=array();
             if (isset($_FILES["image"]["name"]) && $_FILES["image"]["name"] != "") {
-                $image = upload_file(UPLOAD_PATH.'images/', 'image');
-                if (!empty($image['file_name'])) {
+                $image = upload_file(UPLOAD_PATH.'pages/about-us', 'image');
+                if (!empty($image['file_name']))
+                {
                     if(isset($content_row['image']))
                         $this->remove_file(UPLOAD_PATH."images/".$content_row['image']);
                     $vals['image'] = $image['file_name'];
-                } else {
+                }
+                else
+                {
                     setMsg('error', 'Please upload a valid image file >> ' . strip_tags($image['error']));
                     redirect(ADMIN . '/sitecontent/login', 'refresh');
                     exit;
@@ -845,9 +848,16 @@ class Sitecontent extends Admin_Controller
     {
         $this->data['enable_editor'] = FALSE;
         $this->data['pageView'] = ADMIN . '/site_affiliates';
+        $id = $this->uri->segment(4);
+        if(isset($id))
+        {
+            $this->data['record'] = $this->master->getRow('affiliates_cards', ['id'=> $id]);
+        }
+        $this->data['id'] = $id;
+        
         if ($vals = $this->input->post())
         {
-            $content_row = $this->master->getRow($this->table_name, array('ckey'=>'player_signup'));
+            $content_row = $this->master->getRow($this->table_name, array('ckey'=>'affiliates'));
             $content_row = unserialize($content_row->code);
 
             if(!is_array($content_row))
@@ -866,13 +876,13 @@ class Sitecontent extends Admin_Controller
             }
 
             $data = serialize(array_merge($content_row,$vals));
-            $this->master->save($this->table_name,array('code'=>$data),'ckey','player_signup');
+            $this->master->save($this->table_name,array('code'=>$data),'ckey','affiliates');
             setMsg('success', 'Settings updated successfully !');
             redirect(ADMIN . "/sitecontent/affiliates");
             exit;
         }
 
-        $this->data['row'] = $this->master->getRow($this->table_name, array('ckey' => 'player_signup'));
+        $this->data['row'] = $this->master->getRow($this->table_name, array('ckey' => 'affiliates'));
         $this->data['row'] = unserialize($this->data['row']->code);
         $this->data['cards'] = $this->master->getRows('affiliates_cards');
         $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
@@ -898,12 +908,36 @@ class Sitecontent extends Admin_Controller
                 }
             }
 
-            $data = 
-            [
-                'image' => $vals['image'],
-                'heading' => $vals['first_heading'],
-                'description'  => $vals['first_detail']
-            ];
+            if($id != '')
+            {
+                if(isset($_FILES["image"]["name"]) && $_FILES["image"]["name"] != "")
+                {
+                    $data = 
+                    [
+                        'image' => $vals['image'],
+                        'heading' => $vals['first_heading'],
+                        'description'  => $vals['first_detail']
+                    ];
+                }
+                else
+                {
+                    $data = 
+                    [
+                        'heading' => $vals['first_heading'],
+                        'description'  => $vals['first_detail']
+                    ];
+                }
+            }
+            else
+            {
+                $data = 
+                [
+                    'image' => $vals['image'],
+                    'heading' => $vals['first_heading'],
+                    'description'  => $vals['first_detail']
+                ];
+            }
+
 
             $this->master->save('affiliates_cards', $data, 'id', $id);
             setMsg('success', 'Settings updated successfully !');

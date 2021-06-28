@@ -48,10 +48,10 @@
             </div>
         </form>
         <form role="form" action="<?= base_url().ADMIN ?>/sitecontent/save_affiliate"  method="post" class="form-horizontal form-groups-bordered validate" novalidate="novalidate" enctype="multipart/form-data">
-            <h3> Add Affiliate Card</h3>
+            <h3> <?= !empty($id) ? 'Edit' : 'Add'?> Affiliate Card</h3>
             <div class="form-group">
                 <div class="col-md-3">
-                <input type="hidden" name="id" value="" />
+                <input type="hidden" name="id" value="<?=$id?>" />
                     <div class="panel panel-primary" data-collapsed="0">
                         <div class="panel-heading">
                             <div class="panel-title">
@@ -64,13 +64,21 @@
                         <div class="panel-body">
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
+                                    <?php
+                                    if(!empty($record->image))
+                                    {
+                                    ?>
+                                        <img src="<?= !empty($record->image) ? base_url().UPLOAD_PATH.'/pages/affiliates/'.$record->image : '' ?>" alt="--">
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                                 <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                 <div>
                                     <span class="btn btn-white btn-file">
                                         <span class="fileinput-new">Select image</span>
                                         <span class="fileinput-exists">Change</span>
-                                        <input type="file" name="image" accept="image/*" required>
+                                        <input type="file" name="image" accept="image/*" <?php if(empty($record->image)){echo 'required=""';}?>>
                                     </span>
                                     <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
                                 </div>
@@ -82,11 +90,11 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <label for="first_heading" class="control-label"> Heading <span class="symbol required">*</span></label>
-                            <input type="text" name="first_heading" value="<?= $row['first_heading'] ?>" class="form-control" required>
+                            <input type="text" name="first_heading" value="<?= $record->heading ?>" class="form-control" required>
                         </div>
                         <div class="col-md-12">
                             <label for="first_detail" class="control-label "> Detail <span class="symbol required">*</span></label>
-                            <textarea name="first_detail" rows="6" class="form-control ckeditor" ><?= $row['first_detail'] ?></textarea>
+                            <textarea name="first_detail" rows="6" class="form-control ckeditor" ><?= $record->description ?></textarea>
                         </div>
                     </div>
                     <div class="form-group">

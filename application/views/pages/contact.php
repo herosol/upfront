@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Contact us — Upfront Worldwide Talent Agency</title>
+    <title><?= !empty($site_content['page_title']) ? $site_content['page_title'].' - ' : 'Contact Us - '?><?= $site_settings->site_name?></title>
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -14,11 +14,11 @@
         <section id="contact">
             <div class="contain text-center">
                 <div class="content">
-                    <h2 class="heading">Start a conversation</h2>
-                    <p>Working with Tangent gives you access to cross-disciplinary teams to help you meet your digital ambitions- whatever they may be.</p>
+                    <h2 class="heading"><?= $site_content['first_heading']?></h2>
+                    <p><?= $site_content['detail']?></p>
                 </div>
                 <form action="" method="post">
-                    <h3 class="heading">Feel free to ask any question</h3>
+                    <h3 class="heading"><?= $site_content['second_heading']?></h3>
                     <div class="row formRow">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
                             <div class="txtGrp">

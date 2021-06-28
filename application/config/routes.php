@@ -56,21 +56,22 @@ $route['translate_uri_dashes'] = FALSE;
 # FRONT END ROUTES
 //PAGES
 $route['become-a-model'] = 'pages/become_model';
-$route['help'] = 'pages/help';
-$route['cookie-policy'] = 'pages/cookie_policy';
+$route['help']           = 'pages/help';
+$route['cookie-policy']  = 'pages/cookie_policy';
 $route['privacy-policy'] = 'pages/privacy_policy';
-$route['disclaimers'] = 'pages/disclaimers';
-$route['affiliates'] = 'pages/affiliates';
+$route['disclaimers']    = 'pages/disclaimers';
+$route['affiliates']     = 'pages/affiliates';
+$route['contact-us']     = 'pages/contact_us';
 //AUTHENTICAION PAGES
 $route['signin'] = 'index/login'; //user login
 $route['signup'] = 'index/register'; //simple user register
 $route['verification/(:any)'] = 'index/verification/$1'; //email verification after register
-$route['forgot-password'] = 'index/forgot_password'; //forgot password
-$route['reset/(:any)'] = 'index/reset/$1';
-$route['reset-password'] = 'index/reset_password';
+$route['forgot-password']     = 'index/forgot_password'; //forgot password
+$route['reset/(:any)']        = 'index/reset/$1';
+$route['reset-password']      = 'index/reset_password';
 //DASHBOARD
-$route['dashboard'] = 'account/dashboard';
+$route['dashboard']     = 'account/dashboard';
 
 # ADMIN ROUTES
-$route['admin/login'] = 'admin/index/login';
-$route['admin/logout'] = 'admin/index/logout';
+$route['admin/login']   = 'admin/index/login';
+$route['admin/logout']  = 'admin/index/logout';

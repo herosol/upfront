@@ -39,9 +39,17 @@ class Pages extends MY_Controller
 
     function affiliates()
     {
-        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'disclaimers'));
+        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'affiliates'));
         $this->data['site_content'] = unserialize($this->data['content_row']->code);
+        $this->data['cards'] = $this->master->getRows('affiliates_cards');
         $this->load->view('pages/affiliates', $this->data);
+    }
+
+    function contact_us()
+    {
+        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'contact'));
+        $this->data['site_content'] = unserialize($this->data['content_row']->code);
+        $this->load->view('pages/contact', $this->data);
     }
 
 }

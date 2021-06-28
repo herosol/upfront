@@ -45,7 +45,7 @@
                     <input type="text" name="second_heading" id="second_heading" value="<?= $row['second_heading'] ?>" class="form-control" autofocus>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <div class="form-group col-sm-12 ">
                     <label for="third_heading" class="control-label "> Third Heading:</label>
                     <input type="text" name="third_heading" id="third_heading" value="<?= $row['third_heading'] ?>" class="form-control" autofocus>

@@ -66,6 +66,10 @@
                             <input type="text" name="first_heading" value="<?= $row['first_heading'] ?>" class="form-control" required>
                         </div>
                         <div class="col-md-12">
+                            <label for="first_heading" class="control-label"> Sub Heading <span class="symbol required">*</span></label>
+                            <input type="text" name="first_subheading" value="<?= $row['first_subheading'] ?>" class="form-control" required>
+                        </div>
+                        <div class="col-md-12">
                             <label for="first_detail" class="control-label "> Detail <span class="symbol required">*</span></label>
                             <textarea name="first_detail" rows="6" class="form-control ckeditor" ><?= $row['first_detail'] ?></textarea>
                         </div>
