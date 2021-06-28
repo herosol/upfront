@@ -5,9 +5,9 @@
                 <h5>Discover</h5>
                 <ul class="lst">
                     <li><a href="<?= $base_url ?>search.php">Find a Model</a></li>
-                    <li><a href="<?= $base_url ?>become-a-model.php">Become a Model</a></li>
+                    <li><a href="<?= base_url() ?>become-a-model">Become a Model</a></li>
                     <li><a href="<?= $base_url ?>search.php">Online Auditions</a></li>
-                    <li><a href="<?= $base_url ?>affiliates.php">Affiliates</a></li>
+                    <li><a href="<?= base_url() ?>affiliates">Affiliates</a></li>
                     <li><a href="<?= $base_url ?>learning-resources.php">Learning Resources</a></li>
                 </ul>
             </div>
@@ -34,9 +34,9 @@
             <div class="col">
                 <h5>Policies</h5>
                 <ul class="lst">
-                    <li><a href="<?= $base_url ?>cookie-policy.php">Cookies</a></li>
-                    <li><a href="<?= $base_url ?>privacy-policy.php">Privacy Policy</a></li>
-                    <li><a href="<?= $base_url ?>disclaimers.php">Disclaimers</a></li>
+                    <li><a href="<?= base_url() ?>cookie-policy">Cookies</a></li>
+                    <li><a href="<?= base_url() ?>privacy-policy">Privacy Policy</a></li>
+                    <li><a href="<?= base_url() ?>disclaimers">Disclaimers</a></li>
                 </ul>
             </div>
             <div class="col">
@@ -63,7 +63,7 @@
     <div class="copyright relative">
         <div class="contain-fluid">
             <div class="inner">
-                <p>Copyright © 2021 <a href="<?= $base_url ?>index.php">Upfront Worldwide Talent Agency</a>. All rights reserved.</p>
+                <p>Copyright © 2021 <a href="<?= base_url() ?>">Upfront Worldwide Talent Agency</a>. All rights reserved.</p>
                 <ul class="smLst flex">
                     <li><a href="<?= $base_url ?>privacy-policy.php">Privacy Policy</a></li>
                     <li><a href="<?= $base_url ?>terms-and-conditions.php">Terms & Conditions</a></li>

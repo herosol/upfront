@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Sign up — Upfront Worldwide Talent Agency</title>
+<title><?= !empty($site_content['page_title']) ? $site_content['page_title'].' - ' : 'Sign up - '?><?= $site_settings->site_name?></title>
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -16,8 +16,8 @@
                 <div class="logBlk">
                     <form action="" method="post" id="frmSignup" class="frmAjax">
                     <div class="alertMsg" style="display:none"></div>
-                        <h3>Sign up</h3>
-                        <p>Work Better, Live Better.</p>
+                        <h3><?= $site_content['heading']?></h3>
+                        <p><?= $site_content['short_desc']?></p>
                         <div class="txtGrp">
                             <label for="">First Name</label>
                             <input type="text" name="fname" id="first_name" class="txtBox">

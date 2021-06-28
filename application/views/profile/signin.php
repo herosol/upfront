@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Sign in — Upfront Worldwide Talent Agency</title>
+    <title><?= !empty($site_content['page_title']) ? $site_content['page_title'].' - ' : 'Sign In - '?><?= $site_settings->site_name?></title>
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -16,8 +16,8 @@
                 <div class="logBlk">
                     <form action="" method="post" autocomplete="off" class="frmAjax" id="frmLogin">
                     <div class="alertMsg" style="display:none"></div>
-                        <h3>Sign in</h3>
-                        <p>Enter your details below</p>
+                        <h3><?= $site_content['heading'] ?></h3>
+                        <p><?= $site_content['short_desc']?></p>
                         <div class="txtGrp">
                             <label for="">Email Address</label>
                             <input type="email" name="email" id="email" class="txtBox" >

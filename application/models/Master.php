@@ -63,12 +63,19 @@ class Master extends CI_Model
 
     public function save($table, $vals, $field = '', $id = '')
     {
+        echo $table.' '.$field.' '.$id.'<br>';
+        echo "<pre>";
+        print_r($vals);
+        die;
         $this->db->set($vals);
-        if (!empty($id)) {
+        if (!empty($id)) 
+        {
             $this->db->where($field, $id);
             $this->db->update($table);
             return $id;
-        } else {
+        }
+        else
+        {
             $query = $this->db->insert($table);
             return $this->db->insert_id();
         }

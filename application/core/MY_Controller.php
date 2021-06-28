@@ -6,9 +6,9 @@ class MY_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        // $this->data['site_settings'] = $this->getSiteSettings();
+        $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['mem_data'] = $this->getActiveMem();
-        // $this->data['page'] = $this->uri->segment(1);
+        $this->data['page'] = $this->uri->segment(1);
     }
 
     public function isMemLogged($type, $is_verified = true, $player_check = true, $type_arr = array('buyer', 'player'), $memberhsip_check = true) {

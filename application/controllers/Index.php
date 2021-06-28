@@ -71,7 +71,9 @@ class Index extends MY_Controller {
             }
             exit(json_encode($res));
         }else{
-            $this->load->view("profile/signup");
+            $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'signup'));
+            $this->data['site_content'] = unserialize($this->data['site_content']->code);
+            $this->load->view("profile/signup", $this->data);
         }
     }
 
@@ -139,7 +141,9 @@ class Index extends MY_Controller {
         }
         else
         {
-            $this->load->view("profile/signin");
+            $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'login'));
+            $this->data['site_content'] = unserialize($this->data['site_content']->code);
+            $this->load->view("profile/signin", $this->data);
         }
     }
 
@@ -206,7 +210,9 @@ class Index extends MY_Controller {
             }
             exit(json_encode($res));
         } else {
-            $this->load->view("profile/forgot-password");
+            $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'forgot'));
+            $this->data['site_content'] = unserialize($this->data['site_content']->code);
+            $this->load->view("profile/forgot-password", $this->data);
         }
     }
 
@@ -253,7 +259,9 @@ class Index extends MY_Controller {
             }
             else
             {
-                $this->load->view("profile/reset-password");
+                $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'reset'));
+                $this->data['site_content'] = unserialize($this->data['site_content']->code);
+                $this->load->view("profile/reset-password", $this->data);
             }
         }
         else
