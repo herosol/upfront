@@ -4,6 +4,7 @@ class Pages extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('mvideo_model');
     }
 
     public function become_model()
@@ -75,7 +76,8 @@ class Pages extends MY_Controller
 
     function educational_videos()
     {
-        $this->load->view('pages/educational-videos');
+        $this->data['rows'] = $this->mvideo_model->get_rows();
+        $this->load->view('pages/educational-videos', $this->data);
     }
 
 }
