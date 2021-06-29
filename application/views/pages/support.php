@@ -17,8 +17,16 @@
                     <h1>What do you need help with?</h1>
                     <div class="txtGrp flexGrp">
                         <img src="<?= base_url() ?>assets/images/icon-search.svg" alt="">
-                        <input type="text" class="txtBox" placeholder="Try, How to Become a Model">
+                        <input type="text" class="txtBox dropBtn" placeholder="Try, How to Become a Model">
                         <button type="button" class="webBtn">Search</button>
+                        <ul class="dropCnt dropLst">
+                            <li><em>Suggestion 1</em></li>
+                            <li><em>Suggestion 2</em></li>
+                            <li><em>Suggestion 3</em></li>
+                            <li><em>Suggestion 4</em></li>
+                            <li><em>Suggestion 5</em></li>
+                            <li><em>Suggestion 6</em></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -161,6 +169,13 @@
         <!-- help -->
 
 
+        <script type="text/javascript">
+            $(function() {
+                $(document).on("keypress", "[help] #sBanner .dropBtn", function() {
+                    $(this).parent().find(".dropCnt").addClass("active");
+                });
+            });
+        </script>
     </main>
     <?php $this->load->view('includes/footer'); ?>
 </body>
