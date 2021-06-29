@@ -27,6 +27,15 @@ function count_new_header_notis()
     return intval($query->row()->total);
 }
 
+function blog_cat_by_id($cat_id)
+{
+    global $CI;
+    $CI->db->select("title");
+    $CI->db->where('id', $cat_id);
+    $query = $CI->db->get('blog_categories');
+    return $query->row()->title;
+}
+
 function get_header_notis($limit = '', $order_by = 'desc')
 {
     global $CI;

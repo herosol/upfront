@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Blog Details — Upfront Worldwide Talent Agency</title>
+<title><?= !empty($site_content['page_title'])?$site_content['page_title'].' - ':'Blog Detail - '?><?= $site_settings->site_name?></title>
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -16,91 +16,28 @@
                 <div class="flexRow flex">
                     <div class="col col1">
                         <div class="newsBlk">
-                            <div class="image"><img src="<?= $base_url ?>images/portfolio-07.jpg" alt=""></div>
+                            <div class="image"><img src="<?=  get_site_image_src("blog", $row->image, ''); ?>" alt=""></div>
                             <div class="txt">
-                                <div class="ctgry">Fashion & Lifestyle</div>
-                                <h2>9 of the best professional biological examples we have ever seen.</h2>
-                                <div class="date">September 18, 2018</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>
-                            </div>
+                                <div class="ctgry"><?= blog_cat_by_id($row->cat_id) ?></div>
+                                <h2><?= $row->title ?></h2>
+                                <div class="date"><?= format_date($row->date)?></div>
+                                    <?= $row->detail ?>
+                                </div>
                         </div>
                     </div>
                     <div class="col col2">
                         <ul class="articleLst flex">
+                        <?php foreach($recent_blogs as $blog): ?>
                             <li>
                                 <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/1.jpg" alt=""></a></div>
+                                    <div class="ico"><a href="<?= base_url() ?>blog-detail/<?=$blog->id?>"><img src="<?=  get_site_image_src("blog", $blog->image, '300p_'); ?>" alt=""></a></div>
                                     <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">How to optimize the search engines for your blog content</a></h5>
-                                        <div class="date">September 18, 2018</div>
+                                        <h5><a href="<?= base_url() ?>blog-detail/<?=$blog->id?>"><?= $blog->title ?></a></h5>
+                                        <div class="date"><?= format_date($blog->date)?></div>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/2.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">5 products from ES that will change your PC experience</a></h5>
-                                        <div class="date">September 18, 2018</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/3.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">Holiday peripherals stocking stuffers gift guide</a></h5>
-                                        <div class="date">September 18, 2018</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/4.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">Holiday tech gift guide: By price</a></h5>
-                                        <div class="date">September 18, 2018</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/5.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">Why you should care about eSports</a></h5>
-                                        <div class="date">September 18, 2018</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/6.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">5 products from ES that will change your PC experience</a></h5>
-                                        <div class="date">September 18, 2018</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/7.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">Holiday peripherals stocking stuffers gift guide</a></h5>
-                                        <div class="date">September 18, 2018</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="articleBlk">
-                                    <div class="ico"><a href="<?= $base_url ?>blog-detail.php"><img src="<?= $base_url ?>images/blog/8.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <h5><a href="<?= $base_url ?>blog-detail.php">Holiday tech gift guide: By price</a></h5>
-                                        <div class="date">September 18, 2018</div>
-                                    </div>
-                                </div>
-                            </li>
+                        <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>

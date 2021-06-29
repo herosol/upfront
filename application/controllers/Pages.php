@@ -8,7 +8,9 @@ class Pages extends MY_Controller
 
     public function become_model()
     {
-        return $this->load->view('pages/become-a-model');
+        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'become_a_model'));
+        $this->data['site_content'] = unserialize($this->data['content_row']->code);
+        return $this->load->view('pages/become-a-model', $this->data);
     }
 
     public function help()
@@ -50,6 +52,30 @@ class Pages extends MY_Controller
         $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'contact'));
         $this->data['site_content'] = unserialize($this->data['content_row']->code);
         $this->load->view('pages/contact', $this->data);
+    }
+
+    function about_us()
+    {
+        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'about'));
+        $this->data['site_content'] = unserialize($this->data['content_row']->code);
+        $this->load->view('pages/about', $this->data);
+    }
+
+    function how_it_works()
+    {
+        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'how_it_works'));
+        $this->data['site_content'] = unserialize($this->data['content_row']->code);
+        $this->load->view('pages/how-it-works', $this->data);
+    }
+
+    function search()
+    {
+        $this->load->view('pages/search');
+    }
+
+    function educational_videos()
+    {
+        $this->load->view('pages/educational-videos');
     }
 
 }

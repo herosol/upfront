@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>How it works — Upfront Worldwide Talent Agency</title>
+<title><?= !empty($site_content['page_title']) ? $site_content['page_title'].' - ' : 'How it works - '?><?= $site_settings->site_name?></title>
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -15,16 +15,13 @@
             <div class="contain">
                 <div class="flexRow flex">
                     <div class="col col1">
-                        <div class="image"><img src="<?= $base_url ?>images/portfolio-03.jpg" alt=""></div>
+                        <div class="image"><img src="<?= !empty($site_content['image']) ? base_url().UPLOAD_PATH.'pages/how-it-works/'.$site_content['image'] : 'http://placehold.it/3000x1000'?>"></div>
                     </div>
                     <div class="col col2">
                         <div class="content ckEditor">
-                            <h2 class="heading">Upfront Worldwide Talent Agency at a Glance</h2>
-                            <h4>All of our services are backed by our 100% satisfaction guarantee.</h4>
-
-                            <p>Ullam sit quas minus odit voluptates iusto corrupti odio nesciunt ut temporibus voluptatem suscipit molestias! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quae eos facilis voluptas, blanditiis nisi doloribus quaerat similique adipisci debitis sequi rerum eius laudantium numquam!</p>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia delectus illum dolorum consectetur hic dolores earum laudantium atque saepe! Iste praesentium impedit repudiandae aliquam ratione animi ipsam accusamus ea beatae.</p>
+                            <h2 class="heading"><?= $site_content['first_heading'] ?></h2>
+                            <h4><?= $site_content['first_subheading'] ?></h4>
+                            <?= $site_content['first_detail'] ?>
                         </div>
                     </div>
                 </div>
@@ -36,63 +33,20 @@
         <section id="works">
             <div class="contain">
                 <div class="content text-center">
-                    <h2 class="heading">How are we doing it?</h2>
+                    <h2 class="heading"><?= $site_content['second_heading'] ?></h2>
                 </div>
                 <div class="flexRow flex ckEditor">
+                <?php for($i=1; $i<=6; $i++): ?>
                     <div class="col">
                         <div class="inner">
-                            <div class="icon"><img src="<?= $base_url ?>images/vector-bullhorn.svg" alt=""></div>
+                            <div class="icon"><img src="<?= !empty($site_content['second_image'.$i]) ? base_url().UPLOAD_PATH.'pages/how-it-works/'.$site_content['second_image'.$i] : 'http://placehold.it/3000x1000'?>"></div>
                             <div class="txt">
-                                <h4>Care and Comfort</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id ex odit, quo porro nesciunt. Vel magni id dolores quas repudiandae accusantium, ipsum quia nobis. Perspiciatis totam error veniam repudiandae.</p>
+                                <h4><?= $site_content['image_heading'.$i] ?></h4>
+                                <?= $site_content['second_text'.$i] ?>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="inner">
-                            <div class="icon"><img src="<?= $base_url ?>images/vector-requests.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>Daily Updates</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id ex odit, quo porro nesciunt. Vel magni id dolores quas repudiandae accusantium, ipsum quia nobis. Perspiciatis totam error veniam repudiandae.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inner">
-                            <div class="icon"><img src="<?= $base_url ?>images/vector-reliable.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>Expert and Professionals</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id ex odit, quo porro nesciunt. Vel magni id dolores quas repudiandae accusantium, ipsum quia nobis. Perspiciatis totam error veniam repudiandae.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inner">
-                            <div class="icon"><img src="<?= $base_url ?>images/vector-innovation.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>Our Goal</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id ex odit, quo porro nesciunt. Vel magni id dolores quas repudiandae accusantium, ipsum quia nobis. Perspiciatis totam error veniam repudiandae.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inner">
-                            <div class="icon"><img src="<?= $base_url ?>images/vector-cashless.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>Cashless Payment</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id ex odit, quo porro nesciunt. Vel magni id dolores quas repudiandae accusantium, ipsum quia nobis. Perspiciatis totam error veniam repudiandae.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inner">
-                            <div class="icon"><img src="<?= $base_url ?>images/vector-secure.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>Providing Great Service</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id ex odit, quo porro nesciunt. Vel magni id dolores quas repudiandae accusantium, ipsum quia nobis. Perspiciatis totam error veniam repudiandae.</p>
-                            </div>
-                        </div>
-                    </div>
+                <?php endfor; ?>
                 </div>
             </div>
         </section>

@@ -529,3 +529,8 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+defined('SITE_VPATH') OR define('SITE_VPATH', $config['base_url'] . '/v/');
+defined('SITE_IMAGES') OR define('SITE_IMAGES', $config['base_url'] . '/uploads/');
+defined('SITE_VIDEOS') OR define('SITE_VIDEOS', $config['base_url'] . '/uploads/videos/');
+defined('SITE_FILES') OR define('SITE_FILES', $config['base_url'] . '/uploads/files/');

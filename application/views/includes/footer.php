@@ -4,9 +4,9 @@
             <div class="col">
                 <h5>Discover</h5>
                 <ul class="lst">
-                    <li><a href="<?= $base_url ?>search.php">Find a Model</a></li>
+                    <li><a href="<?= base_url() ?>/find">Find a Model</a></li>
                     <li><a href="<?= base_url() ?>become-a-model">Become a Model</a></li>
-                    <li><a href="<?= $base_url ?>search.php">Online Auditions</a></li>
+                    <li><a href="<?= base_url() ?>/find">Online Auditions</a></li>
                     <li><a href="<?= base_url() ?>affiliates">Affiliates</a></li>
                     <li><a href="<?= $base_url ?>learning-resources.php">Learning Resources</a></li>
                 </ul>
@@ -14,7 +14,7 @@
             <div class="col">
                 <h5>My Account</h5>
                 <ul class="lst">
-                    <li><a href="<?= $base_url ?>signin.php">Sign in</a></li>
+                    <li><a href="<?= base_url() ?>/signin">Sign in</a></li>
                     <li><a href="<?= $base_url ?>information.php">Profile Settings</a></li>
                     <li><a href="<?= $base_url ?>inbox.php">My Inbox</a></li>
                     <li><a href="<?= $base_url ?>wishlist.php">My Favorites</a></li>
@@ -23,12 +23,12 @@
             <div class="col">
                 <h5>About us</h5>
                 <ul class="lst">
-                    <li><a href="<?= $base_url ?>about.php">About us</a></li>
-                    <li><a href="<?= $base_url ?>how-it-works.php">How it works</a></li>
-                    <li><a href="<?= $base_url ?>educational-videos.php">Educational Videos</a></li>
-                    <li><a href="<?= $base_url ?>blog.php">Blog Articles</a></li>
-                    <li><a href="<?= $base_url ?>support.php">Help & Support</a></li>
-                    <li><a href="<?= $base_url ?>contact.php">Contact us</a></li>
+                    <li><a href="<?= base_url() ?>about-us">About us</a></li>
+                    <li><a href="<?= base_url() ?>how-it-works">How it works</a></li>
+                    <li><a href="<?= base_url() ?>educational-videos">Educational Videos</a></li>
+                    <li><a href="<?= base_url() ?>blog">Blog Articles</a></li>
+                    <li><a href="<?= base_url() ?>help">Help & Support</a></li>
+                    <li><a href="<?= base_url() ?>contact-us">Contact us</a></li>
                 </ul>
             </div>
             <div class="col">

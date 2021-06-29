@@ -396,7 +396,7 @@ class Sitecontent extends Admin_Controller
                 if (!empty($image['file_name']))
                 {
                     if(isset($content_row['image']))
-                        $this->remove_file(UPLOAD_PATH."images/".$content_row['image']);
+                        $this->remove_file(UPLOAD_PATH."pages/about-us/".$content_row['image']);
                     $vals['image'] = $image['file_name'];
                 }
                 else
@@ -406,13 +406,23 @@ class Sitecontent extends Admin_Controller
                     exit;
                 }
             }
-            for($i=1;$i<=6;$i++){
+            for($i=1;$i<=4;$i++){
                 if (isset($_FILES["second_image".$i]["name"]) && $_FILES["second_image".$i]["name"] != "") {
-                    $image = upload_file(UPLOAD_PATH.'images/', 'second_image'.$i);
+                    $image = upload_file(UPLOAD_PATH.'pages/about-us', 'second_image'.$i);
                     if(!empty($image['file_name'])){
                         if (isset($content_row['second_image'.$i]))
-                            $this->remove_file(UPLOAD_PATH."images/".$content_row['second_image'.$i]);
+                            $this->remove_file(UPLOAD_PATH."pages/about-us/".$content_row['second_image'.$i]);
                         $vals['second_image'.$i] = $image['file_name'];
+                    }
+                }
+            }
+            for($i=1;$i<=3;$i++){
+                if (isset($_FILES["third_image".$i]["name"]) && $_FILES["third_image".$i]["name"] != "") {
+                    $image = upload_file(UPLOAD_PATH.'pages/about-us', 'third_image'.$i);
+                    if(!empty($image['file_name'])){
+                        if (isset($content_row['third_image'.$i]))
+                            $this->remove_file(UPLOAD_PATH."pages/about-us/".$content_row['third_image'.$i]);
+                        $vals['third_image'.$i] = $image['file_name'];
                     }
                 }
             }
@@ -423,6 +433,112 @@ class Sitecontent extends Admin_Controller
         }
 
         $this->data['content'] = $this->master->getRow($this->table_name, array('ckey' => 'about'));
+        $this->data['row'] =unserialize($this->data['content']->code);
+        $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
+    }
+
+    public function become_a_model() {
+        $this->data['enable_editor'] = TRUE;
+        $this->data['pageView'] = ADMIN . '/site_become_model';
+        if ($vals = $this->input->post()) 
+        {
+            $content_row = $this->master->getRow($this->table_name, array('ckey'=>'become_a_model'));
+            $content_row = unserialize($content_row->code);
+            if(!is_array($content_row))
+                $content_row=array();
+            if (isset($_FILES["banner"]["name"]) && $_FILES["banner"]["name"] != "") {
+                $image = upload_file(UPLOAD_PATH.'pages/become-model', 'banner');
+                if (!empty($image['file_name']))
+                {
+                    if(isset($content_row['banner']))
+                        $this->remove_file(UPLOAD_PATH."pages/become-model/".$content_row['banner']);
+                    $vals['banner'] = $image['banner'];
+                }
+                else
+                {
+                    setMsg('error', 'Please upload a valid image file >> ' . strip_tags($image['error']));
+                    redirect(ADMIN . '/sitecontent/become_a_model', 'refresh');
+                    exit;
+                }
+            }
+
+            for($i=1;$i<=3;$i++)
+            {
+                if (isset($_FILES["second_image".$i]["name"]) && $_FILES["second_image".$i]["name"] != "") {
+                    $image = upload_file(UPLOAD_PATH.'pages/become-model', 'second_image'.$i);
+                    if(!empty($image['file_name'])){
+                        if (isset($content_row['second_image'.$i]))
+                            $this->remove_file(UPLOAD_PATH."pages/become-model/".$content_row['second_image'.$i]);
+                        $vals['second_image'.$i] = $image['file_name'];
+                    }
+                }
+            }
+
+            for($i=1;$i<=1;$i++){
+                if (isset($_FILES["third_image".$i]["name"]) && $_FILES["third_image".$i]["name"] != "") {
+                    $image = upload_file(UPLOAD_PATH.'pages/become-model', 'third_image'.$i);
+                    if(!empty($image['file_name'])){
+                        if (isset($content_row['third_image'.$i]))
+                            $this->remove_file(UPLOAD_PATH."pages/become-model/".$content_row['third_image'.$i]);
+                        $vals['third_image'.$i] = $image['file_name'];
+                    }
+                }
+            }
+            $data = serialize(array_merge($content_row,$vals));
+            $this->master->save($this->table_name,array('code'=>$data),'ckey','become_a_model');
+            setMsg('success', 'Settings updated successfully !');
+            redirect(ADMIN . "/sitecontent/become_a_model");
+        }
+
+        $this->data['content'] = $this->master->getRow($this->table_name, array('ckey' => 'become_a_model'));
+        $this->data['row'] =unserialize($this->data['content']->code);
+        $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
+    }
+
+    public function how_it_works() {
+        $this->data['enable_editor'] = TRUE;
+        $this->data['pageView'] = ADMIN . '/site_how_it_works';
+        if ($vals = $this->input->post()) 
+        {
+            $content_row = $this->master->getRow($this->table_name, array('ckey'=>'how_it_works'));
+            $content_row = unserialize($content_row->code);
+            if(!is_array($content_row))
+                $content_row=array();
+            if (isset($_FILES["image"]["name"]) && $_FILES["image"]["name"] != "")
+            {
+                $image = upload_file(UPLOAD_PATH.'pages/how-it-works', 'image');
+                if (!empty($image['file_name']))
+                {
+                    if(isset($content_row['image']))
+                        $this->remove_file(UPLOAD_PATH."pages/how-it-works/".$content_row['image']);
+                    $vals['image'] = $image['file_name'];
+                }
+                else
+                {
+                    setMsg('error', 'Please upload a valid image file >> ' . strip_tags($image['error']));
+                    redirect(ADMIN . '/sitecontent/how_it_works', 'refresh');
+                    exit;
+                }
+            }
+
+            for($i=1;$i<=6;$i++)
+            {
+                if (isset($_FILES["second_image".$i]["name"]) && $_FILES["second_image".$i]["name"] != "") {
+                    $image = upload_file(UPLOAD_PATH.'pages/how-it-works', 'second_image'.$i);
+                    if(!empty($image['file_name'])){
+                        if (isset($content_row['second_image'.$i]))
+                            $this->remove_file(UPLOAD_PATH."pages/how-it-works/".$content_row['second_image'.$i]);
+                        $vals['second_image'.$i] = $image['file_name'];
+                    }
+                }
+            }
+            $data = serialize(array_merge($content_row,$vals));
+            $this->master->save($this->table_name,array('code'=>$data),'ckey','how_it_works');
+            setMsg('success', 'Settings updated successfully !');
+            redirect(ADMIN . "/sitecontent/how_it_works");
+        }
+
+        $this->data['content'] = $this->master->getRow($this->table_name, array('ckey' => 'how_it_works'));
         $this->data['row'] =unserialize($this->data['content']->code);
         $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
     }

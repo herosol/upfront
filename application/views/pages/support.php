@@ -16,7 +16,7 @@
                 <div class="content text-center">
                     <h1>What do you need help with?</h1>
                     <div class="txtGrp flexGrp">
-                        <img src="<?= $base_url ?>images/icon-search.svg" alt="">
+                        <img src="<?= base_url() ?>assets/images/icon-search.svg" alt="">
                         <input type="text" class="txtBox" placeholder="Try, How to Become a Model">
                         <button type="button" class="webBtn">Search</button>
                     </div>

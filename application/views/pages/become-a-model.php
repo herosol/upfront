@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Become a Model — Upfront Worldwide Talent Agency</title>
+<title><?= !empty($site_content['page_title']) ? $site_content['page_title'].' - ' : 'Become A Model - '?><?= $site_settings->site_name?></title>
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -11,11 +11,11 @@
     <main common typical become>
 
 
-        <section id="sBanner" style="background-image: url('<?= base_url() ?>assets/images/portfolio-07.jpg');">
+        <section id="sBanner" style="background-image: url('<?= !empty($site_content['banner']) ? base_url().UPLOAD_PATH.'pages/beome-model/'.$site_content['banner'] : base_url().'assets/images/portfolio-07.jpg' ?>');">
             <div class="contain-fluid">
                 <div class="content">
-                    <h1>Join Upfront to start applying to thousands of new acting and voiceover roles</h1>
-                    <p>Build your profile and get scouted by industry pros casting now.</p>
+                    <h1><?= $site_content['banner_heading'] ?></h1>
+                    <p><?= $site_content['banner_subheading'] ?></p>
                     <div class="bTn"><a href="<?= $base_url ?>signup.php" class="webBtn">Get started now</a></div>
                 </div>
             </div>
@@ -25,35 +25,19 @@
 
         <section id="affiliate">
             <div class="contain text-center">
-                <h2 class="heading">So many reasons to start</h2>
+                <h2 class="heading"><?= $site_content['second_heading'] ?></h2>
                 <div class="flexRow flex">
+                <?php for($i=1; $i<=3; $i++):?>
                     <div class="col">
                         <div class="inner blk">
-                            <div class="icon"><img src="<?= base_url() ?>assets/images/vector-online-classes.svg" alt=""></div>
+                            <div class="icon"><img src="<?= !empty($site_content['second_image'.$i]) ? base_url().UPLOAD_PATH.'pages/become-model/'.$site_content['second_image'.$i] : 'http://placehold.it/3000x1000' ?>" alt="--"></div>
                             <div class="txt">
-                                <h4>Find Your Role</h4>
-                                <p>Apply to over 10,000 jobs and find the roles you love.</p>
+                                <h4><?= $site_content['image_heading'.$i] ?></h4>
+                                <p><?= $site_content['second_text'.$i] ?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="inner blk">
-                            <div class="icon"><img src="<?= base_url() ?>assets/images/vector-projects.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>Get Discovered</h4>
-                                <p>Build your profile and get scouted by industry pros casting now.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inner blk">
-                            <div class="icon"><img src="<?= base_url() ?>assets/images/vector-tracking.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>Get Cast</h4>
-                                <p>Land the role, take your place, and make your mark.</p>
-                            </div>
-                        </div>
-                    </div>
+                <?php endfor; ?>
                 </div>
             </div>
         </section>
@@ -68,8 +52,8 @@
                     </div>
                     <div class="col col2">
                         <div class="content">
-                            <h2 class="heading">We are here to help</h2>
-                            <p>Our Instructor Support Team is available 24/7 to assist you in creating your courses. Use our Teaching Center, a resource center that will support you in this process. Join Studio U and get peer-to-peer support from our dedicated instructor community. This community group is always active, always there and always helpful.</p>
+                            <h2 class="heading"><?= $site_content['third_heading'] ?></h2>
+                            <p><?= $site_content['third_short_desc'] ?></p>
                             <div class="bTn"><a href="<?= $base_url ?>support.php" class="webBtn">Help & Support</a></div>
                         </div>
                     </div>
@@ -119,8 +103,8 @@
         <section id="paid">
             <div class="contain">
                 <div class="content text-center">
-                    <h2 class="heading">Get paid to pros casting now</h2>
-                    <p>Connect with thousands of learners around the world and teach from your living room</p>
+                    <h2 class="heading"><?= $site_content['fourth_heading']?></h2>
+                    <p><?= $site_content['fourth_desc']?></p>
                     <div class="bTn"><a href="<?= $base_url ?>signup.php" class="webBtn simpleBtn">Get started now</a></div>
                 </div>
             </div>

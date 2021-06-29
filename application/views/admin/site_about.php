@@ -44,7 +44,7 @@
                         <div class="panel-body">
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
-                                    <img src="<?= !empty($row['image']) ? get_site_image_src("images/", $row['image']) : 'http://placehold.it/3000x1000' ?>" alt="--">
+                                    <img src="<?= !empty($row['image']) ? base_url().UPLOAD_PATH.'pages/about-us/'.$row['image'] : 'http://placehold.it/3000x1000' ?>" alt="--">
                                 </div>
                                 <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                 <div>
@@ -85,14 +85,14 @@
                             <label for="second_heading" class="control-label"> Heading <span class="symbol required">*</span></label>
                             <input type="text" name="second_heading" value="<?= $row['second_heading'] ?>" class="form-control" required>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" hidden>
                             <label for="second_short_desc" class="control-label"> Short Description <span class="symbol required">*</span></label>
                             <textarea name="second_short_desc" class="form-control" style="resize: none;" required=""><?= $row['second_short_desc'] ?></textarea>
                         </div>
                     </div>
                 </div>
 
-                <?php for($i=1;$i<=6;$i++):?>
+                <?php for($i=1;$i<=4;$i++):?>
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="col-md-12">
@@ -108,7 +108,7 @@
                                     <div class="panel-body">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
-                                                <img src="<?= !empty($row['second_image'.$i]) ? get_site_image_src("images/", $row['second_image'.$i]) : 'http://placehold.it/3000x1000' ?>" alt="--">
+                                                <img src="<?= !empty($row['second_image'.$i]) ? base_url().UPLOAD_PATH.'pages/about-us/'.$row['second_image'.$i] : 'http://placehold.it/3000x1000' ?>" alt="--">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                             <div>
@@ -124,8 +124,12 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
+                                <label for="image_heading<?=$i?>" class="control-label"> Image Heading <span class="symbol required">*</span></label>
+                                <input type="text" name="image_heading<?=$i?>" value="<?= $row['image_heading'.$i] ?>" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
                                 <label for="second_text<?=$i?>" class="control-label"> Detail<?= $i?> <span class="symbol required">*</span></label>
-                                <textarea name="second_text<?=$i?>" for="second_text<?=$i?>" rows="4" class="form-control ckeditor" ><?= $row['second_text'.$i] ?></textarea>
+                                <textarea name="second_text<?=$i?>" for="second_text<?=$i?>" rows="4" class="form-control" ><?= $row['second_text'.$i] ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -134,24 +138,62 @@
 
             <h3> Third Section</h3>
             <div class="form-group">
-                <div class="col-sm-6 col-md-6 ">
-                    <label for="third_left" class="control-label "> Left Detail <span class="symbol required">*</span></label>
-                    <textarea name="third_left" rows="6" class="form-control ckeditor" ><?= $row['third_left'] ?></textarea>
-                </div>
-                <div class="col-sm-6 col-md-6 ">
-                    <label for="third_right" class="control-label "> Right Detail <span class="symbol required">*</span></label>
-                    <textarea name="third_right" rows="6" class="form-control ckeditor" ><?= $row['third_right'] ?></textarea>
-                </div>
+                <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="third_heading" class="control-label"> Heading <span class="symbol required">*</span></label>
+                                <input type="text" name="third_heading" value="<?= $row['third_heading'] ?>" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="third_short_desc" class="control-label"> Short Description <span class="symbol required">*</span></label>
+                                <textarea name="third_short_desc" class="form-control ckeditor" style="resize: none;" required=""><?= $row['third_short_desc'] ?></textarea>
+                            </div>
+                        </div>
+                    </div>
             </div>
-
-            <h3> Fourth Section</h3>
-            <div class="form-group">
-                <div class="col-sm-12 ">
-                    <label for="fourth_heading" class="control-label "> Founder Heading</label>
-                    <input type="text" name="fourth_heading" class="form-control" value="<?= $row['fourth_heading'] ?>">
-                </div>
-            </div>
-
+            <br>
+            <?php for($i=1;$i<=3;$i++):?>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary" data-collapsed="0">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Image<?= $i?>
+                                        </div>
+                                        <div class="panel-options">
+                                            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
+                                                <img src="<?= !empty($row['third_image'.$i]) ? base_url().UPLOAD_PATH.'pages/about-us/'.$row['third_image'.$i] : 'http://placehold.it/3000x1000' ?>" alt="--">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
+                                            <div>
+                                                <span class="btn btn-white btn-file">
+                                                    <span class="fileinput-new">Select image</span>
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="third_image<?=$i?>" accept="image/*" <?php if(empty($row['third_image'.$i])){echo 'required=""';}?>>
+                                                </span>
+                                                <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="third_image_heading<?=$i?>" class="control-label"> Image Heading <span class="symbol required">*</span></label>
+                                <input type="text" name="third_image_heading<?=$i?>" value="<?= $row['third_image_heading'.$i] ?>" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="third_text<?=$i?>" class="control-label"> Detail<?= $i?> <span class="symbol required">*</span></label>
+                                <textarea name="third_text<?=$i?>" for="third_text<?=$i?>" rows="4" class="form-control ckeditor" ><?= $row['third_text'.$i] ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                <?php endfor?>
             <div class="form-group">
                 <label for="field-1" class="col-sm-2 control-label "></label>
                 <div class="col-sm-10">

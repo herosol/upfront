@@ -133,4 +133,17 @@ $(document).ready(function() {
             return false;
         }
     });
+
+    $('#frmChangeEmail').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        errorPlacement: function() {
+            return false; // suppresses error message text
+        }
+    });
+
 });

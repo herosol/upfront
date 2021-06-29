@@ -105,10 +105,6 @@ class MY_Controller extends CI_Controller {
         {
             $msg_body.="<p><a href='{$mem_data['link']}' style='color: #37b36f; text-decoration: none;'>".$mem_data['link']."</a></p>";
         }
-
-        echo "<pre>";
-        print_r($msg_body);
-        die;
         // $emailto = $mem_row->mem_email;
         $emailto = $mem_data['email'];
         $subject = 'Email Verificatoin';

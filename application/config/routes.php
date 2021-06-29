@@ -62,6 +62,13 @@ $route['privacy-policy'] = 'pages/privacy_policy';
 $route['disclaimers']    = 'pages/disclaimers';
 $route['affiliates']     = 'pages/affiliates';
 $route['contact-us']     = 'pages/contact_us';
+$route['about-us']       = 'pages/about_us';
+$route['how-it-works']   = 'pages/how_it_works';
+$route['find']           = 'pages/search'; //Search, Find A Model
+$route['educational-videos'] = 'pages/educational_videos'; //Search, Find A Model
+# BLOGS PAGES
+$route['blog/(:num)']        = 'blog/index/$1';
+$route['blog-detail/(:num)'] = 'blog/detail/$1';
 //AUTHENTICAION PAGES
 $route['signin'] = 'index/login'; //user login
 $route['signup'] = 'index/register'; //simple user register
@@ -69,6 +76,7 @@ $route['verification/(:any)'] = 'index/verification/$1'; //email verification af
 $route['forgot-password']     = 'index/forgot_password'; //forgot password
 $route['reset/(:any)']        = 'index/reset/$1';
 $route['reset-password']      = 'index/reset_password';
+$route['resend-email']  = 'account/resend_email';
 //DASHBOARD
 $route['dashboard']     = 'account/dashboard';
 

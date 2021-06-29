@@ -374,7 +374,7 @@
                     <div class="col col2">
                         <div class="head">
                             <h1 class="heading">Search</h1>
-                            <button type="button" id="filterBtn" class="webBtn smBtn icoBtn"><img src="<?= $base_url ?>images/icon-filter.svg" alt=""> Filter</button>
+                            <button type="button" id="filterBtn" class="webBtn smBtn icoBtn"><img src="<?= base_url() ?>assets/images/icon-filter.svg" alt=""> Filter</button>
                         </div>
                         <div class="topHead">
                             <span>125 Results available</span>
@@ -391,7 +391,7 @@
                         <div class="flexRow flex">
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/1.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
@@ -401,7 +401,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/2.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/2.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
@@ -411,7 +411,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/3.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/3.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
@@ -421,7 +421,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/4.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/4.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Real Productivity: How to Build Habits That Last</a></h4>
@@ -431,7 +431,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/5.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/5.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Hand Lettering in Procreate: Fundamentals to Finishing Touches</a></h4>
@@ -441,7 +441,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/6.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/6.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Customizing Type with Draplin: Creating Wordmarks That Work</a></h4>
@@ -451,7 +451,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/7.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/7.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
@@ -461,7 +461,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/8.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/8.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
@@ -471,7 +471,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/9.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/9.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
@@ -481,7 +481,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/10.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/10.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Real Productivity: How to Build Habits That Last</a></h4>
@@ -491,7 +491,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/1.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
@@ -501,7 +501,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/2.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/2.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
@@ -511,7 +511,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/3.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/3.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
@@ -521,7 +521,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/4.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/4.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Real Productivity: How to Build Habits That Last</a></h4>
@@ -531,7 +531,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/5.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/5.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Hand Lettering in Procreate: Fundamentals to Finishing Touches</a></h4>
@@ -541,7 +541,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/6.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/6.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Customizing Type with Draplin: Creating Wordmarks That Work</a></h4>
@@ -551,7 +551,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/7.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/7.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
@@ -561,7 +561,7 @@
                             </div>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= $base_url ?>images/stars/8.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/8.jpg" alt=""></a></div>
                                     <div class="txt">
                                         <div class="rateYo"></div>
                                         <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
@@ -578,9 +578,9 @@
 
 
         <!-- Ion Slider -->
-        <link type="text/css" rel="stylesheet" href="<?= $base_url ?>css/ion.slider.min.css">
-        <script type="text/javascript" src="<?= $base_url ?>js/ion.slider.min.js"></script>
-        <script type="text/javascript" src="<?= $base_url ?>js/ion.slider.skins.js"></script>
+        <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/ion.slider.min.css">
+        <script type="text/javascript" src="<?= base_url() ?>assets/js/ion.slider.min.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>assets/js/ion.slider.skins.js"></script>
         <script type="text/javascript">
             $(function() {
                 $('#age').ionRangeSlider({

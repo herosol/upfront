@@ -22,6 +22,53 @@ class Account extends MY_Controller
         }
     }
 
+    function change_email()
+    {
+        if($this->input->post())
+        {
+            $res=array();
+            $res['frm_reset'] = 0;
+            $res['hide_msg'] = 0;
+            $res['scroll_to_msg'] = 0;
+            $res['status'] = 0;
+            $res['redirect_url'] = 0;
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            if($this->form_validation->run() === FALSE)
+            {
+                $res['msg'] = validation_errors();
+            }
+            else
+            {
+                $post = html_escape($this->input->post());
+
+                if (!$this->user_model->emailExists($post['email'], $this->session->user_id))
+                {
+                    // $rando=doEncode(rand(111111, 999999));
+                    $rando = doEncode($this->session->user_id.'-'.$post['email']);
+                    $rando = strlen($rando)>225?substr($rando, 0,225):$rando;
+
+                    $this->user_model->save(array('mem_code' => $rando, 'user_email' => $post['email'], 'mem_verified' => 0), $this->session->user_id);
+                    $verify_link = site_url('verification/' .$rando);
+
+                    $mem_data = array('name' => $this->data['mem_data']->mem_fname.' '.$this->data['mem_data']->mem_lname,"email"=>$post['email'],"link"=>$verify_link);
+                    $this->send_site_email($mem_data, 'change_email');
+
+                    $res['redirect_url']=' ';
+
+                    $res['msg'] = showMsg('success', 'Email has been changed successful! Please wait.');
+                    setMsg('info',getSiteText('alert', 'verify_email'));
+
+                    $res['status'] = 1;
+                    $res['frm_reset'] = 1;
+                    $res['hide_msg'] = 1;
+                } else {
+                    $res['msg'] = showMsg('error', 'Email already exists!');
+                }
+            }
+            exit(json_encode($res));
+        }
+    }
+
     function become_pet_buyer()
     {
         $this->isMemLogged('buyer', true, false, array('buyer'), false);
@@ -1012,9 +1059,10 @@ class Account extends MY_Controller
         }
     }
 
-    function resend_email() {
+    function resend_email() 
+    {
         $verification_check = $this->data['mem_data']->mem_verified == 0 ? false:true;
-        $this->isMemLogged($this->session->mem_type, $verification_check, false);
+        $this->isMemLogged($this->session->user_type, $verification_check, false);
 
         $res = array();
         $res['hide_msg'] = 0;
@@ -1023,14 +1071,14 @@ class Account extends MY_Controller
         $res['frm_reset'] = 0;
         $res['redirect_url'] = 0;
 
-        $rando = doEncode($this->session->mem_id.'-'.$this->data['mem_data']->mem_email);
+        $rando = doEncode($this->session->user_id.'-'.$this->data['mem_data']->user_email);
         $rando = strlen($rando)>225?substr($rando, 0, 225):$rando;
         
-        $this->member_model->save(array('mem_code' => $rando), $this->session->mem_id);
+        $this->user_model->save(array('mem_code' => $rando), $this->session->user_id);
 
         $verify_link = site_url('verification/'.$rando);
 
-        $mem_data = array('name' => $this->data['mem_data']->mem_fname.' '.$this->data['mem_data']->mem_lname,"email"=>$this->data['mem_data']->mem_email,"link"=>$verify_link);
+        $mem_data = array('name' => $this->data['mem_data']->user_fname.' '.$this->data['mem_data']->user_lname,"email"=>$this->data['mem_data']->user_email,"link"=>$verify_link);
 
         $ok=$this->send_site_email($mem_data, 'verify_email');
 
