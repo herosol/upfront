@@ -3804,7 +3804,6 @@ video[poster] {
     object-fit: cover;
 }
 
-
 /*
 |----------------------------------------------------------------------
 |       Logon
@@ -3822,6 +3821,10 @@ video[poster] {
     width: 100%;
     max-width: 380px;
     margin: 0 auto;
+}
+
+#signup .logBlk {
+    max-width: 580px;
 }
 
 .logBlk>form {
@@ -3849,6 +3852,10 @@ video[poster] {
 
 .logBlk #pass {
     margin-left: auto;
+}
+
+#signup .upLoadBlk {
+    height: 200px;
 }
 
 
@@ -3894,6 +3901,50 @@ video[poster] {
     padding-right: 40px;
 }
 
+/*_____ upLoadBlk _____*/
+
+.upLoadBlk {
+	height: 300px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	overflow: auto;
+}
+
+.upLoadBlk .imgLst {
+	margin: -7px;
+}
+
+.upLoadBlk .imgLst > li {
+	width: 25%;
+	cursor: move;
+	padding: 7px;
+}
+
+.upLoadBlk .icon {
+	padding-bottom: 100%;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.upLoadBlk .icon img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.upLoadBlk .crosBtn {
+	top: 5px;
+	right: 5px;
+	background: #fff;
+	font-size: 14px;
+	border-radius: 75%;
+	box-shadow: 0 5px 20px rgb(18 15 56 / 7%);
+}
 
 /*
 |----------------------------------------------------------------------
@@ -4302,7 +4353,6 @@ video[poster] {
 #videos .blk>.vidBlk:before {
     width: 18%;
 }
-
 
 /*
 |----------------------------------------------------------------------
