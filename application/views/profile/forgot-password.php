@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title><?= !empty($site_content['page_title']) ? $site_content['page_title'].' - ' : 'Forgot Password - '?><?= $site_settings->site_name?></title>
+    <title><?= !empty($site_content['page_title']) ? $site_content['page_title'] . ' - ' : 'Forgot Password - ' ?><?= $site_settings->site_name ?></title>
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -16,8 +16,8 @@
                 <div class="logBlk">
                     <form action="" method="post" autocomplete="off" class="frmAjax" id="frmForgot">
                         <div class="alertMsg" style="display:none"></div>
-                        <h3><?= $site_content['heading']?></h3>
-                        <p><?= $site_content['short_desc']?></p>
+                        <h3><?= $site_content['heading'] ?></h3>
+                        <p><?= $site_content['short_desc'] ?></p>
                         <div class="txtGrp">
                             <label for="">Email Address</label>
                             <input type="email" name="email" id="email" class="txtBox">
@@ -34,9 +34,10 @@
             </div>
         </section>
         <!-- logon -->
+
+
         <script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
-
     </main>
     <?php $this->load->view('includes/footer'); ?>
 </body>
