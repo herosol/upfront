@@ -79,7 +79,8 @@ class Index extends MY_Controller {
 
     public function model_signup()
     {
-        if($this->input->post()) {
+        if($this->input->post())
+        {
             $res = array();
             $res['hide_msg'] = 0;
             $res['scroll_to_msg'] = 0;
@@ -89,6 +90,7 @@ class Index extends MY_Controller {
             $this->form_validation->set_rules('fname', 'First Name', 'required');
             $this->form_validation->set_rules('lname', 'Last Name', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('phone', 'Phone', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required');
             $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password]');
             $this->form_validation->set_rules('confirm', 'Confirm', 'required', array('required' => 'Please accept our terms and conditions'));
@@ -102,6 +104,12 @@ class Index extends MY_Controller {
                 $user_row = $this->user_model->emailExists($post['email']);
                 if (count($user_row) == '0')
                 {
+                    if (isset($_FILES["dp_image"]["name"]) && $_FILES["dp_image"]["name"] != "")
+                    {
+                        $image = upload_file(UPLOAD_PATH.'members', 'dp_image');
+                        $mem_image = $image['file_name'];
+                    }
+
                     $rando = doEncode(rand(99, 999).'-'.$post['email']);
                     $rando = strlen($rando) > 225 ? substr($rando, 0, 225) : $rando;
 
@@ -109,15 +117,69 @@ class Index extends MY_Controller {
                     [
                         'user_fname' => ucfirst($post['fname']), 
                         'user_lname' => ucfirst($post['lname']),
+                        'mem_phone'      => $post['phone'],
                         'user_email' => $post['email'],
-                        'user_pswd' => doEncode($post['password']),
+                        'mem_about'  => $post['bio'],
+                        'user_pswd'  => doEncode($post['password']),
                         'user_last_login' => date('Y-m-d h:i:s'),
+                        'mem_image'  => $mem_image,
+                        'user_type'  => 'model',
                         'mem_code' => $rando
                     ];
-
                     $user_id = $this->user_model->save($save_data);
+
+                    if($user_id > 0)
+                    {
+                        if(isset($_FILES['gallery_images']) && is_array($_FILES['gallery_images']['name']))
+                        {
+                            $image_path = array();          
+                            $count = count($_FILES['gallery_images']['name']);   
+                            for($key =0; $key < $count; $key++)
+                            {     
+                                $_FILES['file'.$key]['name']     = $_FILES['gallery_images']['name'][$key]; 
+                                $_FILES['file'.$key]['type']     = $_FILES['gallery_images']['type'][$key]; 
+                                $_FILES['file'.$key]['tmp_name'] = $_FILES['gallery_images']['tmp_name'][$key]; 
+                                $_FILES['file'.$key]['error']     = $_FILES['gallery_images']['error'][$key]; 
+                                $_FILES['file'.$key]['size']     = $_FILES['gallery_images']['size'][$key]; 
+                                      
+                            }
+            
+                            for($i=0; $i<$count; $i++)
+                            {
+                                if (isset($_FILES["file".$i]["name"]) && $_FILES["file".$i]["name"] != "") 
+                                {
+                                    $image = upload_file(UPLOAD_PATH.'members', 'file'.$i);
+                                    $gallery_record = 
+                                    [
+                                        'mem_id' => $user_id,
+                                        'image'  => $image['file_name'],
+                                        'status' => 1
+                                    ];
+
+                                    $this->master->save('mem_gallery_images', $gallery_record);
+                                }
+                            }
+                        }
+
+                        if (isset($_FILES["gallery_images"]["name"]) && $_FILES["gallery_images"]["name"] != "")
+                        {
+                            $totalImages = count($_FILES['gallery_images']['name']);
+                            for($i=1; $i<$totalImages;$i++)
+                            {
+                                if (isset($_FILES["second_image"]["name"][$i]) && $_FILES["second_image"]["name"][$i] != "")
+                                {
+                                    $image = upload_file(UPLOAD_PATH.'pages/become-model', $_FILES["second_image"]["name"][$i]);
+                                    if(!empty($image['file_name'])){
+                                        if (isset($content_row['second_image'.$i]))
+                                            $this->remove_file(UPLOAD_PATH."pages/become-model/".$content_row['second_image'.$i]);
+                                        $vals['second_image'.$i] = $image['file_name'];
+                                    }
+                                }
+                            }
+                        }
+                    }
                     $this->session->set_userdata('user_id', $user_id);
-                    $this->session->set_userdata('user_type', 'user');
+                    $this->session->set_userdata('user_type', 'model');
 
                     $verify_link  = site_url('verification/' .$rando);
                     $user_data    = array('name' => ucfirst($post['fname']).' '.ucfirst($post['lname']), "email" => $post['email'], "link" => $verify_link);

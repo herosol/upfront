@@ -87,6 +87,64 @@ $(document).ready(function() {
         }
     });
 
+    $('#frmModelSignup').validate({
+        errorElement: 'div',
+        rules: {
+            dp_image: {
+                required: true,
+            },
+            fname: {
+                required: true,
+            },
+            lname: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            phone: {
+                required: true
+            },
+            password: {
+                required: true,
+                minlength: 8,
+                pwcheck: true,
+            },
+            cpassword: {
+                required: true,
+                equalTo: '#password'
+            },
+            confirm: {
+                required: true
+            },
+            gallery_images: {
+                required: true
+            },
+            bio: {
+                required: true
+            }
+        },
+        messages: {
+            password: {
+                required: "Password required!",
+                minlength: "Password must be at least 8 characters.",
+            },
+            cpassword: {
+                required: "Confirm password required!",
+                equalTo: "Confirm password must be the as the password!"
+            }
+        },
+        errorPlacement: function(error, element) {
+            if ($.inArray(element.attr('id'), ['password', 'cpassword']) !== -1 && error.text() != 'This field is required.') {
+                error.addClass('alert alert-danger alert-sm')
+                error.appendTo(element.parents('form').find("div.alertMsg:first").show());
+                $("html, body").animate({ scrollTop: (element.parents('form').find("div.alertMsg:first").offset().top - 300) }, "slow");
+            }
+            return false;
+        }
+    });
+
     $('#frmForgot').validate({
         rules: {
             email: {

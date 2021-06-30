@@ -14,9 +14,8 @@
         <section id="signup">
             <div class="contain">
                 <div class="logBlk">
-                    <form action="" method="post" id="frmSignup" class="frmAjax">
+                    <form action="" method="post" id="frmModelSignup" class="frmAjax">
                         <div class="alertMsg" style="display:none"></div>
-                        <!-- <h3><?= $site_content['heading'] ?></h3> -->
                         <h3>Become a Model</h3>
                         <p><?= $site_content['short_desc'] ?></p>
                         <div class="formRow row">
@@ -24,11 +23,11 @@
                                 <div class="txtGrp">
                                     <div class="upLoadDp">
                                         <div class="ico">
-                                            <img src="<?= base_url() ?>assets/images/users/1.jpg" alt="">
+                                            <img src="<?=  get_site_image_src("members", 'user.png', ''); ?>" id="uploadDpPreview">
                                         </div>
                                         <div class="text-center">
                                             <button type="button" class="webBtn smBtn uploadImg" data-upload="dp_image" data-text="Upload Photo"></button>
-                                            <input type="file" name="" id="" class="uploadFile" data-upload="dp_image">
+                                            <input type="file" name="dp_image" id="dp_image" class="uploadFile" data-upload="dp_image" onchange="PreviewImage();" >
                                         </div>
                                         <div class="noHats text-center">(Please upload your photo)</div>
                                     </div>
@@ -76,40 +75,10 @@
                                 <div class="txtGrp">
                                     <label for="" class="move">Gallery Images</label>
                                     <button type="button" class="txtBox uploadImg" data-upload="gallery_files" data-text="Upload File"></button>
-                                    <input type="file" name="" id="" class="uploadFile" data-upload="gallery_files">
+                                    <input type="file" name="gallery_images[]" id="gallery_images" class="uploadFile" data-upload="gallery_files" multiple>
                                 </div>
                                 <div class="upLoadBlk txtBox">
                                     <ul class="imgLst flex">
-                                        <li>
-                                            <div class="icon">
-                                                <img src="<?= base_url() ?>assets/images/home-slide-02.jpg" alt="">
-                                                <div class="crosBtn"></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <img src="<?= base_url() ?>assets/images/3.jpg" alt="">
-                                                <div class="crosBtn"></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <img src="<?= base_url() ?>assets/images/portfolio-06.jpg" alt="">
-                                                <div class="crosBtn"></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <img src="<?= base_url() ?>assets/images/iteach-texas-mobile-header.jpg" alt="">
-                                                <div class="crosBtn"></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <img src="<?= base_url() ?>assets/images/portfolio-01.jpg" alt="">
-                                                <div class="crosBtn"></div>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -154,6 +123,57 @@
                 $('.imgLst').sortable();
                 // $('#sortable').disableSelection();
             });
+
+            function PreviewImage() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("dp_image").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    document.getElementById("uploadDpPreview").src = oFREvent.target.result;
+                };
+            };
+
+    $(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) 
+            {
+                let html = '';
+                var reader = new FileReader();
+
+                reader.onload = function(event) 
+                {
+                    html =  `<li class="previewImage">
+                                    <div class="icon">
+                                        <img src="${event.target.result}" alt="">
+                                        <div class="crosBtn"></div>
+                                    </div>
+                                </li>`;
+                    $(placeToInsertImagePreview).append(html);
+                    // $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('#gallery_images').on('change', function() {
+        imagesPreview(this, 'ul.imgLst');
+        });
+    });
+
+        $(document).on("click", ".crosBtn", function() 
+        {
+            $(this).parent().remove();
+            $('.imgLst').sortable();
+        });
+
         </script>
     </main>
     <?php $this->load->view('includes/footer'); ?>
