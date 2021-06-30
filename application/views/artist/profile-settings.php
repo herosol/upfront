@@ -16,7 +16,7 @@
             <div class="contain-fluid">
                 <div class="blk">
                     <form action="" method="post">
-                        <div class="upLoadCover" style="background-image: url('<?= $base_url ?>images/portfolio-01.jpg');">
+                        <div class="upLoadCover" style="background-image: url('<?= base_url() ?>assets/images/portfolio-01.jpg');">
                             <div class="text-center">
                                 <button type="button" class="webBtn smBtn uploadImg" data-upload="cover_image" data-text="Change Cover"></button>
                                 <input type="file" name="" id="" class="uploadFile" data-upload="cover_image">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="upLoadDp">
                             <div class="ico">
-                                <img src="<?= $base_url ?>images/stars/3.jpg" alt="">
+                                <img src="<?= base_url() ?>assets/images/stars/3.jpg" alt="">
                             </div>
                             <div class="text-center">
                                 <button type="button" class="webBtn smBtn uploadImg" data-upload="dp_image" data-text="Change Photo"></button>

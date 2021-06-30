@@ -181,10 +181,10 @@ class Account extends MY_Controller
         exit('1');
     }
     
-    function account_settings()
+    function profile_settings()
     {
-        $this->isMemLogged($this->session->mem_type);
-        $this->load->model('character_model');
+        $this->isMemLogged($this->session->user_type);
+        // $this->load->model('character_model');
         if($this->input->post()) {
             $res = array();
             $res['hide_msg'] = 0;
@@ -293,17 +293,18 @@ class Account extends MY_Controller
             $res['hide_msg'] = 1;
             exit(json_encode($res));
         }
-        else{
-            if($this->session->mem_type == 'player'){
-                // $this->data['mem_data']->images = $this->master->getRows('gallery', array('ref_id' => $this->session->mem_id, 'ref_type' => 'member', 'admin' => 0));
-                // $this->data['characters1'] = $this->character_model->get_member_characters($this->session->mem_id);
-                $this->data['characters'] = $this->character_model->get_rows();
-                $this->data['mem_characters'] = @explode(',', $this->data['mem_data']->mem_characters);
-                foreach ($this->data['mem_characters'] as $key => $char_id) {
-                    $this->data['character_images'][$char_id] = $this->character_model->get_character_images($this->session->mem_id, $char_id);
-                }
-            }
-            $this->load->view($this->session->mem_type."/profile-settings", $this->data);
+        else
+        {
+            // if($this->session->mem_type == 'player'){
+            //     // $this->data['mem_data']->images = $this->master->getRows('gallery', array('ref_id' => $this->session->mem_id, 'ref_type' => 'member', 'admin' => 0));
+            //     // $this->data['characters1'] = $this->character_model->get_member_characters($this->session->mem_id);
+            //     $this->data['characters'] = $this->character_model->get_rows();
+            //     $this->data['mem_characters'] = @explode(',', $this->data['mem_data']->mem_characters);
+            //     foreach ($this->data['mem_characters'] as $key => $char_id) {
+            //         $this->data['character_images'][$char_id] = $this->character_model->get_character_images($this->session->mem_id, $char_id);
+            //     }
+            // }
+            $this->load->view("artist/profile-settings");
         }
     }
 

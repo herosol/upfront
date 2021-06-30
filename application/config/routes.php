@@ -81,8 +81,9 @@ $route['reset-password']      = 'index/reset_password';
 $route['resend-email']  = 'account/resend_email';
 //MODEL
 $route['signup-as-model']  = 'index/model_signup';
-//DASHBOARD
-$route['dashboard']     = 'account/dashboard';
+//MEMBERS DASHBOARD
+$route['dashboard']        = 'account/dashboard';
+$route['profile-settings'] = 'account/profile_settings';
 
 # ADMIN ROUTES
 $route['admin/login']   = 'admin/index/login';

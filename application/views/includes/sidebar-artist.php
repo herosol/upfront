@@ -15,7 +15,7 @@
         <li class="<?php if ($page == "profile-settings") {
                         echo 'active';
                     } ?>">
-            <a href="<?= $base_url ?>artist/profile-settings.php">
+            <a href="<?= base_url() ?>profile-settings">
                 <img src="<?= base_url() ?>assets/images/icon-cog-fill.svg" alt="">
                 <em>Profile Settings</em>
             </a>
