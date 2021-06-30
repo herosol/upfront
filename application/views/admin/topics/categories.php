@@ -1,12 +1,12 @@
 <?php if ($this->uri->segment(3) == 'manage_category'): ?>
     <?= showMsg(); ?>
-    <?= getBredcrum(ADMIN, array('#' => 'Add/Update Category')); ?>
+    <?= getBredcrum(ADMIN, array('#' => 'Add/Update Topic Category')); ?>
     <div class="row margin-bottom-10">
         <div class="col-md-6">
-            <h2 class="no-margin"><i class="entypo-users"></i> Add/Update <strong>Category</strong></h2>
+            <h2 class="no-margin"><i class="entypo-users"></i> Add/Update <strong>Topic Category</strong></h2>
         </div>
         <div class="col-md-6 text-right">
-            <a href="<?= site_url(ADMIN . '/blog/categories'); ?>" class="btn btn-lg btn-default"><i class="fa fa-arrow-left"></i> Cancel</a>
+            <a href="<?= site_url(ADMIN . '/topics/categories'); ?>" class="btn btn-lg btn-default"><i class="fa fa-arrow-left"></i> Cancel</a>
         </div>
     </div>
     <div>
@@ -39,7 +39,7 @@
             <h2 class="no-margin"><i class="entypo-users"></i> Manage <strong>Categories</strong></h2>
         </div>
         <div class="col-md-6 text-right">
-            <a href="<?= site_url(ADMIN . '/blog/manage-category'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
+            <a href="<?= site_url(ADMIN . '/topics/manage_category'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
         </div>
     </div>
     <table class="table table-bordered datatable" id="table-1">
@@ -60,9 +60,9 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Action <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-primary" role="menu">
-                                    <li><a href="<?= site_url(ADMIN.'/blog/manage-category/'.$row->id); ?>">Edit</a></li>
+                                    <li><a href="<?= site_url(ADMIN.'/topics/manage_category/'.$row->id); ?>">Edit</a></li>
                                     <?php if(access(10)):?>
-                                        <li><a href="<?= site_url(ADMIN.'/blog/delete-category/'.$row->id); ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
+                                        <li><a href="<?= site_url(ADMIN.'/topics/delete_category/'.$row->id); ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
                                     <?php endif?>
                                 </ul>
                             </div>

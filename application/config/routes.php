@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 //PAGES
 $route['become-a-model'] = 'pages/become_model';
 $route['help']           = 'pages/help';
+$route['topic-detail/(:num)'] = 'pages/topic_detail/$1';
 $route['cookie-policy']  = 'pages/cookie_policy';
 $route['privacy-policy'] = 'pages/privacy_policy';
 $route['disclaimers']    = 'pages/disclaimers';
