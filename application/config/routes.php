@@ -70,7 +70,8 @@ $route['educational-videos'] = 'pages/educational_videos'; //Search, Find A Mode
 # BLOGS PAGES
 $route['blog/(:num)']        = 'blog/index/$1';
 $route['blog-detail/(:num)'] = 'blog/detail/$1';
-//AUTHENTICAION PAGES
+# AUTHENTICAION PAGES 
+// CLIENT
 $route['signin'] = 'index/login'; //user login
 $route['signup'] = 'index/register'; //simple user register
 $route['verification/(:any)'] = 'index/verification/$1'; //email verification after register
@@ -78,6 +79,8 @@ $route['forgot-password']     = 'index/forgot_password'; //forgot password
 $route['reset/(:any)']        = 'index/reset/$1';
 $route['reset-password']      = 'index/reset_password';
 $route['resend-email']  = 'account/resend_email';
+//MODEL
+$route['signup-as-model']  = 'index/model_signup';
 //DASHBOARD
 $route['dashboard']     = 'account/dashboard';
 
