@@ -14,46 +14,46 @@
 
         <section id="dash">
             <div class="contain-fluid">
-            <?php if($mem_data->mem_verified == 0):?>
-                <div id="verify">
-                    <div class="inBlk blk">
-                        <h3 class="heading">Email Verification</h3>
-                        <div id="resndCntnt">
-                            <p>Please verify your email address, We've sent a verify email to your email address. If you don't see the email, check your spam folder. If you didn't get email click on resend email link, or if you want to change email address click link below.</p>
-                            <p><a href="javascript:void(0)" id="rsnd-email">Resend Email</a> OR <a href="javascript:void(0)" class="popBtn" data-popup="change-email">Change Email</a>
-                            </p>
-                        </div>
-                        <div class="appLoad hide">
-                            <div class="appLoader"><span class="spiner"></span></div>
-                        </div>
-                        <div class="popup small-popup" data-popup="change-email">
-                            <div class="tableDv">
-                                <div class="tableCell">
-                                    <div class="contain">
-                                        <div class="_inner">
-                                            <div class="crosBtn"></div>
-                                            <h4>Change your Email</h4>
-                                            <form action="<?= base_url() ?>account/change_email" method="post" autocomplete="off" class="frmAjax" id="frmChangeEmail">
-                                                <div class="txtGrp">
-                                                    <label for="email">Email Address</label>
-                                                    <input type="email" id="email" name="email" class="txtBox">
-                                                </div>
-                                                <div class="bTn text-center mb-1">
-                                                    <button type="submit" class="webBtn">Change your Email</button>
-                                                </div>
-                                                <br>
-                                                <div class="alertMsg" style="display:none"></div>
-                                            </form>
+                <?php if ($mem_data->mem_verified == 0) : ?>
+                    <div id="verify">
+                        <div class="inBlk blk">
+                            <h3 class="heading">Email Verification</h3>
+                            <div id="resndCntnt">
+                                <p>Please verify your email address, We've sent a verify email to your email address. If you don't see the email, check your spam folder. If you didn't get email click on resend email link, or if you want to change email address click link below.</p>
+                                <p><a href="javascript:void(0)" id="rsnd-email">Resend Email</a> OR <a href="javascript:void(0)" class="popBtn" data-popup="change-email">Change Email</a>
+                                </p>
+                            </div>
+                            <div class="appLoad hide">
+                                <div class="appLoader"><span class="spiner"></span></div>
+                            </div>
+                            <div class="popup small-popup" data-popup="change-email">
+                                <div class="tableDv">
+                                    <div class="tableCell">
+                                        <div class="contain">
+                                            <div class="_inner">
+                                                <div class="crosBtn"></div>
+                                                <h4>Change your Email</h4>
+                                                <form action="<?= base_url() ?>account/change_email" method="post" autocomplete="off" class="frmAjax" id="frmChangeEmail">
+                                                    <div class="txtGrp">
+                                                        <label for="email">Email Address</label>
+                                                        <input type="email" id="email" name="email" class="txtBox">
+                                                    </div>
+                                                    <div class="bTn text-center mb-1">
+                                                        <button type="submit" class="webBtn">Change your Email</button>
+                                                    </div>
+                                                    <br>
+                                                    <div class="alertMsg" style="display:none"></div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
                 <div class="blk topBlk">
-                    <div class="ico"><img src="<?=  get_site_image_src("members", $mem_data->mem_image, ''); ?>" alt=""></div>
+                    <div class="ico"><img src="<?= get_site_image_src("members", $mem_data->mem_image, ''); ?>" alt=""></div>
                     <div class="txt">
                         <h3><span class="regular">Welcome,</span> Dear, <?= $mem_data->user_fname . ' ' . $mem_data->user_lname ?>! <span class="regular">Nice to see you again.</span></h3>
                     </div>
@@ -206,12 +206,11 @@
         <script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
         <script>
-            $(function ()
-            {
-                $(document).on('click','#rsnd-email',function(e){
+            $(function() {
+                $(document).on('click', '#rsnd-email', function(e) {
                     e.preventDefault();
 
-                    var btn=$(this);
+                    var btn = $(this);
                     if (btn.data("disabled"))
                         return false;
                     $("#resndCntnt").addClass('hide');
@@ -219,19 +218,21 @@
 
                     btn.data("disabled", "disabled");
                     $.ajax({
-                        url: base_url+'resend-email',
-                        data : {'cmd':'resend'},
+                        url: base_url + 'resend-email',
+                        data: {
+                            'cmd': 'resend'
+                        },
                         dataType: 'JSON',
                         method: 'POST',
-                        success: function (rs) {
+                        success: function(rs) {
                             $('#resndCntnt').find('.alertMsg').remove().end().append(rs.msg);
                         },
-                        complete: function(){
+                        complete: function() {
                             btn.removeData("disabled");
-                            setTimeout(function(){
+                            setTimeout(function() {
                                 $('.appLoad').addClass('hide');
                                 $('#resndCntnt').removeClass('hide');
-                            },1500)
+                            }, 1500)
                         }
                     })
                 })

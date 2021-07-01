@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ date_default_timezone_set('America/New_York');
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 // ini_set('display errors', E_ALL);
 if ($_SERVER['HTTP_HOST'] == 'localhost')
-	$config['base_url'] = "http://localhost/work/upfront";
+	$config['base_url'] = "http://localhost/herosolutions/upfront-master";
 
 /*
 |--------------------------------------------------------------------------
@@ -530,7 +530,7 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-defined('SITE_VPATH') OR define('SITE_VPATH', $config['base_url'] . '/v/');
-defined('SITE_IMAGES') OR define('SITE_IMAGES', $config['base_url'] . '/uploads/');
-defined('SITE_VIDEOS') OR define('SITE_VIDEOS', $config['base_url'] . '/uploads/videos/');
-defined('SITE_FILES') OR define('SITE_FILES', $config['base_url'] . '/uploads/files/');
+defined('SITE_VPATH') or define('SITE_VPATH', $config['base_url'] . '/v/');
+defined('SITE_IMAGES') or define('SITE_IMAGES', $config['base_url'] . '/uploads/');
+defined('SITE_VIDEOS') or define('SITE_VIDEOS', $config['base_url'] . '/uploads/videos/');
+defined('SITE_FILES') or define('SITE_FILES', $config['base_url'] . '/uploads/files/');

@@ -86,7 +86,7 @@ if ($_SERVER['HTTP_HOST'] != 'localhost') {
 		'hostname' => 'localhost',
 		'username' => 'root',
 		'password' => '',
-		'database' => 'herosols_upfront'
+		'database' => 'upfront-master'
 	);
 }
 
