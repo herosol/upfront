@@ -9,14 +9,14 @@ class Account extends MY_Controller
     {
         parent::__construct();
         $this->load->model('user_model');
-        // $this->load->model('package_model');
+        $this->load->model('skills_model');
     }
 
     function dashboard()
     {
         $this->isMemLogged($this->session->user_type);
         // $this->data['pkg_row'] = $this->package_model->get_row($this->data['mem_data']->mem_package_id);
-        if($this->session->user_type == 'user') 
+        if($this->session->user_type == 'user' || $this->session->user_type == 'model') 
         {
             $this->load->view("artist/dashboard", $this->data);
         }
@@ -67,118 +67,6 @@ class Account extends MY_Controller
             }
             exit(json_encode($res));
         }
-    }
-
-    function become_pet_buyer()
-    {
-        $this->isMemLogged('buyer', true, false, array('buyer'), false);
-        if($this->data['mem_data']->mem_become_buyer > 0) {
-            redirect('dashboard');
-            exit;
-        }
-        if($this->input->post()) {
-            $res = array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-            $res['redirect_url'] = 0;
-            $res['msg'] = '';
-
-            $this->form_validation->set_message('integer', 'Please select a valid {field}');
-
-            $this->form_validation->set_rules('fname', 'First Name', 'required|alpha');
-            $this->form_validation->set_rules('lname', 'Last Name', 'required|alpha');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('address1', 'Address 1', 'required');
-            $this->form_validation->set_rules('country', 'Country', 'required|integer');
-            $this->form_validation->set_rules('state', 'State', 'required', array('required' => 'Please select a {field}'));
-            $this->form_validation->set_rules('city', 'City', 'required');
-            $this->form_validation->set_rules('zip', 'Zip Code', 'required');
-
-            $this->form_validation->set_rules('phone', 'Phone', 'required');
-            $this->form_validation->set_rules('contact_name', 'Contact Name', 'required');
-            $this->form_validation->set_rules('contact_phone', 'Contact Phone', 'required');
-
-            $post = html_escape($this->input->post());
-            if($this->form_validation->run()===FALSE)
-                $res['msg'] = validation_errors();
-
-            if(!empty($post['state']) && !$this->master->getRow('states', array('code' => $post['state'])))
-                $res['msg'] .= showMsg('error', 'Please select a valid State!');
-            if (!empty($post['email']) && $this->member_model->emailExists($post['email'],$this->session->mem_id))
-                $res['msg'] .= showMsg('error', 'Email already in use, Please try another!');
-            if (!empty($post['phone']) && $this->member_model->phoneExists($post['phone'], $this->session->mem_id))
-                $res['msg'] .= showMsg('error', 'Phone already in use, Please try another!');
-            if (empty($this->data['mem_data']->mem_phone_verified))
-                $res['msg'] .= showMsg('error', 'Please verify your Phone!');
-
-            if (!empty($res['msg']))
-                exit(json_encode($res));
-
-            if(!empty($post['zip']) && $this->data['mem_data']->mem_zip != $post['zip']) {
-                $coordinates = get_location_detail($post['zip']);
-                $data['mem_map_lat'] = $coordinates->Latitude;
-                $data['mem_map_lng'] = $coordinates->Longitude;
-            }
-
-            /*
-            if(!empty($post['email']) && $this->data['mem_data']->mem_email!=$post['email']){
-                $rando=doEncode($this->session->mem_id.'-'.$post['email']).rand(99,999);
-                $data['mem_code'] = $rando;
-                $data['mem_verified'] = 0;
-
-                $verify_link = site_url('verification/' .$rando);
-
-                $mem_data = array('name'=>ucwords($post['fname'].' '.$post['lname']),"email"=>$post['email'],"link"=>$verify_link);
-                $this->send_site_email($mem_data, 'change_email');
-                setMsg('info',getSiteText('alert', 'verify_email'));
-                $res['redirect_url'] = site_url('email-verification');
-            }
-            */
-
-            $data = array('mem_fname' => ucfirst($post['fname']), 'mem_lname' => ucfirst($post['lname']), 'mem_company' => $post['company'], 'mem_state' => $post['state'], 'mem_city' => ucwords($post['city']), 'mem_zip' => $post['zip'], 'mem_address1' => $post['address1'], 'mem_address2' => $post['address2'], 'mem_contact_name' => ucfirst($post['contact_name']), 'mem_contact_phone' => $post['contact_phone'], 'mem_become_buyer' => 1);
-
-
-
-            $this->load->library('my_stripe');
-            $this->my_stripe->save_customer(array('name' => ucfirst($post['fname']).' '.ucfirst($post['lname']), 'email' => $post['email'], 'phone' => $this->data['mem_data']->mem_phone, 'description' => $this->data['site_settings']->site_name." Customer ".ucfirst($post['fname']).' '.ucfirst($post['lname'])), $this->data['mem_data']->mem_stripe_id);
-
-            if(!empty($post['zip']) && $this->data['mem_data']->mem_zip != $post['zip'] && $this->session->mem_type==='player') {
-                $coordinates = get_location_detail($post['zip']);
-                $data['mem_map_lat'] = $coordinates->Latitude;
-                $data['mem_map_lng'] = $coordinates->Longitude;
-            }
-            $this->member_model->save($data, $this->session->mem_id);
-
-            $res['msg'] = showMsg('success', 'Profile saved successfully!');
-            $res['redirect_url'] = site_url("membership");
-            $res['status'] = 1;
-            $res['hide_msg'] = 1;
-            exit(json_encode($res));
-        }
-        else
-            $this->load->view("buyer/buyer-signup", $this->data);
-    }
-
-    function membership() {
-        // $this->isMemLogged('buyer', true, true, array('buyer'), false);
-        $this->isMemLogged($this->session->mem_type, true, false, array('buyer', 'player'), false);
-        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'membership'));
-        $this->data['site_content'] = unserialize($this->data['content_row']->code);
-
-        // $this->data['packages'] = $this->package_model->get_rows(array('type' => $this->session->mem_type));
-        $view = $this->session->mem_type=='player'?'player/become-player':"buyer/membership";
-        $this->load->view($view, $this->data);
-    }
-
-    function cancel_membership()
-    {
-        $this->isMemLogged($this->session->mem_type);
-        $this->member_model->save(array('mem_membership_auto' => 0), $this->session->mem_id);
-        $this->load->library('my_stripe');
-        $this->my_stripe->subscription_cancel($this->data['mem_data']->mem_subscription_id);
-        exit('1');
     }
     
     function profile_settings()
@@ -295,16 +183,9 @@ class Account extends MY_Controller
         }
         else
         {
-            // if($this->session->mem_type == 'player'){
-            //     // $this->data['mem_data']->images = $this->master->getRows('gallery', array('ref_id' => $this->session->mem_id, 'ref_type' => 'member', 'admin' => 0));
-            //     // $this->data['characters1'] = $this->character_model->get_member_characters($this->session->mem_id);
-            //     $this->data['characters'] = $this->character_model->get_rows();
-            //     $this->data['mem_characters'] = @explode(',', $this->data['mem_data']->mem_characters);
-            //     foreach ($this->data['mem_characters'] as $key => $char_id) {
-            //         $this->data['character_images'][$char_id] = $this->character_model->get_character_images($this->session->mem_id, $char_id);
-            //     }
-            // }
-            $this->load->view("artist/profile-settings");
+            $this->data['languages'] = languages();
+            $this->data['skills']    = $this->skills_model->get_rows();
+            $this->load->view("artist/profile-settings", $this->data);
         }
     }
 

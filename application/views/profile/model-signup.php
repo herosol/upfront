@@ -153,7 +153,6 @@
                                     </div>
                                 </li>`;
                     $(placeToInsertImagePreview).append(html);
-                    // $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
                 }
 
                 reader.readAsDataURL(input.files[i]);

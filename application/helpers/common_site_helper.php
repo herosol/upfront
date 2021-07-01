@@ -36,6 +36,14 @@ function blog_cat_by_id($cat_id)
     return $query->row()->title;
 }
 
+function languages()
+{
+    global $CI;
+    $CI->db->select("name");
+    $query = $CI->db->get('languages');
+    return $query->result();
+}
+
 function get_header_notis($limit = '', $order_by = 'desc')
 {
     global $CI;

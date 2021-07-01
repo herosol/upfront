@@ -7,7 +7,7 @@
         <li class="<?php if ($page == "dashboard") {
                         echo 'active';
                     } ?>">
-            <a href="<?= $base_url ?>artist/dashboard.php">
+            <a href="<?= base_url() ?>dashboard">
                 <img src="<?= base_url() ?>assets/images/icon-pencil.svg" alt="">
                 <em>Dashboard</em>
             </a>

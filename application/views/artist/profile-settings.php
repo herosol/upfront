@@ -16,19 +16,19 @@
             <div class="contain-fluid">
                 <form action="" method="post">
                     <div class="blk">
-                        <div class="upLoadCover" style="background-image: url('<?= base_url() ?>assets/images/portfolio-01.jpg');">
+                        <div class="upLoadCover" id="cover_preview" style="background-image: url('');">
                             <div class="text-center">
                                 <button type="button" class="webBtn smBtn uploadImg" data-upload="cover_image" data-text="Change Cover"></button>
-                                <input type="file" name="" id="" class="uploadFile" data-upload="cover_image">
+                                <input type="file" name="cover_photo" id="cover_photo" class="uploadFile" data-upload="cover_image">
                             </div>
                         </div>
                         <div class="upLoadDp">
                             <div class="ico">
-                                <img src="<?= base_url() ?>assets/images/stars/3.jpg" alt="">
+                                <img src = "<?=  get_site_image_src("members", $mem_data->mem_image,''); ?>" alt="" id="uploadDpPreview">
                             </div>
                             <div class="text-center">
                                 <button type="button" class="webBtn smBtn uploadImg" data-upload="dp_image" data-text="Change Photo"></button>
-                                <input type="file" name="" id="" class="uploadFile" data-upload="dp_image">
+                                <input type="file" name="dp_image" id="dp_image" class="uploadFile" data-upload="dp_image" onchange="PreviewImage();">
                             </div>
                             <div class="noHats text-center">(Please upload your photo)</div>
                         </div>
@@ -38,25 +38,25 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
                                     <label for="">First Name</label>
-                                    <input type="text" name="" id="" class="txtBox">
+                                    <input type="text" name="user_fname" id="user_fname" value="<?= $mem_data->user_fname ?>" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
                                     <label for="">Last Name</label>
-                                    <input type="text" name="" id="" class="txtBox">
+                                    <input type="text" name="user_lname" id="user_lname" value="<?= $mem_data->user_lname ?>" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
                                     <label for="">Phone Number</label>
-                                    <input type="text" name="" id="" class="txtBox">
+                                    <input type="text" name="mem_phone" id="mem_phone" value="<?= $mem_data->mem_phone ?>" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
                                     <label for="">Email Address</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <input type="text" id="user_email" name="user_email" value="<?= $mem_data->user_email ?>" class="txtBox" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
@@ -196,7 +196,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12">
                                 <div class="txtGrp">
                                     <label for="">Description</label>
-                                    <textarea name="" id="" class="txtBox"></textarea>
+                                    <textarea name="mem_about" id="mem_about" class="txtBox"><?= $mem_data->mem_about ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -528,6 +528,34 @@
                 $('.imgLst').sortable();
                 // $('#sortable').disableSelection();
             });
+
+            function PreviewImage() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("dp_image").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    document.getElementById("uploadDpPreview").src = oFREvent.target.result;
+                };
+            };
+
+            function readURL(input) 
+            {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) 
+                    {
+                        $('#cover_preview').attr('style', `background-image: url('${e.target.result}');`);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#cover_photo").change(function(){
+                readURL(this);
+            });
+
         </script>
     </main>
     <?php $this->load->view('includes/footer'); ?>

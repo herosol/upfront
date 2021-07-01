@@ -23,7 +23,7 @@
                             <p><a href="javascript:void(0)" id="rsnd-email">Resend Email</a> OR <a href="javascript:void(0)" class="popBtn" data-popup="change-email">Change Email</a>
                             </p>
                         </div>
-                        <div class="appLoad">
+                        <div class="appLoad hide">
                             <div class="appLoader"><span class="spiner"></span></div>
                         </div>
                         <div class="popup small-popup" data-popup="change-email">
@@ -53,7 +53,7 @@
                 </div>
             <?php endif; ?>
                 <div class="blk topBlk">
-                    <div class="ico"><img src="<?= base_url() ?>assets/images/users/3.jpg" alt=""></div>
+                    <div class="ico"><img src="<?=  get_site_image_src("members", $mem_data->mem_image, ''); ?>" alt=""></div>
                     <div class="txt">
                         <h3><span class="regular">Welcome,</span> Dear, <?= $mem_data->user_fname . ' ' . $mem_data->user_lname ?>! <span class="regular">Nice to see you again.</span></h3>
                     </div>
@@ -67,7 +67,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/1.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>Educated is even better than you’ve heard</h5>
                                         <p>214243</p>
@@ -84,7 +84,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/2.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/2.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>How to handle a national crisis</h5>
                                         <p>214243</p>
@@ -101,7 +101,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/3.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/3.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>This partnership helped prevent 13 million deaths</h5>
                                         <p>214243</p>
@@ -118,7 +118,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/4.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/4.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>What you can do to fight climate change</h5>
                                         <p>214243</p>
@@ -135,7 +135,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/5.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/5.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>How do we move around in a zero-carbon world?</h5>
                                         <p>214243</p>
@@ -152,7 +152,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/6.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/6.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>5 good books for a lousy year</h5>
                                         <p>214243</p>
@@ -169,7 +169,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/7.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/7.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>Mealtime Conversations – Bangladesh</h5>
                                         <p>214243</p>
@@ -186,7 +186,7 @@
                         <ul class="lst">
                             <li>
                                 <div class="icoBlk">
-                                    <div class="ico"><img src="<?= $base_url ?>images/stars/8.jpg" alt=""></div>
+                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/8.jpg" alt=""></div>
                                     <div class="txt">
                                         <h5>Here’s a way you can help fight Alzheimer’s</h5>
                                         <p>214243</p>

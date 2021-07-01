@@ -1,6 +1,5 @@
-
-.margin-bottom-10{
-    margin-bottom:20px;
+.margin-bottom-10 {
+    margin-bottom: 20px;
 }
 
 .dropdown-menu {
@@ -9,9 +8,9 @@
     min-width: 120px;
     text-align: left;
 }
-.logo-color{
-        background: #ccd !important;
-    
+
+.logo-color {
+    background: #ccd !important;
 }
 
 .icoRound {
@@ -23,7 +22,7 @@
     overflow: hidden;
 }
 
-.icoRound > img {
+.icoRound>img {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -60,7 +59,9 @@
     display: block;
 }
 
+
 /***** append Block *****/
+
 .apndBlk .addBtn {
     color: #faa50d;
     float: right;
@@ -70,16 +71,19 @@
     color: #c20000;
     float: left;
 }
+
+
 /**====================================
 ===============================
         alert message
         ===============================
 ====================================**/
+
 .alertMsg {
     text-align: center;
 }
 
-.alertMsg > .alert {
+.alertMsg>.alert {
     padding: 7px 7px;
     border-radius: 0;
     margin: 0 0 10px;
@@ -91,31 +95,39 @@
     border-radius: 0;
 }
 
-span.input-group-addon{
+span.input-group-addon {
     color: #919191
 }
 
+
 /*** ========== image box ===================***/
+
 .uploadImg {
     border: 1px solid #ebebeb;
     padding: 10px;
 }
+
 .uploadImg .imgbox {
     border: 1px solid #f7f7f7;
     padding: 4px;
     width: 100%;
 }
+
 .uploadImg .instructions {
     padding: 15px 0px 0px;
 }
+
 .uploadImg .instructions small {
     color: #F00;
 }
 
+
 /*** ========== dynamicUpload file ===================***/
+
 input[type="file"].uploadFile {
     display: none;
 }
+
 .dynamicUpload {
     position: relative;
     width: 100%;
@@ -133,6 +145,7 @@ input[type="file"].uploadFile {
     -o-object-position: center;
     object-position: center;
 }
+
 .dynamicUpload .crosBtn {
     position: absolute;
     top: -7px;
@@ -149,6 +162,7 @@ input[type="file"].uploadFile {
     border-radius: 75%;
     z-index: 2;
 }
+
 .dynamicUpload .icoMask {
     position: absolute;
     background: rgba(0, 0, 0, 0.1);
@@ -190,9 +204,10 @@ input[type="file"].uploadFile {
     background: rgba(0, 0, 0, 0.8);
 }
 
-.dynamicUpload > .icoMask > i {
+.dynamicUpload>.icoMask>i {
     margin: 0 0 4px;
 }
+
 .loadingImg {
     position: absolute;
     background: rgba(0, 0, 0, 0.7);
@@ -219,33 +234,41 @@ input[type="file"].uploadFile {
     line-height: 12px;
     cursor: auto;
 }
+
 .loadingImg img {
     width: 80px;
     height: 80px;
 }
-.uploadBar{
-     border: 1px solid #ccc;
-     border-radius: 2px;
-     height: 5px;
-     margin-top: 2px;
-     background: #fff;
+
+.uploadBar {
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    height: 5px;
+    margin-top: 2px;
+    background: #fff;
 }
-.uploadBar>span{
+
+.uploadBar>span {
     display: block;
     width: 0%;
     height: 100%;
     background: #c31616;
 }
+
+
 /*** multi pic box ***/
-.multiPicBox{
+
+.multiPicBox {
     padding: 5px;
     border: solid 1px #eee;
     border-radius: 2%;
 }
-.multiPicBox img{
-    height:100px;
+
+.multiPicBox img {
+    height: 100px;
     margin-bottom: 10px;
 }
+
 
 /*========== miniLbl ==========*/
 
@@ -272,9 +295,11 @@ input[type="file"].uploadFile {
 .miniLbl.gray {
     background: #aaa;
 }
+
 .miniLbl.red {
     background: #d81616;
 }
+
 
 /*--------------    Messages   --------------*/
 
@@ -293,7 +318,7 @@ input[type="file"].uploadFile {
     margin: 0px -10px;
 }
 
-#messages .ouTer >  .inNer {
+#messages .ouTer>.inNer {
     padding: 0px 10px;
 }
 
@@ -329,7 +354,6 @@ input[type="file"].uploadFile {
     padding-right: 80px;
 }
 
-
 #messages .chatPerson .btn {
     margin-left: 4px;
 }
@@ -339,9 +363,10 @@ input[type="file"].uploadFile {
     margin-left: 10px;
 }
 
-#messages .chatPerson .ticketId > span {
+#messages .chatPerson .ticketId>span {
     display: block;
 }
+
 
 /*----- chatBlk -----*/
 
@@ -530,7 +555,7 @@ input[type="file"].uploadFile {
     z-index: 1;
 }
 
-#messages .chatBlk .chat .cntnt > .tip {
+#messages .chatBlk .chat .cntnt>.tip {
     margin-bottom: 4px;
 }
 
@@ -549,25 +574,26 @@ input[type="file"].uploadFile {
     opacity: 1;
 }
 
-#messages .chatBlk .chat .you .icoBlk > .tip,
-#messages .chatBlk .chat .you .cntnt > .tip {
+#messages .chatBlk .chat .you .icoBlk>.tip,
+#messages .chatBlk .chat .you .cntnt>.tip {
     left: 0px;
 }
 
-#messages .chatBlk .chat .you .icoBlk > .tip:before,
-#messages .chatBlk .chat .you .cntnt > .tip:before {
+#messages .chatBlk .chat .you .icoBlk>.tip:before,
+#messages .chatBlk .chat .you .cntnt>.tip:before {
     left: 10px;
 }
 
-#messages .chatBlk .chat .me .icoBlk > .tip,
-#messages .chatBlk .chat .me .cntnt > .tip {
+#messages .chatBlk .chat .me .icoBlk>.tip,
+#messages .chatBlk .chat .me .cntnt>.tip {
     right: 0px;
 }
 
-#messages .chatBlk .chat .me .icoBlk > .tip:before,
-#messages .chatBlk .chat .me .cntnt > .tip:before {
+#messages .chatBlk .chat .me .icoBlk>.tip:before,
+#messages .chatBlk .chat .me .cntnt>.tip:before {
     right: 10px;
 }
+
 
 /*
 |----------------------------------------------------------------------
@@ -590,27 +616,27 @@ input[type="file"].uploadFile {
     cursor: default;
 }
 
-.jq-ry-container > .jq-ry-group-wrapper {
+.jq-ry-container>.jq-ry-group-wrapper {
     position: relative;
     width: 100%;
 }
 
-.jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group {
+.jq-ry-container>.jq-ry-group-wrapper>.jq-ry-group {
     position: relative;
     line-height: 0;
     white-space: nowrap;
     z-index: 1;
 }
 
-.jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group > svg {
+.jq-ry-container>.jq-ry-group-wrapper>.jq-ry-group>svg {
     display: inline-block;
 }
 
-.jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group.jq-ry-normal-group {
+.jq-ry-container>.jq-ry-group-wrapper>.jq-ry-group.jq-ry-normal-group {
     width: 100%;
 }
 
-.jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group.jq-ry-rated-group {
+.jq-ry-container>.jq-ry-group-wrapper>.jq-ry-group.jq-ry-rated-group {
     position: absolute;
     top: 0;
     left: 0;
@@ -618,6 +644,7 @@ input[type="file"].uploadFile {
     overflow: hidden;
     z-index: 3;
 }
+
 
 /*========== Message Lesson ==========*/
 
@@ -630,15 +657,19 @@ input[type="file"].uploadFile {
     border-radius: 10px;
     box-shadow: none;
 }
+
 #messages .chatBlk .blk {
     margin: 10px 44px 20px;
 }
-#messages .chatBlk a.blk > span {
+
+#messages .chatBlk a.blk>span {
     display: block;
     color: #999;
     font-size: 14px;
     margin-top: 5px;
 }
+
+
 /*
 |----------------------------------------------------------------------
 |       Popup
@@ -707,7 +738,7 @@ input[type="file"].uploadFile {
     content: '\2715';
 }
 
-.popup .list > li {
+.popup .list>li {
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
@@ -717,15 +748,40 @@ input[type="file"].uploadFile {
     margin-bottom: 10px;
 }
 
-.popup .list > li strong {
+.popup .list>li strong {
     width: 160px;
     min-width: 160px;
     margin-right: 10px;
 }
 
-.popup .list > li span {
+.popup .list>li span {
     width: 100%;
 }
-.popup .cardBlk .icoBlk .rateYo{
+
+.popup .cardBlk .icoBlk .rateYo {
     margin: 0 auto;
+}
+
+span.new {
+    background: black;
+    color: white;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+span.no-verified {
+    background: #cc2424;
+    color: white;
+    padding: 5px;
+    border: 1px solid #cc2424;
+    border-radius: 3px;
+}
+
+span.verified {
+    background: rgb(54, 134, 43);
+    color: white;
+    padding: 5px;
+    border: 1px solid rgb(28, 126, 37);
+    border-radius: 3px;
 }
