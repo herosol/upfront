@@ -191,6 +191,7 @@ class Account extends MY_Controller
         }
         else
         {
+            $this->data['countries'] = countries();
             $this->data['languages'] = languages();
             $this->data['skills']    = $this->skills_model->get_rows();
             $this->load->view("artist/profile-settings", $this->data);

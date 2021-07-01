@@ -14,7 +14,8 @@
 
         <section id="setting">
             <div class="contain-fluid">
-                <form action="" method="post">
+            <div class="alertMsg" style="display:none"></div>
+                <form aaction="" method="post" id="frmModelProfileSettings" class="frmAjax">
                     <div class="blk">
                         <div class="upLoadCover" id="cover_preview" style="background-image: url('');">
                             <div class="text-center">
@@ -62,14 +63,14 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
                                     <label for="">Date of birth</label>
-                                    <input type="text" name="" id="" class="txtBox datepicker">
+                                    <input type="text" name="mem_dob" id="mem_dob" class="txtBox datepicker">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Gender</label>
-                                    <select name="" id="" class="txtBox">
-                                        <option>Select</option>
+                                    <label for="mem_sex" class="move">Gender</label>
+                                    <select name="mem_sex" id="mem_sex" class="txtBox">
+                                        <option value="">Select</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                         <option value="others">Others</option>
@@ -82,39 +83,20 @@
                         <div class="row formRow">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Country</label>
-                                    <select name="" id="" class="txtBox">
-                                        <option>Select</option>
-                                        <option value="London">London</option>
-                                        <option value="Birmingham">Birmingham</option>
-                                        <option value="Leeds">Leeds</option>
-                                        <option value="Glasgow">Glasgow</option>
-                                        <option value="Sheffield">Sheffield</option>
-                                        <option value="Bradford">Bradford</option>
-                                        <option value="Liverpool">Liverpool</option>
-                                        <option value="Edinburgh">Edinburgh</option>
-                                        <option value="Manchester">Manchester</option>
-                                        <option value="Bristol">Bristol</option>
-                                        <option value="Kirklees">Kirklees</option>
-                                        <option value="Fife">Fife</option>
-                                        <option value="Wirral">Wirral</option>
-                                        <option value="North Lanarkshire">North Lanarkshire</option>
-                                        <option value="Wakefield">Wakefield</option>
-                                        <option value="Cardiff">Cardiff</option>
+                                    <label for="mem_country" class="move">Country</label>
+                                    <select name="mem_country" id="mem_country" class="txtBox">
+                                            <option value="">Select</option>
+                                            <?php foreach($countries as $country): ?>
+                                                <option value="<?=$country->id?>"><?=$country->name?></option>
+                                            <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="">City</label>
-                                    <input type="text" name="" id="" class="txtBox">
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
-                                <div class="txtGrp">
-                                    <label for="" class="move">State</label>
-                                    <select name="" id="" class="txtBox">
-                                        <option>Select</option>
+                                    <label for="mem_state" class="move">State</label>
+                                    <select name="mem_state" id="mem_state" class="txtBox">
+                                        <option value="">Select</option>
                                         <option value="AL">Alabama - AL</option>
                                         <option value="AK">Alaska - AK</option>
                                         <option value="AS">American Samoa - AS</option>
@@ -179,14 +161,20 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="">Zip Code</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="mem_city">City</label>
+                                    <input type="text" name="mem_city" id="mem_city" class="txtBox">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
+                                <div class="txtGrp">
+                                    <label for="mem_zip">Zip Code</label>
+                                    <input type="text" id="mem_zip" name="mem_zip" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-xx-8">
                                 <div class="txtGrp">
-                                    <label for="">Address</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="mem_address1">Address</label>
+                                    <input type="text" id="mem_address1" name="mem_address1" class="txtBox">
                                 </div>
                             </div>
                         </div>
@@ -195,7 +183,7 @@
                         <div class="row formRow">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12">
                                 <div class="txtGrp">
-                                    <label for="">Description</label>
+                                    <label for="mem_about">Description</label>
                                     <textarea name="mem_about" id="mem_about" class="txtBox"><?= $mem_data->mem_about ?></textarea>
                                 </div>
                             </div>
@@ -205,8 +193,8 @@
                         <div class="row formRow">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12">
                                 <div class="txtGrp">
-                                    <label for="">Per Hour Rate</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="mem_rate">Per Hour Rate</label>
+                                    <input type="text" id="mem_rate" name="mem_rate" class="txtBox">
                                 </div>
                             </div>
                         </div>
@@ -218,62 +206,16 @@
                             <script type="text/javascript" src="<?= base_url('assets/js/tagify.js') ?>"></script>
                             <script type="text/javascript">
                                 $(function() {
-                                    $('[name="tags"]').tagify({
-                                        // focusableTags: false,
+                                    $('[name="skills"]').tagify({
+                                        // focusableskills: false,
                                     });
                                 });
                             </script>
-                            <!-- <textarea name="tags" id="" class="txtBox"></textarea> -->
-                            <input name="tags" id="" class="txtBox" placeholder="Type something here">
-                            <!-- <div class="txtBox tagBlk">
-                                <ul class="tagLst">
-                                    <li><span>Screenwriting <i class="fi-cross"></i></span></li>
-                                    <li><span>Martial Arts: Fencing <i class="fi-cross"></i></span></li>
-                                    <li><span>Acting Techniques <i class="fi-cross"></i></span></li>
-                                    <li><span>Songwriting <i class="fi-cross"></i></span></li>
-                                    <li><span>Accents/Dialects <i class="fi-cross"></i></span></li>
-                                    <li><span>Mezzo Soprano <i class="fi-cross"></i></span></li>
-                                    <li><span>Bike Riding <i class="fi-cross"></i></span></li>
-                                    <li><span>Sketch Comedy <i class="fi-cross"></i></span></li>
-                                    <li><span>Sketchwriting <i class="fi-cross"></i></span></li>
-                                    <li><span>Athletic <i class="fi-cross"></i></span></li>
-                                    <li><span>Pole Dancing <i class="fi-cross"></i></span></li>
-                                    <li><span>Modeling <i class="fi-cross"></i></span></li>
-                                    <li><span>Shakespeare Training <i class="fi-cross"></i></span></li>
-                                    <li><span>Weapons Training <i class="fi-cross"></i></span></li>
-                                    <li><span>Stunts <i class="fi-cross"></i></span></li>
-                                </ul>
-                            </div> -->
+                            <input name="skills" id="skills" class="txtBox" placeholder="Type something here">
                         </div>
                         <hr>
                         <h5>Speaks</h5>
                         <div class="row formRow">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
-                                <div class="row formRow">
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-xx-8">
-                                        <div class="txtGrp">
-                                            <label for="" class="move">Choose Language</label>
-                                            <select name="" id="" class="txtBox">
-                                                <option value="">Select</option>
-                                                <option value="">English</option>
-                                                <option value="">Italian</option>
-                                                <option value="">Spanish</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
-                                        <div class="txtGrp">
-                                            <label for="" class="move">Level</label>
-                                            <select name="" id="" class="txtBox">
-                                                <option value="">Select</option>
-                                                <option value="">Fluent</option>
-                                                <option value="">Native</option>
-                                                <option value="">Bilingual</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
                                 <div class="row formRow">
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-xx-8">
@@ -313,13 +255,6 @@
                                     <label for="" class="move">Intro Video</label>
                                     <button type="button" class="txtBox uploadImg" data-upload="intro_thumbnail" data-text="Intro Thumbnail"></button>
                                     <input type="file" name="" id="" class="uploadFile" data-upload="intro_thumbnail">
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12">
-                                <div class="txtGrp">
-                                    <label for="" class="move">Intro Video</label>
-                                    <button type="button" class="txtBox uploadImg" data-upload="intro_video" data-text="Change Cover"></button>
-                                    <input type="file" name="" id="" class="uploadFile" data-upload="intro_video">
                                 </div>
                             </div>
                         </div>
@@ -374,8 +309,8 @@
                         <div class="row formRow">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Eye Color</label>
-                                    <select name="" id="" class="txtBox">
+                                    <label for="eye_color" class="move">Eye Color</label>
+                                    <select name="eye_color" id="eye_color" class="txtBox">
                                         <option value="">Select</option>
                                         <option value="">Green</option>
                                         <option value="">1</option>
@@ -385,8 +320,8 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Skin Color</label>
-                                    <select name="" id="" class="txtBox">
+                                    <label for="skin_color" class="move">Skin Color</label>
+                                    <select name="skin_color" id="skin_color" class="txtBox">
                                         <option value="">Select</option>
                                         <option value="">White</option>
                                         <option value="">1</option>
@@ -396,8 +331,8 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Hair Color</label>
-                                    <select name="" id="" class="txtBox">
+                                    <label for="hair_color" class="move">Hair Color</label>
+                                    <select name="hair_color" id="hair_color" class="txtBox">
                                         <option value="">Select</option>
                                         <option value="">Brown</option>
                                         <option value="">1</option>
@@ -407,14 +342,14 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="">Hair Length</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="hair_length">Hair Length</label>
+                                    <input type="text" id="hair_length" name="hair_length" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Shoe Size</label>
-                                    <select name="" id="" class="txtBox">
+                                    <label for="shoe_size" class="move">Shoe Size</label>
+                                    <select name="shoe_size" id="shoe_size" class="txtBox">
                                         <option value="">Select</option>
                                         <option value="">9.5</option>
                                         <option value="">1</option>
@@ -424,20 +359,20 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="">Height</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="height">Height</label>
+                                    <input type="text" id="height" name="height" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="">Weight</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="weight">Weight</label>
+                                    <input type="text" id="weight" name="weight" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Chest/Bust</label>
-                                    <select name="" id="" class="txtBox">
+                                    <label for="chest_bust" class="move">Chest/Bust</label>
+                                    <select name="chest_bust" id="chest_bust" class="txtBox">
                                         <option value="">Select</option>
                                         <option value="">35</option>
                                         <option value="">1</option>
@@ -447,8 +382,8 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Cup</label>
-                                    <select name="" id="" class="txtBox">
+                                    <label for="cup" class="move">Cup</label>
+                                    <select name="cup" id="cup" class="txtBox">
                                         <option value="">Select</option>
                                         <option value="">B</option>
                                         <option value="">C</option>
@@ -458,20 +393,20 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="">Waist</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="waist">Waist</label>
+                                    <input type="text" id="waist" name="waist" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="">Hip/Inseam</label>
-                                    <input type="text" id="" name="" class="txtBox">
+                                    <label for="hip_inseam">Hip/Inseam</label>
+                                    <input type="text" id="hip_inseam" name="hip_inseam" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
-                                    <label for="" class="move">Ethnicity</label>
-                                    <select name="" id="" class="txtBox">
+                                    <label for="ethnicity" class="move">Ethnicity</label>
+                                    <select name="ethnicity" id="ethnicity" class="txtBox">
                                         <option value="">Select</option>
                                         <option value="">English</option>
                                         <option value="">Italian</option>
@@ -532,7 +467,8 @@
             </div>
         </section>
         <!-- setting -->
-
+        <script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
+        <script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
 
         <script type="text/javascript">
             $(function() {

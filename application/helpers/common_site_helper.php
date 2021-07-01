@@ -44,6 +44,14 @@ function languages()
     return $query->result();
 }
 
+function countries()
+{
+    global $CI;
+    $CI->db->select("id, name");
+    $query = $CI->db->get('countries');
+    return $query->result();
+}
+
 function get_header_notis($limit = '', $order_by = 'desc')
 {
     global $CI;

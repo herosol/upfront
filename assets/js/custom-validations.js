@@ -145,6 +145,95 @@ $(document).ready(function() {
         }
     });
 
+    $('#frmModelProfileSettings').validate({
+        errorElement: 'div',
+        rules: {
+            fname: {
+                required: true,
+            },
+            lname: {
+                required: true,
+            },
+            mem_phone: {
+                required: true
+            },
+            mem_dob: {
+                required: true
+            },
+            mem_sex: {
+                required: true
+            },
+            mem_country: {
+                required: true
+            },
+            mem_state: {
+                required: true
+            },
+            mem_city: {
+                required: true
+            },
+            mem_zip: {
+                required: true
+            },
+            mem_address1: {
+                required: true
+            },
+            mem_about: {
+                required: true
+            },
+            mem_rate: {
+                required: true
+            },
+            skills: {
+                required: true
+            },
+            bio: {
+                required: true
+            },
+            eye_color: {
+                required: true
+            },
+            skin_color: {
+                required: true
+            },
+            hair_color: {
+                required: true
+            },
+            hair_length: {
+                required: true
+            },
+            shoe_size: {
+                required: true
+            },
+            height: {
+                required: true
+            },
+            weight: {
+                required: true
+            },
+            chest_bust: {
+                required: true
+            },
+            cup: {
+                required: true
+            },
+            waist: {
+                required: true
+            },
+            hip_inseam: {
+                required: true
+            },
+            ethnicity: {
+                required: true
+            }
+        },
+        messages: {
+
+        },
+        errorPlacement: function(error, element) {}
+    });
+
+
     $('#frmForgot').validate({
         rules: {
             email: {
