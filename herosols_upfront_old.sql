@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2021 at 12:39 PM
+-- Generation Time: Jun 30, 2021 at 04:15 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -112,51 +112,6 @@ INSERT INTO `tbl_blog_categories` (`id`, `title`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_languages`
---
-
-CREATE TABLE `tbl_languages` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_languages`
---
-
-INSERT INTO `tbl_languages` (`id`, `name`, `status`) VALUES
-(1, 'English', 1),
-(2, 'Urdu', 1),
-(3, 'Spanish', 1),
-(4, 'Arabic', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_mem_appearance`
---
-
-CREATE TABLE `tbl_mem_appearance` (
-  `id` int(11) NOT NULL,
-  `mem_id` int(11) NOT NULL,
-  `eye_color` varchar(20) NOT NULL,
-  `skin_color` varchar(20) NOT NULL,
-  `hair_color` varchar(20) NOT NULL,
-  `hair_length` varchar(20) NOT NULL,
-  `shoe_size` varchar(20) NOT NULL,
-  `height` varchar(20) NOT NULL,
-  `weight` varchar(20) NOT NULL,
-  `chest_bust` varchar(20) NOT NULL,
-  `cup` varchar(20) NOT NULL,
-  `waist` varchar(20) NOT NULL,
-  `hip_inseam` varchar(20) NOT NULL,
-  `ethnicity` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_mem_gallery_images`
 --
 
@@ -176,38 +131,7 @@ INSERT INTO `tbl_mem_gallery_images` (`id`, `mem_id`, `image`, `status`, `date`)
 (1, 38, '559cb990c9dffd8675f6bc2186971dc2_1625062417_9233.jpg', 1, '2021-06-30 14:13:37'),
 (2, 38, '8e98d81f8217304975ccb23337bb5761_1625062417_1118.jpg', 1, '2021-06-30 14:13:37'),
 (3, 38, '48ab2f9b45957ab574cf005eb8a76760_1625062417_6204.jpg', 1, '2021-06-30 14:13:37'),
-(4, 38, '1534b76d325a8f591b52d302e7181331_1625062417_8635.jpg', 1, '2021-06-30 14:13:38'),
-(5, 39, 'd81f9c1be2e08964bf9f24b15f0e4900_1625135916_3797.jpg', 1, '2021-07-01 10:38:36'),
-(6, 39, 'b1a59b315fc9a3002ce38bbe070ec3f5_1625135916_9695.jpg', 1, '2021-07-01 10:38:36'),
-(7, 39, '0e01938fc48a2cfb5f2217fbfb00722d_1625135916_9448.jpg', 1, '2021-07-01 10:38:36'),
-(8, 39, '2afe4567e1bf64d32a5527244d104cea_1625135916_3374.jpg', 1, '2021-07-01 10:38:36');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_mem_languages`
---
-
-CREATE TABLE `tbl_mem_languages` (
-  `id` int(11) NOT NULL,
-  `mem_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `language_status` varchar(20) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_mem_skills`
---
-
-CREATE TABLE `tbl_mem_skills` (
-  `id` int(11) NOT NULL,
-  `mem_id` int(11) NOT NULL,
-  `skill_id` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(4, 38, '1534b76d325a8f591b52d302e7181331_1625062417_8635.jpg', 1, '2021-06-30 14:13:38');
 
 -- --------------------------------------------------------
 
@@ -320,7 +244,7 @@ CREATE TABLE `tbl_siteadmin` (
 --
 
 INSERT INTO `tbl_siteadmin` (`site_id`, `site_username`, `site_password`, `site_admin_name`, `site_admin_type`, `site_domain`, `site_name`, `site_email`, `site_noreply_email`, `site_phone`, `site_fax`, `site_paypal_sandox`, `site_sandbox_paypal`, `site_live_paypal`, `site_ip`, `site_logo`, `site_icon`, `site_thumb`, `site_address`, `site_about`, `site_city`, `site_state`, `site_zip`, `site_country`, `site_lastlogindate`, `site_copyright`, `site_facebook`, `site_twitter`, `site_google`, `site_instagram`, `site_linkedin`, `site_youtube`, `site_contact_map`, `site_google_ad`, `site_meta_desc`, `site_meta_keyword`, `site_meta_copyright`, `site_meta_author`, `site_how_to_pay`, `site_status`, `sub_location`, `site_chat`, `sub_featured`, `site_version`, `site_percentage`, `site_hold_payment`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'cosplay-cosmos-logo1.png', 'cosplay-cosmos-icon1.png', 'cosplay-cosmos-thumb.jpg', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-07-01 09:08:57', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/upfront', '#', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/upfront', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/upfront', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 29, 5, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'cosplay-cosmos-logo1.png', 'cosplay-cosmos-icon1.png', 'cosplay-cosmos-thumb.jpg', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-06-30 09:31:37', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/upfront', '#', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/upfront', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/upfront', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 29, 5, 1),
 (2, 'ajay', '098f6bcd4621d373cade4e832627b4f6', 'Malik Ajay Jones', 'subadmin', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-03-06 15:00:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -406,27 +330,6 @@ INSERT INTO `tbl_site_texts` (`txt_id`, `txt_type`, `txt_label`, `txt_key`, `txt
 (9, 'email', 'Approved Sitter Email', 'approved_sitter', '<h3>Dear {$name}</h3>\r\n\r\n<p>Your Pet Sitter application has been Approved.</p>\r\n', 'Approved Sitter Email', 1),
 (10, 'email', 'Declinced Sitter Email', 'declined_sitter', '<h3>Dear {$name}</h3>\r\n\r\n<p>Your Pet Sitter application has been Declinced.</p>\r\n', 'Declinced Sitter Email', 1),
 (11, 'email', 'Referral Signup Email', 'invite_friend', '<h3>Referral Signup Invitation</h3>\r\n\r\n<p>$name send you a referral signup link</p>\r\n\r\n<p>Please click on the link below to referral signup.</p>\r\n', 'Referral Signup Invitation', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_skills`
---
-
-CREATE TABLE `tbl_skills` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `status` tinytext NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_skills`
---
-
-INSERT INTO `tbl_skills` (`id`, `name`, `status`) VALUES
-(1, 'Skill 1', '1'),
-(2, 'skill 2', '1'),
-(3, 'sasdasd', '1');
 
 -- --------------------------------------------------------
 
@@ -538,7 +441,7 @@ CREATE TABLE `tbl_users` (
   `mem_map_lat` varchar(500) DEFAULT NULL,
   `mem_map_lng` varchar(500) DEFAULT NULL,
   `mem_hear_about` varchar(255) DEFAULT NULL,
-  `mem_model_application` enum('0','1','2') NOT NULL DEFAULT '0' COMMENT '0 for new, 1 for approved, 2 for cancelled',
+  `mem_player_application` tinyint(1) NOT NULL DEFAULT 0,
   `mem_become_buyer` tinyint(1) DEFAULT 0,
   `mem_phone_code` varchar(6) DEFAULT NULL,
   `mem_phone_verified` tinyint(1) NOT NULL DEFAULT 0,
@@ -554,17 +457,17 @@ CREATE TABLE `tbl_users` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`user_id`, `user_remember`, `user_token`, `user_type`, `mem_social_type`, `mem_social_id`, `user_fname`, `user_lname`, `user_email`, `user_pswd`, `mem_code`, `mem_phone`, `mem_sex`, `mem_dob`, `mem_company`, `mem_website`, `mem_about`, `mem_profile_heading`, `mem_availability`, `mem_video`, `mem_image`, `mem_cover_image`, `mem_street`, `mem_address1`, `mem_address2`, `mem_city`, `mem_state`, `mem_zip`, `mem_country_id`, `mem_rate`, `mem_characters`, `mem_ssn`, `mem_dln`, `mem_travel_radius`, `mem_ip`, `mem_note`, `mem_referral_code`, `mem_fb_link`, `mem_instagram_link`, `mem_twitter_link`, `mem_linkedin_link`, `mem_youtube_link`, `mem_paypal`, `mem_stripe_id`, `mem_map_lat`, `mem_map_lng`, `mem_hear_about`, `mem_model_application`, `mem_become_buyer`, `mem_phone_code`, `mem_phone_verified`, `mem_player_verified`, `mem_verified`, `user_status`, `mem_featured`, `mem_date`, `user_last_login`) VALUES
-(1, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-23 12:35:25', '2021-06-23 15:35:25'),
-(2, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad1@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-23 13:03:14', '2021-06-23 16:03:14'),
-(3, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad45@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 07:40:30', '2021-06-25 10:40:30'),
-(32, 'g5', 'omrb60t78llrf47ri8flaevg7oelisik', 'user', 'website', NULL, 'Saad', 'Chaudhary', 'saad@herosolutions.com.pk', 'h5r2e394y3r4o5k36574w49315h393o4', 'v4r4h3l47484q4f4b5r4k4j4a514e3m494q233w54485s3k4b4x2u2s4t4r5r3q474u3b4v4f55643i4', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 09:44:45', '2021-06-30 17:17:32'),
-(33, 'g5', '1f623afnedfhn7q5oq2ivssebcrrje3j', 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad2@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4r4l3l47484q4f4b5q4s493h5k3q3p484r2o3z524s4w3s2a4y3y2n4g53623e474x264t4h5t4m4i4', '03000000000', NULL, NULL, NULL, '', 'This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. ', NULL, NULL, NULL, '05f971b5ec196b8c65b75d2ef8267331_1625062370_4045.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 13:32:55', '2021-07-01 10:27:08'),
-(34, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad1@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4p3f4o4k3a5y4f4a595z4s415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. ', NULL, NULL, NULL, '05f971b5ec196b8c65b75d2ef8267331_1625062370_4045.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 13:34:53', '2021-06-30 16:34:53'),
-(35, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad3@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3d3r4k3a5y4f4a595z4u415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test', NULL, NULL, NULL, 'c0f168ce8900fa56e57789e2a2f2c9d0_1625062417_6160.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 13:36:34', '2021-06-30 16:36:34'),
-(37, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad6@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w493p3p2k3a5y4f4a595z4u215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, '05f971b5ec196b8c65b75d2ef8267331_1625062370_4045.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 14:12:50', '2021-06-30 17:12:50'),
-(38, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad8@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3l3s2k3a5y4f4a595z4w215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, 'c0f168ce8900fa56e57789e2a2f2c9d0_1625062417_6160.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 14:13:37', '2021-06-30 17:13:37'),
-(39, NULL, NULL, 'model', 'website', NULL, 'Test', 'User', 'user@gmail.com', '45t3m3d474t5l4v4y4s5v453', 'x49393p2k3a565x4b5a5s493a5z2p28474r3t4y5t36433o4', '03000000000', NULL, NULL, NULL, '', 'test', NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-07-01 10:38:36', '2021-07-01 13:38:36');
+INSERT INTO `tbl_users` (`user_id`, `user_remember`, `user_token`, `user_type`, `mem_social_type`, `mem_social_id`, `user_fname`, `user_lname`, `user_email`, `user_pswd`, `mem_code`, `mem_phone`, `mem_sex`, `mem_dob`, `mem_company`, `mem_website`, `mem_about`, `mem_profile_heading`, `mem_availability`, `mem_video`, `mem_image`, `mem_cover_image`, `mem_street`, `mem_address1`, `mem_address2`, `mem_city`, `mem_state`, `mem_zip`, `mem_country_id`, `mem_rate`, `mem_characters`, `mem_ssn`, `mem_dln`, `mem_travel_radius`, `mem_ip`, `mem_note`, `mem_referral_code`, `mem_fb_link`, `mem_instagram_link`, `mem_twitter_link`, `mem_linkedin_link`, `mem_youtube_link`, `mem_paypal`, `mem_stripe_id`, `mem_map_lat`, `mem_map_lng`, `mem_hear_about`, `mem_player_application`, `mem_become_buyer`, `mem_phone_code`, `mem_phone_verified`, `mem_player_verified`, `mem_verified`, `user_status`, `mem_featured`, `mem_date`, `user_last_login`) VALUES
+(1, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-23 12:35:25', '2021-06-23 15:35:25'),
+(2, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad1@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-23 13:03:14', '2021-06-23 16:03:14'),
+(3, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad45@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 07:40:30', '2021-06-25 10:40:30'),
+(32, 'g5', '3s30gnqaacv5nr0liv3cj3l30gblm51p', 'user', 'website', NULL, 'Saad', 'Chaudhary', 'saad@herosolutions.com.pk', 'h5r2e394y3r4o5k36574w49315h393o4', 'v4r4h3l47484q4f4b5r4k4j4a514e3m494q233w54485s3k4b4x2u2s4t4r5r3q474u3b4v4f55643i4', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 09:44:45', '2021-06-30 14:56:57'),
+(33, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad2@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4b4p3t2k3a5y4f4a595z4t415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. ', NULL, NULL, NULL, '', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 13:32:55', '2021-06-30 16:32:55'),
+(34, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad1@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4p3f4o4k3a5y4f4a595z4s415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. ', NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 13:34:53', '2021-06-30 16:34:53'),
+(35, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad3@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3d3r4k3a5y4f4a595z4u415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test', NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 13:36:34', '2021-06-30 16:36:34'),
+(36, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad5@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'x4p3p3p4k3a5y4f4a595z4t215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test', NULL, NULL, NULL, '2b8a61594b1f4c4db0902a8a395ced93_1625060348_9691.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 13:39:08', '2021-06-30 16:39:08'),
+(37, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad6@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w493p3p2k3a5y4f4a595z4u215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, '05f971b5ec196b8c65b75d2ef8267331_1625062370_4045.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 14:12:50', '2021-06-30 17:12:50'),
+(38, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad8@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3l3s2k3a5y4f4a595z4w215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, 'c0f168ce8900fa56e57789e2a2f2c9d0_1625062417_6160.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 14:13:37', '2021-06-30 17:13:37');
 
 --
 -- Indexes for dumped tables
@@ -589,33 +492,9 @@ ALTER TABLE `tbl_blog_categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_languages`
---
-ALTER TABLE `tbl_languages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_mem_appearance`
---
-ALTER TABLE `tbl_mem_appearance`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_mem_gallery_images`
 --
 ALTER TABLE `tbl_mem_gallery_images`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_mem_languages`
---
-ALTER TABLE `tbl_mem_languages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_mem_skills`
---
-ALTER TABLE `tbl_mem_skills`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -641,12 +520,6 @@ ALTER TABLE `tbl_sitecontent`
 --
 ALTER TABLE `tbl_site_texts`
   ADD PRIMARY KEY (`txt_id`);
-
---
--- Indexes for table `tbl_skills`
---
-ALTER TABLE `tbl_skills`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_topics`
@@ -689,34 +562,10 @@ ALTER TABLE `tbl_blog_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tbl_languages`
---
-ALTER TABLE `tbl_languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_mem_appearance`
---
-ALTER TABLE `tbl_mem_appearance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tbl_mem_gallery_images`
 --
 ALTER TABLE `tbl_mem_gallery_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tbl_mem_languages`
---
-ALTER TABLE `tbl_mem_languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_mem_skills`
---
-ALTER TABLE `tbl_mem_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_motivational_videos`
@@ -743,12 +592,6 @@ ALTER TABLE `tbl_site_texts`
   MODIFY `txt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tbl_skills`
---
-ALTER TABLE `tbl_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `tbl_topics`
 --
 ALTER TABLE `tbl_topics`
@@ -764,7 +607,7 @@ ALTER TABLE `tbl_topics_categories`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,7 +24,7 @@
                         </div>
                         <div class="upLoadDp">
                             <div class="ico">
-                                <img src = "<?=  get_site_image_src("members", $mem_data->mem_image,''); ?>" alt="" id="uploadDpPreview">
+                                <img src="<?= get_site_image_src("members", $mem_data->mem_image, ''); ?>" alt="" id="uploadDpPreview">
                             </div>
                             <div class="text-center">
                                 <button type="button" class="webBtn smBtn uploadImg" data-upload="dp_image" data-text="Change Photo"></button>
@@ -214,7 +214,18 @@
                     <div class="blk">
                         <h5>Skills</h5>
                         <div class="txtGrp">
-                            <div class="txtBox tagBlk">
+                            <link type="text/css" rel="stylesheet" href="<?= base_url('assets/css/tagify.css') ?>">
+                            <script type="text/javascript" src="<?= base_url('assets/js/tagify.js') ?>"></script>
+                            <script type="text/javascript">
+                                $(function() {
+                                    $('[name="tags"]').tagify({
+                                        // focusableTags: false,
+                                    });
+                                });
+                            </script>
+                            <!-- <textarea name="tags" id="" class="txtBox"></textarea> -->
+                            <input name="tags" id="" class="txtBox" placeholder="Type something here">
+                            <!-- <div class="txtBox tagBlk">
                                 <ul class="tagLst">
                                     <li><span>Screenwriting <i class="fi-cross"></i></span></li>
                                     <li><span>Martial Arts: Fencing <i class="fi-cross"></i></span></li>
@@ -232,7 +243,7 @@
                                     <li><span>Weapons Training <i class="fi-cross"></i></span></li>
                                     <li><span>Stunts <i class="fi-cross"></i></span></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                         <hr>
                         <h5>Speaks</h5>
@@ -533,18 +544,16 @@
                 var oFReader = new FileReader();
                 oFReader.readAsDataURL(document.getElementById("dp_image").files[0]);
 
-                oFReader.onload = function (oFREvent) {
+                oFReader.onload = function(oFREvent) {
                     document.getElementById("uploadDpPreview").src = oFREvent.target.result;
                 };
             };
 
-            function readURL(input) 
-            {
+            function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
-                    reader.onload = function (e) 
-                    {
+                    reader.onload = function(e) {
                         $('#cover_preview').attr('style', `background-image: url('${e.target.result}');`);
                     }
 
@@ -552,10 +561,9 @@
                 }
             }
 
-            $("#cover_photo").change(function(){
+            $("#cover_photo").change(function() {
                 readURL(this);
             });
-
         </script>
     </main>
     <?php $this->load->view('includes/footer'); ?>

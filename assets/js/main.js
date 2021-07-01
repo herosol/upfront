@@ -172,6 +172,14 @@ $(function() {
 			.addClass("move");
 	});
 
+	$(".txtGrp .txtBox:not(select)").each(function(e) {
+		if ($(this).val() != "")
+			$(this)
+				.parents(".txtGrp:first")
+				.find("label:first")
+				.addClass("move");
+	});
+
 	$(document).on("blur", ".txtGrp .txtBox:not(select):not(.uploadImg)", function() {
 		if (this.value == "")
 			$(this)
