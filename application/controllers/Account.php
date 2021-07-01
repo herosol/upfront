@@ -84,56 +84,42 @@ class Account extends MY_Controller
             $post = html_escape($this->input->post());
 
             $this->form_validation->set_message('integer', 'Please select a valid {field}');
-            $this->form_validation->set_rules('fname', 'First Name', 'required|alpha');
-            $this->form_validation->set_rules('lname', 'Last Name', 'required|alpha');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-
-            if ($this->session->mem_type=='player') {
-                $this->form_validation->set_rules('profile_heading', 'Nickname', 'required|alpha');
-                $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
-                $this->form_validation->set_rules('rate', 'Rate', 'required|numeric', array('numeric' => '{field} should be numeric'));
-                $this->form_validation->set_rules('availability[]', 'Areas of Availability', 'required');
-                $this->form_validation->set_rules('profile_bio', 'Profile Bio', 'required');
-                $this->form_validation->set_rules('fb_link', 'Facebook', 'valid_url');
-                $this->form_validation->set_rules('instagram_link', 'Instagram', 'valid_url');
-
-                $this->form_validation->set_rules('characters[]', 'Characters', 'required|integer');
-                $this->form_validation->set_rules('images[]', 'Image', 'required', array('required' => 'Please Select at-least one {field}'));
-                foreach ($post['characters'] as $key => $character) {
-                    if(!$char_row = $this->character_model->get_row($character)) {
-                        $res['msg'] = showMsg('error', 'Please select a valid character!');
-                        exit(json_encode($res));
-                    }
-
-                    if (count($post['images'][$character]) < 1 || $post['images'][$character][0] == '') {
-                        $res['msg'] = showMsg('error', 'Please upload images for '.$char_row->title);
-                        exit(json_encode($res));
-                    }
-                }
-
-                $characters = @implode(',', $post['characters']);
-                $availability = @implode(',', $post['availability']);
-            }
-            $this->form_validation->set_rules('address', 'Address', 'required');
-            $this->form_validation->set_rules('city', 'City or State', 'required');
-            $this->form_validation->set_rules('zip', 'Zip Code', 'required');
-            $this->form_validation->set_rules('country', 'Country', 'required|integer');
+            $this->form_validation->set_rules('user_fname', 'First Name', 'required|alpha');
+            $this->form_validation->set_rules('user_lname', 'Last Name', 'required|alpha');
+            $this->form_validation->set_rules('mem_phone', 'Phone', 'required');
+            $this->form_validation->set_rules('mem_dob', 'Date of Birth', 'required');
+            $this->form_validation->set_rules('mem_rate', 'Rate', 'required|numeric', array('numeric' => '{field} should be numeric'));
+            $this->form_validation->set_rules('mem_bio', 'Profile Bio', 'required');
+            $this->form_validation->set_rules('mem_address1', 'Address', 'required');
+            $this->form_validation->set_rules('mem_city', 'City or State', 'required');
+            $this->form_validation->set_rules('mem_zip', 'Zip Code', 'required');
+            $this->form_validation->set_rules('mem_country', 'Country', 'required|integer');
+            $this->form_validation->set_rules('mem_state', 'Country', 'required|integer');
+            $this->form_validation->set_rules('mem_sex', 'Gender', 'required');
+            
+            $this->form_validation->set_rules('eye_color', 'Eye Color', 'required');
+            $this->form_validation->set_rules('skin_color', 'Skin Color', 'required');
+            $this->form_validation->set_rules('hair_color', 'Hair Color', 'required');
+            $this->form_validation->set_rules('hair_length', 'Hair Length', 'required');
+            $this->form_validation->set_rules('shoe_size', 'Shoe Size', 'required');
+            $this->form_validation->set_rules('height', 'Height', 'required');
+            $this->form_validation->set_rules('weight', 'Weight', 'required');
+            $this->form_validation->set_rules('chest_bust', 'Chest / Bust', 'required');
+            $this->form_validation->set_rules('cup', 'Cup', 'required');
+            $this->form_validation->set_rules('waist', 'Waist', 'required');
+            $this->form_validation->set_rules('hip_inseam', 'Hip / Inseam', 'required');
+            $this->form_validation->set_rules('ethnicity', 'Ethnicity', 'required');
 
 
             if($this->form_validation->run() === FALSE)
                 $res['msg'] = validation_errors();
-                    
-            if(!empty($post['country']) && !$this->master->getRow('countries', array('id' => intval($post['country']))))
-                $res['msg'] .= showMsg('error', 'Please select a valid Country!');
-            if (!empty($post['email']) && $this->member_model->emailExists($post['email'], $this->session->mem_id))
-                $res['msg'] .= showMsg('error', 'Email already in use, Please try another!');
 
             if (!empty($res['msg']))
                 exit(json_encode($res));
 
-            $data = array('mem_fname' => ucfirst($post['fname']), 'mem_lname' => ucfirst($post['lname']), 'mem_company' => $post['company'], 'mem_address1' => $post['address'], 'mem_city' => $post['city'], 'mem_zip' => $post['zip'], 'mem_country_id' => intval($post['country']));
-
-            if ($this->session->mem_type == 'player') {
+            $user_id = $this->session->user_id;
+            if ($this->session->mem_type == 'player')
+            {
                 $data = array('mem_fname' => ucfirst($post['fname']), 'mem_lname' => ucfirst($post['lname']), 'mem_profile_heading' => ucfirst($post['profile_heading']), 'mem_dob' => db_format_date($post['dob']), 'mem_rate' => floatval($post['rate']), 'mem_address1' => $post['address'], 'mem_city' => $post['city'], 'mem_zip' => $post['zip'], 'mem_country_id' => intval($post['country']), 'mem_about' => $this->input->post('profile_bio'), 'mem_characters' => $characters, 'mem_availability' => $availability, 'mem_fb_link' => $post['fb_link'], 'mem_instagram_link' => $post['instagram_link']);
 
                 $this->master->update('gallery', array('main' => 0), array('mem_id' => $this->session->mem_id, 'ref_type' => 'character'));
@@ -153,25 +139,47 @@ class Account extends MY_Controller
                 }
 
             }
-            $this->load->library('my_stripe');
-            $this->my_stripe->save_customer(array('name' => ucfirst($post['fname']).' '.ucfirst($post['lname']), 'email' => $post['email'], 'phone' => $this->data['mem_data']->mem_phone, 'description' => $this->data['site_settings']->site_name." Customer ".ucfirst($post['fname']).' '.ucfirst($post['lname'])), $this->data['mem_data']->mem_stripe_id);
-            if(!empty($post['zip']) && $this->data['mem_data']->mem_zip != $post['zip']) {
-                $coordinates = get_location_detail($post['zip']);
-                $data['mem_map_lat'] = $coordinates->Latitude;
-                $data['mem_map_lng'] = $coordinates->Longitude;
+            if (isset($_FILES["dp_image"]["name"]) && $_FILES["dp_image"]["name"] != "")
+            {
+                $image = upload_file(UPLOAD_PATH.'members', 'dp_image');
+                $post['mem_image'] = $image['file_name'];
             }
-            if(!empty($post['email']) && $this->data['mem_data']->mem_email != $post['email']){
-                $rando = doEncode($this->session->mem_id.'-'.$post['email']);
-                $data['mem_email'] = $post['email'];
-                $data['mem_code'] = $rando;
-                $data['mem_verified'] = 0;
 
-                $verify_link = site_url('verification/' .$rando);
+            if (isset($_FILES["cover_photo"]["name"]) && $_FILES["cover_photo"]["name"] != "")
+            {
+                $image = upload_file(UPLOAD_PATH.'members', 'cover_photo');
+                $post['mem_cover_image'] = $image['file_name'];
+            }
 
-                $mem_data= array('name' => ucwords($post['fname'].' '.$post['lname']), "email" => $post['email'],"link" => $verify_link);
-                $this->send_site_email($mem_data, 'change_email');
-                $res['redirect_url'] = ' ';
-                setMsg('info', getSiteText('alert', 'verify_email'));
+            if(isset($_FILES['gallery_images']) && is_array($_FILES['gallery_images']['name']))
+            {
+                $image_path = array();          
+                $count = count($_FILES['gallery_images']['name']);   
+                for($key =0; $key < $count; $key++)
+                {     
+                    $_FILES['file'.$key]['name']     = $_FILES['gallery_images']['name'][$key]; 
+                    $_FILES['file'.$key]['type']     = $_FILES['gallery_images']['type'][$key]; 
+                    $_FILES['file'.$key]['tmp_name'] = $_FILES['gallery_images']['tmp_name'][$key]; 
+                    $_FILES['file'.$key]['error']    = $_FILES['gallery_images']['error'][$key]; 
+                    $_FILES['file'.$key]['size']     = $_FILES['gallery_images']['size'][$key]; 
+                          
+                }
+
+                for($i=0; $i<$count; $i++)
+                {
+                    if (isset($_FILES["file".$i]["name"]) && $_FILES["file".$i]["name"] != "") 
+                    {
+                        $image = upload_file(UPLOAD_PATH.'members', 'file'.$i);
+                        $gallery_record = 
+                        [
+                            'mem_id' => $user_id,
+                            'image'  => $image['file_name'],
+                            'status' => 1
+                        ];
+
+                        $this->master->save('mem_gallery_images', $gallery_record);
+                    }
+                }
             }
 
             $this->member_model->save($data, $this->session->mem_id);

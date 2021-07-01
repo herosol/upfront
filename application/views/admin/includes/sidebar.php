@@ -103,6 +103,22 @@
                 </a>
             </li>
             <?php endif?>
+            <?php if(access(7)):?>
+            <li class="opened <?= ($this->uri->segment(2) == 'skills') ? 'active' : '' ?>">
+                <a href="<?= site_url(ADMIN.'/skills') ?>">
+                    <i class="fa fa-file"></i>
+                    <span class="title">Models Skills</span>
+                </a>
+            </li>
+            <?php endif?>
+            <?php if(access(7)):?>
+            <li class="opened <?= ($this->uri->segment(2) == 'model_categories') ? 'active' : '' ?>">
+                <a href="<?= site_url(ADMIN.'/model_categories') ?>">
+                    <i class="fa fa-file"></i>
+                    <span class="title">Models Categories</span>
+                </a>
+            </li>
+            <?php endif?>
             <?php if(access(8)):?>
             <li class=" <?= ($this->uri->segment(2) == 'sitecontent' || $this->uri->segment(2) == 'preferences') ? ' opened  active' : '' ?>">
                 <a href="javascript:void(0)">

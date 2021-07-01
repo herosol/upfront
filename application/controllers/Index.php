@@ -139,7 +139,7 @@ class Index extends MY_Controller {
                                 $_FILES['file'.$key]['name']     = $_FILES['gallery_images']['name'][$key]; 
                                 $_FILES['file'.$key]['type']     = $_FILES['gallery_images']['type'][$key]; 
                                 $_FILES['file'.$key]['tmp_name'] = $_FILES['gallery_images']['tmp_name'][$key]; 
-                                $_FILES['file'.$key]['error']     = $_FILES['gallery_images']['error'][$key]; 
+                                $_FILES['file'.$key]['error']    = $_FILES['gallery_images']['error'][$key]; 
                                 $_FILES['file'.$key]['size']     = $_FILES['gallery_images']['size'][$key]; 
                                       
                             }
@@ -157,23 +157,6 @@ class Index extends MY_Controller {
                                     ];
 
                                     $this->master->save('mem_gallery_images', $gallery_record);
-                                }
-                            }
-                        }
-
-                        if (isset($_FILES["gallery_images"]["name"]) && $_FILES["gallery_images"]["name"] != "")
-                        {
-                            $totalImages = count($_FILES['gallery_images']['name']);
-                            for($i=1; $i<$totalImages;$i++)
-                            {
-                                if (isset($_FILES["second_image"]["name"][$i]) && $_FILES["second_image"]["name"][$i] != "")
-                                {
-                                    $image = upload_file(UPLOAD_PATH.'pages/become-model', $_FILES["second_image"]["name"][$i]);
-                                    if(!empty($image['file_name'])){
-                                        if (isset($content_row['second_image'.$i]))
-                                            $this->remove_file(UPLOAD_PATH."pages/become-model/".$content_row['second_image'.$i]);
-                                        $vals['second_image'.$i] = $image['file_name'];
-                                    }
                                 }
                             }
                         }
