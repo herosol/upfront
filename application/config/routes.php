@@ -67,6 +67,7 @@ $route['about-us']       = 'pages/about_us';
 $route['how-it-works']   = 'pages/how_it_works';
 $route['find']           = 'pages/search'; //Search, Find A Model
 $route['educational-videos'] = 'pages/educational_videos'; //Search, Find A Model
+$route['model-profile/(:num)'] = 'pages/model_profile/$1'; //Model Profile
 # BLOGS PAGES
 $route['blog/(:num)']        = 'blog/index/$1';
 $route['blog-detail/(:num)'] = 'blog/detail/$1';

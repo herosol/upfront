@@ -48,6 +48,7 @@ class Master extends CI_Model
         return $query->result();
     }
 
+
     public function getRowsArray($table, $where = '', $offset = '', $start = '')
     {
         if (!empty($where))

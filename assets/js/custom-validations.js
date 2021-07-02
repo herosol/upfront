@@ -187,6 +187,9 @@ $(document).ready(function() {
             skills: {
                 required: true
             },
+            languages: {
+                required: true
+            },
             bio: {
                 required: true
             },

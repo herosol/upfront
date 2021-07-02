@@ -9,6 +9,14 @@ class Pages extends MY_Controller
         $this->load->model('tcategory_model');
     }
 
+    public function model_profile($model_id)
+    {
+        $this->data['model_data'] = $this->master->getRow('users', ['user_id'=> $model_id]);
+        $this->data['mem_languages']  = $this->master->getRows('mem_languages', ['mem_id'=> $model_id]);
+        $this->data['gallery_images'] = $this->master->getRows('mem_gallery_images', ['mem_id'=> $model_id]);
+        $this->data['appearence']     = $this->master->getRow('mem_appearance', ['mem_id'=> $model_id]);
+        return $this->load->view('profile/profile.php', $this->data);
+    }
     public function become_model()
     {
         $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'become_a_model'));

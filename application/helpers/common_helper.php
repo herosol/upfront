@@ -27,6 +27,53 @@ function upload_vfile($field_name, $type = 'image', $size = 2100000) {
     }
 }
 
+function genders()
+{
+    return array('Male', 'Female', 'Other');
+}
+
+function language_level()
+{
+    return array('Fluent', 'Native', 'Bilingual');
+}
+
+function eye_colors()
+{
+    return array('Green', 'Black', 'Blue');
+}
+
+function skin_colors()
+{
+    return array('White', 'Black');
+}
+
+function hair_colors()
+{
+    return array('Brown', 'Black', 'Blonde');
+}
+
+function show_size()
+{
+    return array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
+}
+
+function chest_bust()
+{
+    return array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
+}
+
+function cup()
+{
+    return array('A', 'B', 'C', 'D');
+}
+
+function ethnicity()
+{
+    return array('A', 'B', 'C', 'D');
+}
+
+
+
 function get_vsize_dirs() {
     return array('50' => 'p50x50/', '150' => 'p150x150/', '300' => 'p300x300/', '350' => 'p350x350/', '400' => 'p400x400/');
 }
@@ -648,10 +695,17 @@ function format_date($d,$format='',$default_show='TBD'){
     $d=( is_numeric($d) && (int)$d == $d )?$d:strtotime($d);
     return date($format,$d);
 }
+
 function db_format_date($d){
 
     $d = str_replace('-', '/', $d);
     return empty($d)?'':date('Y-m-d', strtotime($d));
+}
+
+function dp_format_date($d){
+
+    $d = str_replace('-', '/', $d);
+    return empty($d)?'':date('d-m-Y', strtotime($d));
 }
 
 function is_valid_date($date, $format = 'm/d/Y'){

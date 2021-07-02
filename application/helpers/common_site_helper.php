@@ -39,7 +39,7 @@ function blog_cat_by_id($cat_id)
 function languages()
 {
     global $CI;
-    $CI->db->select("name");
+    $CI->db->select("id,name");
     $query = $CI->db->get('languages');
     return $query->result();
 }
@@ -50,6 +50,32 @@ function countries()
     $CI->db->select("id, name");
     $query = $CI->db->get('countries');
     return $query->result();
+}
+
+function states()
+{
+    global $CI;
+    $CI->db->select("id, name");
+    $query = $CI->db->get('states');
+    return $query->result();
+}
+
+function states_by_country($country_id)
+{
+    global $CI;
+    $CI->db->select("id, name");
+    $CI->db->where(['country_id'=> $country_id]);
+    $CI->db->order_by(['name'=> 'asc']);
+    $query = $CI->db->get('states');
+    return $query->result();
+}
+
+
+function language_name($language_id) {
+    global $CI;
+    $CI = get_instance();
+    $row = $CI->master->getRow('languages', array('id' => $language_id));
+    return $row->name;
 }
 
 function get_header_notis($limit = '', $order_by = 'desc')

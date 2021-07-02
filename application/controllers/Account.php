@@ -9,6 +9,7 @@ class Account extends MY_Controller
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('appearence_model');
         $this->load->model('skills_model');
     }
 
@@ -68,9 +69,21 @@ class Account extends MY_Controller
             exit(json_encode($res));
         }
     }
+
+    function delete_gallery_images()
+    {
+        if($this->input->post())
+        {
+            $image_id = html_escape($this->input->post('image_id'));
+            $deleted_images[] = $image_id;
+            $this->session->set_userdata('deleted_images', $deleted_images);
+            echo json_encode(['status'=> 'success']);
+        }
+    }
     
     function profile_settings()
     {
+        $user_id = $this->session->user_id;
         $this->isMemLogged($this->session->user_type);
         // $this->load->model('character_model');
         if($this->input->post()) {
@@ -89,7 +102,7 @@ class Account extends MY_Controller
             $this->form_validation->set_rules('mem_phone', 'Phone', 'required');
             $this->form_validation->set_rules('mem_dob', 'Date of Birth', 'required');
             $this->form_validation->set_rules('mem_rate', 'Rate', 'required|numeric', array('numeric' => '{field} should be numeric'));
-            $this->form_validation->set_rules('mem_bio', 'Profile Bio', 'required');
+            $this->form_validation->set_rules('mem_about', 'Profile Bio', 'required');
             $this->form_validation->set_rules('mem_address1', 'Address', 'required');
             $this->form_validation->set_rules('mem_city', 'City or State', 'required');
             $this->form_validation->set_rules('mem_zip', 'Zip Code', 'required');
@@ -117,40 +130,46 @@ class Account extends MY_Controller
             if (!empty($res['msg']))
                 exit(json_encode($res));
 
-            $user_id = $this->session->user_id;
-            if ($this->session->mem_type == 'player')
-            {
-                $data = array('mem_fname' => ucfirst($post['fname']), 'mem_lname' => ucfirst($post['lname']), 'mem_profile_heading' => ucfirst($post['profile_heading']), 'mem_dob' => db_format_date($post['dob']), 'mem_rate' => floatval($post['rate']), 'mem_address1' => $post['address'], 'mem_city' => $post['city'], 'mem_zip' => $post['zip'], 'mem_country_id' => intval($post['country']), 'mem_about' => $this->input->post('profile_bio'), 'mem_characters' => $characters, 'mem_availability' => $availability, 'mem_fb_link' => $post['fb_link'], 'mem_instagram_link' => $post['instagram_link']);
+            $user_info = 
+            [
+                'user_fname'   => trim($post['user_fname']),
+                'user_lname'   => trim($post['user_lname']),
+                'mem_phone'    => trim($post['mem_phone']),
+                'mem_phone'    => trim($post['mem_phone']),
+                'mem_dob'      => db_format_date($post['mem_dob']),
+                'mem_sex'      => $post['mem_sex'],
+                'mem_country_id'=> $post['mem_country'],
+                'mem_state'     => $post['mem_state'],
+                'mem_city'     => trim($post['mem_city']),
+                'mem_zip'      => trim($post['mem_zip']),
+                'mem_address1' => trim($post['mem_address1']),
+                'mem_about'    => trim($post['mem_about']),
+                'mem_rate'     => trim($post['mem_rate']),
+                'mem_skills'   => trim($post['skills'])
+            ];
 
-                $this->master->update('gallery', array('main' => 0), array('mem_id' => $this->session->mem_id, 'ref_type' => 'character'));
-                foreach ($post['characters'] as $key => $character) {
-                    $images = $this->master->getRows('gallery', array('ref_id' => $character, 'ref_type' => 'character', 'mem_id' => $this->session->mem_id));
-                    $counter = 0;
-                    foreach ($images as $key1 => $img) {
-                        if(!in_array($img->image, $post['images'][$character])) {
-                            $this->master->delete('gallery', 'id' , $img->id);
-                            remove_vfile($img->image);
-                            continue;
-                        }
-                        if ($counter === 0)
-                            $this->master->save('gallery', array('main' => 1), 'id', $img->id);
-                        $counter++;
-                    }
-                }
 
-            }
             if (isset($_FILES["dp_image"]["name"]) && $_FILES["dp_image"]["name"] != "")
             {
                 $image = upload_file(UPLOAD_PATH.'members', 'dp_image');
-                $post['mem_image'] = $image['file_name'];
+                $user_info['mem_image'] = $image['file_name'];
             }
 
             if (isset($_FILES["cover_photo"]["name"]) && $_FILES["cover_photo"]["name"] != "")
             {
                 $image = upload_file(UPLOAD_PATH.'members', 'cover_photo');
-                $post['mem_cover_image'] = $image['file_name'];
+                $user_info['mem_cover_image'] = $image['file_name'];
             }
 
+            if (isset($_FILES["intro_video"]["name"]) && $_FILES["intro_video"]["name"] != "")
+            {
+                $image = upload_file(UPLOAD_PATH.'members', 'intro_video', 'video');
+                $user_info['mem_video'] = $image['file_name'];
+            }
+
+            $this->user_model->save($user_info, $user_id);
+
+            # Gallery Images
             if(isset($_FILES['gallery_images']) && is_array($_FILES['gallery_images']['name']))
             {
                 $image_path = array();          
@@ -176,13 +195,64 @@ class Account extends MY_Controller
                             'image'  => $image['file_name'],
                             'status' => 1
                         ];
-
                         $this->master->save('mem_gallery_images', $gallery_record);
                     }
                 }
             }
 
-            $this->member_model->save($data, $this->session->mem_id);
+            # Model Skills
+            // $user_skills = [];
+            // foreach(explode(',', $post['skills']) as $skill):
+            //     $user_skills = 
+            //     [
+            //         'mem_id' => $user_id,
+            //         'skill'  => $skill
+            //     ];
+            //     if(count($this->master->getRow('mem_skills', ['mem_id'=> $user_id, 'skill'=> $skill])) == '0'):
+            //         $this->master->save('mem_skills', $user_skills);
+            //     endif;
+            // endforeach;
+
+            # Model Languages
+            $user_languages = [];
+            $this->master->delete_where('mem_languages', ['mem_id'=> $user_id]);
+            foreach($post['languages'] as $key => $value):
+                $user_languages = 
+                [
+                    'mem_id'         => $user_id,
+                    'language_id'    => $value,
+                    'language_level' => $post['language_level'][$key]
+                ];
+                if(count($this->master->getRow('mem_languages', ['mem_id'=> $user_id, 'language_id'=> $value])) == '0'):
+                    $this->master->save('mem_languages', $user_languages);
+                endif;
+            endforeach;
+
+            $user_appearence = 
+            [
+                'eye_color'  => trim($post['eye_color']),
+                'skin_color' => trim($post['skin_color']),
+                'hair_color' => trim($post['hair_color']),
+                'weight'     => trim($post['weight']),
+                'chest_bust' => trim($post['chest_bust']),
+                'cup'        => trim($post['cup']),
+                'hair_length'=> trim($post['hair_length']),
+                'shoe_size'  => trim($post['shoe_size']),
+                'height'     => trim($post['height']),
+                'waist'      => trim($post['waist']),
+                'hip_inseam' => trim($post['hip_inseam']),
+                'ethnicity'  => trim($post['ethnicity']),
+                'mem_id'     => $user_id 
+            ];
+
+            if(count($this->appearence_model->is_exist(['mem_id'=> $user_id])) > 0)
+            {
+                $this->appearence_model->update($user_appearence, ['mem_id'=> $user_id]);
+            }
+            else
+            {
+                $this->appearence_model->save($user_appearence);
+            }
 
             $res['msg'] = showMsg('success', 'Profile update successfully!');
             $res['status'] = 1;
@@ -193,173 +263,64 @@ class Account extends MY_Controller
         {
             $this->data['countries'] = countries();
             $this->data['languages'] = languages();
-            $this->data['skills']    = $this->skills_model->get_rows();
+            $this->data['skills']         = $this->skills_model->get_rows();
+            $this->data['mem_languages']  = $this->master->getRowsArray('mem_languages', ['mem_id'=> $user_id]);
+            $this->data['gallery_images'] = $this->master->getRows('mem_gallery_images', ['mem_id'=> $user_id]);
+            $this->data['appearence']     = $this->master->getRow('mem_appearance', ['mem_id'=> $user_id]);
             $this->load->view("artist/profile-settings", $this->data);
         }
     }
 
-    function additional_info()
+    function fetch_states()
     {
-        $this->isMemLogged('player');
-        if($this->input->post()){
-            $res = array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-            $res['redirect_url'] = 0;
-            $this->form_validation->set_message('integer', 'Please select a valid {field}');
-            $this->form_validation->set_rules('has_home', 'Has House', 'integer');
-            $this->form_validation->set_rules('has_fenced_yard', 'Has fenced yard', 'integer');
-            $this->form_validation->set_rules('allow_furniture', 'Dogs allowed on furniture', 'integer');
-            $this->form_validation->set_rules('allow_bed', 'Dogs allowed on bed', 'integer');
-            $this->form_validation->set_rules('non_smoke_house', 'Non-smoking home', 'integer');
+        if($this->input->post())
+        {
+            $country_id = html_escape($this->input->post('country_id'));
+            $html = '';
+            $html .= '<option value="">Select</option>';
+            $states = $this->master->getRows('states', ['country_id'=> $country_id], '', '', 'asc', 'name');
+            foreach($states as $state):
+                $html .= '<option value="'.$state->id.'">'.$state->name.'</option>';
+            endforeach;
 
-            $this->form_validation->set_rules('not_dog', "Doesn't own a dog", 'integer');
-            $this->form_validation->set_rules('not_cat', "Doesn't own a cat", 'integer');
-            $this->form_validation->set_rules('one_client', "Accepts only one client at a time", 'integer');
-            $this->form_validation->set_rules('caged_pet', "Does not own caged pets", 'integer');
-            
-            $this->form_validation->set_rules('puppy_care', "Puppy care", 'integer');
-            $this->form_validation->set_rules('cat_care', "Cat care", 'integer');
-            $this->form_validation->set_rules('play_dates', "Play Dates", 'integer');
-            $this->form_validation->set_rules('first_aid_certified', "Dog first-aid certified", 'integer');
-            $this->form_validation->set_rules('apse_member', "APSE member", 'integer');
-            $this->form_validation->set_rules('petsit_member', "PetsitUSA member", 'integer');
-            $this->form_validation->set_rules('volunteer_member', "Volunteer / Donor", 'integer');
-
-            $this->form_validation->set_rules('children', 'Children in the home', 'required');
-                
-            if($this->form_validation->run() === FALSE) {
-                $res['msg'] = validation_errors();
-            } else {
-                $post = html_escape($this->input->post());
-                /*if(!in_array($post['has_home'],array(0, 1, null))) {
-                    $res['msg'] = showMsg('error','Please select valid Has house');
-                    exit(json_encode($res));
-                }
-                if(!in_array($post['allow_bed'],array(0, 1, null))) {
-                    $res['msg'] = showMsg('error','Please select valid Has fenced yard');
-                    exit(json_encode($res));
-                }
-                if(!in_array($post['allow_furniture'],array(0, 1, null))) {
-                    $res['msg'] = showMsg('error','Please select valid Dogs allowed on furniture');
-                    exit(json_encode($res));
-                }
-                if(!in_array($post['allow_bed'],array(0, 1, null))) {
-                    $res['msg'] = showMsg('error','Please select valid Dogs allowed on bed');
-                    exit(json_encode($res));
-                }
-                if(!in_array($post['non_smoke_house'],array(0, 1, null))) {
-                    $res['msg'] = showMsg('error','Please select valid Non-smoking home');
-                    exit(json_encode($res));
-                }
-
-                if(!in_array($post['children'],array('0-5', '6-12', 'No'))) {
-                    $res['msg'] = showMsg('error','Please select valid home type!');
-                    exit(json_encode($res));
-                }
-                if(!in_array($post['cat'],array(0, 1, null))) {
-                    $res['msg'] = showMsg('error','Please select valid option from Have any cat?');
-                    exit(json_encode($res));
-                }
-                if(!in_array($post['caged_pet'],array(0, 1, null))) {
-                    $res['msg'] = showMsg('error','Please select valid option from Caged pets?');
-                    exit(json_encode($res));
-                }*/
-                
-
-                $data = array('mem_has_home' => intval($post['has_home']), 'mem_has_fenced_yard' => intval($post['has_fenced_yard']), 'mem_allow_furniture' => intval($post['allow_furniture']), 'mem_allow_bed' => intval($post['allow_bed']), 'mem_non_smoke_house' => intval($post['non_smoke_house']), 'mem_not_dog' => intval($post['not_dog']), 'mem_not_cat' => intval($post['not_cat']), 'mem_one_client' => intval($post['one_client']), 'mem_caged_pet' => intval($post['caged_pet']), 'mem_children' => $post['children'], 'mem_puppy_care' => intval($post['puppy_care']), 'mem_cat_care' => intval($post['cat_care']), 'mem_play_dates' => intval($post['play_dates']), 'mem_first_aid_certified' => intval($post['first_aid_certified']), 'mem_apse_member' => intval($post['apse_member']), 'mem_petsit_member' => intval($post['petsit_member']), 'mem_volunteer_member' => intval($post['volunteer_member']));
-
-                $this->member_model->save($data, $this->session->mem_id);
-                $res['msg'] = showMsg('success', 'Additional Info updated successfully!');
-                $res['status'] = 1;
-                $res['hide_msg'] = 1;
-            }
-            exit(json_encode($res));
+            echo json_encode(['status'=> 'success', 'html'=> $html]);
         }
-        else
-            show_404();
     }
 
-    function gallery()
+    function new_langugae_row()
     {
-        $this->isMemLogged('player');
-        if($this->input->post()) {
-            $res = array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-            $res['redirect_url'] = 0;
-
-            $this->form_validation->set_message('integer', 'Please select a valid {field}');
-            $this->form_validation->set_rules('images[]', 'Image', 'required', array('required' => 'Please Select at-least one {field}'));
-                
-            if($this->form_validation->run() === FALSE) {
-                $res['msg'] = validation_errors();
-            } else {
-                $post = html_escape($this->input->post());
-                
-                $new_images = $this->master->getRows('gallery', array('ref_id' => null, 'ref_type' => 'member'));
-                $mem_images = $this->master->getRows('gallery', array('ref_id' => $this->session->mem_id, 'ref_type' => 'member'));
-                if (count($post['images']) < 1 || $post['images'][0] == '' || count($mem_images) < 1) {
-                    $res['msg'] = showMsg('error', 'Please select images!');
-                    exit(json_encode($res));
-                }
-                foreach ($new_images as $key => $img) {
-                    if(in_array($img->image, $post['images']))
-                        $this->master->save('gallery', array('ref_id' => $this->session->mem_id), 'id', $img->id);
-                }
-                foreach ($mem_images as $key => $img) {
-                    if(!in_array($img->image, $post['images'])) {
-                        $this->master->delete('gallery', 'id' , $img->id);
-                        remove_vfile($img->image);
-                    }
-                }
-
-                $res['msg'] = showMsg('success', 'Gallery images have been saved successfully!');
-                $res['status'] = 1;
-                $res['hide_msg'] = 1;
-            }
-            exit(json_encode($res));
+        if($this->input->post())
+        {
+            $number = html_escape($this->input->post('number'));
+            $html = '';
+            $html .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
+                        <div class="row formRow">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-xx-8">
+                                <div class="txtGrp">
+                                    <label for="languages" class="move">Choose Language</label>
+                                    <select name="languages['.$number.']" id="languages" class="txtBox">
+                                        <option value="">Select</option>';
+                                        foreach(languages() as $language):
+                                            $html .= '<option value="'.$language->id.'">'.$language->name.'</option>';
+                                        endforeach;
+                                    $html .= '</select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
+                                <div class="txtGrp">
+                                    <label for="language_level" class="move">Level</label>
+                                    <select name="language_level['.$number.']" id="language_level" class="txtBox">
+                                        <option value="">Select</option>
+                                        <option value="Fluent">Fluent</option>
+                                        <option value="Native">Native</option>
+                                        <option value="Bilingual">Bilingual</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+            echo json_encode(['status'=> 'success', 'html'=> $html]);
         }
-        else
-            show_404();
-    }
-
-    function availability()
-    {
-        $this->isMemLogged('player');
-        if($this->input->post()) {
-            $res = array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-            $res['redirect_url'] = 0;
-            $post = html_escape($this->input->post());
-
-            if(count($post['days'])!=count($post['start_time']) || count($post['start_time'])!=count($post['end_time']))
-            {
-                $res['msg'] = showMsg('error', 'Inconsistent data of availability!');
-                exit(json_encode($res));
-            }
-            $this->master->delete('player_timings', 'mem_id',$this->session->mem_id);
-            $week_days = get_week_days();
-            foreach ($week_days as $day_key=> $day) {
-                $available = $post['days'][$day_key] != '' ? 1 : 0;
-                $start_time = $post['start_time'][$day_key] ? get_full_time($post['start_time'][$day_key]) : '';
-                $end_time = $post['end_time'][$day_key] ? get_full_time($post['end_time'][$day_key]) : '';
-                $this->master->save('player_timings', array('mem_id' => $this->session->mem_id, 'day' => $day, 'start_time' => $start_time, 'end_time' => $end_time, 'available' => $available));
-            }
-            $res['msg'] = showMsg('success', 'Availability updated successfully!');
-            $res['status'] = 1;
-            $res['hide_msg'] = 1;
-            exit(json_encode($res));
-        }
-        else
-            show_404();
     }
 
     function change_pswd()
@@ -394,503 +355,6 @@ class Account extends MY_Controller
                 }
             }
             exit(json_encode($res));
-        }
-    }
-
-    function services()
-    {
-        $this->isMemLogged('player');
-        $this->load->model('service_model');
-        $this->load->model('question_model');
-        if($this->input->post()) {
-            $res = array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-            $res['redirect_url'] = 0;
-
-            $this->form_validation->set_rules('services[]','Services','required|integer');
-            $this->form_validation->set_rules('prices[]','Prices','required|numeric',array('numeric'=>'{field} should be numeric'));
-
-            $this->form_validation->set_rules('host_dog_size', 'What size dogs will you host in your home?', 'required');
-            $this->form_validation->set_rules('host_cat', 'Do you want to host cats?', 'required|in_list[0,1]', array('in_list' => 'Please select valid option for Do you want to host cats?'));
-            $this->form_validation->set_rules('host_puppy_under_one', 'Do you want to host puppies under 1 year old?', 'required|in_list[0,1]', array('in_list' => 'Please select valid option for Do you want to host puppies under 1 year old?'));
-            $this->form_validation->set_rules('different_families_dog', 'Do you plan to host dogs from different families at the same time?', 'required|in_list[0,1]', array('in_list' => 'Please select valid option for Do you plan to host dogs from different families at the same time?'));
-            $this->form_validation->set_rules('accept_dog_size', 'What size dogs do you accept?', 'required');
-            $this->form_validation->set_rules('accept_cat', 'Do you accept cats?', 'required|in_list[0,1]', array('in_list' => 'Please select valid option for Do you accept cats?'));
-            $this->form_validation->set_rules('accept_puppy_under_one', 'Do you accept puppies under 1 year old?', 'required|in_list[0,1]', array('in_list' => 'Please select valid option for Do you accept puppies under 1 year old?'));
-
-            $this->form_validation->set_rules('home_type', 'Home Type', 'required');
-            $this->form_validation->set_rules('have_yard', 'Have Yard', 'required');
-            $this->form_validation->set_rules('smoke', 'Does anyone smoke?', 'required');
-            $this->form_validation->set_rules('children', 'Children in home?', 'required');
-            $this->form_validation->set_rules('cat', 'Have any cat?', 'required');
-            $this->form_validation->set_rules('caged_pet', 'Caged pets?', 'required');
-            $this->form_validation->set_rules('allow_furniture', 'Allowed on furniture?', 'required');
-            $this->form_validation->set_rules('allow_bed', 'Allowed on bed?', 'required');
-
-            $this->form_validation->set_rules('stay_activities', 'What sort of activities will a dog enjoy on a stay with you?', 'required');
-            $this->form_validation->set_rules('breed_prefrences', 'What would you like to know about a dog before sitting him or her? Do you have any breed preferences?', 'required');
-            $this->form_validation->set_rules('dog_first_aid', 'Do you know dog first aid and/or CPR?', 'required|integer');
-            $this->form_validation->set_rules('oral_medication', 'Can you administer oral medication to dogs?', 'required|integer');
-            $this->form_validation->set_rules('injected_medication', 'Can you administer oral medication to dogs?', 'required|integer');
-
-            $this->form_validation->set_rules('senior_dog_care', "Do you have experience taking care of senior dogs?", 'required|integer');
-            $this->form_validation->set_rules('special_need_dog', "Do you have experience taking care of special needs dogs?", 'required|integer');
-            $this->form_validation->set_rules('daily_exercise', "Can you provide daily exercise for high-energy dogs?", 'required|integer');
-            $this->form_validation->set_rules('week_longer_stay', "Are you willing to accept stays longer than one week?", 'required|integer');
-
-            if($this->form_validation->run()===FALSE)
-                $res['msg'] = validation_errors();
-
-            $post = html_escape($this->input->post());
-
-            if(count($post['services'])<1 && count($post['prices'])<1)
-                $res['msg'] .= showMsg('error','Please select at-least one Service!');
-
-            if(count($post['services'])!=count($post['prices']))
-                $res['msg'] .= showMsg('error','Inconsistent data of services and prices!');
-
-            foreach ($post['services'] as $key => $service) {
-                if (!$this->service_model->get_row($service)) {
-                    $res['msg'] .= showMsg('error','Please select valid service');
-                    break;
-                }
-            }
-            if (!empty($res['msg']))
-                exit(json_encode($res));
-
-            $this->master->delete('mem_services','mem_id',$this->session->mem_id);
-            foreach ($post['services'] as $key => $service) {
-                $data = array('mem_id' => $this->session->mem_id, 'service_id' => $service, 'price' => $post['prices'][$key]);
-                switch ($service) {
-                    case 1:
-                        $data['service_for'] = $post['service_for1'];
-                        $data['available_spaces'] = intval($post['available_spaces1']);
-                        $data['full_time_home'] = intval($post['full_time_home1']);
-                        $data['potty_break'] = $post['potty_break1'];
-                        $data['flex_availability'] = intval($post['flex_availability1']);
-                        $data['cancellation_policy'] = $post['cancellation_policy1'];
-                        $data['additional_services'] = !empty($post['adition_svc1'])?1:0;
-                        if ($data['additional_services']) {
-                            $data['holiday_rate'] = $post['holiday_rate1'];
-                            $data['additional_dog_rate_plus'] = $post['additional_dog_rate1'];
-
-                            $data['extended_stay_rate'] = $post['extended_stay_rate1'];
-                            $data['extended_stay_days'] = $post['extended_stay_days1'];
-
-                            $data['puppy_rate'] = $post['puppy_rate1'];
-
-                            $data['bathing_rate_plus'] = $post['bathing_rate1'];
-                            $data['bathing_is_free'] = $post['bathing_is_free1'];
-
-                            $data['pick_drop_rate_plus'] = $post['pick_drop_rate1'];
-                            $data['cat_care_rate'] = $post['cat_care_rate1'];
-                            $data['additional_cat_rate_plus'] = $post['additional_cat_rate1'];
-                        }
-                        break;
-                    case 2:
-                        $data['service_for'] = $post['service_for2'];
-                        $data['travel_radius'] = floatval($post['travel_radius2']);
-                        $data['full_time_home'] = intval($post['full_time_home2']);
-                        /*$data['per_day_visits'] = intval($post['per_day_visits2']);
-                        $data['per_day_walks'] = intval($post['per_day_walks2']);
-                        $data['dog_walk_time'] = $post['dog_walk_time2'];
-                        $data['available_times'] = $post['available_times2'];*/
-                        $data['potty_break'] = $post['potty_break2'];
-                        $data['cancellation_policy'] = $post['cancellation_policy2'];
-                        $data['additional_services'] = !empty($post['adition_svc2'])?1:0;
-                        if ($data['additional_services']) {
-                            $data['holiday_rate'] = $post['holiday_rate2'];
-                            $data['additional_dog_rate_plus'] = $post['additional_dog_rate2'];
-                            $data['extended_stay_rate'] = $post['extended_stay_rate2'];
-                            $data['extended_stay_days'] = $post['extended_stay_days2'];
-                            $data['puppy_rate'] = $post['puppy_rate2'];
-                            $data['bathing_rate_plus'] = $post['bathing_rate2'];
-                            $data['bathing_is_free'] = $post['bathing_is_free2'];
-                            $data['cat_care_rate'] = $post['cat_care_rate2'];
-                            $data['additional_cat_rate_plus'] = $post['additional_cat_rate2'];
-                        }
-                        
-                        break;
-                    case 3:
-                        $data['service_for'] = $post['service_for3'];
-                        $data['travel_radius'] = floatval($post['travel_radius3']);
-                        $data['per_day_visits'] = intval($post['per_day_visits3']);
-                        $data['per_day_walks'] = intval($post['per_day_walks3']);
-                        /*$data['staying_at_client'] = intval($post['staying_at_client3']);
-                        $data['dog_walk_time'] = $post['dog_walk_time3'];
-                        $data['potty_break'] = $post['potty_break3'];*/
-                        $data['available_times'] = $post['available_times3'];
-                        $data['cancellation_policy'] = $post['cancellation_policy3'];
-                        $data['additional_services'] = !empty($post['adition_svc3'])?1:0;
-                        if ($data['additional_services']) {
-                            $data['sixty_minute_rate_plus'] = $post['sixty_minute_rate3'];
-                            $data['holiday_rate'] = $post['holiday_rate3'];
-                            $data['additional_dog_rate_plus'] = $post['additional_dog_rate3'];
-                            $data['extended_stay_rate'] = $post['extended_stay_rate3'];
-                            $data['extended_stay_days'] = $post['extended_stay_days3'];
-                            $data['puppy_rate'] = $post['puppy_rate3'];
-                            $data['bathing_rate_plus'] = $post['bathing_rate3'];
-                            $data['bathing_is_free'] = $post['bathing_is_free3'];
-                            $data['cat_care_rate'] = $post['cat_care_rate3'];
-                            $data['additional_cat_rate_plus'] = $post['additional_cat_rate3'];
-                        }
-                        break;
-                    case 4:
-                        /*$data['dog_size'] = $post['dog_size4'];
-                        $data['host_cat'] = intval($post['host_cat4']);
-                        $data['host_puppy_under_one'] = intval($post['host_puppy_under_one4']);
-                        $data['neutered_dog'] = intval($post['neutered_dog4']);
-                        $data['crate_trained'] = intval($post['crate_trained4']);*/
-
-                        $data['service_for'] = $post['service_for4'];
-                        $data['available_spaces'] = intval($post['available_spaces4']);
-                        $data['full_time_home'] = intval($post['full_time_home4']);
-                        $data['potty_break'] = $post['potty_break4'];
-                        $data['cancellation_policy'] = $post['cancellation_policy4'];
-                        $data['additional_services'] = !empty($post['adition_svc4'])?1:0;
-                        if ($data['additional_services']) {
-                            $data['holiday_rate'] = $post['holiday_rate4'];
-                            $data['additional_dog_rate_plus'] = $post['additional_dog_rate4'];
-                            $data['puppy_rate'] = $post['puppy_rate4'];
-                            $data['bathing_rate_plus'] = $post['bathing_rate4'];
-                            $data['bathing_is_free'] = $post['bathing_is_free4'];
-                            // $data['pick_drop_rate_plus'] = $post['pick_drop_rate4'];
-                        }
-                        break;
-                    case 5:
-                        /*$data['dog_size'] = $post['dog_size5'];
-                        $data['accept_cat'] = intval($post['accept_cat5']);
-                        $data['host_puppy_under_one'] = intval($post['host_puppy_under_one5']);*/
-                        $data['travel_radius'] = floatval($post['travel_radius5']);
-                        $data['available_times'] = $post['available_times5'];
-                        $data['cancellation_policy'] = $post['cancellation_policy5'];
-                        $data['additional_services'] = !empty($post['adition_svc5'])?1:0;
-                        if ($data['additional_services']) {
-                            $data['holiday_rate'] = $post['holiday_rate5'];
-                            $data['additional_dog_rate_plus'] = $post['additional_dog_rate5'];
-                            $data['puppy_rate'] = $post['puppy_rate5'];
-                            $data['bathing_rate_plus'] = $post['bathing_rate5'];
-                            $data['bathing_is_free'] = $post['bathing_is_free5'];
-                            // $data['pick_drop_rate_plus'] = $post['pick_drop_rate5'];
-                        }
-                        
-                        break;
-                }
-                $this->master->save('mem_services', $data);
-            }
-
-            $data = array('mem_host_dog_size' => $post['host_dog_size'], 'mem_host_cat' => intval($post['host_cat']), 'mem_host_puppy_under_one' => intval($post['host_puppy_under_one']), 'mem_different_families_dog' => intval($post['different_families_dog']), 'mem_accept_dog_size' => $post['accept_dog_size'], 'mem_accept_cat' => intval($post['accept_cat']), 'mem_accept_puppy_under_one' => intval($post['accept_puppy_under_one']),
-
-                'mem_home_type' => $post['home_type'], 'mem_have_yard' => $post['have_yard'], 'mem_non_smoke_house' => intval($post['smoke']), 'mem_children' => $post['children'], 'mem_not_cat' => intval($post['cat']), 'mem_caged_pet' => intval($post['caged_pet']), 'mem_allow_furniture' => intval($post['allow_furniture']), 'mem_allow_bed' => intval($post['allow_bed']),
-
-                'mem_stay_activities' => $post['stay_activities'], 'mem_breed_prefrences' => $post['breed_prefrences'], 'mem_dog_first_aid' => intval($post['dog_first_aid']), 'mem_oral_medication' => intval($post['oral_medication']), 'mem_injected_medication' => intval($post['injected_medication']), 'mem_senior_dog_care' => intval($post['senior_dog_care']), 'mem_special_need_dog' => intval($post['special_need_dog']), 'mem_daily_exercise' => intval($post['daily_exercise']), 'mem_week_longer_stay' => intval($post['week_longer_stay']));
-            $this->member_model->save($data, $this->session->mem_id);
-
-                $res['msg'] = showMsg('success', 'Services have been saved successfully!');
-                $res['status'] = 1;
-            exit(json_encode($res));
-        }
-        else{
-            $this->data['why_questions'] = $this->question_model->get_rows(array('type' => 'why'));
-            $this->data['income_questions'] = $this->question_model->get_rows(array('type' => 'income'));
-
-            $this->data['services'] = $this->service_model->get_rows();
-            $this->data['policies'] = $this->master->getRows("policies");
-            $this->load->view('player/services',$this->data);
-        }
-    }
-
-    function calendar() {
-        $this->isMemLogged('player');
-        $this->load->view('player/calendar',$this->data);
-    }
-
-    function invite_friend() {
-        $this->isMemLogged($this->session->mem_type);
-        if($this->input->post()){
-            $res=array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['redirect_url'] = 0;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-
-            $this->form_validation->set_rules('emails', 'Email', 'required');
-            if($this->form_validation->run() === FALSE)
-            {
-                $res['msg'] = validation_errors();
-            }else{
-                $post = html_escape($this->input->post());
-                $emails=@explode(', ', $post['emails']);
-                            // exit(json_encode($emails));
-                if (count($emails) > 0) {
-                    foreach ($emails as $key => $email) {
-                        if(filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE){
-                            $res['msg'] = showMsg('error', 'Please enter valid comma separated emails');
-                            exit(json_encode($res));
-                        }
-                    }
-                    $new_count=0;
-                    foreach ($emails as $key => $email) {
-
-                        $ref_code=$this->data['mem_data']->mem_referral_code;
-                        $referral_signup_link = site_url(($this->session->mem_type=='player'?'rts':'rs').'/'.$mem_data->mem_referral_code);
-
-                        $mem_data= array('name' => ucfirst($this->data['mem_data']->mem_fname).' '.ucfirst($this->data['mem_data']->mem_lname),"email"=>$email,"link"=>$referral_signup_link);
-
-                        if(send_site_email($mem_data, 'invite_friend'))
-                            $new_count++;
-                    }
-                    $s=$new_count>1?'s':'';
-                    $res['msg'] = showMsg('success',"Email has been sent to your friend$s !");
-                    
-
-                    $res['frm_reset'] = 1;
-                    $res['status'] = 1;
-                } else {
-                    $res['msg'] = showMsg('error', 'Please enter emails!');
-                }
-            }
-            exit(json_encode($res));
-        }
-        else
-            $this->load->view('account/invite-friend',$this->data);
-    }
-
-    function profile() {
-        $this->load->view('account/profile', $this->data);
-    }
-    /*function profile() {
-        if($this->session->mem_type=='player'){
-
-            $this->data['row'] = $this->data['mem_data'];
-
-            $this->data['row']->images = $this->master->getRows('gallery', array('ref_id' => $this->data['row']->mem_id, 'ref_type' => 'member'));
-            
-            $this->load->model('package_model');
-            $this->data['pkg_row'] = $this->package_model->get_row($this->data['row']->mem_package_id);
-
-            $this->load->model('service_model');
-            $this->data['services'] = $this->service_model->get_mem_services($this->data['row']->mem_id);
-
-            $this->data['player_timings']=$this->master->getRows('player_timings',array('mem_id' => $this->session->mem_id));
-            $this->data['mem_reviews'] = get_mem_reviews($id);
-            $this->data['avg_mem_rating'] = get_avg_mem_rating($id);
-            $this->data['review_count'] = count($this->data['mem_reviews']);
-            $this->data['encoded_id'] = $encoded_id;
-            $this->load->view('account/profile', $this->data);
-        }
-        else
-            show_404();
-    }*/
-
-    function report_profile() {
-
-        list($type,$id)=explode('-', doDecode($this->input->post('store')));
-        $id=intval($id);
-        if($id<1 || $type!='profile' || !$row=$this->member_model->getMember($id,array('mem_status' => 1, 'mem_verified' => 1)))
-            die('access denied!');
-
-        $res=array();
-        $res['hide_msg'] = 1;
-        $res['scroll_to_msg'] = 1;
-        $res['status'] = 0;
-        $res['frm_reset'] = 1;
-        $res['redirect_url'] = 0;
-
-        $this->form_validation->set_rules('reason', 'Reason', 'required');
-        if($this->form_validation->run() === FALSE)
-        {
-            $res['msg'] = validation_errors();
-        }else{
-            $post=html_escape($this->input->post());
-            $this->master->save('reports',array('mem_id' => $this->session->mem_id, 'profile_id' => $id, 'reason' => $post['reason']));
-            $res['msg']=showMsg('success', 'Profile reported successfully!');
-            $res['status'] = 1;
-        }
-        exit(json_encode($res));
-    }
-
-    function change_phone() {
-        $this->isMemLogged($this->session->mem_type);
-        if($this->input->post()){
-            $res=array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['redirect_url'] = 0;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-
-            $this->form_validation->set_rules('phone', 'Phone', 'required');
-            // $this->form_validation->set_rules('phone', 'Phone', 'required|integer|min_length[10]|max_length[10]',array('integer' => 'Please enter valid US phone number', 'min_length' => 'Please enter valid US phone number', 'max_length' => 'Please enter valid US phone number'));
-            if($this->form_validation->run() === FALSE)
-            {
-                $res['msg'] = validation_errors();
-            }else{
-                $post = html_escape($this->input->post());
-                /*if($post['phone']==$this->data['mem_data']->mem_phone){
-                    $res['msg'] = showMsg('error', 'Please change Phone Number to updated!');
-                    exit(json_encode($res));
-                }*/
-                if($this->member_model->phoneExists($post['phone'],$this->session->mem_id)){
-                    $res['msg'] = showMsg('error', 'Phone Already In Use!');
-                    exit(json_encode($res));
-                }
-                $ary = array('mem_phone' => trim($post['phone']));
-                if (!empty($post['phone'])) {
-                    $this->verify_phone_code();
-                }elseif($post['phone']!=$this->data['mem_data']->mem_phone){
-                    $ary['mem_phone_verified'] = 0;
-                    $res['redirect_url'] = ' ';
-                }
-
-                $this->member_model->save($ary, $this->session->mem_id);
-                $res['msg'] = showMsg('success', 'Phone number successfully updated!');
-                $res['status'] = 1;
-            }
-            exit(json_encode($res));
-        }
-    }
-
-    function verify_phone() {
-        $this->isMemLogged($this->session->mem_type);
-        if($this->input->post()){
-            $res=array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['redirect_url'] = 0;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-
-            $this->form_validation->set_rules('code[]', 'code', 'required|integer');
-            if($this->form_validation->run() === FALSE)
-            {
-                $res['msg'] = validation_errors();
-            }else{
-                $post = html_escape($this->input->post());
-                $code=implode('', $post['code']);
-                if(!$this->member_model->getMember($this->session->mem_id,array('mem_phone_code' => $code))){
-                    $res['msg'] = showMsg('error', 'Invalid code!');
-                    exit(json_encode($res));
-                }
-
-                $mem_data = array('mem_phone_code' => '', 'mem_phone_verified' => 1);
-                $this->member_model->save($mem_data, $this->session->mem_id);
-                $res['msg'] = showMsg('success', 'Phone Number verified successfully!');
-                $res['status'] = 1;
-                $res['redirect_url'] = ' ';
-            }
-            exit(json_encode($res));
-        }
-            die('access denied!');
-    }
-
-    function verify_phone_code() {
-        $this->isMemLogged($this->session->mem_type, true, false, array('buyer', 'player'), false);
-        /*
-        if($this->data['mem_data']->mem_phone_verified==1){
-            redirect('dashboard');
-            exit;
-        }
-        */
-        
-        if($this->input->post()){
-            $res = array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['redirect_url'] = 0;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-            $post['phone'] = $this->input->post('phone');
-            $mem_row = $this->member_model->get_row($this->session->mem_id);
-            if(!empty($mem_row->mem_phone) || !empty($post['phone']) )
-            {
-                if (!empty($post['phone']) && $this->member_model->phoneExists($post['phone'], $this->session->mem_id)) {
-                    $res['msg'] = showMsg('error', 'Phone already in use, Please try another!');
-                    exit(json_encode($res));
-                }
-                $mem_phone = empty($post['phone'])?$mem_row->mem_phone:$post['phone'];
-                $mem_phone = str_replace(array('-',',',' ','(',')'), '', $mem_phone);
-                $code=rand(111111, 999999);
-                // if ($_SERVER['HTTP_HOST'] != 'localhost') {
-                    $client = new Client(TWILIO_SID, TWILIO_TOEKN);
-                    try {
-                        $client->messages
-                        ->create(
-                            '+1'.$mem_phone,
-                            array(
-                                "from" => TWILIO_NUMBER,
-                                "body" => $code." is your PFSC code. Don't share this code with others"
-                            )
-                        );
-                    } catch (Exception $e) {
-                        $res['msg'] = showMsg('error',$e->getMessage());
-                        $res['status'] = 0;
-                        exit(json_encode($res));
-                    }
-                // }
-
-                // send_twilio_msg($mem_row->mem_phone,$code." is your PFSC code. Don't share this code with others");
-
-                $ary = array('mem_phone_code' => $code);
-
-                $this->member_model->save($ary, $this->session->mem_id);
-                $res['status'] = 1;
-            }
-            exit(json_encode($res));
-        }
-        die('access denied!');
-    }
-    
-    function phone_verification() {
-        $this->isMemLogged($this->session->mem_type, true, false, array('buyer', 'player'), false);
-        // $this->isMemLogged($this->session->mem_type);
-        /*if($this->data['mem_data']->mem_phone_verified==1){
-            $url=$this->session->mem_type=='buyer'?'account-settings':'dashboard';
-            redirect('dashboard');
-            exit;
-        }*/
-        if($this->input->post()){
-            $res=array();
-            $res['hide_msg'] = 0;
-            $res['scroll_to_msg'] = 1;
-            $res['redirect_url'] = 0;
-            $res['status'] = 0;
-            $res['frm_reset'] = 0;
-
-            $this->form_validation->set_rules('code[]', 'code', 'required|integer');
-            if ((empty($this->data['mem_data']->mem_become_buyer) && $this->session->mem_type=='buyer') || (empty($this->data['mem_data']->mem_player_application) && $this->session->mem_type=='player'))
-                $this->form_validation->set_rules('phone', 'Phone', 'required', array('required' => 'Something went wrong!'));
-            if($this->form_validation->run() === FALSE)
-            {
-                $res['msg'] = validation_errors();
-            }else{
-                $post = html_escape($this->input->post());
-                $code=implode('', $post['code']);
-                if(!$this->member_model->getMember($this->session->mem_id,array('mem_phone_code' => $code))){
-                    $res['msg'] = showMsg('error', 'Invalid code!');
-                    exit(json_encode($res));
-                }
-
-                $mem_data = array('mem_phone_code' => NUll, 'mem_phone_verified' => 1);
-                if ((empty($this->data['mem_data']->mem_become_buyer) && $this->session->mem_type=='buyer') || (empty($this->data['mem_data']->mem_player_application) && $this->session->mem_type=='player'))
-                    $mem_data['mem_phone'] = $post['phone'];
-                else
-                    $res['redirect_url'] = 'dashboard';
-                $this->member_model->save($mem_data, $this->session->mem_id);
-                $res['msg'] = showMsg('success', 'Phone Number verified successfully!');
-                $res['status'] = 1;
-                $res['frm_reset'] = 1;
-                // $res['redirect_url'] = $this->session->mem_type=='player' && $this->session->mem_player_verified==0 && $this->session->mem_player_verified==0 && $this->session->mem_player_application==0?'become-a-player':' '
-            }
-            exit(json_encode($res));
-        }else{
-            $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'phone_verify'));
-            $this->data['site_content'] =unserialize($this->data['site_content']->code);
-            $this->load->view("account/verify-phone", $this->data);
         }
     }
 
@@ -979,21 +443,5 @@ class Account extends MY_Controller
         exit(json_encode($res));
     }
 
-    function orders(){
-        // $this->isMemLogged('player');
-        $this->load->view("player/orders", $this->data);
-    }
-    function order_detail(){
-        // $this->isMemLogged('player');
-        $this->load->view("player/order-detail", $this->data);
-    }
-    function my_products(){
-        // $this->isMemLogged('player');
-        $this->load->view("player/products", $this->data);
-    }
-    function add_product(){
-        // $this->isMemLogged('player');
-        $this->load->view("player/add-product", $this->data);
-    }
 }
 ?>
