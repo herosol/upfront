@@ -38,7 +38,9 @@
 <script type="text/javascript" src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/jquery.validate.min.js') ?>"></script>
-<script type="text/javascript"> var base_url = "<?= base_url()?>";</script>
+<script type="text/javascript">
+    var base_url = "<?= base_url() ?>";
+</script>
 <!-- Owl Carousel Js -->
 <script type="text/javascript" src="<?= base_url() ?>assets/js/owl.carousel.min.js"></script>
 <script type="text/javascript">
@@ -142,6 +144,8 @@
         });
     });
 </script>
+<!-- Ckeditor Js -->
+<script type="text/javascript" src="<?= base_url() ?>assets/js/ckeditor5.js"></script>
 
 
 <!-- Favicon -->
