@@ -56,38 +56,127 @@ class User_model extends CRUD_Model
         return $query->result();
     }
 
-
-    function get_player($user_id)
+    function get_searched_models($post)
     {
+        $this->db->from($this->table_name.' mem');
+        $this->db->join('mem_appearance app', 'mem.user_id=app.mem_id');
+        $this->db->join('mem_languages lan', 'mem.user_id=lan.mem_id');
+        $this->db->select('mem.user_id, mem.mem_image, mem.user_fname, mem.user_lname');
+        # IF ZIP
+        if(!empty($post['zip']))
+            $this->db->where('mem.mem_zip', $post['zip']);
 
-        $this->db->where(array('user_status' => 1, 'user_verified' => 1, 'user_player_verified' => 1, 'user_type' => 'player'/*, 'user_phone_verified' => '1'*/));
-        $this->db->where("user_id", $user_id);
-
-        $query = $this->db->get($this->table_name);
-        return $query->row();
-    }
-    
-    /*
-    function delete($user_id)
-    {
-        $this->db->where('user_id', $user_id);
-        $this->db->delete($this->table_name);
-    }
-    
-    function save($vals, $user_id = '')
-    {
-        $this->db->set($vals);
-        if ($user_id != '') {
-            $this->db->where('user_id', $user_id);
-            $this->db->update($this->table_name);
-            return $user_id;
-        } else {
-            $this->db->insert($this->table_name);
-            //return $this->db->last_query(); 
-            return $this->db->insert_id();
+        # IF NAME
+        if(!empty($post['model_name']))
+        {
+            $this->db->group_start();
+            foreach(explode(' ', trim($post['model_name'])) as $key => $nameKeyword)
+            {
+                if($key == 0)
+                {
+                    $this->db->like('mem.user_fname', $nameKeyword);
+                    $this->db->or_like('mem.user_lname', $nameKeyword);
+                }
+                else
+                {
+                    $this->db->or_like('mem.user_fname', $nameKeyword);
+                    $this->db->or_like('mem.user_lname', $nameKeyword);
+                }
+            }
+            $this->db->group_end();
         }
+
+        # AGE RANGES
+        $ageIndexes = explode(';', $post['age']);
+        $ageStart = $ageIndexes[0];
+        $ageEnd   = $ageIndexes[1];
+        $this->db->where("( mem.mem_age >= $ageStart AND mem.mem_age <= $ageEnd ) ", null, false);
+
+        # HEIGHT RANGES
+        $heightIndexes = explode(';', $post['height']);
+        $heightStart = $heightIndexes[0];
+        $heightEnd   = $heightIndexes[1];
+        $this->db->where("( app.height >= $heightStart AND app.height <= $heightEnd ) ", null, false);
+
+        # IF GENDER FILTER
+        if(isset($post['gender']))
+        {
+            $this->db->group_start();
+            foreach($post['gender'] as $key => $value)
+            {
+                if($key == 0)
+                    $this->db->where('mem.mem_sex', $value);
+                else
+                    $this->db->or_where('mem.mem_sex', $value);
+            }
+            $this->db->group_end();
+        }
+
+        # IF LANGUAGE FILTER
+        if(isset($post['language']))
+        {
+            $this->db->group_start();
+            foreach($post['language'] as $key => $value)
+            {
+                if($key == 0)
+                    $this->db->where('lan.language_id', $value);
+                else
+                    $this->db->or_where('lan.language_id', $value);
+            }
+            $this->db->group_end();
+        }
+
+        # IF ETHNTICITY FILTER
+        if(isset($post['ethnicity']))
+        {
+            $this->db->group_start();
+            foreach($post['ethnicity'] as $key => $value)
+            {
+                if($key == 0)
+                    $this->db->where('app.ethnicity', $value);
+                else
+                    $this->db->or_where('app.ethnicity', $value);
+            }
+            $this->db->group_end();
+        }
+
+        # IF HAIR FILTER
+        if(isset($post['hair']))
+        {
+            $this->db->group_start();
+            foreach($post['hair'] as $key => $value)
+            {
+                if($key == 0)
+                    $this->db->where('app.hair_color', $value);
+                else
+                    $this->db->or_where('app.hair_color', $value);
+            }
+            $this->db->group_end();
+        }
+
+        # IF EYE FILTER
+        if(isset($post['eye']))
+        {
+            $this->db->group_start();
+            foreach($post['eye'] as $key => $value)
+            {
+                if($key == 0)
+                    $this->db->where('app.eye_color', $value);
+                else
+                    $this->db->or_where('app.eye_color', $value);
+            }
+            $this->db->group_end();
+        }
+
+        $this->db->where(['mem.user_type'=> 'model', 'mem.mem_model_application'=> '1', 'mem.mem_verified'=> '1', 'mem.user_status'=> '1']);
+        $this->db->order_by('mem.user_id', 'DESC');
+        $this->db->group_by('mem.user_id');
+        $query = $this->db->get();
+        // echo "<pre>";
+        // print_r($query->result());
+        // die;
+        return $query->result();
     }
-    */
     
     function oldPswdCheck($user_id, $user_pswd)
     {

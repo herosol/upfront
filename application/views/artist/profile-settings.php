@@ -155,7 +155,7 @@
                             if (count($mem_languages) > 0) :
                                 foreach ($mem_languages as $key => $value) :
                             ?>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6" id="row_no_<?=$key?>">
                                         <div class="flexBlk">
                                             <div class="row formRow">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-xx-8">
@@ -181,7 +181,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" class="rmvBtn"></button>
+                                            <?php if($key != '0'): ?>
+                                                <button type="button" class="rmvBtn" data-row-no="<?=$key?>" onclick="delete_language_row(this)"></button>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 <?php
@@ -230,14 +232,15 @@
                                     <input type="file" name="intro_video" id="intro_video" class="uploadFile" data-upload="intro_thumbnail">
                                 </div>
                                 <div class="vidBlk">
-                                    <!-- <video controls="">
-                                        <source src="Append video path here" type="video/mp4">
-                                    </video> -->
+                                    <video controls="">
+                                        <source src="<?= get_site_image_src("members", $mem_data->mem_video, ''); ?>" alt="" type="video/mp4">
+                                    </video>
                                 </div>
                             </div>
                         </div>
                         <hr>
                         <h5>Gallery Images</h5>
+                        <input type="hidden" name="deleted_images" id="deleted_images">
                         <div class="row formRow">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12">
                                 <div class="txtGrp">
@@ -263,6 +266,17 @@
                     <div class="blk">
                         <h5>Appearance</h5>
                         <div class="row formRow">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
+                                <div class="txtGrp">
+                                    <label for="body_type" class="move">Body Type</label>
+                                    <select name="body_type" id="body_type" class="txtBox">
+                                        <option value="">Select</option>
+                                        <?php foreach (body_types() as $color) : ?>
+                                            <option value="<?= $color ?>" <?= $appearence->body_type == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
                                 <div class="txtGrp">
                                     <label for="eye_color" class="move">Eye Color</label>
@@ -307,7 +321,7 @@
                                     <label for="shoe_size" class="move">Shoe Size</label>
                                     <select name="shoe_size" id="shoe_size" class="txtBox">
                                         <option value="">Select</option>
-                                        <?php foreach (hair_colors() as $color) : ?>
+                                        <?php foreach (show_size() as $color) : ?>
                                             <option value="<?= $color ?>" <?= $appearence->shoe_size == $color ? 'selected' : '' ?>><?= $color ?></option>
                                         <?php endforeach; ?>
                                     </select>
@@ -368,6 +382,12 @@
                                             <option value="<?= $color ?>" <?= $appearence->ethnicity == $color ? 'selected' : '' ?>><?= $color ?></option>
                                         <?php endforeach; ?>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
+                                <div class="txtGrp">
+                                    <label for="jacket_size">Jacket Size</label>
+                                    <input type="text" id="jacket_size" name="jacket_size" value="<?= $appearence->jacket_size ?>" class="txtBox">
                                 </div>
                             </div>
                         </div>
@@ -537,9 +557,27 @@
                 })
             }
 
-            const deleteGalleryImage = btn => {
+            const deleteGalleryImage = btn => 
+            {
                 let image_id = $(btn).data('id');
-                // HERE WERE STOPED
+                let deleted_images = $('#deleted_images').val();
+
+                if(deleted_images != '')
+                {
+                    $('#deleted_images').val(deleted_images+','+image_id);
+                }
+                else
+                {
+                    $('#deleted_images').val(image_id);
+                }
+
+                $(btn).parent().parent().remove();
+            }
+
+            const delete_language_row = btn => 
+            {
+                let row_no = $(btn).data('row-no');
+                $('#row_no_'+row_no).remove();  
             }
         </script>
         <script type="text/javascript">

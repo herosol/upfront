@@ -17,17 +17,17 @@
                     <div class="col col1">
                         <div class="filters">
                             <div class="closeBtn"></div>
-                            <form action="" method="post">
+                            <form method="post" id="searchForm">
                                 <h5>Filter by <button type="reset">Reset all</button></h5>
                                 <div class="inBlk">
                                     <h6>Profile Type</h6>
                                     <ul class="ctgLst inline">
                                         <li>
-                                            <input type="radio" id="typeRegular" name="type" checked="">
+                                            <input type="radio" id="typeRegular" name="profile_type" value="regular" checked>
                                             <label for="typeRegular">Regular</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="typeVoiceover" name="type">
+                                            <input type="radio" id="typeVoiceover" name="profile_type" value="voiceover">
                                             <label for="typeVoiceover">Voiceover</label>
                                         </li>
                                     </ul>
@@ -36,51 +36,33 @@
                                     <h6>Search by Name</h6>
                                     <div class="txtGrp">
                                         <label for="">Type Model Name</label>
-                                        <input type="text" name="" id="" class="txtBox">
+                                        <input type="text" name="model_name" id="model_name" class="txtBox">
                                     </div>
                                 </div>
                                 <div class="inBlk">
                                     <h6>Location <button type="reset">Clear</button></h6>
                                     <div class="txtGrp">
                                         <label for="">Zip code or Address</label>
-                                        <input type="text" name="" id="" class="txtBox">
+                                        <input type="text" name="zip" id="zip" class="txtBox">
                                     </div>
                                 </div>
                                 <div class="inBlk">
                                     <h6>Age Range</h6>
-                                    <input type="text" name="" id="age" value="">
+                                    <input type="text" name="age" id="age" value="">
                                 </div>
                                 <div class="inBlk">
                                     <h6>Distance (miles)</h6>
-                                    <input type="text" name="" id="distance" value="">
+                                    <input type="text" name="distance" id="distance" value="">
                                 </div>
                                 <div class="inBlk">
                                     <h6>Gender <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst">
+                                    <?php foreach(genders() as $key => $val): ?>
                                         <li>
-                                            <input type="checkbox" id="genderFemale" name="gender">
-                                            <label for="genderFemale">Female</label>
+                                            <input class="clicked" type="checkbox" id="gender<?=$key?>" name="gender[]" value="<?=$val?>">
+                                            <label for="gender<?=$key?>"><?=$val?></label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="genderMale" name="gender">
-                                            <label for="genderMale">Male</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="genderNonConfirm" name="gender">
-                                            <label for="genderNonConfirm">Non-Confirming</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="genderNonBinary" name="gender">
-                                            <label for="genderNonBinary">Non-Binary</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="genderTransFemale" name="gender">
-                                            <label for="genderTransFemale">Trans Female</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="genderTransMale" name="gender">
-                                            <label for="genderTransMale">Trans Male</label>
-                                        </li>
+                                    <?php endforeach; ?>
                                     </ul>
                                 </div>
                                 <div class="inBlk">
@@ -111,46 +93,12 @@
                                 <div class="inBlk">
                                     <h6>Language <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst moreLst">
+                                    <?php foreach(languages() as $language): ?>
                                         <li>
-                                            <input type="checkbox" id="languageEnglish" name="language">
-                                            <label for="languageEnglish">English</label>
+                                            <input class="clicked" type="checkbox" id="language<?=$language->name?>" name="language[]" value="<?=$language->id?>">
+                                            <label for="language<?=$language->name?>"><?=$language->name?></label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="languagePortuguês" name="language">
-                                            <label for="languagePortuguês">Português</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="languageEspañol" name="language">
-                                            <label for="languageEspañol">Español</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="languageFrançais" name="language">
-                                            <label for="languageFrançais">Français</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="languageالعربية" name="language">
-                                            <label for="languageالعربية">العربية</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="languageItaliano" name="language">
-                                            <label for="languageItaliano">Italiano</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="language日本語" name="language">
-                                            <label for="language日本語">日本語</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="languageاردو" name="language">
-                                            <label for="languageاردو">اردو</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="languageภาษาไทย" name="language">
-                                            <label for="languageภาษาไทย">ภาษาไทย</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="languageKhmer" name="language">
-                                            <label for="languageKhmer">Khmer</label>
-                                        </li>
+                                    <?php endforeach; ?>
                                     </ul>
                                     <button type="button" class="webBtn labelBtn" data-more="Show more" data-less="Show less"></button>
                                 </div>
@@ -158,15 +106,15 @@
                                     <h6>Personal <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst">
                                         <li>
-                                            <input type="checkbox" id="personalPassport" name="personal">
+                                            <input  type="checkbox" id="personalPassport" name="personal[]">
                                             <label for="personalPassport">Has Passport</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" id="personalLicense" name="personal">
+                                            <input type="checkbox" id="personalLicense" name="personal[]">
                                             <label for="personalLicense">Has Driver's License</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" id="personalRecord" name="personal">
+                                            <input type="checkbox" id="personalRecord" name="personal[]">
                                             <label for="personalRecord">Self-record</label>
                                         </li>
                                     </ul>
@@ -195,174 +143,54 @@
                                 <div class="inBlk">
                                     <h6>Ethnicity <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst moreLst">
+                                    <?php foreach(ethnicity() as $key => $val): ?>
                                         <li>
-                                            <input type="checkbox" id="ethnicityAsian" name="ethnicity">
-                                            <label for="ethnicityAsian">Asian</label>
+                                            <input class="clicked" type="checkbox" id="ethnicity<?=$key?>" name="ethnicity[]" value="<?=$val?>">
+                                            <label for="ethnicity<?=$key?>"><?=$val?></label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicityBlack" name="ethnicity">
-                                            <label for="ethnicityBlack">Black / African Descent</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicityEthnically" name="ethnicity">
-                                            <label for="ethnicityEthnically">Ethnically Ambiguous / Multiracial</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicityIndigenous" name="ethnicity">
-                                            <label for="ethnicityIndigenous">Indigenous Peoples</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicityLatino" name="ethnicity">
-                                            <label for="ethnicityLatino">Latino / Hispanic</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicityMiddle" name="ethnicity">
-                                            <label for="ethnicityMiddle">Middle Eastern</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicitySouth" name="ethnicity">
-                                            <label for="ethnicitySouth">South Asian / Indian</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicitySoutheast" name="ethnicity">
-                                            <label for="ethnicitySoutheast">Southeast Asian / Pacific Islander</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ethnicityWhite" name="ethnicity">
-                                            <label for="ethnicityWhite">White / European Descent</label>
-                                        </li>
+                                    <?php endforeach; ?>
                                     </ul>
                                     <button type="button" class="webBtn labelBtn" data-more="Show more" data-less="Show less"></button>
                                 </div>
                                 <div class="inBlk">
                                     <h6>Hair Color <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst moreLst">
+                                    <?php foreach(hair_colors() as $key => $val): ?>
                                         <li>
-                                            <input type="checkbox" id="hairBlack" name="hair">
-                                            <label for="hairBlack">Black</label>
+                                            <input class="clicked" type="checkbox" id="hair<?=$key?>" name="hair[]" value="<?=$val?>">
+                                            <label for="hair<?=$key?>"><?=$val?></label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="hairBrown" name="hair">
-                                            <label for="hairBrown">Brown</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairBlond" name="hair">
-                                            <label for="hairBlond">Blond</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairAuburn" name="hair">
-                                            <label for="hairAuburn">Auburn</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairChestnut" name="hair">
-                                            <label for="hairChestnut">Chestnut</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairRed" name="hair">
-                                            <label for="hairRed">Red</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairGray" name="hair">
-                                            <label for="hairGray">Gray</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairWhite" name="hair">
-                                            <label for="hairWhite">White</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairBald" name="hair">
-                                            <label for="hairBald">Bald</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairSalt" name="hair">
-                                            <label for="hairSalt">Salt & Pepper</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairStrawberry" name="hair">
-                                            <label for="hairStrawberry">Strawberry Blond</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="hairMulticolored" name="hair">
-                                            <label for="hairMulticolored">Multicolored/Dyed</label>
-                                        </li>
+                                    <?php endforeach; ?>
                                     </ul>
                                     <button type="button" class="webBtn labelBtn" data-more="Show more" data-less="Show less"></button>
                                 </div>
                                 <div class="inBlk">
                                     <h6>Eye Color <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst moreLst">
+                                    <?php foreach(eye_colors() as $key => $val): ?>
                                         <li>
-                                            <input type="checkbox" id="eyeAmber" name="eye">
-                                            <label for="eyeAmber">Amber</label>
+                                            <input class="clicked" type="checkbox" id="eye<?=$key?>" name="eye[]" value="<?=$val?>">
+                                            <label for="eye<?=$key?>"><?=$val?></label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="eyeBlue" name="eye">
-                                            <label for="eyeBlue">Blue</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="eyeBrown" name="eye">
-                                            <label for="eyeBrown">Brown</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="eyeGray" name="eye">
-                                            <label for="eyeGray">Gray</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="eyeGreen" name="eye">
-                                            <label for="eyeGreen">Green</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="eyeHazel" name="eye">
-                                            <label for="eyeHazel">Hazel</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="eyeRed" name="eye">
-                                            <label for="eyeRed">Red</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="eyeViolet" name="eye">
-                                            <label for="eyeViolet">Violet</label>
-                                        </li>
+                                    <?php endforeach; ?>
                                     </ul>
                                     <button type="button" class="webBtn labelBtn" data-more="Show more" data-less="Show less"></button>
                                 </div>
                                 <div class="inBlk">
                                     <h6>Body Type <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst moreLst">
+                                    <?php foreach(body_types() as $key => $val): ?>
                                         <li>
-                                            <input type="checkbox" id="bodyAverage" name="body">
-                                            <label for="bodyAverage">Average</label>
+                                            <input class="clicked" type="checkbox" id="body<?=$key?>" name="body_type[]" value="<?=$val?>">
+                                            <label for="body<?=$key?>"><?=$val?></label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="bodySlim" name="body">
-                                            <label for="bodySlim">Slim</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="bodyAthletic" name="body">
-                                            <label for="bodyAthletic">Athletic / Toned</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="bodyMuscular" name="body">
-                                            <label for="bodyMuscular">Muscular</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="bodyCurvy" name="body">
-                                            <label for="bodyCurvy">Curvy</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="bodyHeavyset" name="body">
-                                            <label for="bodyHeavyset">Heavyset / Stocky</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="bodyPlus" name="body">
-                                            <label for="bodyPlus">Plus-Sized / Full-Figured</label>
-                                        </li>
+                                    <?php endforeach; ?>
                                     </ul>
                                     <button type="button" class="webBtn labelBtn" data-more="Show more" data-less="Show less"></button>
                                 </div>
                                 <div class="inBlk">
                                     <h6>Height Range</h6>
-                                    <input type="text" name="" id="height" value="">
+                                    <input type="text" name="height" id="height" value="">
                                 </div>
                                 <div class="btnBlk">
                                     <button type="reset" class="webBtn lgBtn lightBtn borderBtn">Clear</button>
@@ -377,7 +205,7 @@
                             <button type="button" id="filterBtn" class="webBtn smBtn icoBtn"><img src="<?= base_url() ?>assets/images/icon-filter.svg" alt=""> Filter</button>
                         </div>
                         <div class="topHead">
-                            <span>125 Results available</span>
+                            <span id="total_records">125 Results available</span>
                             <div class="miniBtn">
                                 Sort by
                                 <select name="" id="" class="txtBox">
@@ -388,7 +216,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="flexRow flex">
+                        <div class="flexRow flex" id="model_records">
                             <div class="col">
                                 <div class="profBlk">
                                     <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></a></div>
@@ -632,6 +460,62 @@
                 $(document).on('click', '.filters .moreLst + .webBtn', function() {
                     $(this).prev(":first").toggleClass('change');
                 });
+
+                // SEARCH REQUEST DETECTIONS BLOCK
+                $(document).on('keyup', '#model_name, #zip', function(e) 
+                {
+                    e.preventDefault();
+                    search();
+                });
+
+                $(document).on('change', '#age, #distance, #height', function(e) 
+                {
+                    e.preventDefault();
+                    search();
+                });
+
+                $(document).on('click', '.clicked', function(e) 
+                {
+                    e.preventDefault();
+                    search();
+                });
+
+
+                var xhr = new window.XMLHttpRequest();
+                var ajaxSearch = false;
+                function search() 
+                {
+                    if(xhr && xhr.readyState != 4) {
+                        xhr.abort();
+                    }
+                    if(ajaxSearch)
+                        return;
+                    ajaxSearch = true;
+                    let formData = $("#searchForm").serializeArray();
+                    $.ajax({
+                        url: base_url + 'search',
+                        type: "POST",
+                        data: $.param(formData),
+                        success: function (rs) {
+                            let data = JSON.parse(rs);
+                            $('#model_records').html(data.html);
+                            if(data.total < 2)
+                                $('#total_records').html(`${data.total} result Available`);
+                            else
+                                $('#total_records').html(`${data.total} results Available`);
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        },
+                        complete: function (data) {
+                            ajaxSearch = false;
+                        },
+                        xhr : function(){
+                            return xhr;
+                        }
+                    }); 
+                }
+                // END SEARCH BLOCK
             });
         </script>
     </main>

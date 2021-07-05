@@ -7,6 +7,7 @@ class Pages extends MY_Controller
         $this->load->model('mvideo_model');
 		$this->load->model('topic_model');
         $this->load->model('tcategory_model');
+        $this->load->model('user_model');
     }
 
     public function model_profile($model_id)
@@ -163,7 +164,33 @@ class Pages extends MY_Controller
 
     function search()
     {
-        $this->load->view('pages/search');
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            $searchRecords = $this->user_model->get_searched_models($post);
+            $response = [];
+            $response['total'] = $total = count($searchRecords);
+            $html = '';
+            if($total > 0)
+            {
+                foreach($searchRecords as $key => $row):
+                    $image = get_site_image_src("members", $row->mem_image, '');
+                    $html .= '<div class="col"><div class="profBlk"><div class="image"><a href="'.base_url().'model-profile/'.$row->user_id.'"><img src="'.$image.'" alt=""></a></div><div class="txt"><div class="rateYo"></div><h4><a href="'.base_url().'model-profile/'.$row->user_id.'">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4><p>'.$row->user_fname.' '.$row->user_lname.'</p></div></div></div>';
+                endforeach;
+                $response['html'] = $html;
+            }
+            else
+            {
+                $response['html'] = '<div class="col-md-12">'.showMsg('Info', 'No Record Found').'</div>';
+            }
+
+            $response['status'] = 'success';
+            echo json_encode($response);
+        }
+        else
+        {
+            $this->load->view('pages/search');
+        }
     }
 
     function educational_videos()

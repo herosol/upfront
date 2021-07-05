@@ -29,7 +29,7 @@ function upload_vfile($field_name, $type = 'image', $size = 2100000) {
 
 function genders()
 {
-    return array('Male', 'Female', 'Other');
+    return array('Female', 'Male', 'Non-Confirming', 'Non-Binary', 'Trans Female', 'Trans Male');
 }
 
 function language_level()
@@ -39,7 +39,7 @@ function language_level()
 
 function eye_colors()
 {
-    return array('Green', 'Black', 'Blue');
+    return array('Amber', 'Blue', 'Brown', 'Gray', 'Green', 'Hazel', 'Red', 'Violet');
 }
 
 function skin_colors()
@@ -49,7 +49,7 @@ function skin_colors()
 
 function hair_colors()
 {
-    return array('Brown', 'Black', 'Blonde');
+    return array('Black', 'Brown', 'Blond', 'Auburn', 'Chestnut', 'Red', 'Gray', 'White', 'Bald', 'Salt & Pepper', 'Strawberry Blond', 'Multicolored/Dyed');
 }
 
 function show_size()
@@ -69,10 +69,13 @@ function cup()
 
 function ethnicity()
 {
-    return array('A', 'B', 'C', 'D');
+    return array('Asian', 'Black / African Descent', 'Ethnically Ambiguous / Multiracial', 'Indigenous Peoples', 'Latino / Hispanic', 'Middle Eastern', 'South Asian / Indian', 'Southeast Asian / Pacific Islander', 'White / European Descent');
 }
 
-
+function body_types()
+{
+    return array('Average', 'Slim', 'Athletic / Toned', 'Muscular', 'Curvy', 'Heavyset / Stocky', 'Plus-Sized / Full-Figured');
+}
 
 function get_vsize_dirs() {
     return array('50' => 'p50x50/', '150' => 'p150x150/', '300' => 'p300x300/', '350' => 'p350x350/', '400' => 'p400x400/');

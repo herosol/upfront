@@ -228,6 +228,12 @@ $(document).ready(function() {
             },
             ethnicity: {
                 required: true
+            },
+            jacket_size: {
+                required: true
+            },
+            body_type: {
+                required: true
             }
         },
         messages: {

@@ -30,7 +30,7 @@
                             </div>
                             <div class="txt">
                                 <h4>Personal Info</h4>
-                                <?= '<p>'.$model_data->mem_about.'</p>' ?>
+                                <?php echo $model_data->mem_about; ?>
                                 <ul class="lst">
                                     <li>
                                         <strong>Speaks:</strong>
@@ -180,6 +180,10 @@
                             </div>
                             <ul class="list">
                                 <li>
+                                    <div>Body Type</div>
+                                    <div><?= $appearence->body_type ?></div>
+                                </li>
+                                <li>
                                     <div>Eye Color</div>
                                     <div><?= $appearence->eye_color ?></div>
                                 </li>
@@ -201,7 +205,7 @@
                                 </li>
                                 <li>
                                     <div>Jacket Size</div>
-                                    <div><?= $appearence->height ?></div>
+                                    <div><?= $appearence->jacket_size ?></div>
                                 </li>
                                 <li>
                                     <div>Height</div>

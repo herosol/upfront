@@ -117,6 +117,8 @@ class Account extends MY_Controller
             $this->form_validation->set_rules('waist', 'Waist', 'required');
             $this->form_validation->set_rules('hip_inseam', 'Hip / Inseam', 'required');
             $this->form_validation->set_rules('ethnicity', 'Ethnicity', 'required');
+            $this->form_validation->set_rules('jacket_size', 'Jacket Size', 'required');
+            $this->form_validation->set_rules('body_type', 'Body Type', 'required');
 
 
             if ($this->form_validation->run() === FALSE)
@@ -187,6 +189,15 @@ class Account extends MY_Controller
                 }
             }
 
+            # DELETED IMAGES
+            if(!empty(trim($post['deleted_images'])))
+            {
+                foreach(explode(',', trim($post['deleted_images'])) as $key => $value)
+                {
+                    $this->master->delete_where('mem_gallery_images', ['id'=> $value]);
+                }
+            }
+
             # Model Skills
             // $user_skills = [];
             // foreach(explode(',', $post['skills']) as $skill):
@@ -229,12 +240,17 @@ class Account extends MY_Controller
                     'waist'      => trim($post['waist']),
                     'hip_inseam' => trim($post['hip_inseam']),
                     'ethnicity'  => trim($post['ethnicity']),
+                    'body_type'  => trim($post['body_type']),
+                    'jacket_size'=> trim($post['jacket_size']),
                     'mem_id'     => $user_id
                 ];
 
-            if (count($this->appearence_model->is_exist(['mem_id' => $user_id])) > 0) {
+            if (count($this->appearence_model->is_exist(['mem_id' => $user_id])) > 0)
+            {
                 $this->appearence_model->update($user_appearence, ['mem_id' => $user_id]);
-            } else {
+            }
+            else
+            {
                 $this->appearence_model->save($user_appearence);
             }
 
@@ -273,7 +289,7 @@ class Account extends MY_Controller
         if ($this->input->post()) {
             $number = html_escape($this->input->post('number'));
             $html = '';
-            $html .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
+            $html .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6" id="row_no_'.$number.'">
                         <div class="flexBlk">
                             <div class="row formRow">
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-xx-8">
@@ -299,7 +315,7 @@ class Account extends MY_Controller
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="rmvBtn"></button>
+                            <button type="button" class="rmvBtn" data-row-no="'.$number.'" onclick="delete_language_row(this)"></button>
                         </div>
                     </div>';
             echo json_encode(['status' => 'success', 'html' => $html]);
