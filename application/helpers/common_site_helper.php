@@ -36,6 +36,15 @@ function blog_cat_by_id($cat_id)
     return $query->row()->title;
 }
 
+function get_image_of_member($member_id)
+{
+    global $CI;
+    $CI->db->select("mem_image");
+    $CI->db->where('user_id', $member_id);
+    $query = $CI->db->get('users');
+    return $query->row()->mem_image;
+}
+
 function languages()
 {
     global $CI;

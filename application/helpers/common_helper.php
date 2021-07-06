@@ -80,6 +80,15 @@ function body_types()
 function get_vsize_dirs() {
     return array('50' => 'p50x50/', '150' => 'p150x150/', '300' => 'p300x300/', '350' => 'p350x350/', '400' => 'p400x400/');
 }
+
+function sort_chat_participants($user_id, $receiver_id)
+{
+    if($user_id > $receiver_id)    
+        return $receiver_id.','.$user_id;
+    else 
+        return  $user_id.','.$receiver_id;
+}
+
 function generate_vimage_thumbs($image) {
     $img_sizes = get_vsize_dirs();
     foreach ($img_sizes as $size => $directory) {

@@ -86,6 +86,8 @@ $route['signup-as-model']  = 'index/model_signup';
 //MEMBERS DASHBOARD
 $route['dashboard']        = 'account/dashboard';
 $route['profile-settings'] = 'account/profile_settings';
+$route['inbox/(:any)']     = 'account/inbox/$1';
+$route['inbox']            = 'account/inbox';
 
 # ADMIN ROUTES
 $route['admin/login']   = 'admin/index/login';

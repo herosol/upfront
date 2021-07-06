@@ -26,7 +26,7 @@
                                         <strong>4.1<em>286 ratings</em></strong>
                                     </div>
                                 </div>
-                                <a href="<?= $base_url ?>messages/.php" class="webBtn smBtn">Send Message</a>
+                                <a href="<?= base_url() ?>inbox/<?=$model_data->user_id?>" class="webBtn smBtn">Send Message</a>
                             </div>
                             <div class="txt">
                                 <h4>Personal Info</h4>

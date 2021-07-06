@@ -188,12 +188,13 @@ function get_location_detail($zipcode, $country = 'usa')
     curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $data = curl_exec($ch);
-    if (curl_error($ch)) {
+    if (curl_error($ch))
+    {
         echo $error_msg = curl_error($ch);
     }
     curl_close($ch);
     $response = json_decode($data);
-            // pr($response->Response->View[0]->Result[0]->Location);
+    //pr($response->Response->View[0]->Result[0]->Location);
     return $response->Response->View[0]->Result[0]->Location->DisplayPosition;
     /*echo $response->Response->View[0]->Result[0]->Location->DisplayPosition->Latitude.'<br>';
     echo $response->Response->View[0]->Result[0]->Location->DisplayPosition->Longitude*/;

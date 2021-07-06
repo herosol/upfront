@@ -13,6 +13,7 @@ class Account extends MY_Controller
         $this->load->model('user_model');
         $this->load->model('appearence_model');
         $this->load->model('skills_model');
+        $this->load->model('chat_model');
     }
 
     function dashboard()
@@ -78,8 +79,8 @@ class Account extends MY_Controller
 
     function profile_settings()
     {
-        $user_id = $this->session->user_id;
         $this->isMemLogged($this->session->user_type);
+        $user_id = $this->session->user_id;
         // $this->load->model('character_model');
         if ($this->input->post()) {
             $res = array();
@@ -159,6 +160,13 @@ class Account extends MY_Controller
             if (isset($_FILES["intro_video"]["name"]) && $_FILES["intro_video"]["name"] != "") {
                 $image = upload_file(UPLOAD_PATH . 'members', 'intro_video', 'video');
                 $user_info['mem_video'] = $image['file_name'];
+            }
+
+            if(!empty($post['mem_zip']))
+            {
+                $coordinates = get_location_detail(trim($post['mem_zip']));
+                $user_info['mem_map_lat'] = $coordinates->Latitude;
+                $user_info['mem_map_lng'] = $coordinates->Longitude;
             }
 
             $this->user_model->save($user_info, $user_id);
@@ -266,6 +274,61 @@ class Account extends MY_Controller
             $this->data['gallery_images'] = $this->master->getRows('mem_gallery_images', ['mem_id' => $user_id]);
             $this->data['appearence']     = $this->master->getRow('mem_appearance', ['mem_id' => $user_id]);
             $this->load->view("artist/profile-settings", $this->data);
+        }
+    }
+
+    function inbox($receiver_id = '')
+    {
+        $this->isMemLogged($this->session->user_type);
+        $user_id = $this->session->user_id;
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            $user_id     = $post['sender_id'];
+            $receiver_id = $post['receiver_id'];
+            $message = $post['message'];
+            $current_chatroom = $this->chat_model->ifChatroomExist($user_id, $receiver_id);
+            if($current_chatroom)
+            {
+                $data = 
+                [
+                    'room_id'   => $current_chatroom,
+                    'sender_id' => $user_id,
+                    'message'   => $message
+                ];
+                $this->chat_model->save($data);
+            }
+
+            echo json_encode(['status'=> 'status']);
+        }
+        else
+        {
+            if(!empty($receiver_id))
+            {
+                $this->data['chatrooms']     = $this->chat_model->getRelatedChats();
+                $this->data['receiver_id']   = $receiver_id;
+                $this->data['receiver_data'] = $this->user_model->getMember($receiver_id);
+                # MEMBER CHATS
+                $this->data['current_chatroom_id'] = $current_chatroom = $this->chat_model->ifChatroomExist($user_id, $receiver_id);
+                foreach($this->data['chatrooms'] as $room):
+                    $participantsIndex = explode(',', $room->participants);
+                    foreach($participantsIndex as $receiver):
+                        if($user_id != $receiver):
+                            $this->data['chats'][] = 
+                            [
+                                'room_id' => $room->room_id,
+                                'member'  => $this->user_model->getMember($receiver),
+                                'isActive'=> $receiver_id == $receiver ? 'active' : 'inactive'
+                            ];
+                        endif;
+                    endforeach;
+                endforeach;
+    
+                $this->data['current_room'] = $this->chat_model->get_rows(['room_id'=> $current_chatroom], '', '', 'asc', 'id');
+    
+            }
+    
+            $this->load->view("artist/messages", $this->data);
         }
     }
 

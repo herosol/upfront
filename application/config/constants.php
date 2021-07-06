@@ -86,3 +86,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define('ADMIN', 'admin');
 defined('UPLOAD_PATH') OR define('UPLOAD_PATH','./uploads/');
+
+// HERE.COM APP ID AND KEY
+define('GEOCODER_APP_ID', '1PkgNKWibkIPw6V1ymkt');
+define('GEOCODER_APP_KEY', 'Ipd9kzcGK59WDtDbXnxl_WG6jgmcj0Rq0rRlPWjA2lA');
