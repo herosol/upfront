@@ -88,6 +88,7 @@ $route['dashboard']        = 'account/dashboard';
 $route['profile-settings'] = 'account/profile_settings';
 $route['inbox/(:any)']     = 'account/inbox/$1';
 $route['inbox']            = 'account/inbox';
+$route['toggleChatroom']   = 'account/toggle_chatroom';
 
 # ADMIN ROUTES
 $route['admin/login']   = 'admin/index/login';

@@ -284,48 +284,63 @@ class Account extends MY_Controller
         if($this->input->post())
         {
             $post = html_escape($this->input->post());
-            $user_id     = $post['sender_id'];
+            $sender_id   = $post['sender_id'];
             $receiver_id = $post['receiver_id'];
             $message = $post['message'];
-            $current_chatroom = $this->chat_model->ifChatroomExist($user_id, $receiver_id);
+            $current_chatroom = $this->chat_model->ifChatroomExist($sender_id, $receiver_id);
             if($current_chatroom)
             {
                 $data = 
                 [
                     'room_id'   => $current_chatroom,
-                    'sender_id' => $user_id,
+                    'sender_id' => $sender_id,
+                    'message'   => $message
+                ];
+                $this->chat_model->save($data);
+            }
+            else
+            {
+                $room_id = $this->master->save('chatrooms', ['participants'=> sort_chat_participants($sender_id, $receiver_id)]);
+                $data = 
+                [
+                    'room_id'   => $room_id,
+                    'sender_id' => $sender_id,
                     'message'   => $message
                 ];
                 $this->chat_model->save($data);
             }
 
-            echo json_encode(['status'=> 'status']);
+            echo json_encode(['status'=> 'success']);
         }
         else
         {
+            $this->data['chatrooms']     = $this->chat_model->getRelatedChats();
+            foreach($this->data['chatrooms'] as $room):
+                $participantsIndex = explode(',', $room->participants);
+                foreach($participantsIndex as $receiver):
+                    if($user_id != $receiver):
+                        $this->data['chats'][] = 
+                        [
+                            'room_id' => $room->room_id,
+                            'member'  => $this->user_model->getMember($receiver),
+                            'isActive'=> $receiver_id == $receiver ? 'active' : ''
+                        ];
+                    endif;
+                endforeach;
+            endforeach;
+            
             if(!empty($receiver_id))
             {
-                $this->data['chatrooms']     = $this->chat_model->getRelatedChats();
                 $this->data['receiver_id']   = $receiver_id;
                 $this->data['receiver_data'] = $this->user_model->getMember($receiver_id);
                 # MEMBER CHATS
                 $this->data['current_chatroom_id'] = $current_chatroom = $this->chat_model->ifChatroomExist($user_id, $receiver_id);
-                foreach($this->data['chatrooms'] as $room):
-                    $participantsIndex = explode(',', $room->participants);
-                    foreach($participantsIndex as $receiver):
-                        if($user_id != $receiver):
-                            $this->data['chats'][] = 
-                            [
-                                'room_id' => $room->room_id,
-                                'member'  => $this->user_model->getMember($receiver),
-                                'isActive'=> $receiver_id == $receiver ? 'active' : 'inactive'
-                            ];
-                        endif;
-                    endforeach;
-                endforeach;
-    
                 $this->data['current_room'] = $this->chat_model->get_rows(['room_id'=> $current_chatroom], '', '', 'asc', 'id');
-    
+                $this->data['selected'] = 'yes';
+            }
+            else
+            {
+                $this->data['selected'] = 'no';
             }
     
             $this->load->view("artist/messages", $this->data);
@@ -382,6 +397,48 @@ class Account extends MY_Controller
                         </div>
                     </div>';
             echo json_encode(['status' => 'success', 'html' => $html]);
+        }
+    }
+
+    function toggle_chatroom()
+    {
+        if($this->input->post())
+        {
+            $room_id = html_escape($this->input->post('room_id'));
+            $room_detail = $this->master->getRow('chatrooms', ['room_id'=> $room_id]);
+            $room_chats  = $this->chat_model->get_rows(['room_id'=> $room_id], '', '', 'asc', 'id');
+            
+            $room_participants = explode(',', $room_detail->participants);
+            if($room_participants[0] == $this->session->user_id)
+            {
+                $sender_id = $room_participants[0];
+                $receiver_id = $room_participants[1];
+            }
+            else
+            {
+                $sender_id = $room_participants[1];
+                $receiver_id = $room_participants[0];
+            }
+
+            $receiver_data = $this->user_model->getMember($receiver_id);
+            $chat_person = '';
+            $chat_person .= '<div class="backBtn"><a href="javascript:void(0)" class="fi-arrow-left"></a></div>';
+            $chat_person .= '<div class="ico"><img src="'.get_site_image_src("members", $receiver_data->mem_image, '').'" alt=""></div>';
+            $chat_person .= '<h6>'.$receiver_data->user_fname.' '.$receiver_data->user_lname.'</h6>';
+
+            $chats = '';
+            foreach($room_chats as $chat):
+                $who = $chat->sender_id == $this->session->user_id ? 'me' : 'you';
+                $chats .= '<div class="buble '.$who.'" >';
+                $chats .= '<div class="ico"><img src="'.get_site_image_src("members", get_image_of_member($chat->sender_id), '').'" alt=""></div>';
+                $chats .= '<div class="txt">';
+                $chats .= '<div class="time">11:59 am</div>';
+                $chats .= '<div class="cntnt">'.$chat->message.'</div>';
+                $chats .= '</div>';
+                $chats .= '</div>';
+            endforeach;
+
+            echo json_encode(['status'=> 'success', 'sender'=> $sender_id, 'receiver'=> $receiver_id, 'chat_person'=> $chat_person, 'chat'=> $chats]);
         }
     }
 

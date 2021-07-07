@@ -22,7 +22,7 @@
                     if(count($chats) > 0):
                         foreach($chats as $key => $chat):
                     ?>
-                        <li data-chat="person1" class="<?= $chat['isActive']?>" onclick="selectMe(<?= $chat['room_id'] ?>)">
+                        <li data-chat="person1" class="<?= $chat['isActive']?>" onclick="selectMe(this, <?= $chat['room_id'] ?>)">
                             <div class="inner sms">
                                 <div class="ico"><img src="<?= get_site_image_src("members", $chat['member']->mem_image, ''); ?>" alt=""></div>
                                 <div class="txt">
@@ -39,11 +39,15 @@
             </div>
             <div class="chatBlk relative">
                 <div class="chatPerson">
+                <?php if($selected == 'yes'): ?>
                     <div class="backBtn"><a href="javascript:void(0)" class="fi-arrow-left"></a></div>
                     <div class="ico"><img src="<?= get_site_image_src("members", $receiver_data->mem_image, ''); ?>" alt=""></div>
                     <h6><?= $receiver_data->user_fname.' '.$receiver_data->user_lname; ?></h6>
+                <?php else: ?>
+                    <h6>Select a chat</h6>
+                <?php endif; ?>
                 </div>
-                <div class="chat scrollbar active" data-chat="person1">
+                <div class="chat scrollbar active" data-chat="person1" id="room_chat">
                 <?php foreach($current_room as $chat): ?>
                     <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
                         <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
@@ -59,7 +63,7 @@
                         <textarea class="txtBox" placeholder="Type a message" id="msgText" onkeypress="textAreaAdjust(this)"></textarea>
                         <div class="btm">
                             <button type="button" class="webBtn smBtn labelBtn arrowBtn upBtn" title="Upload Files"><img src="<?= base_url() ?>assets/images/icon-clip.svg" alt=""></button>
-                            <button type="button" class="webBtn smBtn labelBtn icoBtn" data-sender="<?= $this->session->user_id ?>" data-receiver="<?= $receiver_id ?>" onclick="sendMessage(this)">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
+                            <button type="button" class="webBtn smBtn labelBtn icoBtn" id="messageSendBtn" data-sender="<?= $this->session->user_id ?>" data-receiver="<?= $receiver_id ?>" onclick="sendMessage(this)">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
                         </div>
                     </form>
                 </div>
@@ -74,10 +78,11 @@
             {
                 let btn = $(obj);
                 let message = $.trim($('#msgText').val());
-                if(message.length === 0)
-                    return false;
                 let sender_id   = btn.data('sender');
                 let receiver_id = btn.data('receiver');
+
+                if(message.length === 0 || receiver_id.length === 0)
+                    return false;
 
                 $.ajax({
                         url: base_url+'inbox',
@@ -112,6 +117,42 @@
                 });
             }
 
+            const selectMe = (obj, room_id) => 
+            {
+                $.ajax({
+                        url: base_url+'toggleChatroom',
+                        data : {'room_id': room_id},
+                        dataType: 'JSON',
+                        method: 'POST',
+                        success: function (rs)
+                        {
+                            // TOGGLE ACTIVE CLASS
+                            $('#chat_list li.active').removeClass('active');
+                            $(obj).addClass('active');
+
+                            // CHAT TOGGLE
+                            $('.chatPerson').html(rs.chat_person);
+                            $('#room_chat').html(rs.chat);
+                            $('button#messageSendBtn').attr('data-sender', rs.sender);
+                            $('button#messageSendBtn').attr('data-receiver', rs.receiver);
+
+                            // CHANGE URL
+                            let url = document.URL;
+                            let parts = url.split('/');
+                            let lastSegment = parts.pop() || parts.pop();
+
+                            if(lastSegment == 'inbox')
+                                window.location = url.replace(lastSegment, 'inbox/'+rs.receiver);
+                            else
+                                window.location = url.replace(lastSegment, rs.receiver);
+
+                        },
+                        complete: function()
+                        {
+                            // console.log('T');
+                        }
+                    })  
+            }
             
         </script>
     </main>
