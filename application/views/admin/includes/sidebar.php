@@ -28,6 +28,28 @@
                 </a>
             </li>
             <?php if(access(6)):?>
+                <li class=" <?= ($this->uri->segment(2) == 'members') ? ' opened  active' : '' ?>">
+                    <a href="javascript:void(0)">
+                        <i class="entypo-user"></i>
+                        <span class="title">Members</span>
+                    </a>
+                    <ul>
+                        <li class=" <?= in_array($this->uri->segment(3), array('manage')) ? ' active' : '' ?>">
+                            <a href="<?= site_url(ADMIN.'/members/clients') ?>">
+                                <i class="entypo-user"></i>
+                                <span class="title">Clients</span>
+                            </a>
+                        </li>
+                        <li class=" <?= ($this->uri->segment(3) == 'blog/categories') ? ' active' : '' ?>">
+                            <a href="<?= site_url(ADMIN.'/members/models') ?>">
+                                <i class="entypo-user"></i>
+                                <span class="title">Models</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif?>
+            <?php if(access(6)):?>
                 <li class=" <?= ($this->uri->segment(2) == 'blog') ? ' opened  active' : '' ?>">
                     <a href="javascript:void(0)">
                         <i class="fa fa-th"></i>

@@ -20,6 +20,14 @@
                 <em>Profile Settings</em>
             </a>
         </li>
+        <li class="<?php if ($page == "inbox") {
+                        echo 'active';
+                    } ?>">
+            <a href="<?= base_url() ?>inbox">
+                <img src="<?= base_url() ?>assets/images/icon-cog-fill.svg" alt="">
+                <em>Inbox</em>
+            </a>
+        </li>
         <li class="<?php if ($page == "bookings") {
                         echo 'active';
                     } ?>">
