@@ -29,9 +29,231 @@
                             <input type="text" name="user_lname" value="<?php if (isset($row->user_lname)) echo $row->user_lname; ?>" class="form-control" required>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Phone Number <span class="symbol required">*</span></label>
+                            <input type="text" name="mem_phone" value="<?php if (isset($row->mem_phone)) echo $row->mem_phone; ?>" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Date Of Birth <span class="symbol required">*</span></label>
+                            <input type="text" name="mem_dob" value="<?php if (isset($row->mem_dob)) echo $row->mem_dob; ?>" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <label class="control-label"> Gender <span class="symbol required">*</span></label>
+                            <select name="mem_sex" id="mem_sex" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (genders() as $gender) : ?>
+                                    <option value="<?= $gender ?>" <?= $row->mem_sex == $gender ? 'selected' : '' ?>><?= $gender ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <h3><i class="fa fa-bars"></i> Address Information</h3>
+                    <hr class="hr-short">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <label class="control-label"> Country <span class="symbol required">*</span></label>
+                            <select name="mem_country" id="mem_country" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (countries() as $country) : ?>
+                                    <option value="<?= $country->id ?>" <?= $row->mem_country_id == $country->id ? 'selected' : '' ?>><?= $country->name ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <label class="control-label"> State <span class="symbol required">*</span></label>
+                            <select name="mem_state" id="mem_state" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (states_by_country($row->mem_country_id) as $state) : ?>
+                                    <option value="<?= $state->id ?>" <?= $mem_data->mem_state == $state->id ? 'selected' : '' ?>><?= $state->name ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> City <span class="symbol required">*</span></label>
+                            <input type="text" name="mem_city" value="<?php if (isset($row->mem_city)) echo $row->mem_city; ?>" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Zip <span class="symbol required">*</span></label>
+                            <input type="text" name="mem_zip" value="<?php if (isset($row->mem_zip)) echo $row->mem_zip; ?>" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Address <span class="symbol required">*</span></label>
+                            <input type="text" name="mem_address1" value="<?php if (isset($row->mem_address1)) echo $row->mem_address1; ?>" class="form-control" required>
+                        </div>
+                    </div>
+                    <h3><i class="fa fa-bars"></i> Profile Bio</h3>
+                    <hr class="hr-short">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> About <span class="symbol required">*</span></label>
+                            <textarea  name="mem_about" id="mem_about" rows="8" class="form-control ckeditor" required><?php if (isset($row->mem_about)) echo $row->mem_about; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Rate <span class="symbol required">*</span></label>
+                            <input type="text" name="mem_rate" value="<?php if (isset($row->mem_rate)) echo $row->mem_rate; ?>" class="form-control" required>
+                        </div>
+                    </div>
+                    <h3><i class="fa fa-bars"></i> Skills</h3>
+                    <hr class="hr-short">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input name="skills" id="skills" class="form-control" value="<?= $row->mem_skills ?>" placeholder="Type something here">
+                        </div>
+                    </div>
+                    <!-- tagify -->
+                    <link type="text/css" rel="stylesheet" href="<?= base_url('assets/css/tagify.css') ?>">
+                    <script type="text/javascript" src="<?= base_url('assets/js/tagify.js') ?>"></script>
+                    <script type="text/javascript">
+                        $(function() {
+                            $('[name="skills"]').tagify({
+                                // focusableskills: false,
+                            });
+                        });
+                    </script>
+                    <h3><i class="fa fa-bars"></i> Appearence</h3>
+                    <hr class="hr-short">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Body Type <span class="symbol required">*</span></label>
+                            <select name="body_type" id="body_type" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (body_types() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->body_type == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Eye Color <span class="symbol required">*</span></label>
+                            <select name="eye_color" id="eye_color" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (eye_colors() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->eye_color == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Skin Color <span class="symbol required">*</span></label>
+                            <select name="skin_color" id="skin_color" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (skin_colors() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->skin_color == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Hair Color <span class="symbol required">*</span></label>
+                            <select name="hair_color" id="hair_color" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (hair_colors() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->hair_color == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Hair Length <span class="symbol required">*</span></label>
+                            <input type="text" id="hair_length" name="hair_length" value="<?= $appearence->hair_length ?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Shoe Size <span class="symbol required">*</span></label>
+                            <select name="shoe_size" id="shoe_size" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (show_size() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->shoe_size == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Height <span class="symbol required">*</span></label>
+                            <input type="text" id="height" name="height" value="<?= $appearence->height ?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Weight <span class="symbol required">*</span></label>
+                            <input type="text" id="weight" name="weight" value="<?= $appearence->weight ?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> About <span class="symbol required">*</span></label>
+                            <select name="chest_bust" id="chest_bust" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (chest_bust() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->chest_bust == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Cup <span class="symbol required">*</span></label>
+                            <select name="cup" id="cup" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (cup() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->cup == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Waist <span class="symbol required">*</span></label>
+                            <input type="text" id="waist" name="waist" value="<?= $appearence->waist ?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Hip/Inseam <span class="symbol required">*</span></label>
+                            <input type="text" id="hip_inseam" name="hip_inseam" value="<?= $appearence->hip_inseam ?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Ethnicity <span class="symbol required">*</span></label>
+                            <select name="ethnicity" id="ethnicity" class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach (ethnicity() as $color) : ?>
+                                    <option value="<?= $color ?>" <?= $appearence->ethnicity == $color ? 'selected' : '' ?>><?= $color ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"> Jacket Size <span class="symbol required">*</span></label>
+                            <input type="text" id="jacket_size" name="jacket_size" value="<?= $appearence->jacket_size ?>" class="form-control">
+                        </div>
+                    </div>
                 </div>    
-                <div class="col-md-6">
 
+                <div class="col-md-6">
                     <div class="col-md-12">
                         <h3><i class="fa fa-bars"></i> Account Detail</h3>
                         <hr class="hr-short">

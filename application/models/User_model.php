@@ -172,9 +172,6 @@ class User_model extends CRUD_Model
         $this->db->order_by('mem.user_id', 'DESC');
         $this->db->group_by('mem.user_id');
         $query = $this->db->get();
-        // echo "<pre>";
-        // print_r($query->result());
-        // die;
         return $query->result();
     }
     
