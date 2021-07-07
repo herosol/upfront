@@ -57,12 +57,110 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+                <!-- ==============================invoice box=============== -->
+                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
+                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
+                        <div class="txt">
+                            <div class="time">11:59 am</div>
+                            <div class="cntnt ivoice-outer">
+                                <div class="invoice-header">
+                                    <h4>Order Invoice</h4>
+                                </div>
+                                <div class="ivoice-lbl">
+                                    <p>Remote opportunities, voiceover jobs, self-tape auditions, live webinars, and more.Explore new skills, deepen existing passions, and get lost in creativity. What you find just might surprise and inspire you.</p>
+                                    <div class="flex">
+                                        <div><small>Amount:</small> <span>$7292<span></div>
+                                        <div><small>Days:</small> <span>12 Working days<span></div>
+                                    </div>
+                                </div>
+                                <div class="bTn">
+                                    <a href="javascript:void()" class="accept-btn webBtn smBtn"><i class="fi-check"></i><span>Accept</span></a>
+                                    <a href="javascript:void()" class="decline-btn webBtn smBtn"><i class="fi-cross"></i><span>Decline</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ===============end invoice msg box=============== -->
+                    <!-- =============accepted invoice box============= -->
+                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
+                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
+                        <div class="txt">
+                            <div class="time">11:59 am</div>
+                            <div class="cntnt ivoice-outer">
+                                <div class="invoice-header">
+                                    <h4>Order Invoice</h4>
+                                </div>
+                                <div class="ivoice-lbl">
+                                    <p>Remote opportunities, voiceover jobs, self-tape auditions, live webinars, and more.Explore new skills, deepen existing passions, and get lost in creativity. What you find just might surprise and inspire you.</p>
+                                    <div class="flex">
+                                        <div><small>Amount:</small> <span>$7292<span></div>
+                                        <div><small>Days:</small> <span>12 Working days<span></div>
+                                    </div>
+                                </div>
+                                <div class="bTn">
+                                    <div class="accept-btn webBtn smBtn"><i class="fi-check"></i><span>Accepted</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ===============rejected invoice box============= -->
+                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
+                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
+                        <div class="txt">
+                            <div class="time">11:59 am</div>
+                            <div class="cntnt ivoice-outer">
+                                <div class="invoice-header">
+                                    <h4>Order Invoice</h4>
+                                </div>
+                                <div class="ivoice-lbl">
+                                    <p>Remote opportunities, voiceover jobs, self-tape auditions, live webinars, and more.Explore new skills, deepen existing passions, and get lost in creativity. What you find just might surprise and inspire you.</p>
+                                    <div class="flex">
+                                        <div><small>Amount:</small> <span>$7292<span></div>
+                                        <div><small>Days:</small> <span>12 Working days<span></div>
+                                    </div>
+                                </div>
+                                <div class="bTn">
+                                    <div class="decline-btn webBtn smBtn"><i class="fi-cross"></i><span>Declined</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- =================file attach msg box================ -->
+                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
+                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
+                        <div class="txt">
+                            <div class="time">11:59 am</div>
+                            <div class="cntnt">
+                                <?= $chat->message ?>
+                            </div>
+                            <div class="file-attach">
+                                <div class="file-attach-bx flex">
+                                    <i class="fi-file"></i> <span>world-wide.pdf</span>
+                                </div>
+                                <a href="?" class="download-lnk"><i class="fi-download"></i></a>
+                            </div>
+                            <div class="file-attach">
+                                <div class="file-attach-bx flex">
+                                    <i class="fi-file"></i> <span>world-wide.pdf</span>
+                                </div>
+                                <a href="?" class="download-lnk"><i class="fi-download"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="write">
+                    <div class="file-upload-box">
+                        <div class="image-blk">
+                           <img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt="">
+                           <span><i class="fi-cross"></i></span>
+                        </div>
+                    </div>
                     <form class="relative">
                         <textarea class="txtBox" placeholder="Type a message" id="msgText" onkeypress="textAreaAdjust(this)"></textarea>
                         <div class="btm">
                             <button type="button" class="webBtn smBtn labelBtn arrowBtn upBtn" title="Upload Files"><img src="<?= base_url() ?>assets/images/icon-clip.svg" alt=""></button>
+                            <a href="javascript:void(0)" class="popBtn webBtn smBtn" data-popup="invoice">Make Invoice</a>
                             <button type="button" class="webBtn smBtn labelBtn icoBtn" id="messageSendBtn" data-sender="<?= $this->session->user_id ?>" data-receiver="<?= $receiver_id ?>" onclick="sendMessage(this)">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
                         </div>
                     </form>
@@ -70,7 +168,39 @@
             </div>
         </div>
 
-
+        <div class="popup detail-pupup" data-popup="invoice">
+            <div class="tableDv">
+                <div class="tableCell">
+                    <div class="contain">
+                        <div class="_inner">
+                           <div class="crosBtn"></div>
+                           <h2>Please Make An Invoice</h2>
+                           <form action="" class="">
+							   <div class="alertMsg"></div>
+                               <div class="row">
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12 text-center txtGrp">
+                                        <label for="" class="">Invoice Description</label>
+                                        <textarea name="" class="txtBox"></textarea>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6 text-center txtGrp">
+                                        <label for="" class="">Amount</label>
+                                        <input type="text" name="money" id="money" class="txtBox" required="">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6 text-center txtGrp">
+                                        <label for="" class="">Number of days</label>
+                                        <input type="text" name="days" id="days" class="txtBox" required="">
+                                    </div>
+                                    
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12 text-center">
+                                        <button type="submit" class="webBtn"><i class="fa fa-spinner fa-spin hidden"></i> Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Main Js -->
         <script type="text/javascript" src="<?= base_url() ?>assets/js/main.js"></script>
         <script>
