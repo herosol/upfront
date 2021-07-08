@@ -284,6 +284,8 @@ class Account extends MY_Controller
         if($this->input->post())
         {
             $post = html_escape($this->input->post());
+            pr($post);
+            die;
             $sender_id   = $post['sender_id'];
             $receiver_id = $post['receiver_id'];
             $message = $post['message'];
@@ -344,6 +346,61 @@ class Account extends MY_Controller
             }
     
             $this->load->view("artist/messages", $this->data);
+        }
+    }
+
+    function createInvoice()
+    {
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            $sender_id   = $post['sender_id'];
+            $receiver_id = $post['receiver_id'];
+            $message     = trim($post['message']);
+            $amount      = trim($post['invoice_amount']);
+            $working_days= trim($post['invoice_workings_days']);
+            $current_chatroom = $this->chat_model->ifChatroomExist($sender_id, $receiver_id);
+            if($current_chatroom)
+            {
+                $data = 
+                [
+                    'room_id'        => $current_chatroom,
+                    'sender_id'      => $sender_id,
+                    'message'        => $message,
+                    'message_type'   => 'invoice',
+                    'invoice_amount' => $amount,
+                    'invoice_workings_days' => $working_days,
+                    'invoice_status' => 'new'
+                ];
+                $this->chat_model->save($data);
+            }
+            else
+            {
+                $room_id = $this->master->save('chatrooms', ['participants'=> sort_chat_participants($sender_id, $receiver_id)]);
+                $data = 
+                [
+                    'room_id'   => $room_id,
+                    'sender_id'      => $sender_id,
+                    'message'        => $message,
+                    'message_type'   => 'invoice',
+                    'invoice_amount' => $amount,
+                    'invoice_workings_days' => $working_days,
+                    'invoice_status' => 'new'
+                ];
+                $this->chat_model->save($data);
+            }
+
+            echo json_encode(['status'=> 'success', 'message'=> showMsg('success', 'Invoice Created Successfully')]);
+        }
+    }
+
+    function invoice_response()
+    {
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            $this->chat_model->save(['invoice_status'=> $post['action']], $post['chat_id'], 'id');
+            echo json_encode(['status'=> 'success']);
         }
     }
 

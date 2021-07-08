@@ -302,4 +302,34 @@ $(document).ready(function() {
         }
     });
 
+    $('#createInvoiceForm').validate({
+        rules: {
+            message: {
+                required: true
+            },
+            invoice_workings_days: {
+                required: true,
+                digits: true
+            },
+            invoice_amount: {
+                required: true,
+                digits: true
+            }
+        },
+        errorPlacement: function() {
+            return false; // suppresses error message text
+        },
+        submitHandler: function(form) {
+            let frmMsg = $(form).find("div.alertMsg:first");
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+
 });

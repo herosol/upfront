@@ -81,7 +81,7 @@ $route['verification/(:any)'] = 'index/verification/$1'; //email verification af
 $route['forgot-password']     = 'index/forgot_password'; //forgot password
 $route['reset/(:any)']        = 'index/reset/$1';
 $route['reset-password']      = 'index/reset_password';
-$route['resend-email']  = 'account/resend_email';
+$route['resend-email']        = 'account/resend_email';
 //MODEL
 $route['signup-as-model']  = 'index/model_signup';
 //MEMBERS DASHBOARD

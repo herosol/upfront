@@ -48,7 +48,10 @@
                 <?php endif; ?>
                 </div>
                 <div class="chat scrollbar active" data-chat="person1" id="room_chat">
-                <?php foreach($current_room as $chat): ?>
+                <?php 
+                foreach($current_room as $chat):
+                    if($chat->message_type == 'text'):
+                ?>
                     <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
                         <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
                         <div class="txt">
@@ -56,8 +59,7 @@
                             <div class="cntnt"><?= $chat->message ?></div>
                         </div>
                     </div>
-                <?php endforeach; ?>
-                <!-- ==============================invoice box=============== -->
+                <?php elseif($chat->message_type == 'invoice'): ?>
                     <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
                         <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
                         <div class="txt">
@@ -67,71 +69,41 @@
                                     <h4>Order Invoice</h4>
                                 </div>
                                 <div class="ivoice-lbl">
-                                    <p>Remote opportunities, voiceover jobs, self-tape auditions, live webinars, and more.Explore new skills, deepen existing passions, and get lost in creativity. What you find just might surprise and inspire you.</p>
+                                    <p><?=$chat->message?></p>
                                     <div class="flex">
-                                        <div><small>Amount:</small> <span>$7292<span></div>
-                                        <div><small>Days:</small> <span>12 Working days<span></div>
+                                        <div><small>Amount:</small> <span>$ <?= $chat->invoice_amount ?><span></div>
+                                        <div><small>Days:</small> <span><?= $chat->invoice_workings_days ?> Working days<span></div>
                                     </div>
                                 </div>
                                 <div class="bTn">
-                                    <a href="javascript:void()" class="accept-btn webBtn smBtn"><i class="fi-check"></i><span>Accept</span></a>
-                                    <a href="javascript:void()" class="decline-btn webBtn smBtn"><i class="fi-cross"></i><span>Decline</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ===============end invoice msg box=============== -->
-                    <!-- =============accepted invoice box============= -->
-                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
-                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
-                        <div class="txt">
-                            <div class="time">11:59 am</div>
-                            <div class="cntnt ivoice-outer">
-                                <div class="invoice-header">
-                                    <h4>Order Invoice</h4>
-                                </div>
-                                <div class="ivoice-lbl">
-                                    <p>Remote opportunities, voiceover jobs, self-tape auditions, live webinars, and more.Explore new skills, deepen existing passions, and get lost in creativity. What you find just might surprise and inspire you.</p>
-                                    <div class="flex">
-                                        <div><small>Amount:</small> <span>$7292<span></div>
-                                        <div><small>Days:</small> <span>12 Working days<span></div>
-                                    </div>
-                                </div>
-                                <div class="bTn">
+                                <?php  if($chat->invoice_status == 'new'): ?>
+                                    <?php if($chat->sender_id != $this->session->user_id): ?>
+                                        <a href="javascript:void()" class="accept-btn webBtn smBtn" onclick="invoiceResponse(this, 'accepted', '<?= $chat->id ?>')"><i class="fi-check"></i><span>Accept</span></a>
+                                        <a href="javascript:void()" class="decline-btn webBtn smBtn" onclick="invoiceResponse(this, 'declined', '<?= $chat->id ?>')"><i class="fi-cross"></i><span>Decline</span></a>
+                                    <?php else: ?>
+                                        <div class="waiting-btn webBtn smBtn"><i class="fi-spinner"></i><span>Waiting For Response</span></div>
+                                    <?php endif; ?>
+                                <?php elseif($chat->invoice_status == 'accepted'): ?>
                                     <div class="accept-btn webBtn smBtn"><i class="fi-check"></i><span>Accepted</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ===============rejected invoice box============= -->
-                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
-                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
-                        <div class="txt">
-                            <div class="time">11:59 am</div>
-                            <div class="cntnt ivoice-outer">
-                                <div class="invoice-header">
-                                    <h4>Order Invoice</h4>
-                                </div>
-                                <div class="ivoice-lbl">
-                                    <p>Remote opportunities, voiceover jobs, self-tape auditions, live webinars, and more.Explore new skills, deepen existing passions, and get lost in creativity. What you find just might surprise and inspire you.</p>
-                                    <div class="flex">
-                                        <div><small>Amount:</small> <span>$7292<span></div>
-                                        <div><small>Days:</small> <span>12 Working days<span></div>
-                                    </div>
-                                </div>
-                                <div class="bTn">
+                                <?php else: ?>
                                     <div class="decline-btn webBtn smBtn"><i class="fi-cross"></i><span>Declined</span></div>
+                                <?php endif; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- =================file attach msg box================ -->
-                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
+                <?php else: ?>
+                    <h2>Test Here</h2>
+                <?php 
+                endif;
+                endforeach;
+                ?>
+                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?> hidden">
                         <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
                         <div class="txt">
                             <div class="time">11:59 am</div>
                             <div class="cntnt">
-                                <?= $chat->message ?>
+                                TEST HERE
                             </div>
                             <div class="file-attach">
                                 <div class="file-attach-bx flex">
@@ -147,11 +119,10 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="write">
                     <div class="file-upload-box">
-                        <div class="image-blk">
+                        <div class="image-blk" hidden>
                            <img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt="">
                            <span><i class="fi-cross"></i></span>
                         </div>
@@ -159,9 +130,12 @@
                     <form class="relative">
                         <textarea class="txtBox" placeholder="Type a message" id="msgText" onkeypress="textAreaAdjust(this)"></textarea>
                         <div class="btm">
-                            <button type="button" class="webBtn smBtn labelBtn arrowBtn upBtn" title="Upload Files"><img src="<?= base_url() ?>assets/images/icon-clip.svg" alt=""></button>
+                            <!-- <button type="button" class="webBtn smBtn labelBtn arrowBtn upBtn" title="Upload Files"><img src="<?= base_url() ?>assets/images/icon-clip.svg" alt=""></button> -->
+                            <input type="file" name="attachments[]" id="attachments" multiple>
                             <a href="javascript:void(0)" class="popBtn webBtn smBtn" data-popup="invoice">Make Invoice</a>
-                            <button type="button" class="webBtn smBtn labelBtn icoBtn" id="messageSendBtn" data-sender="<?= $this->session->user_id ?>" data-receiver="<?= $receiver_id ?>" onclick="sendMessage(this)">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
+                            <input type="hidden" name="sender_id" id="sender_id" value="<?= $this->session->user_id ?>">
+                            <input type="hidden" name="receiver_id" id="receiver_id" value="<?= $receiver_id ?>">
+                            <button type="button" class="webBtn smBtn labelBtn icoBtn" id="messageSendBtn" onclick="sendMessage(this)">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
                         </div>
                     </form>
                 </div>
@@ -175,24 +149,26 @@
                         <div class="_inner">
                            <div class="crosBtn"></div>
                            <h2>Please Make An Invoice</h2>
-                           <form action="" class="">
+                           <form action="<?=base_url()?>account/createInvoice" method="POST" id="createInvoiceForm">
+                                <input type="hidden" id="invoice_sender_id" name="sender_id" value="<?= $this->session->user_id ?>" ?>
+                                <input type="hidden" id="invoice_receiver_id" name="receiver_id" value="<?= $receiver_id ?>" ?>
 							   <div class="alertMsg"></div>
                                <div class="row">
                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12 text-center txtGrp">
-                                        <label for="" class="">Invoice Description</label>
-                                        <textarea name="" class="txtBox"></textarea>
+                                        <label for="message">Invoice Description</label>
+                                        <textarea name="message" class="txtBox"></textarea>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6 text-center txtGrp">
-                                        <label for="" class="">Amount</label>
-                                        <input type="text" name="money" id="money" class="txtBox" required="">
+                                        <label for="invoice_amount">Amount</label>
+                                        <input type="text" name="invoice_amount" id="invoice_amount" class="txtBox">
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6 text-center txtGrp">
-                                        <label for="" class="">Number of days</label>
-                                        <input type="text" name="days" id="days" class="txtBox" required="">
+                                        <label for="invoice_workings_days">Number of days</label>
+                                        <input type="text" name="invoice_workings_days" id="invoice_workings_days" class="txtBox">
                                     </div>
                                     
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12 text-center">
-                                        <button type="submit" class="webBtn"><i class="fa fa-spinner fa-spin hidden"></i> Submit</button>
+                                        <button type="submit" class="webBtn" id="createInvoice"><i class="fa fa-spinner fa-spin hidden"></i> Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -204,12 +180,65 @@
         <!-- Main Js -->
         <script type="text/javascript" src="<?= base_url() ?>assets/js/main.js"></script>
         <script>
+            $(function() {
+                // Multiple images preview in browser
+                var imagesPreview = function(input, placeToInsertImagePreview) {
+
+                    if (input.files) {
+                        var filesAmount = input.files.length;
+
+                        for (i = 0; i < filesAmount; i++) {
+                            let html = '';
+                            var reader = new FileReader();
+
+                            reader.onload = function(event) {
+                                html = `<div class="image-blk">
+                                            <img src="${event.target.result}" alt="">
+                                            <span><i class="fi-cross"></i></span>
+                                        </div>`;
+                                $(placeToInsertImagePreview).prepend(html);
+                            }
+
+                            reader.readAsDataURL(input.files[i]);
+                        }
+                    }
+
+                };
+
+                $('#attachments').on('change', function() {
+                    imagesPreview(this, '.file-upload-box');
+                });
+            });
+
+            const invoiceResponse = (obj, action, chat_id) =>
+            {
+                $.ajax({
+                        url: base_url+'account/invoice_response',
+                        data : {'action': action, 'chat_id': chat_id},
+                        dataType: 'JSON',
+                        method: 'POST',
+                        success: function (rs)
+                        {
+                            if(rs.status == 'success')
+                            {
+                                if(action == 'accepted')
+                                    $(obj).parent().html('<div class="accept-btn webBtn smBtn"><i class="fi-check"></i><span>Accepted</span></div>');
+                                else
+                                    $(obj).parent().html('<div class="decline-btn webBtn smBtn"><i class="fi-cross"></i><span>Declined</span></div>');
+                            }
+                        },
+                        complete: function()
+                        {
+
+                        }
+                    })
+            }
+
             const sendMessage = obj => 
             {
                 let btn = $(obj);
                 let message = $.trim($('#msgText').val());
-                let sender_id   = btn.data('sender');
-                let receiver_id = btn.data('receiver');
+                let receiver_id = $('#receiver_id').val();
 
                 if(message.length === 0 || receiver_id.length === 0)
                     return false;
@@ -263,8 +292,10 @@
                             // CHAT TOGGLE
                             $('.chatPerson').html(rs.chat_person);
                             $('#room_chat').html(rs.chat);
-                            $('button#messageSendBtn').attr('data-sender', rs.sender);
-                            $('button#messageSendBtn').attr('data-receiver', rs.receiver);
+                            $('#sender_id').val(rs.sender);
+                            $('#receiver_id').val(rs.receiver);
+                            $('#invoice_sender_id').val(rs.sender);
+                            $('#invoice_receiver_id').val(rs.receiver);
 
                             // CHANGE URL
                             let url = document.URL;
@@ -286,6 +317,8 @@
             
         </script>
     </main>
+    <script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
 </body>
 
 </html>
