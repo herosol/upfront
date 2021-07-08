@@ -64,6 +64,7 @@ $route['disclaimers']    = 'pages/disclaimers';
 $route['affiliates']     = 'pages/affiliates';
 $route['contact-us']     = 'pages/contact_us';
 $route['about-us']       = 'pages/about_us';
+$route['checkout']       = 'pages/checkout';
 $route['how-it-works']   = 'pages/how_it_works';
 $route['find']           = 'pages/search'; //Search, Find A Model
 $route['search']         = 'pages/search'; //Search, Find A Model

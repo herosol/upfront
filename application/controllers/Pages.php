@@ -155,6 +155,13 @@ class Pages extends MY_Controller
         $this->load->view('pages/about', $this->data);
     }
 
+    function checkout()
+    {
+        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'checkout'));
+        $this->data['site_content'] = unserialize($this->data['content_row']->code);
+        $this->load->view('pages/checkout', $this->data);
+    }
+
     function how_it_works()
     {
         $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'how_it_works'));

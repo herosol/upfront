@@ -6277,3 +6277,255 @@ tags > tag {
 tags > .txtBox {
     display: none !important;
 }
+
+.ivoice-lbl p{
+color: rgb(24, 24, 24);
+}
+.ivoice-outer .webBtn{
+    background: transparent;
+    box-shadow: none;
+    flex: 1;
+    padding: 10px;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    
+}
+.ivoice-outer .bTn{
+    margin-top: 0px;
+    border-top: 1px solid #f9f2d9;
+}
+.ivoice-outer .bTn .webBtn:not(:first-child){
+    border-left: 1px solid #f9f2d9;
+}
+.ivoice-outer .bTn .webBtn.accept-btn{
+    color: green;
+}
+.ivoice-outer .bTn .webBtn.decline-btn{
+    color: red;
+}
+[inbox] .buble .cntnt.ivoice-outer{
+    background: #fdfdfd;
+    width: 300px;
+    padding: 0;
+    overflow: hidden;
+}
+.ivoice-lbl{
+    padding:20px;
+}
+.ivoice-lbl .flex div{
+    color: rgb(24, 24, 24);
+    flex: 1;
+}
+.ivoice-lbl div span{
+    display: block;
+    font-family: 'Poppins Bold';
+    color: #000;
+}
+.ivoice-lbl div small{
+    font-family: 'Poppins Medium';
+}
+.invoice-header h4{
+    margin-bottom: 0px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+.invoice-header{
+    background: #edd567;
+    padding: 10px 20px;
+}
+.file-attach{
+    /* margin-top: 5px; */
+    display: flex;
+    flex-wrap: wrap;
+}
+.file-attach .file-attach-bx{
+    flex:1;
+    margin-right: 5px;
+    align-self: center;
+} 
+.file-attach .file-attach-bx span{
+    font-size: 11px;
+    flex: 1;
+    margin-left: 5px;
+    font-family: 'Poppins Medium';
+    color: #676767;
+}
+.file-attach .file-attach-bx i{
+    font-size: 16px;
+}
+.download-lnk{
+    font-size: 15px;
+    color: #0d171d;
+}
+
+
+.file-upload-box{
+    margin-bottom: 10px;
+}
+
+.file-upload-box .image-blk{
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+.file-upload-box .image-blk img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.file-upload-box .image-blk span{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #fff;
+    font-size: 8px;
+    z-index: 1;
+    width: 17px;
+    height: 17px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+}
+.file-upload-box .image-blk span:hover{
+    transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    background: #edd567;
+}
+/* ====================checkout-blk============= */
+
+.checkout-blk .col1{
+    width: 30%;
+    padding-right: 30px;
+}
+.checkout-blk .col2{
+    width: 70%;
+    padding-left: 30px;
+}
+
+.checkout-blk .ivoice-outer{
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.checkout-blk .inner{
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+.checkout-blk .inner h3{
+    margin-bottom: 20px;
+}
+.checkout-blk .col2 .inner:nth-child(2){
+    margin-top: 30px;
+}
+.checkout-blk .info {
+    position: absolute;
+    top: 14px;
+    right: 25px;
+}
+.checkout-blk .info > i {
+    width: 18px;
+    height: 18px;
+    padding-top: 2.4px;
+    text-align: center;
+    border: 1px solid #aaa;
+    color: #aaa;
+    border-radius: 75%;
+    font-size: 12px;
+    display: block;
+    padding-left: 0.3px;
+    cursor: pointer;
+}
+
+.checkout-blk .info > .infoTip {
+    position: absolute;
+    z-index: 10;
+    /*color: #333;*/
+    color: #222222;
+    width: 160px;
+    top: 22px;
+    left: -115px;
+    background: #ffffff;
+    border: 1px solid #f1f1f1;
+    /* text-align: justify; */
+    line-height: 17px;
+    -moz-text-align-last: center;
+         text-align-last: center;
+    font-size: 12px;
+    padding: 5px 10px 5px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 6px 0px;
+            box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 6px 0px;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.checkout-blk .info > .infoTip:before {
+    position: absolute;
+    content: '';
+    left: 120px;
+    top: -3px;
+    border-top: 8px solid #ffffff;
+    border-left: 8px solid #ffffff;
+    -webkit-box-shadow: #ffffff 1px -1px 0px;
+            box-shadow: #ffffff 1px -1px 0px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+}
+.checkout-blk .info:hover .infoTip {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.payment-method .lblBtn{
+    margin-bottom: 10px;
+}
+[data-payment] .insideBlk:not(.active) {
+    display: none;
+}
+[data-payment] .insideBlk {
+    margin: 15px 0 0;
+}
+.payment-method ._ico{
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    /* margin: 0px auto 20px; */
+    background: #edd567;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+.paypall-lsting p{
+    flex:1;
+margin-left: 10px;
+margin-bottom: 0;
+}
+#sq-creditcard{
+    margin-top: 30px;
+}
