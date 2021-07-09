@@ -685,7 +685,7 @@ function get_meridian_time($d){
 
 function get_full_time($d){
     $d = str_replace('/', '-', $d);
-    return date("H:i", strtotime($d));
+    return date("H:i a", strtotime($d));
 }
 
 function hours_format($h){
@@ -720,6 +720,11 @@ function dp_format_date($d){
     return empty($d)?'':date('d-m-Y', strtotime($d));
 }
 
+function chat_message_time($time)
+{
+    return format_date($time).' at '.get_full_time($time);
+}
+
 function is_valid_date($date, $format = 'm/d/Y'){
     $CI = get_instance();
     $d = DateTime::createFromFormat($format, $date);
@@ -743,6 +748,7 @@ function is_min_valid_date($date, $format = 'm/d/Y'){
     $CI->form_validation->set_message('is_min_valid_date', 'Please select valid {field}');
     return false;
 }
+
 function compare_dates($date1, $date2, $format = 'Y-m-d'){
     $date1 = str_replace('/', '-', $date1);
     $date2 = str_replace('/', '-', $date2);
@@ -779,6 +785,7 @@ function get_year_difference($d1,$d2){
     $diff = $d2->diff($d1);
     return $diff->y;
 }
+
 function time_ago($time) {
     $time=str_replace('/', '-', $time);
     $timestamp = ( is_numeric($time) && (int)$time == $time )?$time:strtotime($time);

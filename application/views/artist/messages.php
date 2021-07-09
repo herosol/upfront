@@ -55,7 +55,7 @@
                     <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
                         <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
                         <div class="txt">
-                            <div class="time">11:59 am</div>
+                            <div class="time"><?= chat_message_time($chat->message_time) ?></div>
                             <div class="cntnt"><?= $chat->message ?></div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                     <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>" >
                         <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
                         <div class="txt">
-                            <div class="time">11:59 am</div>
+                            <div class="time"><?= chat_message_time($chat->message_time) ?></div>
                             <div class="cntnt ivoice-outer">
                                 <div class="invoice-header">
                                     <h4>Order Invoice</h4>
@@ -92,50 +92,52 @@
                             </div>
                         </div>
                     </div>
-                <?php else: ?>
-                    <h2>Test Here</h2>
+                <?php 
+                else:
+                $attachments = $this->master->getRows('chat_attachments', ['chat_id'=> $chat->id]);
+                 ?>
+                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?>">
+                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
+                        <div class="txt">
+                            <div class="time"><?= chat_message_time($chat->message_time) ?></div>
+                            <div class="cntnt">
+                            <?= $chat->message ?>
+                            </div>
+                            <?php foreach($attachments as $attachment): ?>
+                            <div class="file-attach">
+                                <div class="file-attach-bx flex">
+                                    <i class="fi-file"></i> <span><?= $attachment->original_name ?></span>
+                                </div>
+                                <a href="<?= base_url().'download-file/'.doEncode($attachment->id); ?>" target="_blank" class="download-lnk"><i class="fi-download"></i></a>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                 <?php 
                 endif;
                 endforeach;
                 ?>
-                    <div class="buble <?= $chat->sender_id == $this->session->user_id ? 'me' : 'you'; ?> hidden">
-                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt=""></div>
-                        <div class="txt">
-                            <div class="time">11:59 am</div>
-                            <div class="cntnt">
-                                TEST HERE
-                            </div>
-                            <div class="file-attach">
-                                <div class="file-attach-bx flex">
-                                    <i class="fi-file"></i> <span>world-wide.pdf</span>
-                                </div>
-                                <a href="?" class="download-lnk"><i class="fi-download"></i></a>
-                            </div>
-                            <div class="file-attach">
-                                <div class="file-attach-bx flex">
-                                    <i class="fi-file"></i> <span>world-wide.pdf</span>
-                                </div>
-                                <a href="?" class="download-lnk"><i class="fi-download"></i></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="write">
                     <div class="file-upload-box">
-                        <div class="image-blk" hidden>
+                        <div class="image-blk">
+                            <img src="<?= base_url().'assets/images/file-dummy.png' ?>" alt="">
+                            <span><i class="fi-cross"></i></span>
+                        </div>
+                        <div class="image-blk">
                            <img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt="">
                            <span><i class="fi-cross"></i></span>
                         </div>
                     </div>
-                    <form class="relative">
-                        <textarea class="txtBox" placeholder="Type a message" id="msgText" onkeypress="textAreaAdjust(this)"></textarea>
+                    <form class="relative" id="sendMessageForm" action="" method="post">
+                        <textarea class="txtBox" name="message" placeholder="Type a message" id="msgText" onkeypress="textAreaAdjust(this)"></textarea>
                         <div class="btm">
-                            <!-- <button type="button" class="webBtn smBtn labelBtn arrowBtn upBtn" title="Upload Files"><img src="<?= base_url() ?>assets/images/icon-clip.svg" alt=""></button> -->
+                            <button type="button" class="webBtn smBtn labelBtn arrowBtn upBtn" title="Upload Files"><img src="<?= base_url() ?>assets/images/icon-clip.svg" alt=""></button>
                             <input type="file" name="attachments[]" id="attachments" multiple>
                             <a href="javascript:void(0)" class="popBtn webBtn smBtn" data-popup="invoice">Make Invoice</a>
                             <input type="hidden" name="sender_id" id="sender_id" value="<?= $this->session->user_id ?>">
                             <input type="hidden" name="receiver_id" id="receiver_id" value="<?= $receiver_id ?>">
-                            <button type="button" class="webBtn smBtn labelBtn icoBtn" id="messageSendBtn" onclick="sendMessage(this)">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
+                            <button type="submit" class="webBtn smBtn labelBtn icoBtn">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
                         </div>
                     </form>
                 </div>
@@ -182,20 +184,36 @@
         <script>
             $(function() {
                 // Multiple images preview in browser
-                var imagesPreview = function(input, placeToInsertImagePreview) {
-
-                    if (input.files) {
+                var imagesPreview = function(input, placeToInsertImagePreview) 
+                {
+                    var extensions = ["jpg", "jpeg", "png"];
+                    if (input.files) 
+                    {
                         var filesAmount = input.files.length;
-
-                        for (i = 0; i < filesAmount; i++) {
+                        for (i = 0; i < filesAmount; i++) 
+                        {
+                            let extension = input.files[i].name.split('.')[1];
                             let html = '';
                             var reader = new FileReader();
 
-                            reader.onload = function(event) {
-                                html = `<div class="image-blk">
+                            reader.onload = function(event) 
+                            {
+                                // OTHER THAN IMAGE
+                                if(extensions.indexOf(extension) < 0)
+                                {
+                                    html = `<div class="image-blk">
+                                            <img src="<?= base_url().'assets/images/file-dummy.png' ?>" alt="">
+                                            <span><i class="fi-cross"></i></span>
+                                        </div>`;
+                                }
+                                // IMAGES
+                                else
+                                {
+                                    html = `<div class="image-blk">
                                             <img src="${event.target.result}" alt="">
                                             <span><i class="fi-cross"></i></span>
                                         </div>`;
+                                }
                                 $(placeToInsertImagePreview).prepend(html);
                             }
 
@@ -231,35 +249,30 @@
                         {
 
                         }
-                    })
+                    });
             }
 
-            const sendMessage = obj => 
+            $(document).on('submit', '#sendMessageForm', function(e) 
             {
-                let btn = $(obj);
-                let message = $.trim($('#msgText').val());
-                let receiver_id = $('#receiver_id').val();
-
-                if(message.length === 0 || receiver_id.length === 0)
-                    return false;
-
+                e.preventDefault();
+                let form = this;
                 $.ajax({
-                        url: base_url+'inbox',
-                        data : {'sender_id': sender_id, 'receiver_id': receiver_id, 'message': message},
-                        dataType: 'JSON',
-                        method: 'POST',
-                        success: function (rs)
-                        {
-                            $('#msgText').val('');
-                            $('#msgText').focus();
-                            location.reload();
-                        },
-                        complete: function()
-                        {
+                    url: base_url+'inbox',
+                    data: new FormData(form),
+                    processData: false,
+                    contentType: false,
+                    dataType: 'JSON',
+                    method: 'POST',
+                    success: function (rs)
+                    {
+                        location.reload();
+                    },
+                    complete: function()
+                    {
 
-                        }
-                    })
-            }
+                    }
+                });
+            });
 
             function filter(element) 
             {
@@ -312,7 +325,7 @@
                         {
                             // console.log('T');
                         }
-                    })  
+                    });
             }
             
         </script>

@@ -14,7 +14,7 @@
 
         <section id="setting">
             <div class="contain-fluid">
-                <form aaction="" method="post" id="frmModelProfileSettings" class="frmAjax">
+                <form action="" method="post" id="frmModelProfileSettings" class="frmAjax">
                     <div class="alertMsg" style="display:none"></div>
                     <div class="blk">
                         <div class="upLoadCover" id="cover_preview" style="background-image: url('<?= get_site_image_src("members", $mem_data->mem_cover_image, ''); ?>');">

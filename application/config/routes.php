@@ -90,6 +90,7 @@ $route['profile-settings'] = 'account/profile_settings';
 $route['inbox/(:any)']     = 'account/inbox/$1';
 $route['inbox']            = 'account/inbox';
 $route['toggleChatroom']   = 'account/toggle_chatroom';
+$route['download-file/(:any)'] = 'downloadfile/index/$1';
 
 # ADMIN ROUTES
 $route['admin/login']   = 'admin/index/login';

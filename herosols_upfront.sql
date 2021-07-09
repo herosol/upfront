@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2021 at 04:02 PM
+-- Generation Time: Jul 09, 2021 at 04:02 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -140,32 +140,48 @@ CREATE TABLE `tbl_chatrooms_chat` (
   `id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL COMMENT 'who send the message',
-  `message_type` enum('text','attachment') NOT NULL DEFAULT 'text',
-  `message` text NOT NULL,
-  `message_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `message_status` enum('new','seen') NOT NULL DEFAULT 'new'
+  `message_type` enum('text','attachment','invoice') NOT NULL DEFAULT 'text',
+  `message` text DEFAULT NULL COMMENT 'Text Or Invoice Description',
+  `invoice_amount` int(11) DEFAULT NULL COMMENT '$ price',
+  `invoice_workings_days` int(11) DEFAULT NULL COMMENT 'workings days',
+  `invoice_status` enum('new','accepted','declined') DEFAULT NULL,
+  `message_status` enum('new','seen') NOT NULL DEFAULT 'new',
+  `message_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_chatrooms_chat`
 --
 
-INSERT INTO `tbl_chatrooms_chat` (`id`, `room_id`, `sender_id`, `message_type`, `message`, `message_time`, `message_status`) VALUES
-(1, 1, 34, 'text', 'Hello This is Test From 34', '2021-07-06 13:05:44', 'new'),
-(2, 1, 35, 'text', 'Hello This is Test Reply From 35', '2021-07-06 13:05:44', 'new'),
-(3, 1, 34, 'text', 'Hello This is again test from 34', '2021-07-06 13:48:20', 'new'),
-(4, 1, 34, 'text', 'Again Test From 34', '2021-07-06 13:50:22', 'new'),
-(5, 1, 34, 'text', 'Hhahahahahaha', '2021-07-06 13:54:18', 'new'),
-(6, 1, 34, 'text', 'Hehehehehee', '2021-07-06 13:54:26', 'new'),
-(7, 1, 35, 'text', 'Hello This is A TEST Reponse', '2021-07-06 13:56:00', 'new'),
-(8, 1, 35, 'text', 'HELLO TEST HERE', '2021-07-06 13:56:36', 'new'),
-(9, 1, 34, 'text', 'HAHAHAHAHA', '2021-07-06 13:56:46', 'new'),
-(11, 1, 34, 'text', 'HEHEHEHEHEHEHE', '2021-07-07 07:49:50', 'new'),
-(14, 1, 34, 'text', 'HUHUHUU', '2021-07-07 08:05:07', 'new'),
-(17, 1, 34, 'text', 'How are you doing?', '2021-07-07 08:20:22', 'new'),
-(19, 1, 34, 'text', 'How was the day?', '2021-07-07 08:38:27', 'new'),
-(21, 6, 34, 'text', 'Hello Saad Ashraf?', '2021-07-07 08:42:06', 'new'),
-(22, 6, 34, 'text', 'How are you doing?', '2021-07-07 08:42:13', 'new');
+INSERT INTO `tbl_chatrooms_chat` (`id`, `room_id`, `sender_id`, `message_type`, `message`, `invoice_amount`, `invoice_workings_days`, `invoice_status`, `message_status`, `message_time`) VALUES
+(1, 1, 34, 'text', 'Hello This is Test From 34', NULL, NULL, NULL, 'new', '2021-07-06 13:05:44'),
+(2, 1, 35, 'text', 'Hello This is Test Reply From 35', NULL, NULL, NULL, 'new', '2021-07-06 13:05:44'),
+(3, 1, 34, 'text', 'Hello This is again test from 34', NULL, NULL, NULL, 'new', '2021-07-06 13:48:20'),
+(4, 1, 34, 'text', 'Again Test From 34', NULL, NULL, NULL, 'new', '2021-07-06 13:50:22'),
+(5, 1, 34, 'text', 'Hhahahahahaha', NULL, NULL, NULL, 'new', '2021-07-06 13:54:18'),
+(6, 1, 34, 'text', 'Hehehehehee', NULL, NULL, NULL, 'new', '2021-07-06 13:54:26'),
+(7, 1, 35, 'text', 'Hello This is A TEST Reponse', NULL, NULL, NULL, 'new', '2021-07-06 13:56:00'),
+(8, 1, 35, 'text', 'HELLO TEST HERE', NULL, NULL, NULL, 'new', '2021-07-06 13:56:36'),
+(9, 1, 34, 'text', 'HAHAHAHAHA', NULL, NULL, NULL, 'new', '2021-07-06 13:56:46'),
+(11, 1, 34, 'text', 'HEHEHEHEHEHEHE', NULL, NULL, NULL, 'new', '2021-07-07 07:49:50'),
+(14, 1, 34, 'text', 'HUHUHUU', NULL, NULL, NULL, 'new', '2021-07-07 08:05:07'),
+(17, 1, 34, 'text', 'How are you doing?', NULL, NULL, NULL, 'new', '2021-07-07 08:20:22'),
+(19, 1, 34, 'text', 'How was the day?', NULL, NULL, NULL, 'new', '2021-07-07 08:38:27'),
+(21, 6, 34, 'text', 'Hello Saad Ashraf?', NULL, NULL, NULL, 'new', '2021-07-07 08:42:06'),
+(22, 6, 34, 'text', 'How are you doing?', NULL, NULL, NULL, 'new', '2021-07-07 08:42:13'),
+(23, 1, 34, 'invoice', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n', 123, 12, 'declined', 'new', '2021-07-08 09:48:59'),
+(24, 1, 34, 'invoice', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 700, 12, 'accepted', 'new', '2021-07-08 10:31:21'),
+(25, 1, 34, 'invoice', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 1000, 16, 'new', 'new', '2021-07-08 10:35:02'),
+(26, 1, 35, 'invoice', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 250, 3, 'new', 'new', '2021-07-08 11:54:49'),
+(35, 1, 34, 'text', 'Attachments are below', NULL, NULL, NULL, 'new', '2021-07-09 07:34:29'),
+(40, 1, 34, 'invoice', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 300, 2, 'new', 'new', '2021-07-09 09:15:15'),
+(41, 1, 34, 'text', 'Only Message Test Message Here', NULL, NULL, NULL, 'new', '2021-07-09 09:15:34'),
+(44, 1, 34, 'attachment', 'Hey! Here are my portfolio images list. Please check.', NULL, NULL, NULL, 'new', '2021-07-09 09:33:33'),
+(45, 1, 34, 'attachment', 'My Requirements', NULL, NULL, NULL, 'new', '2021-07-09 09:54:48'),
+(46, 1, 34, 'attachment', 'Test PNG image', NULL, NULL, NULL, 'new', '2021-07-09 10:46:26'),
+(47, 1, 34, 'attachment', 'messi', NULL, NULL, NULL, 'new', '2021-07-09 11:06:53'),
+(48, 1, 34, 'attachment', 'Simple Message here', NULL, NULL, NULL, 'new', '2021-07-09 12:34:30'),
+(49, 1, 34, 'invoice', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1500, 10, 'accepted', 'new', '2021-07-09 12:34:45');
 
 -- --------------------------------------------------------
 
@@ -176,9 +192,30 @@ INSERT INTO `tbl_chatrooms_chat` (`id`, `room_id`, `sender_id`, `message_type`, 
 CREATE TABLE `tbl_chat_attachments` (
   `id` int(11) NOT NULL,
   `chat_id` int(11) NOT NULL,
-  `attachment_name` varchar(100) NOT NULL,
-  `attachment_type` varchar(10) NOT NULL
+  `original_name` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_chat_attachments`
+--
+
+INSERT INTO `tbl_chat_attachments` (`id`, `chat_id`, `original_name`, `name`, `type`) VALUES
+(1, 36, '1.jpg', '5f2c22cb4a5380af7ca75622a6426917_1625816069_6179.jpg', 'image/jpeg'),
+(2, 37, '2.jpg', '7fa732b517cbed14a48843d74526c11a_1625816070_8696.jpg', 'image/jpeg'),
+(3, 38, '3.jpg', '1534b76d325a8f591b52d302e7181331_1625816070_6961.jpg', 'image/jpeg'),
+(4, 39, 'dummy.pdf', '3b8a614226a953a8cd9526fca6fe9ba5_1625819584_7412.pdf', 'applicatio'),
+(5, 47, 'Dummy Video.mp4', 'f57a2f557b098c43f11ab969efe1504b_1625822154_8037.mp4', 'video/mp4'),
+(6, 43, '3.jpg', '854d9fca60b4bd07f9bb215d59ef5561_1625822877_1185.jpg', 'image/jpeg'),
+(7, 43, '4.jpg', 'fccb60fb512d13df5083790d64c4d5dd_1625822877_5069.jpg', 'image/jpeg'),
+(8, 43, '8.jpg', '2ca65f58e35d9ad45bf7f3ae5cfd08f1_1625822877_7092.jpg', 'image/jpeg'),
+(9, 44, '3.jpg', '39059724f73a9969845dfe4146c5660e_1625823213_8212.jpg', 'image/jpeg'),
+(10, 44, '4.jpg', 'b0b183c207f46f0cca7dc63b2604f5cc_1625823213_6844.jpg', 'image/jpeg'),
+(11, 44, '8.jpg', 'eb6fdc36b281b7d5eabf33396c2683a2_1625823213_1565.jpg', 'image/jpeg'),
+(12, 45, 'dummy.pdf', '1cc3633c579a90cfdd895e64021e2163_1625824488_7786.pdf', 'application/pdf'),
+(13, 46, 'Screenshot (1).png', 'd96409bf894217686ba124d7356686c9_1625827586_2691.png', 'image/png'),
+(14, 47, 'download.jpg', 'ff4d5fbbafdf976cfdc032e3bde78de5_1625828813_8248.jpg', 'image/jpeg');
 
 -- --------------------------------------------------------
 
@@ -761,7 +798,7 @@ CREATE TABLE `tbl_siteadmin` (
 --
 
 INSERT INTO `tbl_siteadmin` (`site_id`, `site_username`, `site_password`, `site_admin_name`, `site_admin_type`, `site_domain`, `site_name`, `site_email`, `site_noreply_email`, `site_phone`, `site_fax`, `site_paypal_sandox`, `site_sandbox_paypal`, `site_live_paypal`, `site_ip`, `site_logo`, `site_icon`, `site_thumb`, `site_address`, `site_about`, `site_city`, `site_state`, `site_zip`, `site_country`, `site_lastlogindate`, `site_copyright`, `site_facebook`, `site_twitter`, `site_google`, `site_instagram`, `site_linkedin`, `site_youtube`, `site_contact_map`, `site_google_ad`, `site_meta_desc`, `site_meta_keyword`, `site_meta_copyright`, `site_meta_author`, `site_how_to_pay`, `site_status`, `sub_location`, `site_chat`, `sub_featured`, `site_version`, `site_percentage`, `site_hold_payment`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'cosplay-cosmos-logo1.png', 'cosplay-cosmos-icon1.png', 'cosplay-cosmos-thumb.jpg', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-07-07 12:46:08', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/upfront', '#', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/upfront', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/upfront', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 29, 5, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'cosplay-cosmos-logo1.png', 'cosplay-cosmos-icon1.png', 'cosplay-cosmos-thumb.jpg', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-07-08 10:34:32', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/upfront', '#', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/upfront', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/upfront', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 29, 5, 1),
 (2, 'ajay', '098f6bcd4621d373cade4e832627b4f6', 'Malik Ajay Jones', 'subadmin', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-03-06 15:00:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -5912,8 +5949,8 @@ INSERT INTO `tbl_users` (`user_id`, `user_remember`, `user_token`, `user_type`, 
 (2, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad1@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, '20', '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 1, 1, 0, '2021-06-23 13:03:14', '2021-06-23 16:03:14'),
 (3, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad45@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, '20', '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 07:40:30', '2021-06-25 10:40:30'),
 (32, 'g5', 'omrb60t78llrf47ri8flaevg7oelisik', 'user', 'website', NULL, 'Saad', 'Chaudhary', 'saad@herosolutions.com.pk', 'h5r2e394y3r4o5k36574w49315h393o4', 'v4r4h3l47484q4f4b5r4k4j4a514e3m494q233w54485s3k4b4x2u2s4t4r5r3q474u3b4v4f55643i4', NULL, NULL, NULL, '20', '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 09:44:45', '2021-06-30 17:17:32'),
-(34, 'g5', 'aakbh0leokrhjucgtlr6fq7snv0cdj87', 'model', 'website', NULL, 'Saadd', 'Ashraff', 'saad1@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4r4p3l47484q4f4b5q4o493h5k3q3p484r2o3z524s4w3s2a4y3y2n4g53623e474x264t4h5t4m4i4', '03000000001', 'Male', '1969-12-31', '31', 'Screenwriting, Martial Arts: Fencing, Acting Techniques, Songwriting, Accents/Dialects, Mezzo Soprano, Bike Riding, Sketch Comedy, Sketchwriting, Athletic, Modeling, Shakespeare Training, Weapons Training', NULL, '', '&lt;p&gt;This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.&lt;/p&gt;', NULL, NULL, 'ffd52f3c7e12435a724a8f30fddadd9c_1625226753_3830.mp4', '470e7a4f017a5476afb7eeb3f8b96f9b_1625226936_1715.jpg', 'e2c0be24560d78c5e599c2a9c9d0bbd2_1625224361_1397.jpg', NULL, 'Sargodha', '', 'Sargodha', 3175, '40100', 167, 50, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:34:53', '2021-07-07 12:58:11'),
-(35, 'g5', '9oo2hsf6jfdpgqe9bhdr220asipbs9e2', 'model', 'website', NULL, 'Saad', 'Test', 'saad3@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3d3r4k3a5y4f4a595z4u415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', 'Male', '1969-12-31', '20', 'Test1, Test2, Test3, Test4, Test5, Test6, Test7, Test8, Test9, Test10, Test11', NULL, '', '&lt;p&gt;This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;&lt;p&gt;This is a test .This is a test .This is a test . This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;', NULL, NULL, '72da7fd6d1302c0a159f6436d01e9eb0_1625230862_3334.mp4', '13f3cf8c531952d72e5847c4183e6910_1625230862_6337.jpg', 'd34ab169b70c9dcd35e62896010cd9ff_1625231963_2961.jpg', NULL, 'Test address # is here', '', 'Log Angeles', 1416, '90001', 233, 100, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '33.96967', '-118.24993', NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:36:34', '2021-07-07 12:49:01'),
+(34, 'g5', 'tkn68me8hj15lbj7sruaq1ngvlndd3sv', 'model', 'website', NULL, 'Saadd', 'Ashraff', 'saad1@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4r4p3l47484q4f4b5q4o493h5k3q3p484r2o3z524s4w3s2a4y3y2n4g53623e474x264t4h5t4m4i4', '03000000001', 'Male', '1969-12-31', '31', 'Screenwriting, Martial Arts: Fencing, Acting Techniques, Songwriting, Accents/Dialects, Mezzo Soprano, Bike Riding, Sketch Comedy, Sketchwriting, Athletic, Modeling, Shakespeare Training, Weapons Training', NULL, '', '&lt;p&gt;This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.&lt;/p&gt;', NULL, NULL, 'ffd52f3c7e12435a724a8f30fddadd9c_1625226753_3830.mp4', '470e7a4f017a5476afb7eeb3f8b96f9b_1625226936_1715.jpg', 'e2c0be24560d78c5e599c2a9c9d0bbd2_1625224361_1397.jpg', NULL, 'Sargodha', '', 'Sargodha', 3175, '40100', 167, 50, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:34:53', '2021-07-09 09:36:22'),
+(35, 'g5', 'rc5ruausnkr6q3a2l8s56i0pt9pqg3dl', 'model', 'website', NULL, 'Saad', 'Test', 'saad3@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3d3r4k3a5y4f4a595z4u415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', 'Male', '1969-12-31', '20', 'Test1, Test2, Test3, Test4, Test5, Test6, Test7, Test8, Test9, Test10, Test11', NULL, '', '&lt;p&gt;This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;&lt;p&gt;This is a test .This is a test .This is a test . This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;', NULL, NULL, '72da7fd6d1302c0a159f6436d01e9eb0_1625230862_3334.mp4', '13f3cf8c531952d72e5847c4183e6910_1625230862_6337.jpg', 'd34ab169b70c9dcd35e62896010cd9ff_1625231963_2961.jpg', NULL, 'Test address # is here', '', 'Log Angeles', 1416, '90001', 233, 100, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '33.96967', '-118.24993', NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:36:34', '2021-07-09 15:54:30'),
 (37, 'g5', 'hkvbath9oudjdp7vh6jnti3enfp1mp9s', 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad6@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w493p3p2k3a5y4f4a595z4u215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, '20', '', NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, '05f971b5ec196b8c65b75d2ef8267331_1625062370_4045.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 14:12:50', '2021-07-05 09:29:19'),
 (38, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad8@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3l3s2k3a5y4f4a595z4w215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, '20', '', NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, 'c0f168ce8900fa56e57789e2a2f2c9d0_1625062417_6160.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 14:13:37', '2021-06-30 17:13:37'),
 (39, NULL, NULL, 'model', 'website', NULL, 'Test', 'User', 'user@gmail.com', '45t3m3d474t5l4v4y4s5v453', 'x49393p2k3a565x4b5a5s493a5z2p28474r3t4y5t36433o4', '03000000000', NULL, NULL, '20', '', NULL, '', 'test', NULL, NULL, NULL, 'c0f168ce8900fa56e57789e2a2f2c9d0_1625062417_6160.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-07-01 10:38:36', '2021-07-01 13:38:36');
@@ -6081,19 +6118,19 @@ ALTER TABLE `tbl_blog_categories`
 -- AUTO_INCREMENT for table `tbl_chatrooms`
 --
 ALTER TABLE `tbl_chatrooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_chatrooms_chat`
 --
 ALTER TABLE `tbl_chatrooms_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tbl_chat_attachments`
 --
 ALTER TABLE `tbl_chat_attachments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_countries`

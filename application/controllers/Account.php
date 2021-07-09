@@ -2,7 +2,6 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use Twilio\Rest\Client;
 
 class Account extends MY_Controller
 {
@@ -206,19 +205,6 @@ class Account extends MY_Controller
                 }
             }
 
-            # Model Skills
-            // $user_skills = [];
-            // foreach(explode(',', $post['skills']) as $skill):
-            //     $user_skills = 
-            //     [
-            //         'mem_id' => $user_id,
-            //         'skill'  => $skill
-            //     ];
-            //     if(count($this->master->getRow('mem_skills', ['mem_id'=> $user_id, 'skill'=> $skill])) == '0'):
-            //         $this->master->save('mem_skills', $user_skills);
-            //     endif;
-            // endforeach;
-
             # Model Languages
             $user_languages = [];
             $this->master->delete_where('mem_languages', ['mem_id' => $user_id]);
@@ -284,33 +270,75 @@ class Account extends MY_Controller
         if($this->input->post())
         {
             $post = html_escape($this->input->post());
-            pr($post);
-            die;
             $sender_id   = $post['sender_id'];
             $receiver_id = $post['receiver_id'];
-            $message = $post['message'];
+            $message = trim($post['message']);
             $current_chatroom = $this->chat_model->ifChatroomExist($sender_id, $receiver_id);
+
+            if (isset($_FILES['attachments']) && is_array($_FILES['attachments']['name'])) 
+            {
+                $message_type = 'attachment';
+            }
+            else
+            {
+                $message_type = 'text';
+            }
+
             if($current_chatroom)
             {
                 $data = 
                 [
-                    'room_id'   => $current_chatroom,
-                    'sender_id' => $sender_id,
-                    'message'   => $message
+                    'room_id'     => $current_chatroom,
+                    'sender_id'   => $sender_id,
+                    'message'     => $message,
+                    'message_type'=> $message_type
                 ];
-                $this->chat_model->save($data);
+                $chat_id = $this->chat_model->save($data);
             }
             else
             {
-                $room_id = $this->master->save('chatrooms', ['participants'=> sort_chat_participants($sender_id, $receiver_id)]);
+                $current_chatroom = $this->master->save('chatrooms', ['participants'=> sort_chat_participants($sender_id, $receiver_id)]);
                 $data = 
                 [
-                    'room_id'   => $room_id,
-                    'sender_id' => $sender_id,
-                    'message'   => $message
+                    'room_id'      => $current_chatroom,
+                    'sender_id'    => $sender_id,
+                    'message'      => $message,
+                    'message_type' => $message_type
                 ];
-                $this->chat_model->save($data);
+                $chat_id = $this->chat_model->save($data);
             }
+
+            
+            # Gallery Images
+            if (isset($_FILES['attachments']) && is_array($_FILES['attachments']['name'])) 
+            {
+                $image_path = array();
+                $count = count($_FILES['attachments']['name']);
+                for ($key = 0; $key < $count; $key++) {
+                    $_FILES['file' . $key]['name']     = $_FILES['attachments']['name'][$key];
+                    $_FILES['file' . $key]['type']     = $_FILES['attachments']['type'][$key];
+                    $_FILES['file' . $key]['tmp_name'] = $_FILES['attachments']['tmp_name'][$key];
+                    $_FILES['file' . $key]['error']    = $_FILES['attachments']['error'][$key];
+                    $_FILES['file' . $key]['size']     = $_FILES['attachments']['size'][$key];
+                }
+
+                for ($i = 0; $i < $count; $i++)
+                {
+                    if (isset($_FILES["file" . $i]["name"]) && $_FILES["file" . $i]["name"] != "")
+                    {
+                        $image = upload_file(UPLOAD_PATH . 'chat', 'file' . $i);
+                        $attachments_record =
+                            [
+                                'chat_id'       => $chat_id,
+                                'original_name' => $_FILES["file" . $i]["name"],
+                                'name'          => $image['file_name'],
+                                'type'          => $_FILES['file' . $i]['type']
+                            ];
+                        $this->master->save('chat_attachments', $attachments_record);
+                    }
+                }
+            }
+
 
             echo json_encode(['status'=> 'success']);
         }
