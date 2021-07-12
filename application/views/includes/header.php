@@ -9,17 +9,19 @@
         <nav class="ease">
             <div nav>
                 <ul id="nav">
-                    <li class="<?php if ($page == "index") {
+                    <li class="<?php if ($page == "" || $page == "home") {
                                     echo 'active';
                                 } ?>">
                         <a href="<?= base_url() ?>">Home</a>
                     </li>
-                    <li class="<?php if ($page == "become-a-mentor") {
+                    <?php if($this->session->userdata('user_type') == '' || $this->session->userdata('user_type') != 'model'):?>
+                    <li class="<?php if ($page == "become-a-model") {
                                     echo 'active';
                                 } ?>">
                         <a href="<?= base_url() ?>become-a-model">Become a Model</a>
                     </li>
-                    <li class="<?php if ($page == "support") {
+                    <?php endif; ?>
+                    <li class="<?php if ($page == "help") {
                                     echo 'active';
                                 } ?>">
                         <a href="<?= base_url() ?>help">Help</a>
@@ -45,7 +47,7 @@
 <!-- header -->
 
 
-<!-- <div class="upperlay"></div> -->
-<!-- <div id="pageloader">
+<div class="upperlay"></div>
+<div id="pageloader">
     <span class="loader"></span>
-</div> -->
+</div>

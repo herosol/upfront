@@ -44,7 +44,7 @@
                         <div class="panel-body">
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
-                                    <img src="<?= !empty($row['banner']) ? base_url().UPLOAD_PATH.'pages/become-a-model/'.$row['banner'] : 'http://placehold.it/3000x1000' ?>" alt="--">
+                                    <img src="<?= !empty($row['banner']) ? base_url().UPLOAD_PATH.'pages/become-model/'.$row['banner'] : 'http://placehold.it/3000x1000' ?>" alt="--">
                                 </div>
                                 <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                 <div>
@@ -100,7 +100,7 @@
                                     <div class="panel-body">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
-                                                <img src="<?= !empty($row['second_image'.$i]) ? base_url().UPLOAD_PATH.'pages/about-us/'.$row['second_image'.$i] : 'http://placehold.it/3000x1000' ?>" alt="--">
+                                                <img src="<?= !empty($row['second_image'.$i]) ? base_url().UPLOAD_PATH.'pages/become-model/'.$row['second_image'.$i] : 'http://placehold.it/3000x1000' ?>" alt="--">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                             <div>
@@ -160,7 +160,7 @@
                                     <div class="panel-body">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
-                                                <img src="<?= !empty($row['third_image'.$i]) ? base_url().UPLOAD_PATH.'pages/about-us/'.$row['third_image'.$i] : 'http://placehold.it/3000x1000' ?>" alt="--">
+                                                <img src="<?= !empty($row['third_image'.$i]) ? base_url().UPLOAD_PATH.'pages/become-model/'.$row['third_image'.$i] : 'http://placehold.it/3000x1000' ?>" alt="--">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                             <div>

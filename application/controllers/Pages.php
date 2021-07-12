@@ -119,6 +119,13 @@ class Pages extends MY_Controller
         $this->load->view('pages/cookie-policy', $this->data);
     }
 
+    function terms_and_conditions()
+    {
+        $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'terms_conditions'));
+        $this->data['site_content'] =unserialize($this->data['content_row']->code);
+        $this->load->view('pages/terms-and-conditions', $this->data);
+    }
+
     function privacy_policy()
     {
         $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'privacy_policy'));

@@ -16,7 +16,7 @@
                 <div class="logBlk">
                     <form action="" method="post" id="frmModelSignup" class="frmAjax">
                         <div class="alertMsg" style="display:none"></div>
-                        <h3>Become a Model</h3>
+                        <h3><?= $site_content['heading'] ?></h3>
                         <p><?= $site_content['short_desc'] ?></p>
                         <div class="formRow row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12">

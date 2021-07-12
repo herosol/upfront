@@ -16,7 +16,7 @@
             <div class="contain-fluid">
                 <div class="blk">
                     <div class="itmBlk">
-                        <div class="ico"><img src="<?= $base_url ?>images/stars/1.jpg" alt=""></div>
+                        <div class="ico"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></div>
                         <div class="txt">
                             <h4>Educated is even better than you’ve heard</h4>
                             <div class="rating">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="blk review">
-                    <div class="ico"><img src="<?= $base_url ?>images/users/1.jpg" alt=""></div>
+                    <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
                     <div class="txt">
                         <form action="" method="post">
                             <div class="txtGrp">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="blk review">
-                    <div class="ico"><img src="<?= $base_url ?>images/users/1.jpg" alt=""></div>
+                    <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
                     <div class="txt">
                         <div class="icoTxt">
                             <div class="title">
@@ -80,7 +80,7 @@
                         </div>
                         <p>Had a short stay with my dad and younger sis. Very comfortable and cozy room. The host Jeka is nice and prepared snacks for us in advance. The location is good and we particularly like the view of the room. Strongly recommend:)</p>
                         <div class="review">
-                            <div class="ico"><img src="<?= $base_url ?>images/users/1.jpg" alt=""></div>
+                            <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
                             <div class="txt">
                                 <h6>Model's Response</h6>
                                 <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>

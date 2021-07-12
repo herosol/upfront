@@ -8,7 +8,7 @@
                     <li><a href="<?= base_url() ?>become-a-model">Become a Model</a></li>
                     <li><a href="<?= base_url() ?>find">Online Auditions</a></li>
                     <li><a href="<?= base_url() ?>affiliates">Affiliates</a></li>
-                    <li><a href="<?= $base_url ?>learning-resources.php">Learning Resources</a></li>
+                    <li><a href="#">Learning Resources</a></li>
                 </ul>
             </div>
             <div class="col">
@@ -17,7 +17,7 @@
                     <li><a href="<?= base_url() ?>signin">Sign in</a></li>
                     <li><a href="<?= base_url() ?>profile-settings">Profile Settings</a></li>
                     <li><a href="<?= base_url() ?>inbox">My Inbox</a></li>
-                    <li><a href="<?= $base_url ?>wishlist.php">My Favorites</a></li>
+                    <li><a href="#">My Favorites</a></li>
                 </ul>
             </div>
             <div class="col">
@@ -51,11 +51,11 @@
                 </form>
                 <h5>Follow us</h5>
                 <ul class="social flex">
-                    <li><a href="?"><img src="<?= base_url() ?>assets/images/social-instagram.svg" alt=""></a></li>
-                    <li><a href="?"><img src="<?= base_url() ?>assets/images/social-facebook.svg" alt=""></a></li>
-                    <li><a href="?"><img src="<?= base_url() ?>assets/images/social-youtube.svg" alt=""></a></li>
-                    <li><a href="?"><img src="<?= base_url() ?>assets/images/social-twitter.svg" alt=""></a></li>
-                    <li><a href="?"><img src="<?= base_url() ?>assets/images/social-email.svg" alt=""></a></li>
+                    <li><a href="<?= $site_settings->site_instagram ?>"><img src="<?= base_url() ?>assets/images/social-instagram.svg" alt=""></a></li>
+                    <li><a href="<?= $site_settings->site_facebook ?>"><img src="<?= base_url() ?>assets/images/social-facebook.svg" alt=""></a></li>
+                    <li><a href="<?= $site_settings->site_youtube ?>"><img src="<?= base_url() ?>assets/images/social-youtube.svg" alt=""></a></li>
+                    <li><a href="<?= $site_settings->site_twitter ?>"><img src="<?= base_url() ?>assets/images/social-twitter.svg" alt=""></a></li>
+                    <li><a href="#"><img src="<?= base_url() ?>assets/images/social-email.svg" alt=""></a></li>
                 </ul>
             </div>
         </div>
@@ -65,8 +65,8 @@
             <div class="inner">
                 <p>Copyright © 2021 <a href="<?= base_url() ?>">Upfront Worldwide Talent Agency</a>. All rights reserved.</p>
                 <ul class="smLst flex">
-                    <li><a href="<?= $base_url ?>privacy-policy.php">Privacy Policy</a></li>
-                    <li><a href="<?= $base_url ?>terms-and-conditions.php">Terms & Conditions</a></li>
+                    <li><a href="<?= base_url() ?>privacy-policy">Privacy Policy</a></li>
+                    <li><a href="<?= base_url() ?>terms-and-conditions">Terms & Conditions</a></li>
                 </ul>
             </div>
         </div>

@@ -46,7 +46,7 @@
         <thead>
             <tr>
                 <th width="5%" class="text-center">Sr#</th>
-                <th>Skoll Title</th>
+                <th>Skill Title</th>
                 <th width="12%" class="text-center">&nbsp;</th>
             </tr>
         </thead>

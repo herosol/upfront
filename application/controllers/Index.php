@@ -60,7 +60,7 @@ class Index extends MY_Controller {
                     $is_email_send = $this->send_site_email($user_data, 'signup');
 
                     $res['msg'] = showMsg('success', 'Registered Successfully');
-                    $res['redirect_url'] = site_url('email-verification');
+                    $res['redirect_url'] = site_url('dashboard');
                     $res['status'] = 1;
                     $res['frm_reset'] = 1;
                 }
@@ -102,6 +102,7 @@ class Index extends MY_Controller {
             {
                 $post = html_escape($this->input->post());
                 $user_row = $this->user_model->emailExists($post['email']);
+                
                 if (count($user_row) == '0')
                 {
                     if (isset($_FILES["dp_image"]["name"]) && $_FILES["dp_image"]["name"] != "")
@@ -109,6 +110,7 @@ class Index extends MY_Controller {
                         $image = upload_file(UPLOAD_PATH.'members', 'dp_image');
                         $mem_image = $image['file_name'];
                     }
+
 
                     $rando = doEncode(rand(99, 999).'-'.$post['email']);
                     $rando = strlen($rando) > 225 ? substr($rando, 0, 225) : $rando;
@@ -169,7 +171,7 @@ class Index extends MY_Controller {
                     $is_email_send = $this->send_site_email($user_data, 'signup');
 
                     $res['msg'] = showMsg('success', 'Registered Successfully');
-                    $res['redirect_url'] = site_url('email-verification');
+                    $res['redirect_url'] = site_url('dashboard');
                     $res['status'] = 1;
                     $res['frm_reset'] = 1;
                 }
@@ -180,7 +182,7 @@ class Index extends MY_Controller {
             }
             exit(json_encode($res));
         }else{
-            $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'signup'));
+            $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'signup_model'));
             $this->data['site_content'] = unserialize($this->data['site_content']->code);
             $this->load->view("profile/model-signup", $this->data);
         }
@@ -189,7 +191,7 @@ class Index extends MY_Controller {
 
     function login()
     {
-        //$this->MemLogged();
+        // $this->MemLogged();
         if($this->input->post()) 
         {
             $res = array();
@@ -236,7 +238,11 @@ class Index extends MY_Controller {
                     if ($row->mem_verified == 0)
                         $this->session->set_userdata('verification_status', true);
 
-                    $res['redirect_url'] = site_url('dashboard');
+                    if(!empty($this->session->userdata('redirect_url')))
+                        $res['redirect_url'] = $this->session->userdata('redirect_url');
+                    else
+                        $res['redirect_url'] = site_url('dashboard');   
+
                     $res['msg'] = showMsg('success', 'Login successful! Please wait.');
                     $res['status'] = 1;
                     $res['frm_reset'] = 1;
@@ -395,5 +401,16 @@ class Index extends MY_Controller {
             redirect('', 'refresh');
             exit;
         }
+    }
+
+    function logout()
+    {
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('user_type');
+        $this->session->unset_userdata('redirect_url');
+        $this->load->helper('cookie');
+        delete_cookie('remember');
+        redirect('signin', 'refresh');
+        exit;
     }
 }

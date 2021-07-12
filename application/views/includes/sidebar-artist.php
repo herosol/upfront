@@ -31,7 +31,7 @@
         <li class="<?php if ($page == "bookings") {
                         echo 'active';
                     } ?>">
-            <a href="<?= $base_url ?>artist/bookings.php">
+            <a href="<?= base_url() ?>bookings">
                 <img src="<?= base_url() ?>assets/images/icon-list.svg" alt="">
                 <em>My Bookings</em>
             </a>
@@ -39,7 +39,7 @@
         <li class="<?php if ($page == "earnings") {
                         echo 'active';
                     } ?>">
-            <a href="<?= $base_url ?>artist/earnings.php">
+            <a href="#">
                 <img src="<?= base_url() ?>assets/images/icon-earnings.svg" alt="">
                 <em>Earnings</em>
             </a>
@@ -47,7 +47,7 @@
         <li class="<?php if ($page == "calendar") {
                         echo 'active';
                     } ?>">
-            <a href="<?= $base_url ?>artist/calendar.php">
+            <a href="#">
                 <img src="<?= base_url() ?>assets/images/icon-calendar.svg" alt="">
                 <em>My Calendar</em>
             </a>
@@ -55,7 +55,7 @@
         <li class="<?php if ($page == "payment-method") {
                         echo 'active';
                     } ?>">
-            <a href="<?= $base_url ?>artist/payment-method.php">
+            <a href="#">
                 <img src="<?= base_url() ?>assets/images/icon-credit-card.svg" alt="">
                 <em>Payment Method</em>
             </a>
@@ -63,7 +63,7 @@
         <li class="<?php if ($page == "signout") {
                         echo 'active';
                     } ?>">
-            <a href="<?= $base_url ?>signin.php">
+            <a href="<?= base_url() ?>index/logout">
                 <img src="<?= base_url() ?>assets/images/icon-signout.svg" alt="">
                 <em>Sign out</em>
             </a>

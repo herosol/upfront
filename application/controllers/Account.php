@@ -13,6 +13,7 @@ class Account extends MY_Controller
         $this->load->model('appearence_model');
         $this->load->model('skills_model');
         $this->load->model('chat_model');
+        $this->load->model('booking_model');
     }
 
     function dashboard()
@@ -136,7 +137,7 @@ class Account extends MY_Controller
                     'mem_dob'      => db_format_date($post['mem_dob']),
                     'mem_sex'      => $post['mem_sex'],
                     'mem_country_id' => $post['mem_country'],
-                    'mem_state'     => $post['mem_state'],
+                    'mem_state'      => $post['mem_state'],
                     'mem_city'     => trim($post['mem_city']),
                     'mem_zip'      => trim($post['mem_zip']),
                     'mem_address1' => trim($post['mem_address1']),
@@ -377,6 +378,31 @@ class Account extends MY_Controller
         }
     }
 
+    function bookings()
+    {
+        if($this->input->post())
+        {
+            
+        }
+        else
+        {
+            $this->data['bookings'] = $this->booking_model->get_rows(['booked_member'=> $this->session->user_id]);
+            $this->load->view("artist/bookings", $this->data);
+        }
+    }
+
+    function booking_detail()
+    {
+        if($this->input->post())
+        {
+
+        }
+        else
+        {
+            $this->load->view("artist/booking-detail", $this->data);
+        }
+    }
+
     function createInvoice()
     {
         if($this->input->post())
@@ -427,7 +453,34 @@ class Account extends MY_Controller
         if($this->input->post())
         {
             $post = html_escape($this->input->post());
-            $this->chat_model->save(['invoice_status'=> $post['action']], $post['chat_id'], 'id');
+            $is_updated = $this->chat_model->save(['invoice_status'=> $post['action']], $post['chat_id'], 'id');
+            if($is_updated && $post['action'] == 'accepted')
+            {
+                $invoice  = $this->chat_model->get_row($post['chat_id'], 'id');
+                $chatroom = $this->master->getRow('chatrooms', ['room_id'=> $invoice->room_id]);
+                $participants = explode(',', $chatroom->participants);
+                if($participants[0] == $invoice->sender_id)
+                {
+                    $booked_by     = $participants[0];
+                    $booked_member = $participants[1];
+                }
+                else
+                {
+                    $booked_by     = $participants[1];
+                    $booked_member = $participants[0];
+                }
+
+                $booking_data = 
+                [
+                    'booked_by'     => $booked_by,
+                    'booked_member' => $booked_member,
+                    'amount'        => $invoice->invoice_amount,
+                    'duration'      => $invoice->invoice_workings_days,
+                    'detail'        => $invoice->message
+                ];
+
+                $this->booking_model->save($booking_data);
+            }
             echo json_encode(['status'=> 'success']);
         }
     }

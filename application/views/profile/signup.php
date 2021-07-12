@@ -44,9 +44,9 @@
                             <div class="lblBtn">
                                 <input type="checkbox" name="confirm" id="confirm">
                                 <label for="confirm">By signing up, I agree to Upfront Worldwide Talent Agency
-                                    <a href="<?= $base_url ?>terms-and-conditions.php">Terms & Conditions</a>
+                                    <a target="_balnk" href="<?= base_url() ?>terms-and-conditions">Terms & Conditions</a>
                                     and
-                                    <a href="<?= $base_url ?>privacy-policy.php">Privacy Policy.</a>
+                                    <a target="_balnk" href="<?= base_url() ?>privacy-policy">Privacy Policy.</a>
                                 </label>
                             </div>
                         </div>

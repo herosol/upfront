@@ -60,6 +60,7 @@ $route['help']           = 'pages/help';
 $route['topic-detail/(:num)'] = 'pages/topic_detail/$1';
 $route['cookie-policy']  = 'pages/cookie_policy';
 $route['privacy-policy'] = 'pages/privacy_policy';
+$route['terms-and-conditions'] = 'pages/terms_and_conditions';
 $route['disclaimers']    = 'pages/disclaimers';
 $route['affiliates']     = 'pages/affiliates';
 $route['contact-us']     = 'pages/contact_us';
@@ -89,6 +90,8 @@ $route['dashboard']        = 'account/dashboard';
 $route['profile-settings'] = 'account/profile_settings';
 $route['inbox/(:any)']     = 'account/inbox/$1';
 $route['inbox']            = 'account/inbox';
+$route['bookings']         = 'account/bookings';
+$route['booking-detail']   = 'account/booking_detail';
 $route['toggleChatroom']   = 'account/toggle_chatroom';
 $route['download-file/(:any)'] = 'downloadfile/index/$1';
 

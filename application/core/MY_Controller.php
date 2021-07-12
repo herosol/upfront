@@ -4,14 +4,16 @@ class MY_Controller extends CI_Controller {
 
     public $data = array();
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['mem_data'] = $this->getActiveMem();
         $this->data['page'] = $this->uri->segment(1);
     }
 
-    public function isMemLogged($type, $is_verified = true, $player_check = true, $type_arr = array('buyer', 'player'), $memberhsip_check = true) {
+    public function isMemLogged($type, $is_verified = true, $player_check = true, $type_arr = array('buyer', 'player'), $memberhsip_check = true)
+    {
         if (intval($this->session->user_id)<1 || !$this->session->has_userdata('user_type') || $this->session->user_type != $type) 
         {
             $remember_cookie = $this->input->cookie('cosmos_remember');
@@ -19,7 +21,6 @@ class MY_Controller extends CI_Controller {
             {
                 $this->session->set_userdata('user_id', $row->user_id);
                 $this->session->set_userdata('user_type', $row->user_type);
-
             }
             else
             {
@@ -65,12 +66,15 @@ class MY_Controller extends CI_Controller {
     public function MemLogged()
     {
         $remember_cookie = $this->input->cookie('cosmos_remember');
-        if($remember_cookie && $row = $this->master->getRow('members', array('mem_remember' => $remember_cookie))) {
+        if($remember_cookie && $row = $this->master->getRow('members', array('mem_remember' => $remember_cookie))) 
+        {
             $this->session->set_userdata('mem_id', $row->mem_id);
             $this->session->set_userdata('mem_type', $row->mem_type);
             redirect('dashboard', 'refresh');
             exit;
-        } elseif (($this->session->mem_id > 0) && $this->session->has_userdata('mem_type')) {
+        }
+        elseif (($this->session->mem_id > 0) && $this->session->has_userdata('mem_type')) 
+        {
             redirect('dashboard', 'refresh');
             exit;
         }

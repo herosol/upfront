@@ -420,7 +420,7 @@
                         <div class="content">
                             <h1 class="heading">Become a Model</h1>
                             <p>Top instructors from around the world teach millions of stars on Upfront Worldwide Talent Agency. We provide the tools and skills to teach what you love.</p>
-                            <div class="bTn"><a href="<?= base_url() ?>/assets/become-a-model.php" class="webBtn">Get started now</a></div>
+                            <div class="bTn"><a href="<?= base_url() ?>become-a-model" class="webBtn">Get started now</a></div>
                         </div>
                     </div>
                 </div>

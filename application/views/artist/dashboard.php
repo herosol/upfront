@@ -58,7 +58,7 @@
                         <h3><span class="regular">Welcome,</span> Dear, <?= $mem_data->user_fname . ' ' . $mem_data->user_lname ?>! <span class="regular">Nice to see you again.</span></h3>
                     </div>
                     <div class="bTn">
-                        <a href="<?= $base_url ?>artist/profile-settings.php" class="webBtn mdBtn">Edit Info</a>
+                        <a href="<?= base_url() ?>profile-settings" class="webBtn mdBtn">Edit Info</a>
                     </div>
                 </div>
                 <?php if ($this->session->user_type != 'user') : ?>

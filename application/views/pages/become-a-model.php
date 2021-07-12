@@ -10,13 +10,12 @@
     <?php $this->load->view('includes/header'); ?>
     <main common typical become>
 
-
-        <section id="sBanner" style="background-image: url('<?= !empty($site_content['banner']) ? base_url().UPLOAD_PATH.'pages/beome-model/'.$site_content['banner'] : base_url().'assets/images/portfolio-07.jpg' ?>');">
+        <section id="sBanner" style="background-image: url('<?= !empty($site_content['banner']) ? base_url().UPLOAD_PATH.'pages/become-model/'.$site_content['banner'] : base_url().'assets/images/portfolio-07.jpg' ?>');">
             <div class="contain-fluid">
                 <div class="content">
                     <h1><?= $site_content['banner_heading'] ?></h1>
                     <p><?= $site_content['banner_subheading'] ?></p>
-                    <div class="bTn"><a href="<?= $base_url ?>signup.php" class="webBtn">Get started now</a></div>
+                    <div class="bTn"><a href="<?= base_url() ?>signup-as-model" class="webBtn">Get started now</a></div>
                 </div>
             </div>
         </section>
@@ -48,13 +47,13 @@
             <div class="contain">
                 <div class="flexRow flex">
                     <div class="col col1">
-                        <div class="vidBlk image" style="background-image: url('<?= base_url() ?>assets/images/portfolio-04.jpg')"></div>
+                        <div class="vidBlk image" style="background-image: url('<?= base_url().UPLOAD_PATH.'pages/become-model/'.$site_content['third_image1'] ?>')"></div>
                     </div>
                     <div class="col col2">
                         <div class="content">
                             <h2 class="heading"><?= $site_content['third_heading'] ?></h2>
                             <p><?= $site_content['third_short_desc'] ?></p>
-                            <div class="bTn"><a href="<?= $base_url ?>support.php" class="webBtn">Help & Support</a></div>
+                            <div class="bTn"><a href="<?= $base_url ?>help" class="webBtn">Help & Support</a></div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +104,7 @@
                 <div class="content text-center">
                     <h2 class="heading"><?= $site_content['fourth_heading']?></h2>
                     <p><?= $site_content['fourth_desc']?></p>
-                    <div class="bTn"><a href="<?= $base_url ?>signup.php" class="webBtn simpleBtn">Get started now</a></div>
+                    <div class="bTn"><a href="<?= base_url() ?>signup-as-model" class="webBtn simpleBtn">Get started now</a></div>
                 </div>
             </div>
         </section>

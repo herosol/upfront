@@ -160,6 +160,12 @@
                             <span class="title">Sign up</span>
                         </a>
                     </li>
+                    <li class=" <?= ($this->uri->segment(3) == 'signup_model') ? ' active' : '' ?>">
+                        <a href="<?= site_url(ADMIN.'/sitecontent/signup_model') ?>">
+                            <i class="entypo-doc-text  "></i>
+                            <span class="title">Model Sign up</span>
+                        </a>
+                    </li>
                     <li class=" <?= ($this->uri->segment(3) == 'forgot') ? ' active' : '' ?>">
                         <a href="<?= site_url(ADMIN.'/sitecontent/forgot') ?>">
                             <i class="entypo-doc-text  "></i>
@@ -172,12 +178,12 @@
                             <span class="title">Reset Password</span>
                         </a>
                     </li>
-                    <li class=" <?= ($this->uri->segment(3) == 'email-verify') ? ' active' : '' ?>">
+                    <!-- <li class=" <?= ($this->uri->segment(3) == 'email-verify') ? ' active' : '' ?>">
                         <a href="<?= site_url(ADMIN.'/sitecontent/email-verify') ?>">
                             <i class="entypo-doc-text  "></i>
                             <span class="title">Email Verification</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class=" <?= ($this->uri->segment(3) == 'home') ? ' active' : '' ?>">
                         <a href="<?= site_url(ADMIN.'/sitecontent/home') ?>">
                             <i class="entypo-doc-text  "></i>

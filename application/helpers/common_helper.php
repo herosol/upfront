@@ -767,6 +767,14 @@ function get_dates_days($date1, $date2, $format = 'm/d/Y'){
     return $interval->d;
 }
 
+function dob_age($bithdayDate)
+{
+    $date = new DateTime($bithdayDate);
+    $now = new DateTime();
+    $interval = $now->diff($date);
+    return $interval->y;
+}
+
 function get_between_dates($date1, $date2){
     $date1 = new DateTime($date1);
     $date2 = new DateTime($date2);

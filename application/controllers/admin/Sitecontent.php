@@ -188,6 +188,29 @@ class Sitecontent extends Admin_Controller
         $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
     }
 
+    public function signup_model() {
+        $this->data['enable_editor'] = FALSE;
+        $this->data['pageView'] = ADMIN . '/site_signup_model';
+        if ($vals = $this->input->post()) 
+        {
+            $content_row = $this->master->getRow($this->table_name, array('ckey'=>'signup_model'));
+            $content_row = unserialize($content_row->code);
+
+            if(!is_array($content_row))
+                $content_row=array();
+
+            $data = serialize(array_merge($content_row,$vals));
+            $this->master->save($this->table_name,array('code'=>$data),'ckey','signup_model');
+            setMsg('success', 'Settings updated successfully !');
+            redirect(ADMIN . "/sitecontent/signup_model");
+            exit;
+        }
+
+        $this->data['row'] = $this->master->getRow($this->table_name, array('ckey' => 'signup_model'));
+        $this->data['row'] =unserialize($this->data['row']->code);
+        $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
+    }
+
     public function forgot() {
         $this->data['enable_editor'] = FALSE;
         $this->data['pageView'] = ADMIN . '/site_forgot';
@@ -452,7 +475,7 @@ class Sitecontent extends Admin_Controller
                 {
                     if(isset($content_row['banner']))
                         $this->remove_file(UPLOAD_PATH."pages/become-model/".$content_row['banner']);
-                    $vals['banner'] = $image['banner'];
+                    $vals['banner'] = $image['file_name'];
                 }
                 else
                 {
