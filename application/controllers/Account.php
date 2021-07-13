@@ -14,6 +14,7 @@ class Account extends MY_Controller
         $this->load->model('skills_model');
         $this->load->model('chat_model');
         $this->load->model('booking_model');
+        $this->load->model('review_model');
     }
 
     function dashboard()
@@ -386,20 +387,173 @@ class Account extends MY_Controller
         }
         else
         {
-            $this->data['bookings'] = $this->booking_model->get_rows(['booked_member'=> $this->session->user_id]);
+            $this->data['bookings'] = $this->booking_model->get_bookings();
             $this->load->view("artist/bookings", $this->data);
         }
     }
 
-    function booking_detail()
+    function booking_detail($booking_id)
     {
+        $booking_id = doDecode($booking_id);
         if($this->input->post())
         {
 
         }
         else
         {
+            $this->data['booking_detail'] = $this->booking_model->get_booking_detail($booking_id);
+            $this->data['reviews'] = $this->review_model->get_reviews($booking_id);
             $this->load->view("artist/booking-detail", $this->data);
+        }
+    }
+
+    function cancel_booking()
+    {
+        $this->form_validation->set_rules('cancel_request_reason', 'Cancel Reason', 'required');
+        $this->form_validation->set_rules('cancel_request_description', 'Description', 'required');
+
+        if ($this->form_validation->run() === FALSE)
+        $res['msg'] = validation_errors();
+
+        if (!empty($res['msg']))
+            exit(json_encode($res));
+
+        $vals = html_escape($this->input->post());
+        unset($vals['booking_id']);
+        $vals['cancel_request'] = 'send';
+        $if_updated = $this->booking_model->save($vals, $this->input->post('booking_id'));
+        if($if_updated)
+        {
+            echo json_encode(['status'=> 'success']);
+        }
+        else
+        {
+            echo json_encode(['status'=> 'failed']);
+        }
+    }
+
+    function cancellation_respose()
+    {
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            if($post['action'] == 'accept')
+            {
+                $data_update = 
+                [
+                    'booking_status' => 'Cancelled',
+                    'cancel_request' => 'accept'
+                ];
+            }
+            else
+            {
+                $data_update = 
+                [
+                    'cancel_request' => 'decline'
+                ];
+            }
+
+            $is_updated = $this->booking_model->save($data_update, doDecode($post['booking_id']));
+            if($is_updated)
+            {
+                echo json_encode(['status'=> 'success']);
+                exit;
+            }
+
+            echo json_encode(['status'=> 'failed']);
+        }
+    }
+
+    function complete_session()
+    {
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            if($post['action'] == 'complete')
+            {
+                $data_update = 
+                [
+                    'complete_request' => 'send'
+                ];
+
+                $is_updated = $this->booking_model->save($data_update, doDecode($post['booking_id']));
+                if($is_updated)
+                {
+                    echo json_encode(['status'=> 'success']);
+                    exit;
+                }
+            }
+
+            echo json_encode(['status'=> 'failed']);
+        }
+    }
+
+    function completion_respose()
+    {
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            if($post['action'] == 'accept')
+            {
+                $data_update = 
+                [
+                    'booking_status' => 'Completed',
+                    'complete_request' => NULL
+                ];
+            }
+            else
+            {
+                $data_update = 
+                [
+                    'complete_request' => 'decline'
+                ];
+            }
+
+            $is_updated = $this->booking_model->save($data_update, doDecode($post['booking_id']));
+            if($is_updated)
+            {
+                echo json_encode(['status'=> 'success']);
+                exit;
+            }
+
+            echo json_encode(['status'=> 'failed']);
+        }
+    }
+
+    function review()
+    {
+        if($this->input->post())
+        {
+            $post = html_escape($this->input->post());
+            $post['rating_by'] = $this->session->user_id;
+            $review_id = $this->review_model->save($post);
+            $html = '';
+            if($review_id)
+            {
+                $review = $this->review_model->get_review($review_id);
+                $html .= '<div class="ico"><img src="'.get_site_image_src("members", $review->rater_image, '').'" alt=""></div>
+                <div class="txt">
+                    <div class="icoTxt">
+                        <div class="title">
+                            <h5>'.$review->rater_fname.' '.$review->rater_lname.'</h5>
+                            <div class="rateYo"></div>
+                        </div>
+                        <div class="date">'.chat_message_time($review->review_date).'</div>
+                    </div>
+                    <p>'.$review->review_comment.'</p>
+                    <div class="review">
+                        <div class="ico"><img src="'.base_url().'assets/images/users/1.jpg" alt=""></div>
+                        <div class="txt">
+                            <h6>Model\'s Response</h6>
+                            <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>
+                        </div>
+                    </div>
+                </div>';
+                echo json_encode(['status'=> 'success', 'html'=> $html]);
+                exit;
+            }
+
+            echo json_encode(['status'=> 'failed']);
         }
     }
 

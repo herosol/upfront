@@ -8,6 +8,7 @@ class Pages extends MY_Controller
 		$this->load->model('topic_model');
         $this->load->model('tcategory_model');
         $this->load->model('user_model');
+        $this->load->model('review_model');
     }
 
     public function model_profile($model_id)
@@ -16,6 +17,8 @@ class Pages extends MY_Controller
         $this->data['mem_languages']  = $this->master->getRows('mem_languages', ['mem_id'=> $model_id]);
         $this->data['gallery_images'] = $this->master->getRows('mem_gallery_images', ['mem_id'=> $model_id]);
         $this->data['appearence']     = $this->master->getRow('mem_appearance', ['mem_id'=> $model_id]);
+        $this->data['appearence']     = $this->master->getRow('mem_appearance', ['mem_id'=> $model_id]);
+        $this->data['reviews']        = $this->review_model->get_mem_reviews();
         return $this->load->view('profile/profile.php', $this->data);
     }
     public function become_model()

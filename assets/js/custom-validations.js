@@ -332,4 +332,55 @@ $(document).ready(function() {
         }
     });
 
+    $('#cancelBookingForm').validate({
+        rules: {
+            cancel_request_reason: {
+                required: true
+            },
+            cancel_request_description: {
+                required: true
+            }
+        },
+        errorPlacement: function() {
+            return false; // suppresses error message text
+        },
+        submitHandler: function(form) {
+            let frmMsg = $(form).find("div.alertMsg:first");
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+
+    $('#reviewForm').validate({
+        rules: {
+            review_comment: {
+                required: true
+            }
+        },
+        errorPlacement: function() {
+            return false; // suppresses error message text
+        },
+        submitHandler: function(form) {
+            let frmMsg = $(form).find("div.alertMsg:first");
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function(response) {
+                    response = JSON.parse(response);
+                    if (response.status == 'success') {
+                        form.reset();
+                        $('.reviews-section').prepend(response.html);
+                    }
+                }
+            });
+        }
+    });
+
 });

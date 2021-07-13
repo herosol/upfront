@@ -89,6 +89,22 @@ function sort_chat_participants($user_id, $receiver_id)
         return  $user_id.','.$receiver_id;
 }
 
+function booking_status_badge($val)
+{
+    if($val == 'Pending' || $val == 'In Progress')
+    {
+        return 'yellow';
+    }
+    else if($val == 'Completed')
+    {
+        return 'green';
+    }
+    else
+    {
+        return 'red';
+    }
+}
+
 function generate_vimage_thumbs($image) {
     $img_sizes = get_vsize_dirs();
     foreach ($img_sizes as $size => $directory) {

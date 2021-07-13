@@ -26,7 +26,7 @@
                     <div id="Upcoming" class="tab-pane fade in active">
                     <?php
                     foreach($bookings as $key => $booking):
-                        if($booking->booking_status == 'pending' || $booking->booking_status == 'in_progress'):
+                        if($booking->booking_status == 'Pending' || $booking->booking_status == 'In Progress'):
                     ?>
                         <div class="bookBlk">
                             <ul class="lst">
@@ -37,7 +37,7 @@
                                             <h5>Educated is even better than you’ve heard</h5>
                                             <p>214243</p>
                                         </div>
-                                        <a href="<?= $base_url ?>artist/booking-detail.php"></a>
+                                        <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
                                     </div>
                                 </li>
                                 <li class="date">March 20, 2019 - 5:20 pm</li>
@@ -53,7 +53,7 @@
                     <div id="Completed" class="tab-pane fade">
                     <?php
                     foreach($bookings as $key => $booking):
-                        if($booking->booking_status == 'completed'):
+                        if($booking->booking_status == 'Completed'):
                     ?>
                         <div class="bookBlk">
                             <ul class="lst">
@@ -64,7 +64,7 @@
                                             <h5>Educated is even better than you’ve heard</h5>
                                             <p>214243</p>
                                         </div>
-                                        <a href="<?= $base_url ?>artist/booking-detail.php"></a>
+                                        <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
                                     </div>
                                 </li>
                                 <li class="date">March 20, 2019 - 5:20 pm</li>
@@ -80,7 +80,7 @@
                     <div id="Cancelled" class="tab-pane fade">
                     <?php
                     foreach($bookings as $key => $booking):
-                        if($booking->booking_status == 'cancelled'):
+                        if($booking->booking_status == 'Cancelled'):
                     ?>
                         <div class="bookBlk">
                             <ul class="lst">
@@ -91,7 +91,7 @@
                                             <h5>Educated is even better than you’ve heard</h5>
                                             <p>214243</p>
                                         </div>
-                                        <a href="<?= $base_url ?>artist/booking-detail.php"></a>
+                                        <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
                                     </div>
                                 </li>
                                 <li class="date">March 20, 2019 - 5:20 pm</li>

@@ -14,7 +14,11 @@
             <div class="col">
                 <h5>My Account</h5>
                 <ul class="lst">
-                    <li><a href="<?= base_url() ?>signin">Sign in</a></li>
+                    <?php if($this->session->user_id == ''): ?>
+                        <li><a href="<?= base_url() ?>signin">Sign in</a></li>
+                    <?php else: ?>
+                        <li><a href="<?= base_url() ?>dashboard">Dashboard</a></li>
+                    <?php endif; ?>
                     <li><a href="<?= base_url() ?>profile-settings">Profile Settings</a></li>
                     <li><a href="<?= base_url() ?>inbox">My Inbox</a></li>
                     <li><a href="#">My Favorites</a></li>

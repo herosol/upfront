@@ -91,7 +91,7 @@ $route['profile-settings'] = 'account/profile_settings';
 $route['inbox/(:any)']     = 'account/inbox/$1';
 $route['inbox']            = 'account/inbox';
 $route['bookings']         = 'account/bookings';
-$route['booking-detail']   = 'account/booking_detail';
+$route['booking-detail/(:any)'] = 'account/booking_detail/$1';
 $route['toggleChatroom']   = 'account/toggle_chatroom';
 $route['download-file/(:any)'] = 'downloadfile/index/$1';
 

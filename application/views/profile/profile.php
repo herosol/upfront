@@ -67,7 +67,7 @@
                         </div>
                         <div class="blk">
                             <div class="_header">
-                                <h4>202 Reviews</h4>
+                                <h4><?=count($reviews)?> Reviews</h4>
                                 <div class="rateYo"></div>
                             </div>
                             <div class="review">
