@@ -18,7 +18,7 @@
                     <ul class="blans">
                         <li>Deliveries: <span>50</span></li>
                         <li>Payouts: <span class="price">$1,258.5</span></li>
-                        <li>Current Balance: <span class="price">$00.0</span></li>
+                        <li>Current Balance: <span class="price">$<?=round($availBalance, 1)?></span></li>
                         <li><button type="button" class="webBtn smBtn popBtn" data-popup="withdraw-funds">Withdraw Funds</button></li>
                     </ul>
                 </div>
@@ -33,54 +33,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>John Wick</td>
-                                <td class="price">$250</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge green">Complete</span></td>
-                            </tr>
-                            <tr>
-                                <td>Abraham Adam</td>
-                                <td class="price">$220</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge yellow">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>Jenifer Kem</td>
-                                <td class="price">$150</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge green">Complete</span></td>
-                            </tr>
-                            <tr>
-                                <td>Samira Jones</td>
-                                <td class="price">$140</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge red">Canceled</span></td>
-                            </tr>
-                            <tr>
-                                <td>Preety Zinta</td>
-                                <td class="price">$180</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge yellow">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>Tai Chi</td>
-                                <td class="price">$390</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge green">Complete</span></td>
-                            </tr>
-                            <tr>
-                                <td>Christoper Smith</td>
-                                <td class="price">$280</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge red">Canceled</span></td>
-                            </tr>
-                            <tr>
-                                <td>Julian Adam</td>
-                                <td class="price">$170</td>
-                                <td>September 25, 2018</td>
-                                <td><span class="badge yellow">Pending</span></td>
-                            </tr>
+                            <?php foreach($earnings as $key => $value): ?>
+                                <tr>
+                                    <td><?= $value->cfname.' '.$value->clname ?></td>
+                                    <td class="price">$<?=$value->amount?></td>
+                                    <td><?=chat_message_time($value->date)?></td>
+                                    <td><span class="badge <?=earning_status_badge($value->status)?>"><?=earning_status($value->status)?></span></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

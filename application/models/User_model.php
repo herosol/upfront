@@ -61,6 +61,7 @@ class User_model extends CRUD_Model
         $this->db->from($this->table_name.' mem');
         $this->db->join('mem_appearance app', 'mem.user_id=app.mem_id');
         $this->db->join('mem_languages lan', 'mem.user_id=lan.mem_id');
+        $this->db->join('reviews r', 'r.mem_id=mem.user_id');
         $this->db->select('mem.user_id, mem.mem_image, mem.user_fname, mem.user_lname');
         # IF ZIP
         if(!empty($post['zip']))
@@ -110,6 +111,14 @@ class User_model extends CRUD_Model
                     $this->db->or_where('mem.mem_sex', $value);
             }
             $this->db->group_end();
+        }
+
+        # IF RATING
+        if(isset($post['star_rating']))
+        {
+            $avgStart = $post['star_rating'];
+            $avgEnd   = 5;
+            $this->db->where("( (SELECT AVG(rating) FROM tbl_reviews WHERE mem_id = mem.user_id) >= $avgStart AND (SELECT AVG(rating) FROM tbl_reviews WHERE mem_id = mem.user_id) <= $avgEnd ) ", null, false);
         }
 
         # IF LANGUAGE FILTER

@@ -69,22 +69,22 @@
                                     <h6>Rating <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst ratingLst">
                                         <li>
-                                            <input type="radio" id="star_four_five" name="star_rating">
+                                            <input type="radio" id="star_four_five" name="star_rating" value="4.5">
                                             <div class="rateYo" data-rateyo-rating="4.5" data-rateyo-star-width="16px"></div>
                                             <label for="star_four_five">4.5 & up</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="star_four" name="star_rating">
+                                            <input type="radio" id="star_four" name="star_rating" value="4">
                                             <div class="rateYo" data-rateyo-rating="4" data-rateyo-star-width="16px"></div>
                                             <label for="star_four">4.0 & up</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="star_three_five" name="star_rating">
+                                            <input type="radio" id="star_three_five" name="star_rating" value="3.5">
                                             <div class="rateYo" data-rateyo-rating="3.5" data-rateyo-star-width="16px"></div>
                                             <label for="star_three_five">3.5 & up</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="star_three" name="star_rating">
+                                            <input type="radio" id="star_three" name="star_rating" value="3">
                                             <div class="rateYo" data-rateyo-rating="3" data-rateyo-star-width="16px"></div>
                                             <label for="star_three">3.0 & up</label>
                                         </li>
@@ -474,7 +474,7 @@
                     search();
                 });
 
-                $(document).on('click', '.clicked', function(e) 
+                $(document).on('click', '.clicked, input[name="star_rating"]', function(e) 
                 {
                     e.preventDefault();
                     search();

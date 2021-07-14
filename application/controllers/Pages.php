@@ -18,7 +18,8 @@ class Pages extends MY_Controller
         $this->data['gallery_images'] = $this->master->getRows('mem_gallery_images', ['mem_id'=> $model_id]);
         $this->data['appearence']     = $this->master->getRow('mem_appearance', ['mem_id'=> $model_id]);
         $this->data['appearence']     = $this->master->getRow('mem_appearance', ['mem_id'=> $model_id]);
-        $this->data['reviews']        = $this->review_model->get_mem_reviews();
+        $this->data['reviews']        = $this->review_model->get_mem_reviews($model_id);
+        $this->data['avgRating']     = $this->review_model->get_reviews_avg($model_id);
         return $this->load->view('profile/profile.php', $this->data);
     }
     public function become_model()

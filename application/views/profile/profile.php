@@ -22,8 +22,13 @@
                                 <div class="title">
                                     <h3><?= $model_data->user_fname.' '.$model_data->user_lname; ?> <small>Actor & Writer</small></h3>
                                     <div class="rating">
-                                        <div class="rateYo"></div>
-                                        <strong>4.1<em>286 ratings</em></strong>
+                                        <?php if(count($reviews) > 0): ?>
+                                            <div class="rateYo" data-rateyo-rating="<?=$avgRating?>"></div>
+                                            <strong><?=round($avgRating, 1)?><em><?=count($reviews)?> <?=count($reviews) < 2 ? 'rating' : 'ratings'?></em></strong>
+                                        <?php else: ?>
+                                            <div class="rateYo" data-rateyo-rating="0"></div>
+                                            <strong><em>0 rating</em></strong>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <a href="<?= base_url() ?>inbox/<?=$model_data->user_id?>" class="webBtn smBtn">Send Message</a>
@@ -69,7 +74,7 @@
                             <div class="_header">
                                 <h4><?=count($reviews)?> <?=count($reviews) < 2 ? 'Review' : 'Reviews'?></h4>
                                 <?php if(count($reviews) > 0): ?>
-                                    <div class="rateYo"></div>
+                                    <div class="rateYo" data-rateyo-rating="<?=$avgRating?>"></div>
                                 <?php endif; ?>
                             </div>
                             <?php 
@@ -82,13 +87,13 @@
                                         <div class="icoTxt">
                                             <div class="title">
                                                 <h5><?= $review->rater_fname.' '.$review->rater_lname ?></h5>
-                                                <div class="rateYo"></div>
+                                                <div class="rateYo" data-rateyo-rating="<?=$review->rating?>"></div>
                                             </div>
                                             <div class="date"><?= chat_message_time($review->review_date) ?></div>
                                         </div>
                                         <p><?= $review->review_comment ?></p>
                                         <div class="review">
-                                            <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
+                                            <div class="ico"><img src="<?= get_site_image_src("members", $model_data->mem_image, ''); ?>" alt=""></div>
                                             <div class="txt">
                                                 <h6>Model's Response</h6>
                                                 <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>

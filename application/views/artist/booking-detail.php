@@ -152,7 +152,7 @@
                             <div class="icoTxt">
                                 <div class="title">
                                     <h5><?= $review->rater_fname.' '.$review->rater_lname ?></h5>
-                                    <div class="rateYo"></div>
+                                    <div class="rateYo" data-rateyo-rating="<?=$review->rating?>"></div>
                                 </div>
                                 <div class="date"><?= chat_message_time($review->review_date) ?></div>
                             </div>

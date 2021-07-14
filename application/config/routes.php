@@ -94,6 +94,9 @@ $route['bookings']         = 'account/bookings';
 $route['booking-detail/(:any)'] = 'account/booking_detail/$1';
 $route['toggleChatroom']   = 'account/toggle_chatroom';
 $route['download-file/(:any)'] = 'downloadfile/index/$1';
+$route['earnings']       = 'earnings/index';
+$route['my-calender']    = 'account/my_calender';
+$route['payment-methods']= 'paymentmethods/index';
 
 # ADMIN ROUTES
 $route['admin/login']   = 'admin/index/login';

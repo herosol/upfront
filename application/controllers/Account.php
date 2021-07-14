@@ -512,6 +512,18 @@ class Account extends MY_Controller
             $is_updated = $this->booking_model->save($data_update, doDecode($post['booking_id']));
             if($is_updated)
             {
+                if($post['action'] == 'accept')
+                {
+                    $booking_data = $this->booking_model->get_row(doDecode($post['booking_id']));
+                    $amount = $booking_data->amount - ( ($booking_data->site_percentage / 100) * $booking_data->amount );
+                    $earning = 
+                    [
+                        'booking_id' => $booking_data->id,
+                        'amount'     => $amount
+                    ];
+
+                    $this->master->save('earnings', $earning);
+                }
                 echo json_encode(['status'=> 'success']);
                 exit;
             }
@@ -626,11 +638,12 @@ class Account extends MY_Controller
 
                 $booking_data = 
                 [
-                    'booked_by'     => $booked_by,
-                    'booked_member' => $booked_member,
-                    'amount'        => $invoice->invoice_amount,
-                    'duration'      => $invoice->invoice_workings_days,
-                    'detail'        => $invoice->message
+                    'booked_by'       => $booked_by,
+                    'booked_member'   => $booked_member,
+                    'amount'          => $invoice->invoice_amount,
+                    'duration'        => $invoice->invoice_workings_days,
+                    'detail'          => $invoice->message,
+                    'site_percentage' => $this->data['site_settings']->site_percentage
                 ];
 
                 $this->booking_model->save($booking_data);
@@ -852,4 +865,11 @@ class Account extends MY_Controller
         $res['hide_msg'] = 1;
         exit(json_encode($res));
     }
-}
+
+    function my_calender()
+    {
+        $this->isMemLogged($this->session->user_type);
+        $this->load->view('artist/calendar');
+    }
+
+}   

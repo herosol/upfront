@@ -25,7 +25,7 @@
                     } ?>">
             <a href="<?= base_url() ?>inbox">
                 <img src="<?= base_url() ?>assets/images/icon-cog-fill.svg" alt="">
-                <em>Inbox</em>
+                <em>Messages</em>
             </a>
         </li>
         <li class="<?php if ($page == "bookings") {
@@ -39,23 +39,23 @@
         <li class="<?php if ($page == "earnings") {
                         echo 'active';
                     } ?>">
-            <a href="#">
+            <a href="<?= base_url() ?>earnings">
                 <img src="<?= base_url() ?>assets/images/icon-earnings.svg" alt="">
                 <em>Earnings</em>
             </a>
         </li>
-        <li class="<?php if ($page == "calendar") {
+        <li class="<?php if ($page == "my-calender") {
                         echo 'active';
                     } ?>">
-            <a href="#">
+            <a href="<?= base_url() ?>my-calender">
                 <img src="<?= base_url() ?>assets/images/icon-calendar.svg" alt="">
                 <em>My Calendar</em>
             </a>
         </li>
-        <li class="<?php if ($page == "payment-method") {
+        <li class="<?php if ($page == "payment-methods") {
                         echo 'active';
                     } ?>">
-            <a href="#">
+            <a href="<?= base_url() ?>payment-methods">
                 <img src="<?= base_url() ?>assets/images/icon-credit-card.svg" alt="">
                 <em>Payment Method</em>
             </a>

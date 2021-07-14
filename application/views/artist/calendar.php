@@ -21,9 +21,9 @@
 
 
         <!-- Calendar -->
-        <link type="text/css" rel="stylesheet" href="<?= $base_url ?>css/fullcalendar.min.css">
-        <script type="text/javascript" src="<?= $base_url ?>js/moment.min.js"></script>
-        <script type="text/javascript" src="<?= $base_url ?>js/fullcalendar.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/fullcalendar.min.css">
+        <script type="text/javascript" src="<?= base_url() ?>assets/js/moment.min.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>assets/js/fullcalendar.min.js"></script>
         <script type="text/javascript">
             $(function() {
                 $('#calendar').fullCalendar({

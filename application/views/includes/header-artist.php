@@ -1,7 +1,7 @@
 <header class="ease">
     <div class="contain-fluid">
         <div class="logo">
-            <a href="<?= $base_url ?>index.php">
+            <a href="<?= base_url() ?>">
                 <img src="<?= base_url() ?>assets/images/logo.png" alt="">
             </a>
         </div>
@@ -49,10 +49,10 @@
                         <li><a href="<?= base_url() ?>dashboard">Dashboard <small>See and Manage Data</small></a></li>
                         <li><a href="<?= base_url() ?>inbox">Messages <small>Have a Friendly Exchange</small></a></li>
                         <li><a href="<?= base_url() ?>profile-settings">Profile Settings <small>Personal Information Settings</small></a></li>
-                        <li><a href="#">My Bookings <small>View Bookings Details</small></a></li>
-                        <li><a href="#">Earnings <small>Status of your Payouts</small></a></li>
-                        <li><a href="#">My Calendar <small>Maintain a regular Schedule</small></a></li>
-                        <li><a href="#">Payment Method <small>Credit card or PayPal accounts</small></a></li>
+                        <li><a href="<?= base_url() ?>bookings">My Bookings <small>View Bookings Details</small></a></li>
+                        <li><a href="<?= base_url() ?>earnings">Earnings <small>Status of your Payouts</small></a></li>
+                        <li><a href="<?= base_url() ?>my-calender">My Calendar <small>Maintain a regular Schedule</small></a></li>
+                        <li><a href="<?= base_url() ?>payment-methods">Payment Method <small>Credit card or PayPal accounts</small></a></li>
                         <li><a href="<?= base_url() ?>index/logout">Sign out</a></li>
                     </ul>
                 </div>

@@ -105,6 +105,42 @@ function booking_status_badge($val)
     }
 }
 
+function earning_status_badge($val)
+{
+    if($val == 'pending' || $val == 'available')
+    {
+        return 'yellow';
+    }
+    else if($val == 'paid')
+    {
+        return 'green';
+    }
+    else
+    {
+        return 'red';
+    }
+}
+
+function earning_status($val)
+{
+    if($val == 'pending')
+    {
+        return 'Pending';
+    }
+    else if($val == 'paid')
+    {
+        return 'Cleared';
+    }
+    else if($val == 'available')
+    {
+        return 'In Balance';
+    }
+    else
+    {
+        return 'Requested';
+    }
+}
+
 function generate_vimage_thumbs($image) {
     $img_sizes = get_vsize_dirs();
     foreach ($img_sizes as $size => $directory) {
@@ -776,7 +812,8 @@ function compare_dates($date1, $date2, $format = 'Y-m-d'){
     return false;
 }
 
-function get_dates_days($date1, $date2, $format = 'm/d/Y'){
+function get_dates_days($date1, $date2, $format = 'Y-m-d H:i:s'){
+
     $d1 = DateTime::createFromFormat($format, $date1);
     $d2 = DateTime::createFromFormat($format, $date2);
     $interval = $d1->diff($d2);
