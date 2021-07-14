@@ -67,109 +67,39 @@
                         </div>
                         <div class="blk">
                             <div class="_header">
-                                <h4><?=count($reviews)?> Reviews</h4>
-                                <div class="rateYo"></div>
+                                <h4><?=count($reviews)?> <?=count($reviews) < 2 ? 'Review' : 'Reviews'?></h4>
+                                <?php if(count($reviews) > 0): ?>
+                                    <div class="rateYo"></div>
+                                <?php endif; ?>
                             </div>
-                            <div class="review">
-                                <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
-                                <div class="txt">
-                                    <div class="icoTxt">
-                                        <div class="title">
-                                            <h5>Jennifer Kem</h5>
-                                            <div class="rateYo"></div>
+                            <?php 
+                            if(count($reviews) > 0):
+                                foreach($reviews as $key => $review):
+                            ?>
+                                <div class="review">
+                                    <div class="ico"><img src="<?= get_site_image_src("members", $review->rater_image, ''); ?>" alt=""></div>
+                                    <div class="txt">
+                                        <div class="icoTxt">
+                                            <div class="title">
+                                                <h5><?= $review->rater_fname.' '.$review->rater_lname ?></h5>
+                                                <div class="rateYo"></div>
+                                            </div>
+                                            <div class="date"><?= chat_message_time($review->review_date) ?></div>
                                         </div>
-                                        <div class="date">February 2018</div>
-                                    </div>
-                                    <p>Had a short stay with my dad and younger sis. Very comfortable and cozy room. The host Jeka is nice and prepared snacks for us in advance. The location is good and we particularly like the view of the room. Strongly recommend:)</p>
-                                    <div class="review">
-                                        <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
-                                        <div class="txt">
-                                            <h6>Model's Response</h6>
-                                            <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>
+                                        <p><?= $review->review_comment ?></p>
+                                        <div class="review">
+                                            <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
+                                            <div class="txt">
+                                                <h6>Model's Response</h6>
+                                                <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="review">
-                                <div class="ico"><img src="<?= base_url() ?>assets/images/users/2.jpg" alt=""></div>
-                                <div class="txt">
-                                    <div class="icoTxt">
-                                        <div class="title">
-                                            <h5>Brent Phillips</h5>
-                                            <div class="rateYo"></div>
-                                        </div>
-                                        <div class="date">January 2018</div>
-                                    </div>
-                                    <p>This place was wonderful. Very walkable to the subway and very close to the Bund. Host is easily reachable and the space was very clean. My only complaint is that during the day the construction nearby gets a bit loud.</p>
-                                    <div class="review">
-                                        <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
-                                        <div class="txt">
-                                            <h6>Model's Response</h6>
-                                            <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="ico"><img src="<?= base_url() ?>assets/images/users/3.jpg" alt=""></div>
-                                <div class="txt">
-                                    <div class="icoTxt">
-                                        <div class="title">
-                                            <h5>Sara Fernandas</h5>
-                                            <div class="rateYo"></div>
-                                        </div>
-                                        <div class="date">December 2017</div>
-                                    </div>
-                                    <p>Jeka is totally great,the room is clean and delicate.There is a little kitchen, loudspeaker and a humidifier in (Website hidden by Virtual Iceland) easy to go to Duolun road and 1933 workshop.Watching night scene of Shanghai in room is super amazing.Drink some beer and enjoy the travel!</p>
-                                    <div class="review">
-                                        <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
-                                        <div class="txt">
-                                            <h6>Model's Response</h6>
-                                            <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="ico"><img src="<?= base_url() ?>assets/images/users/4.jpg" alt=""></div>
-                                <div class="txt">
-                                    <div class="icoTxt">
-                                        <div class="title">
-                                            <h5>Michel Jones</h5>
-                                            <div class="rateYo"></div>
-                                        </div>
-                                        <div class="date">December 2017</div>
-                                    </div>
-                                    <p>This place was great. You’ll love it, very clean, and a great view. Host is very attentive and pro-active.</p>
-                                    <div class="review">
-                                        <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
-                                        <div class="txt">
-                                            <h6>Model's Response</h6>
-                                            <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="ico"><img src="<?= base_url() ?>assets/images/users/5.jpg" alt=""></div>
-                                <div class="txt">
-                                    <div class="icoTxt">
-                                        <div class="title">
-                                            <h5>Sana Safinaz</h5>
-                                            <div class="rateYo"></div>
-                                        </div>
-                                        <div class="date">September 2017</div>
-                                    </div>
-                                    <p>Jeka was an amazing host throughout our time in Shanghai. She responded so quickly to all our questions and really made the space feel like home. The flat was very central and very walkable to restaurants and public transport. Thanks to Jeka, the apartment was very easy to find.</p>
-                                    <div class="review">
-                                        <div class="ico"><img src="<?= base_url() ?>assets/images/users/1.jpg" alt=""></div>
-                                        <div class="txt">
-                                            <h6>Model's Response</h6>
-                                            <p>Thank you for your kind comment, I will be waiting for your next call, hope we work for a long time together.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php 
+                                endforeach;
+                            endif;
+                            ?>
                         </div>
                     </div>
                     <div class="col col2">

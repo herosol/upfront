@@ -143,9 +143,10 @@
                 </div>
                 <?php endif; ?>
 
-                
-                <div class="blk review reviews-section" <?= count($reviews) == 0 ? 'style="display:none"' : '' ?>>
-                    <?php foreach($reviews as $key => $review): ?>
+
+                <div class="blk reviews" <?= count($reviews) == 0 ? 'style="display:none"' : '' ?>>
+                <?php foreach($reviews as $key => $review): ?>
+                    <div class="review">
                         <div class="ico"><img src="<?= get_site_image_src("members", $review->rater_image, ''); ?>" alt=""></div>
                         <div class="txt">
                             <div class="icoTxt">
@@ -164,7 +165,8 @@
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
                 </div>
             </div>
             
