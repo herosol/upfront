@@ -70,6 +70,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
+// $active_group = 'default';
+// $query_builder = TRUE;
+// if ($_SERVER['HTTP_HOST'] != 'localhost') {
+// 	$db['default'] = array(
+// 		'dsn'	=> '',
+// 		'hostname' => '',
+// 		'username' => '',
+// 		'password' => '',
+// 		'database' => ''
+// 	);
+// } else {
+// 	$db['default'] = array(
+// 		'dsn'	=> '',
+// 		'hostname' => 'localhost',
+// 		'username' => 'root',
+// 		'password' => '',
+// 		'database' => 'herosols_upfront'
+// 	);
+// }
+
 $active_group = 'default';
 $query_builder = TRUE;
 if ($_SERVER['HTTP_HOST'] != 'localhost') {
@@ -86,7 +106,7 @@ if ($_SERVER['HTTP_HOST'] != 'localhost') {
 		'hostname' => 'localhost',
 		'username' => 'root',
 		'password' => '',
-		'database' => 'herosols_upfront'
+		'database' => 'upfront-master'
 	);
 }
 
