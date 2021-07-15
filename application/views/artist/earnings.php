@@ -14,11 +14,13 @@
 
         <section id="trans">
             <div class="contain-fluid">
+                <?php echo showMsg(); ?>
                 <div class="blk">
                     <ul class="blans">
-                        <li>Deliveries: <span>50</span></li>
-                        <li>Payouts: <span class="price">$1,258.5</span></li>
+                        <li>Deliveries: <span><?=$deliveries?></span></li>
+                        <li>Payouts: <span class="price">$<?=round($payouts, 1)?></span></li>
                         <li>Current Balance: <span class="price">$<?=round($availBalance, 1)?></span></li>
+                        <li>Requested Balance: <span class="price">$<?=round($requested, 1)?></span></li>
                         <li><button type="button" class="webBtn smBtn popBtn" data-popup="withdraw-funds">Withdraw Funds</button></li>
                     </ul>
                 </div>
@@ -52,7 +54,7 @@
                             <div class="_inner">
                                 <div class="crosBtn"></div>
                                 <h3>Add Payment method</h3>
-                                <form action="" method="post">
+                                <form action="<?=base_url()?>earnings/withdraw_request" method="post" id="withdrawForm">
                                     <div data-payment>
                                         <div class="lblBtn">
                                             <input type="radio" name="payment" id="bank" class="tglBlk" value="bank-account" checked="">
@@ -95,6 +97,8 @@
 
     </main>
     <?php $this->load->view('includes/footer'); ?>
+    <script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
 </body>
 
 </html>

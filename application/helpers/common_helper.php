@@ -107,9 +107,13 @@ function booking_status_badge($val)
 
 function earning_status_badge($val)
 {
-    if($val == 'pending' || $val == 'available')
+    if($val == 'pending')
     {
         return 'yellow';
+    }
+    else if($val == 'available')
+    {
+        return 'gray';
     }
     else if($val == 'paid')
     {
@@ -117,7 +121,7 @@ function earning_status_badge($val)
     }
     else
     {
-        return 'red';
+        return 'blue';
     }
 }
 
@@ -444,7 +448,7 @@ function get_promocode_status($status) {
 }
 
 function get_paid_status($status) {
-    if ($status == 0) {
+    if ($status == 'pending') {
         return '<span class="miniLbl yellow">Pending</span>';
     } else {
         return '<span class="miniLbl green">Complete</span>';
@@ -733,6 +737,12 @@ function show_time_option() {
 function get_meridian_time($d){
     $d = str_replace('/', '-', $d);
     return date("h:i A", strtotime($d));
+}
+
+function amount_percentage($amount, $per)
+{
+    $amount = $amount - (($per / 100) * $amount);
+    return format_amount($amount);
 }
 
 function get_full_time($d){

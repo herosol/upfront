@@ -49,6 +49,36 @@
                     </ul>
                 </li>
             <?php endif?>
+            <?php if(access(7)):?>
+            <li class="opened <?= ($this->uri->segment(2) == 'bookings') ? 'active' : '' ?>">
+                <a href="<?= site_url(ADMIN.'/bookings') ?>">
+                    <i class="fa fa-file"></i>
+                    <span class="title">Bookings</span>
+                </a>
+            </li>
+            <?php endif?>
+            <?php if(access(6)):?>
+                <li class=" <?= ($this->uri->segment(2) == 'withdraws') ? ' opened  active' : '' ?>">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-money"></i>
+                        <span class="title">Withdraws</span>
+                    </a>
+                    <ul>
+                        <li class=" <?= in_array($this->uri->segment(3), array('manage')) ? ' active' : '' ?>">
+                            <a href="<?= site_url(ADMIN.'/withdraws') ?>">
+                                <i class="fa fa-money"></i>
+                                <span class="title">Withdrawals</span>
+                            </a>
+                        </li>
+                        <li class=" <?= ($this->uri->segment(3) == 'blog/categories') ? ' active' : '' ?>">
+                            <a href="<?= site_url(ADMIN.'/withdraws/requests') ?>">
+                                <i class="fa fa-money"></i>
+                                <span class="title">Withdraw Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif?>
             <?php if(access(6)):?>
                 <li class=" <?= ($this->uri->segment(2) == 'blog') ? ' opened  active' : '' ?>">
                     <a href="javascript:void(0)">
@@ -178,12 +208,6 @@
                             <span class="title">Reset Password</span>
                         </a>
                     </li>
-                    <!-- <li class=" <?= ($this->uri->segment(3) == 'email-verify') ? ' active' : '' ?>">
-                        <a href="<?= site_url(ADMIN.'/sitecontent/email-verify') ?>">
-                            <i class="entypo-doc-text  "></i>
-                            <span class="title">Email Verification</span>
-                        </a>
-                    </li> -->
                     <li class=" <?= ($this->uri->segment(3) == 'home') ? ' active' : '' ?>">
                         <a href="<?= site_url(ADMIN.'/sitecontent/home') ?>">
                             <i class="entypo-doc-text  "></i>

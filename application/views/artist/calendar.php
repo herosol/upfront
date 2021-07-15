@@ -32,63 +32,71 @@
                         center: 'title',
                         right: 'month, basicWeek, basicDay'
                     },
-                    // defaultDate: '2019-10-04',
+                    // defaultDate: '2021-10-04',
                     navLinks: true, // can click day/week names to navigate views
                     editable: true,
                     eventLimit: true, // allow "more" link when too many events
                     events: [{
                             title: 'All Day Event',
-                            start: '2019-10-12'
+                            start: '2021-07-12'
                         },
                         {
                             title: 'Long Event',
-                            start: '2019-10-06',
-                            end: '2019-10-08'
+                            start: '2021-07-06',
+                            end: '2021-07-08'
                         },
                         {
                             id: 999,
                             title: 'Repeating Event',
-                            start: '2019-10-16T16:00:00'
+                            start: '2021-07-16T16:00:00'
                         },
                         {
                             id: 999,
                             title: 'Repeating Event',
-                            start: '2019-10-22T16:00:00'
+                            start: '2021-07-22T16:00:00'
                         },
                         {
                             title: 'Conference',
-                            start: '2019-10-04',
-                            end: '2019-10-04'
+                            start: '2021-07-04',
+                            end: '2021-07-04'
                         },
                         {
                             title: 'Meeting',
-                            start: '2019-10-29T10:30:00',
-                            end: '2019-10-28T12:30:00'
+                            start: '2021-07-29T10:30:00',
+                            end: '2021-07-28T12:30:00'
                         },
                         {
                             title: 'Lunch',
-                            start: '2019-10-31T12:00:00'
+                            start: '2021-07-31T12:00:00'
                         },
                         {
                             title: 'Meeting',
-                            start: '2019-10-04T14:30:00'
+                            start: '2021-07-04T14:30:00'
                         },
                         {
                             title: 'Happy Hour',
-                            start: '2019-10-04T17:30:00'
+                            start: '2021-07-04T17:30:00'
                         },
                         {
                             title: 'Dinner',
-                            start: '2019-10-04T20:00:00'
+                            start: '2021-07-04T20:00:00'
+                        },
+                        {
+                            title: 'Gym',
+                            start: '2021-07-04T20:00:00'
+                        },
+                        {
+                            title: 'Test',
+                            start: '2021-07-04T20:00:00'
                         },
                         {
                             title: 'Birthday Party',
-                            start: '2019-10-19T07:00:00'
+                            start: '2021-07-19T07:00:00'
                         },
                         {
                             title: 'Click for Google',
                             url: 'http://google.com/',
-                            start: '2019-10-04'
+                            start: '2021-07-04'
                         }
                     ]
                 });

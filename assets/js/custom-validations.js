@@ -383,4 +383,27 @@ $(document).ready(function() {
         }
     });
 
+    $('#withdrawForm').validate({
+        rules: {
+            review_comment: {
+                required: true
+            }
+        },
+        errorPlacement: function() {
+            return false; // suppresses error message text
+        },
+        submitHandler: function(form) {
+            let frmMsg = $(form).find("div.alertMsg:first");
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function(response) {
+                    response = JSON.parse(response);
+                    location.reload();
+                }
+            });
+        }
+    });
+
 });

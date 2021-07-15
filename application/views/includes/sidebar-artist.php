@@ -24,7 +24,7 @@
                         echo 'active';
                     } ?>">
             <a href="<?= base_url() ?>inbox">
-                <img src="<?= base_url() ?>assets/images/icon-cog-fill.svg" alt="">
+                <img src="<?= base_url() ?>assets/images/icon-envelope.svg" alt="">
                 <em>Messages</em>
             </a>
         </li>

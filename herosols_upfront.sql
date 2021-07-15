@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2021 at 04:54 PM
+-- Generation Time: Jul 15, 2021 at 03:33 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -122,7 +122,14 @@ CREATE TABLE `tbl_bookings` (
   `amount` int(11) NOT NULL,
   `duration` int(11) NOT NULL,
   `detail` text NOT NULL,
-  `booking_status` enum('pending','in_progress','completed','cancelled') NOT NULL DEFAULT 'pending',
+  `booking_status` enum('Pending','In Progress','Completed','Cancelled') NOT NULL DEFAULT 'Pending',
+  `complete_request` enum('send','decline') DEFAULT NULL,
+  `cancel_request` enum('send','accept','decline') DEFAULT NULL,
+  `cancel_request_by` int(11) DEFAULT NULL COMMENT '0 = the one who booked, 1= booked by',
+  `cancel_request_reason` varchar(100) DEFAULT NULL,
+  `cancel_request_description` text DEFAULT NULL,
+  `cancel_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `site_percentage` int(2) NOT NULL,
   `booking_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -130,12 +137,12 @@ CREATE TABLE `tbl_bookings` (
 -- Dumping data for table `tbl_bookings`
 --
 
-INSERT INTO `tbl_bookings` (`id`, `booked_by`, `booked_member`, `amount`, `duration`, `detail`, `booking_status`, `booking_date`) VALUES
-(1, 34, 35, 300, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'pending', '2021-07-12 14:20:51'),
-(2, 34, 35, 1000, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 'pending', '2021-07-12 14:21:53'),
-(3, 34, 35, 300, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'completed', '2021-07-12 14:20:51'),
-(4, 34, 35, 1000, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 'cancelled', '2021-07-12 14:21:53'),
-(5, 34, 35, 300, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'in_progress', '2021-07-12 14:20:51');
+INSERT INTO `tbl_bookings` (`id`, `booked_by`, `booked_member`, `amount`, `duration`, `detail`, `booking_status`, `complete_request`, `cancel_request`, `cancel_request_by`, `cancel_request_reason`, `cancel_request_description`, `cancel_on`, `site_percentage`, `booking_date`) VALUES
+(1, 34, 35, 300, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Cancelled', NULL, 'accept', 35, 'Due to having to finish a report on that day.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2021-07-14 12:28:21', 5, '2021-07-12 14:20:51'),
+(2, 34, 35, 1000, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 'Completed', NULL, NULL, NULL, NULL, NULL, '2021-07-14 12:55:28', 5, '2021-07-12 14:21:53'),
+(3, 34, 35, 300, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Completed', NULL, NULL, NULL, NULL, NULL, '2021-07-14 12:56:34', 5, '2021-07-12 14:20:51'),
+(4, 34, 35, 1000, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 'Cancelled', NULL, NULL, 35, NULL, NULL, '2021-07-15 11:33:32', 5, '2021-07-12 14:21:53'),
+(5, 34, 35, 300, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Cancelled', NULL, 'accept', 35, 'I am not able to attend this meeting due to conflict with another meeting.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2021-07-14 12:28:26', 5, '2021-07-12 14:20:51');
 
 -- --------------------------------------------------------
 
@@ -539,6 +546,40 @@ INSERT INTO `tbl_countries` (`id`, `name`, `iso3`, `iso2`, `phonecode`, `capital
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_earnings`
+--
+
+CREATE TABLE `tbl_earnings` (
+  `id` int(11) NOT NULL,
+  `booking_id` int(11) DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `status` enum('pending','available','requested','paid') NOT NULL DEFAULT 'pending',
+  `date` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_earnings`
+--
+
+INSERT INTO `tbl_earnings` (`id`, `booking_id`, `amount`, `note`, `status`, `date`) VALUES
+(1, 2, 950, NULL, 'paid', '2021-07-08 05:55:28'),
+(2, 3, 285, NULL, 'paid', '2021-07-13 05:56:34'),
+(3, 3, 285, NULL, 'paid', '2021-07-13 05:56:34'),
+(4, 2, 950, NULL, 'paid', '2021-07-08 05:55:28'),
+(5, 3, 285, NULL, 'paid', '2021-07-13 05:56:34'),
+(6, 3, 285, NULL, 'paid', '2021-07-13 05:56:34'),
+(11, 3, 285, NULL, 'paid', '2021-07-13 05:56:34'),
+(12, 2, 950, NULL, 'paid', '2021-07-08 05:55:28'),
+(13, 3, 285, NULL, 'paid', '2021-07-13 05:56:34'),
+(14, 3, 285, NULL, 'paid', '2021-07-13 05:56:34'),
+(15, 2, 950, NULL, 'requested', '2021-07-08 05:55:28'),
+(16, 3, 285, NULL, 'available', '2021-07-13 05:56:34'),
+(17, 3, 285, NULL, 'pending', '2021-07-13 05:56:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_languages`
 --
 
@@ -775,6 +816,33 @@ INSERT INTO `tbl_permissions_admin` (`admin_id`, `permission_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_reviews`
+--
+
+CREATE TABLE `tbl_reviews` (
+  `id` int(11) NOT NULL,
+  `rating_by` int(11) NOT NULL,
+  `mem_id` int(11) NOT NULL,
+  `booking_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT 0,
+  `rating` tinyint(1) NOT NULL,
+  `review_comment` text NOT NULL,
+  `review_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_reviews`
+--
+
+INSERT INTO `tbl_reviews` (`id`, `rating_by`, `mem_id`, `booking_id`, `parent_id`, `rating`, `review_comment`, `review_date`) VALUES
+(1, 34, 35, 3, 0, 5, 'Had a short stay with my dad and younger sis. Very comfortable and cozy room. The host Jeka is nice and prepared snacks for us in advance. The location is good and we particularly like the view of the room. Strongly recommend.', '2021-07-13 13:16:59'),
+(2, 34, 35, 3, 0, 5, 'HAHAHAHAHAHHAHA ', '2021-07-13 13:36:01'),
+(3, 34, 35, 3, 0, 5, 'Again Review', '2021-07-13 13:45:01'),
+(4, 34, 35, 3, 0, 5, 'Again Tesssat Here', '2021-07-13 13:46:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_siteadmin`
 --
 
@@ -832,7 +900,7 @@ CREATE TABLE `tbl_siteadmin` (
 --
 
 INSERT INTO `tbl_siteadmin` (`site_id`, `site_username`, `site_password`, `site_admin_name`, `site_admin_type`, `site_domain`, `site_name`, `site_email`, `site_noreply_email`, `site_phone`, `site_fax`, `site_paypal_sandox`, `site_sandbox_paypal`, `site_live_paypal`, `site_ip`, `site_logo`, `site_icon`, `site_thumb`, `site_address`, `site_about`, `site_city`, `site_state`, `site_zip`, `site_country`, `site_lastlogindate`, `site_copyright`, `site_facebook`, `site_twitter`, `site_google`, `site_instagram`, `site_linkedin`, `site_youtube`, `site_contact_map`, `site_google_ad`, `site_meta_desc`, `site_meta_keyword`, `site_meta_copyright`, `site_meta_author`, `site_how_to_pay`, `site_status`, `sub_location`, `site_chat`, `sub_featured`, `site_version`, `site_percentage`, `site_hold_payment`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'cosplay-cosmos-logo1.png', 'cosplay-cosmos-icon1.png', 'cosplay-cosmos-thumb.jpg', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-07-12 10:32:24', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/', 'https://twitter.com/', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 29, 5, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'cosplay-cosmos-logo1.png', 'cosplay-cosmos-icon1.png', 'cosplay-cosmos-thumb.jpg', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-07-15 11:08:55', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/', 'https://twitter.com/', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 29, 5, 5),
 (2, 'ajay', '098f6bcd4621d373cade4e832627b4f6', 'Malik Ajay Jones', 'subadmin', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-03-06 15:00:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -5983,13 +6051,68 @@ INSERT INTO `tbl_users` (`user_id`, `user_remember`, `user_token`, `user_type`, 
 (2, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad1@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, '20', '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 1, 1, 0, '2021-06-23 13:03:14', '2021-06-23 16:03:14'),
 (3, NULL, NULL, 'user', 'website', NULL, 'Saad', 'Ashraf', 'saad45@gmail.com', 'h5r2e394y3r4o5v36564j4s4', '', NULL, NULL, NULL, '20', '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 07:40:30', '2021-06-25 10:40:30'),
 (32, 'g5', 'omrb60t78llrf47ri8flaevg7oelisik', 'user', 'website', NULL, 'Saad', 'Chaudhary', 'saad@herosolutions.com.pk', 'h5r2e394y3r4o5k36574w49315h393o4', 'v4r4h3l47484q4f4b5r4k4j4a514e3m494q233w54485s3k4b4x2u2s4t4r5r3q474u3b4v4f55643i4', NULL, NULL, NULL, '20', '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-06-25 09:44:45', '2021-06-30 17:17:32'),
-(34, 'g5', 'nbjg4gao03cdp6f6i7quu3jou90532qs', 'model', 'website', NULL, 'Saadd', 'Ashraff', 'saad1@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4r4p3l47484q4f4b5q4o493h5k3q3p484r2o3z524s4w3s2a4y3y2n4g53623e474x264t4h5t4m4i4', '03000000001', 'Male', '1969-12-31', '31', 'Screenwriting, Martial Arts: Fencing, Acting Techniques, Songwriting, Accents/Dialects, Mezzo Soprano, Bike Riding, Sketch Comedy, Sketchwriting, Athletic, Modeling, Shakespeare Training, Weapons Training', NULL, '', '&lt;p&gt;This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.&lt;/p&gt;', NULL, NULL, 'ffd52f3c7e12435a724a8f30fddadd9c_1625226753_3830.mp4', '470e7a4f017a5476afb7eeb3f8b96f9b_1625226936_1715.jpg', 'e2c0be24560d78c5e599c2a9c9d0bbd2_1625224361_1397.jpg', NULL, 'Sargodha', '', 'Sargodha', 3175, '40100', 167, 50, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:34:53', '2021-07-12 11:09:50'),
-(35, 'g5', 'fda5j168bmi0kbro89ec2gfs6mh259r3', 'model', 'website', NULL, 'Saad', 'Test', 'saad3@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3d3r4k3a5y4f4a595z4u415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', 'Male', '1998-07-14', '20', 'Test1, Test2, Test3, Test4, Test5, Test6, Test7, Test8, Test9, Test10, Test11', NULL, '', '&lt;p&gt;This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;&lt;p&gt;This is a test .This is a test .This is a test . This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;', NULL, NULL, '72da7fd6d1302c0a159f6436d01e9eb0_1625230862_3334.mp4', '13f3cf8c531952d72e5847c4183e6910_1625230862_6337.jpg', 'd34ab169b70c9dcd35e62896010cd9ff_1625231963_2961.jpg', NULL, 'Test address # is here', '', 'Log Angeles', 1416, '90001', 233, 100, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '33.96967', '-118.24993', NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:36:34', '2021-07-12 13:30:49'),
+(34, 'g5', '8ricaaiigich3nam7pv5h7ffs7flsc8i', 'model', 'website', NULL, 'Saadd', 'Ashraff', 'saad1@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'v4r4p3l47484q4f4b5q4o493h5k3q3p484r2o3z524s4w3s2a4y3y2n4g53623e474x264t4h5t4m4i4', '03000000001', 'Male', '1969-12-31', '31', 'Screenwriting, Martial Arts: Fencing, Acting Techniques, Songwriting, Accents/Dialects, Mezzo Soprano, Bike Riding, Sketch Comedy, Sketchwriting, Athletic, Modeling, Shakespeare Training, Weapons Training', NULL, '', '&lt;p&gt;This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.&lt;/p&gt;', NULL, NULL, 'ffd52f3c7e12435a724a8f30fddadd9c_1625226753_3830.mp4', '470e7a4f017a5476afb7eeb3f8b96f9b_1625226936_1715.jpg', 'e2c0be24560d78c5e599c2a9c9d0bbd2_1625224361_1397.jpg', NULL, 'Sargodha', '', 'Sargodha', 3175, '40100', 167, 50, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:34:53', '2021-07-15 14:59:51'),
+(35, 'g5', 'tk17gtpgfndfq9pbs5fvouj80374f13n', 'model', 'website', NULL, 'Saad', 'Test', 'saad3@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3d3r4k3a5y4f4a595z4u415k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', 'Male', '1998-07-14', '20', 'Test1, Test2, Test3, Test4, Test5, Test6, Test7, Test8, Test9, Test10, Test11', NULL, '', '&lt;p&gt;This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;&lt;p&gt;This is a test .This is a test .This is a test . This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .This is a test .&lt;/p&gt;', NULL, NULL, '72da7fd6d1302c0a159f6436d01e9eb0_1625230862_3334.mp4', '13f3cf8c531952d72e5847c4183e6910_1625230862_6337.jpg', 'd34ab169b70c9dcd35e62896010cd9ff_1625231963_2961.jpg', NULL, 'Test address # is here', '', 'Log Angeles', 1416, '90001', 233, 100, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '33.96967', '-118.24993', NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 13:36:34', '2021-07-15 15:24:35'),
 (37, 'g5', 'hkvbath9oudjdp7vh6jnti3enfp1mp9s', 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad6@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w493p3p2k3a5y4f4a595z4u215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, '20', '', NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, '05f971b5ec196b8c65b75d2ef8267331_1625062370_4045.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 0, 1, 0, '2021-06-30 14:12:50', '2021-07-05 09:29:19'),
 (38, NULL, NULL, 'model', 'website', NULL, 'Saad', 'Ashraf', 'saad8@herosolutions.com.pk', 'h5r2e394y3r4o5v36564j4s4', 'w4p3l3s2k3a5y4f4a595z4w215k384c494d433362464u4t2d4i3d4o4f5s5q3p4y3x2f4s4u4w593z5', '03000000000', NULL, NULL, '20', '', NULL, '', 'This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. This is a test here. ', NULL, NULL, NULL, 'c0f168ce8900fa56e57789e2a2f2c9d0_1625062417_6160.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 0, NULL, 0, 0, 1, 1, 0, '2021-06-30 14:13:37', '2021-06-30 17:13:37'),
 (39, NULL, NULL, 'model', 'website', NULL, 'Test', 'User', 'user@gmail.com', '45t3m3d474t5l4v4y4s5v453', 'x49393p2k3a565x4b5a5s493a5z2p28474r3t4y5t36433o4', '03000000000', NULL, NULL, '20', '', NULL, '', 'test', NULL, NULL, NULL, 'c0f168ce8900fa56e57789e2a2f2c9d0_1625062417_6160.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-07-01 10:38:36', '2021-07-01 13:38:36'),
 (40, 'g5', 'nbjg4gao03cdp6f6i7quu3jou90532qs', 'user', 'website', NULL, 'Demo', 'User', 'demouser@gmail.com', '05c3u3l4649465x4b5a5s493x4u31313', 'w49393l4y3t465r4j59445u4a514e35304q2v2l51475t4p424x2y2m4', NULL, NULL, NULL, NULL, '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-07-12 07:37:20', '2021-07-12 11:11:27'),
 (42, NULL, NULL, 'model', 'website', NULL, 'Demo', 'Model', 'demomodel@gmail.com', 'h5r2e394y3r4o5v36564j4s4', 'v4b4b4o4k39525j4j595b4o4i5z2m3c48493c3r52475g3k4b4e3u2c4f544x253', '03000000000', NULL, NULL, NULL, '', NULL, '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English.', NULL, NULL, NULL, 'ce78d1da254c0843eb23951ae077ff5f_1626079383_8094.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-07-12 08:43:03', '2021-07-12 11:43:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_withdrawal_detail`
+--
+
+CREATE TABLE `tbl_withdrawal_detail` (
+  `withdraw_id` int(10) UNSIGNED DEFAULT NULL,
+  `earning_id` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_withdrawal_detail`
+--
+
+INSERT INTO `tbl_withdrawal_detail` (`withdraw_id`, `earning_id`) VALUES
+(1, 4),
+(1, 3),
+(1, 2),
+(1, 1),
+(2, 6),
+(2, 5),
+(3, 14),
+(3, 13),
+(3, 12),
+(3, 11),
+(4, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_withdraws`
+--
+
+CREATE TABLE `tbl_withdraws` (
+  `id` int(11) NOT NULL,
+  `mem_id` int(11) NOT NULL,
+  `amount` float NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `payment_method_id` int(11) DEFAULT NULL,
+  `status` enum('pending','completed') NOT NULL DEFAULT 'pending',
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `paid_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_withdraws`
+--
+
+INSERT INTO `tbl_withdraws` (`id`, `mem_id`, `amount`, `note`, `payment_method_id`, `status`, `date`, `paid_date`) VALUES
+(1, 35, 2470, NULL, NULL, 'completed', '2021-07-15 09:08:29', '2021-07-15 05:12:09'),
+(2, 35, 570, NULL, NULL, 'completed', '2021-07-15 09:21:55', '2021-07-15 05:22:09'),
+(3, 35, 1805, NULL, NULL, 'completed', '2021-07-15 09:23:14', '2021-07-15 05:23:27'),
+(4, 35, 950, NULL, NULL, 'pending', '2021-07-15 09:24:24', NULL);
 
 --
 -- Indexes for dumped tables
@@ -6044,6 +6167,12 @@ ALTER TABLE `tbl_countries`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_earnings`
+--
+ALTER TABLE `tbl_earnings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_languages`
 --
 ALTER TABLE `tbl_languages`
@@ -6083,6 +6212,12 @@ ALTER TABLE `tbl_model_categories`
 -- Indexes for table `tbl_motivational_videos`
 --
 ALTER TABLE `tbl_motivational_videos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_reviews`
+--
+ALTER TABLE `tbl_reviews`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -6133,6 +6268,12 @@ ALTER TABLE `tbl_topics_categories`
 --
 ALTER TABLE `tbl_users`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `tbl_withdraws`
+--
+ALTER TABLE `tbl_withdraws`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -6187,6 +6328,12 @@ ALTER TABLE `tbl_countries`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
+-- AUTO_INCREMENT for table `tbl_earnings`
+--
+ALTER TABLE `tbl_earnings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `tbl_languages`
 --
 ALTER TABLE `tbl_languages`
@@ -6227,6 +6374,12 @@ ALTER TABLE `tbl_model_categories`
 --
 ALTER TABLE `tbl_motivational_videos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_reviews`
+--
+ALTER TABLE `tbl_reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_siteadmin`
@@ -6275,6 +6428,12 @@ ALTER TABLE `tbl_topics_categories`
 --
 ALTER TABLE `tbl_users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `tbl_withdraws`
+--
+ALTER TABLE `tbl_withdraws`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

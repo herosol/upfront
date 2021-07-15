@@ -12,7 +12,7 @@
     <div>
         <hr>
         <div class="row col-md-12">
-            <form action="<?= site_url(ADMIN.'/withdraws/mark-paid/'.$row->id)?>" name="frmPartner" role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <form action="<?= site_url(ADMIN.'/withdraws/mark_paid/'.$row->id)?>" name="frmPartner" role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -107,10 +107,10 @@
     </div>
 <?php else: ?>
     <?= showMsg(); ?>
-    <?= getBredcrum(ADMIN, array('#' => 'Manage Withdraw Requests')); ?>
+    <?= getBredcrum(ADMIN, array('#' => $page_tittle)); ?>
     <div class="row margin-bottom-10">
         <div class="col-md-12">
-            <h2 class="no-margin"><i class="entypo-list"></i> Manage <?php if ($this->uri->segment(4) > 0): ?><strong>" <?php echo ucwords($member_row->mem_fname.' '.$member_row->mem_lname); ?> "</strong> <?php endif; ?>Withdraw Requests</h2>
+            <h2 class="no-margin"><i class="entypo-list"></i> <?= $page_tittle ?> </h2>
         </div>
     </div>
     <table class="table table-bordered datatable" id="table-1">
@@ -128,7 +128,7 @@
                 <?php foreach ($rows as $row): ?>
                     <tr class="odd gradeX">
                         <td class="text-center"><?= ++$count; ?></td>
-                        <td><b><a href="<?= site_url(ADMIN.'/sitters/manage/'.$row->mem_id)?>" target="_blank"><?= get_mem_name($row->mem_id); ?></a></b></td>
+                        <td><b><a href="#" target="_blank"><?= get_mem_name($row->mem_id); ?></a></b></td>
                         <td><?= format_date($row->date, 'M d, Y h:m:i a'); ?></td>
                         <td><?= format_amount($row->amount); ?></td>
                         <td class="text-center">

@@ -126,8 +126,8 @@ function get_mem_image($mem_id) {
 function get_mem_name($mem_id) {
     global $CI;
     $CI = get_instance();
-    $row = $CI->master->getRow('members', array('mem_id' => $mem_id));
-    return ucwords($row->mem_fname.' '.$row->mem_lname);
+    $row = $CI->master->getRow('users', array('user_id' => $mem_id));
+    return ucwords($row->user_fname.' '.$row->user_lname);
 }
 
 function get_mem_type($mem_id) {
@@ -410,17 +410,18 @@ function get_mem_rating($mem_id,$ref_id,$ref_type='booking') {
     ->where('ref_type', $ref_type);
     return $CI->db->get('reviews')->row();
 }
-function get_mem_review($mem_id, $ref_id, $ref_type='booking') {
+
+function get_mem_review($booking_id) 
+{
     $CI = get_instance();
-    $CI->db->select("r.*, mem_image, concat(mem_fname,' ',mem_lname) as mem_name")
+    $CI->db->select("r.*, mem_image, concat(user_fname,' ',user_lname) as mem_name")
     ->from('reviews r')
-    ->join('members mem','mem.mem_id=r.from_id')
-    ->where('r.from_id', $mem_id)
-    ->where('r.ref_id', $ref_id)
-    ->where('r.ref_type', $ref_type)
-    ->where('r.parent_id', NULL);
+    ->join('users mem','mem.user_id=r.rating_by')
+    ->where('r.booking_id', $booking_id)
+    ->where('r.parent_id', 0);
     return $CI->db->get()->row();
 }
+
 function get_reply($parent_id) {
     $CI = get_instance();
     $CI->db->select("r.*,mem_image,concat(mem_fname,' ',mem_lname) as mem_name")
