@@ -406,4 +406,30 @@ $(document).ready(function() {
         }
     });
 
+    $('#frmContact').validate({
+        errorElement: 'div',
+        rules: {
+            name: {
+                required: true,
+            },
+            phone: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            subject: {
+                required: true
+            },
+            comment: {
+                required: true
+            }
+        },
+        messages: {},
+        errorPlacement: function(error, element) {
+
+        }
+    });
+
 });

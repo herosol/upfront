@@ -148,6 +148,14 @@
             </li>
             <?php endif?> -->
             <?php if(access(7)):?>
+            <li class="opened <?= ($this->uri->segment(2) == 'contacts') ? 'active' : '' ?>">
+                <a href="<?= site_url(ADMIN.'/contacts') ?>">
+                    <i class="fa fa-file"></i>
+                    <span class="title">Conatct Messages</span>
+                </a>
+            </li>
+            <?php endif?>
+            <?php if(access(7)):?>
             <li class="opened <?= ($this->uri->segment(2) == 'model_applications') ? 'active' : '' ?>">
                 <a href="<?= site_url(ADMIN.'/model_applications') ?>">
                     <i class="fa fa-file"></i>
@@ -170,6 +178,28 @@
                     <span class="title">Models Categories</span>
                 </a>
             </li>
+            <?php endif?>
+            <?php if(access(6)):?>
+                <li class=" <?= ($this->uri->segment(2) == 'homecruds') ? ' opened  active' : '' ?>">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-th"></i>
+                        <span class="title">Home Cruds</span>
+                    </a>
+                    <ul>
+                        <li class=" <?= in_array($this->uri->segment(3), array('manage')) ? ' active' : '' ?>">
+                            <a href="<?= site_url(ADMIN.'/homecruds') ?>">
+                                <i class="fa fa-th-list"></i>
+                                <span class="title">Fascinates</span>
+                            </a>
+                        </li>
+                        <li class=" <?= ($this->uri->segment(3) == 'topics/categories') ? ' active' : '' ?>">
+                            <a href="<?= site_url(ADMIN.'/homecruds/star_viewing') ?>">
+                                <i class="fa fa-th-list"></i>
+                                <span class="title">Star Viewing</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             <?php endif?>
             <?php if(access(8)):?>
             <li class=" <?= ($this->uri->segment(2) == 'sitecontent' || $this->uri->segment(2) == 'preferences') ? ' opened  active' : '' ?>">

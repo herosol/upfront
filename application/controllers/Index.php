@@ -6,11 +6,18 @@ class Index extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('mcategories_model');
+        $this->load->model('homec_model');
     }
 
 	public function index()
 	{
-		$this->load->view('pages/index');
+        $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'home'));
+        $this->data['site_content'] = unserialize($this->data['site_content']->code);
+        $this->data['featured_categories'] = $this->mcategories_model->get_rows(['is_featured'=> '1']);
+        $this->data['fascinates'] = $this->homec_model->get_rows(['section_type'=> 'fascinates']);
+        $this->data['stars'] = $this->homec_model->get_rows(['section_type'=> 'star_viewing']);
+		$this->load->view('pages/index', $this->data);
 	}
 
     public function register()

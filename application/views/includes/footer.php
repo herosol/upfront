@@ -6,9 +6,9 @@
                 <ul class="lst">
                     <li><a href="<?= base_url() ?>find">Find a Model</a></li>
                     <li><a href="<?= base_url() ?>become-a-model">Become a Model</a></li>
-                    <li><a href="<?= base_url() ?>find">Online Auditions</a></li>
+                    <li class="hidden"><a href="<?= base_url() ?>find">Online Auditions</a></li>
                     <li><a href="<?= base_url() ?>affiliates">Affiliates</a></li>
-                    <li><a href="#">Learning Resources</a></li>
+                    <li class="hidden"><a href="#">Learning Resources</a></li>
                 </ul>
             </div>
             <div class="col">
@@ -21,7 +21,7 @@
                     <?php endif; ?>
                     <li><a href="<?= base_url() ?>profile-settings">Profile Settings</a></li>
                     <li><a href="<?= base_url() ?>inbox">My Inbox</a></li>
-                    <li><a href="#">My Favorites</a></li>
+                    <li class="hidden"><a href="#">My Favorites</a></li>
                 </ul>
             </div>
             <div class="col">

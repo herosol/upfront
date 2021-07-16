@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Home — Upfront Worldwide Talent Agency</title>
+    <title><?= !empty($site_content['page_title']) ? $site_content['page_title'] . ' - ' : 'Home - ' ?><?= $site_settings->site_name ?></title>  
     <?php $this->load->view('includes/site-master'); ?>
 </head>
 
@@ -11,12 +11,12 @@
     <main index>
 
 
-        <section id="banner" class="flexBox" style="background-image: url('<?= base_url() ?>assets/images/portfolio-06.jpg');">
+        <section id="banner" class="flexBox" style="background-image: url('<?= base_url().UPLOAD_PATH.'pages/home/'.$site_content['image1']?> ');">
             <div class="flexDv">
                 <div class="contain-fluid">
                     <div class="content text-center">
-                        <h1>A division of SpeakUp Bev</h1>
-                        <p>Remote opportunities, voiceover jobs, self-tape auditions, live webinars, and more.</p>
+                        <h1><?= $site_content['banner_heading'] ?></h1>
+                        <p><?= $site_content['banner_detail'] ?></p>
                         <form action="" method="post">
                             <div class="txtGrp">
                                 <label for="" class="">Search by title, skill or company</label>
@@ -37,62 +37,24 @@
             </div>
         </section>
         <!-- banner -->
-
+        
 
         <section id="guardian">
             <div class="contain-fluid">
                 <div class="content text-center">
-                    <h1 class="heading">Find What Fascinates You</h1>
+                    <h1 class="heading"><?= $site_content['fascinates_heading'] ?></h1>
                 </div>
                 <div id="owl-guardian" class="owl-carousel owl-theme owl-guardian">
+                <?php foreach($fascinates as $key => $row): ?>
                     <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/1.jpg" alt=""></a></div>
+                        <div class="image"><a href="?"><img src="<?= get_site_image_src("home-cruds", $row->image, ''); ?>" alt=""></a></div>
                         <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
-                            <p>Emma Gannon</p>
+                            <div class="rateYo" data-rateyo-rating="<?=$row->rating?>"></div>
+                            <h4><a href="?"><?=$row->short_desc?></a></h4>
+                            <p><?=$row->name?></p>
                         </div>
                     </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/2.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
-                            <p>Amanda Rach Lee</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/3.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
-                            <p>Thomas Frank</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/4.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Real Productivity: How to Build Habits That Last</a></h4>
-                            <p>Gia Graham</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/5.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Hand Lettering in Procreate: Fundamentals to Finishing Touches</a></h4>
-                            <p>Sean Dalton</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/6.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Customizing Type with Draplin: Creating Wordmarks That Work</a></h4>
-                            <p>Aaron Draplin</p>
-                        </div>
-                    </div>
+                <?php endforeach; ?>
                 </div>
             </div>
         </section>
@@ -104,13 +66,13 @@
                 <div class="flexRow flex">
                     <div class="col col1">
                         <div class="content">
-                            <h1 class="heading">Get instant help with your homework</h1>
-                            <p>Explore new skills, deepen existing passions, and get lost in creativity. What you find just might surprise and inspire you.</p>
+                            <h1 class="heading"><?= $site_content['instant_help_heading'] ?></h1>
+                            <p><?= $site_content['instant_help_short_desc'] ?></p>
                             <div class="bTn"><a href="?" class="webBtn">Browse Classes</a></div>
                         </div>
                     </div>
                     <div class="col col2">
-                        <div class="vidBlk" style="background-image: url('<?= base_url() ?>/assets/images/3.jpg')"></div>
+                        <div class="vidBlk" style="background-image: url('<?= get_site_image_src("pages/home", $site_content['instant_help_image'], ''); ?>')"></div>
                     </div>
                 </div>
             </div>
@@ -121,58 +83,18 @@
         <section id="category">
             <div class="contain-fluid text-center">
                 <div class="content">
-                    <h1 class="heading">Featured Models by Category</h1>
-                    <p>With so much to explore, real projects to create, and the support of fellow-creatives, Upfront Worldwide Talent Agency empowers you to accomplish real growth.</p>
+                    <h1 class="heading"><?= $site_content['featured_model_heading'] ?></h1>
+                    <p><?= $site_content['featured_model_detail'] ?></p>
                 </div>
                 <div id="owl-topics" class="owl-carousel owl-theme">
+                <?php foreach($featured_categories as $key => $row): ?>
                     <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/1.jpg" alt=""></div>
+                        <div class="image"><img src="<?= get_site_image_src("model-categories", $row->image, ''); ?>" alt=""></div>
                         <div class="txt">
-                            <h4>Film</h4>
+                            <h4><?= ucfirst($row->name); ?></h4>
                         </div>
                     </div>
-                    <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/2.jpg" alt=""></div>
-                        <div class="txt">
-                            <h4>Photography</h4>
-                        </div>
-                    </div>
-                    <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/3.jpg" alt=""></div>
-                        <div class="txt">
-                            <h4>Theater</h4>
-                        </div>
-                    </div>
-                    <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/4.jpg" alt=""></div>
-                        <div class="txt">
-                            <h4>Voiceover</h4>
-                        </div>
-                    </div>
-                    <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/5.jpg" alt=""></div>
-                        <div class="txt">
-                            <h4>Modeling</h4>
-                        </div>
-                    </div>
-                    <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/6.jpg" alt=""></div>
-                        <div class="txt">
-                            <h4>TV</h4>
-                        </div>
-                    </div>
-                    <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/7.jpg" alt=""></div>
-                        <div class="txt">
-                            <h4>Music</h4>
-                        </div>
-                    </div>
-                    <div class="inner">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/category/8.jpg" alt=""></div>
-                        <div class="txt">
-                            <h4>Kids</h4>
-                        </div>
-                    </div>
+                <?php endforeach; ?>
                 </div>
             </div>
         </section>
@@ -182,57 +104,19 @@
         <section id="viewing">
             <div class="contain-fluid">
                 <div class="content text-center">
-                    <h1 class="heading">Stars are viewing</h1>
+                    <h1 class="heading"><?= $site_content['star_viewing_heading'] ?></h1>
                 </div>
                 <div id="owl-viewing" class="owl-carousel owl-theme owl-guardian">
+                <?php foreach($stars as $key => $row): ?>
                     <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/5.jpg" alt=""></a></div>
+                        <div class="image"><a href="?"><img src="<?= get_site_image_src("home-cruds", $row->image, ''); ?>" alt=""></a></div>
                         <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Hand Lettering in Procreate: Fundamentals to Finishing Touches</a></h4>
-                            <p>Sean Dalton</p>
+                            <div class="rateYo" data-rateyo-rating="<?=$row->rating?>"></div>
+                            <h4><a href="?"><?=$row->short_desc?></a></h4>
+                            <p><?=$row->name?></p>
                         </div>
                     </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/6.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Customizing Type with Draplin: Creating Wordmarks That Work</a></h4>
-                            <p>Aaron Draplin</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/9.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
-                            <p>Emma Gannon</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/10.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
-                            <p>Amanda Rach Lee</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/3.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
-                            <p>Thomas Frank</p>
-                        </div>
-                    </div>
-                    <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= base_url() ?>/assets/images/stars/4.jpg" alt=""></a></div>
-                        <div class="txt">
-                            <div class="rateYo"></div>
-                            <h4><a href="?">Real Productivity: How to Build Habits That Last</a></h4>
-                            <p>Gia Graham</p>
-                        </div>
-                    </div>
+                <?php endforeach; ?>
                 </div>
             </div>
         </section>
@@ -242,40 +126,22 @@
         <section id="customer">
             <div class="contain-fluid">
                 <div class="content text-center">
-                    <h1 class="heading">Take their words for it</h1>
-                    <p>Move your creative journey forward without putting life on hold. Upfront Worldwide Talent Agency helps you find inspiration that fits your routine.</p>
+                    <h1 class="heading"><?=$site_content['take_words_heading']?></h1>
+                    <p><?=$site_content['take_words_short_desc']?></p>
                 </div>
                 <div class="flexRow flex">
+                <?php for($i=1; $i<=3; $i++):?>
                     <div class="col">
                         <div class="inner">
-                            <div class="image"><img src="<?= base_url() ?>/assets/images/stars/1.jpg" alt=""></div>
+                            <div class="image"><img src="<?=get_site_image_src("pages/home", $site_content['take_words_image'.$i]) ?>" alt=""></div>
                             <div class="txt">
-                                <h4>Angela M.</h4>
-                                <p>“I've been with Elephant for many years now and have had no bad experiences at all! Only great experiences and customer service!”</p>
-                                <div class="rateYo"></div>
+                                <h4><?=$site_content['take_words_image_name'.$i]?></h4>
+                                <p><?=$site_content['take_words_image_desc'.$i]?></p>
+                                <div class="rateYo" data-rateyo-rating="<?=$site_content['take_words_image_rating'.$i]?>"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="inner">
-                            <div class="image"><img src="<?= base_url() ?>/assets/images/stars/2.jpg" alt=""></div>
-                            <div class="txt">
-                                <h4>Kevin D.</h4>
-                                <p>“Your staff are exceptional! Doesn't matter whether it's an on-line chat or directly on the phone they're always courteous, helpful, and so easy to deal with.”</p>
-                                <div class="rateYo"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inner">
-                            <div class="image"><img src="<?= base_url() ?>/assets/images/stars/3.jpg" alt=""></div>
-                            <div class="txt">
-                                <h4>Cathy G.</h4>
-                                <p>“Elephant is a great affordable insurance company, it's easy to make changes online and if I have trouble the agents are very helpful!”</p>
-                                <div class="rateYo"></div>
-                            </div>
-                        </div>
-                    </div>
+                <?php endfor; ?>
                 </div>
             </div>
         </section>
@@ -310,37 +176,21 @@
         <section id="affiliate">
             <div class="contain text-center">
                 <div class="content">
-                    <h1 class="heading">Land your perfect role</h1>
-                    <p>Unlimited submissions, best-in-class casting tools, and more performance roles than any other casting service.</p>
+                    <h1 class="heading"><?=$site_content['perfect_role_heading']?></h1>
+                    <p><?=$site_content['perfect_role_short_desc']?></p>
                 </div>
                 <div class="flexRow flex">
+                <?php for($i=1; $i<=3; $i++):?>
                     <div class="col">
                         <div class="inner blk">
-                            <div class="icon"><img src="<?= base_url() ?>assets/images/vector-online-classes.svg" alt=""></div>
+                            <div class="icon"><img src="<?=get_site_image_src("pages/home", $site_content['perfect_role_image'.$i]) ?>" alt=""></div>
                             <div class="txt">
-                                <h4>35,000+ Online Creators</h4>
-                                <p>Find the best creators and stars for your audience.</p>
+                                <h4><?=$site_content['perfect_role_image_heading'.$i]?></h4>
+                                <p><?=$site_content['perfect_role_image_desc'.$i]?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="inner blk">
-                            <div class="icon"><img src="<?= base_url() ?>assets/images/vector-projects.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>60,000+ Creators Projects</h4>
-                                <p>Showcase creative work created by Upfront Worldwide creators.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="inner blk">
-                            <div class="icon"><img src="<?= base_url() ?>assets/images/vector-cookie.svg" alt=""></div>
-                            <div class="txt">
-                                <h4>30-Day Cookie</h4>
-                                <p>Earn commission for each new reader you refer.</p>
-                            </div>
-                        </div>
-                    </div>
+                <?php endfor; ?>
                 </div>
             </div>
         </section>
@@ -350,60 +200,22 @@
         <section id="creator">
             <div class="contain-fluid text-center">
                 <div class="content">
-                    <h1 class="heading">Upfront Real Creators</h1>
-                    <p>Upfront Worldwide Talent Agency models are icons, experts, and industry rock stars excited to share their experience, wisdom, and trusted tools with you.</p>
+                    <h1 class="heading"><?=$site_content['real_creators_heading']?></h1>
+                    <p><?=$site_content['real_creators_short_desc']?></p>
                 </div>
                 <div class="flexRow flex">
+                <?php for($i=1; $i<=5; $i++):?>
                     <div class="col">
                         <div class="profBlk">
-                            <div class="ico"><a href="?"><img src="<?= base_url() ?>/assets/images/users/1.jpg" alt=""></a></div>
+                            <div class="ico"><a href="?"><img src="<?=get_site_image_src("pages/home", $site_content['real_creators_image'.$i]) ?>" alt=""></a></div>
                             <div class="txt">
-                                <div class="rateYo"></div>
-                                <h4><a href="?">Bonnie Christine</a></h4>
-                                <p>Artist & Fabric Designer</p>
+                                <div class="rateYo" data-rateyo-rating="<?=$site_content['real_creator_rating'.$i]?>"></div>
+                                <h4><a><?=$site_content['real_creator_name'.$i]?></a></h4>
+                                <p><?=$site_content['real_creator_title'.$i]?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="profBlk">
-                            <div class="ico"><a href="?"><img src="<?= base_url() ?>/assets/images/users/2.jpg" alt=""></a></div>
-                            <div class="txt">
-                                <div class="rateYo"></div>
-                                <h4><a href="?">DKNG Studios</a></h4>
-                                <p>Illustrators</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="profBlk">
-                            <div class="ico"><a href="?"><img src="<?= base_url() ?>/assets/images/users/3.jpg" alt=""></a></div>
-                            <div class="txt">
-                                <div class="rateYo"></div>
-                                <h4><a href="?">Emily Henderson</a></h4>
-                                <p>Stylist & Author</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="profBlk">
-                            <div class="ico"><a href="?"><img src="<?= base_url() ?>/assets/images/users/4.jpg" alt=""></a></div>
-                            <div class="txt">
-                                <div class="rateYo"></div>
-                                <h4><a href="?">Debbie Millman</a></h4>
-                                <p>Designer & Writer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="profBlk">
-                            <div class="ico"><a href="?"><img src="<?= base_url() ?>/assets/images/users/5.jpg" alt=""></a></div>
-                            <div class="txt">
-                                <div class="rateYo"></div>
-                                <h4><a href="?">Brandon Woelfel</a></h4>
-                                <p>Photographer</p>
-                            </div>
-                        </div>
-                    </div>
+                <?php endfor; ?>
                 </div>
             </div>
         </section>
@@ -414,12 +226,12 @@
             <div class="contain-fluid">
                 <div class="flexRow flex">
                     <div class="col col1">
-                        <div class="image"><img src="<?= base_url() ?>/assets/images/home-women.jpg" alt=""></div>
+                        <div class="image"><img src="<?= get_site_image_src("pages/home/", $site_content['become_model_image'])?>" alt=""></div>
                     </div>
                     <div class="col col2">
                         <div class="content">
-                            <h1 class="heading">Become a Model</h1>
-                            <p>Top instructors from around the world teach millions of stars on Upfront Worldwide Talent Agency. We provide the tools and skills to teach what you love.</p>
+                            <h1 class="heading"><?=$site_content['become_model_heading']?></h1>
+                            <p><?=$site_content['become_model_short_desc']?></p>
                             <div class="bTn"><a href="<?= base_url() ?>become-a-model" class="webBtn">Get started now</a></div>
                         </div>
                     </div>

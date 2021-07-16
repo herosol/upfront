@@ -20,18 +20,99 @@ class Sitecontent extends Admin_Controller
 
             if(!is_array($content_row))
                 $content_row = array();
+            if (isset($_FILES["image1"]["name"]) && $_FILES["image1"]["name"] != "")
+            {
+                $image = upload_file(UPLOAD_PATH.'pages/home', 'image1');
+                if (!empty($image['file_name']))
+                {
+                    if(isset($content_row['image1']))
+                        $this->remove_file(UPLOAD_PATH."pages/home/".$content_row['image1']);
+                    $vals['image1'] = $image['file_name'];
+                }
+                else
+                {
+                    setMsg('error', 'Please upload a valid image file >> ' . strip_tags($image['error']));
+                    redirect(ADMIN . '/sitecontent/login', 'refresh');
+                    exit;
+                }
+            }
 
-            for($i = 1; $i <= 2; $i++) {
-                if (isset($_FILES["image".$i]["name"]) && $_FILES["image".$i]["name"] != "") {
-                    
-                    $image = upload_file(UPLOAD_PATH.'images/', 'image'.$i);
-                    if(!empty($image['file_name'])){
-                        if(isset($content_row['image'.$i]))
-                            $this->remove_file(UPLOAD_PATH."images/".$content_row['image'.$i]);
-                        $vals['image'.$i] = $image['file_name'];
+            if (isset($_FILES["become_model_image"]["name"]) && $_FILES["become_model_image"]["name"] != "")
+            {
+                $image = upload_file(UPLOAD_PATH.'pages/home', 'become_model_image');
+                if (!empty($image['file_name']))
+                {
+                    if(isset($content_row['become_model_image']))
+                        $this->remove_file(UPLOAD_PATH."pages/home/".$content_row['become_model_image']);
+                    $vals['become_model_image'] = $image['file_name'];
+                }
+                else
+                {
+                    setMsg('error', 'Please upload a valid image file >> ' . strip_tags($image['error']));
+                    redirect(ADMIN . '/sitecontent/login', 'refresh');
+                    exit;
+                }
+            }
+
+            if (isset($_FILES["instant_help_image"]["name"]) && $_FILES["instant_help_image"]["name"] != "")
+            {
+                $image = upload_file(UPLOAD_PATH.'pages/home', 'instant_help_image');
+                if (!empty($image['file_name']))
+                {
+                    if(isset($content_row['instant_help_image']))
+                        $this->remove_file(UPLOAD_PATH."pages/home/".$content_row['instant_help_image']);
+                    $vals['instant_help_image'] = $image['file_name'];
+                }
+                else
+                {
+                    setMsg('error', 'Please upload a valid image file >> ' . strip_tags($image['error']));
+                    redirect(ADMIN . '/sitecontent/login', 'refresh');
+                    exit;
+                }
+            }
+
+            for($i = 1; $i <= 5; $i++)
+            {
+                if (isset($_FILES["real_creators_image".$i]["name"]) && $_FILES["real_creators_image".$i]["name"] != "") 
+                {
+                    $image = upload_file(UPLOAD_PATH.'pages/home', 'real_creators_image'.$i);
+                    if(!empty($image['file_name']))
+                    {
+                        if(isset($content_row['real_creators_image'.$i]))
+                            $this->remove_file(UPLOAD_PATH."pages/home".$content_row['real_creators_image'.$i]);
+                        $vals['real_creators_image'.$i] = $image['file_name'];
                     }
                 }
             }
+
+            for($i = 1; $i <= 3; $i++)
+            {
+                if (isset($_FILES["perfect_role_image".$i]["name"]) && $_FILES["perfect_role_image".$i]["name"] != "") 
+                {
+                    $image = upload_file(UPLOAD_PATH.'pages/home', 'perfect_role_image'.$i);
+                    if(!empty($image['file_name']))
+                    {
+                        if(isset($content_row['perfect_role_image'.$i]))
+                            $this->remove_file(UPLOAD_PATH."pages/home".$content_row['perfect_role_image'.$i]);
+                        $vals['perfect_role_image'.$i] = $image['file_name'];
+                    }
+                }
+            }
+
+            for($i = 1; $i <= 3; $i++)
+            {
+                if (isset($_FILES["take_words_image".$i]["name"]) && $_FILES["take_words_image".$i]["name"] != "") 
+                {
+                    $image = upload_file(UPLOAD_PATH.'pages/home', 'take_words_image'.$i);
+                    if(!empty($image['file_name']))
+                    {
+                        if(isset($content_row['take_words_image'.$i]))
+                            $this->remove_file(UPLOAD_PATH."pages/home".$content_row['take_words_image'.$i]);
+                        $vals['take_words_image'.$i] = $image['file_name'];
+                    }
+                }
+            }
+            
             
             for($i = 1; $i <= 4; $i++) {
                 if (isset($_FILES["highlights_image".$i]["name"]) && $_FILES["highlights_image".$i]["name"] != "") {
@@ -414,7 +495,8 @@ class Sitecontent extends Admin_Controller
             $content_row = unserialize($content_row->code);
             if(!is_array($content_row))
                 $content_row=array();
-            if (isset($_FILES["image"]["name"]) && $_FILES["image"]["name"] != "") {
+            if (isset($_FILES["image"]["name"]) && $_FILES["image"]["name"] != "")
+            {
                 $image = upload_file(UPLOAD_PATH.'pages/about-us', 'image');
                 if (!empty($image['file_name']))
                 {

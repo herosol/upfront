@@ -154,6 +154,35 @@ class Pages extends MY_Controller
 
     function contact_us()
     {
+        if($this->input->post())
+        {
+            $res = array();
+            $res['hide_msg'] = 0;
+            $res['scroll_to_msg'] = 0;
+            $res['frm_reset'] = 0;
+            $res['status'] = 0;
+
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('phone', 'Phone', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('subject', 'Subject', 'required');
+            $this->form_validation->set_rules('comment', 'Comment', 'required');
+            if($this->form_validation->run() === FALSE)
+            {
+                $res['msg'] = validation_errors();
+            }
+            else
+            {
+                $post = html_escape($this->input->post());
+                $this->master->save('contact', $post);
+                $res['msg']          = showMsg('success', 'Message Has Been Sent Successfully.');
+                $res['redirect_url'] = site_url('contact-us');
+                $res['status'] = 1;
+                $res['frm_reset'] = 1;
+            }
+            exit(json_encode($res));
+        }
+
         $this->data['content_row'] = $this->master->getRow('sitecontent', array('ckey' => 'contact'));
         $this->data['site_content'] = unserialize($this->data['content_row']->code);
         $this->load->view('pages/contact', $this->data);
