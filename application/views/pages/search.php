@@ -36,14 +36,14 @@
                                     <h6>Search by Name</h6>
                                     <div class="txtGrp">
                                         <label for="">Type Model Name</label>
-                                        <input type="text" name="model_name" id="model_name" class="txtBox">
+                                        <input type="text" name="model_name" value="<?=$params['model_name']?>" id="model_name" class="txtBox">
                                     </div>
                                 </div>
                                 <div class="inBlk">
                                     <h6>Location <button type="reset">Clear</button></h6>
                                     <div class="txtGrp">
                                         <label for="">Zip code or Address</label>
-                                        <input type="text" name="zip" id="zip" class="txtBox">
+                                        <input type="text" name="zip" value="<?=$params['zip']?>" id="zip" class="txtBox">
                                     </div>
                                 </div>
                                 <div class="inBlk">
@@ -205,7 +205,7 @@
                             <button type="button" id="filterBtn" class="webBtn smBtn icoBtn"><img src="<?= base_url() ?>assets/images/icon-filter.svg" alt=""> Filter</button>
                         </div>
                         <div class="topHead">
-                            <span id="total_records">125 Results available</span>
+                            <span id="total_records"><?=$total?> <?=$total < 2 ? 'Result' : 'Results';?> Available</span>
                             <div class="miniBtn">
                                 Sort by
                                 <select name="" id="" class="txtBox">
@@ -217,186 +217,21 @@
                             </div>
                         </div>
                         <div class="flexRow flex" id="model_records">
+                        <?php
+                            foreach($records as $key => $row):
+                            $image = get_site_image_src("members", $row->mem_image, '');
+                        ?>
                             <div class="col">
                                 <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></a></div>
+                                    <div class="image"><a href="<?= base_url() ?>model-profile/<?=$row->user_id?>"><img src="<?=$image?>" alt=""></a></div>
                                     <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
-                                        <p>Emma Gannon</p>
+                                        <div class="rateYo" data-rateyo-rating="<?=get_avg_mem_rating($row->user_id)?>"></div>
+                                        <h4><a href="<?= base_url() ?>model-profile/<?=$row->user_id?>">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
+                                        <p><?=$row->user_fname.' '.$row->user_lname?></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/2.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
-                                        <p>Amanda Rach Lee</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/3.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
-                                        <p>Thomas Frank</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/4.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Real Productivity: How to Build Habits That Last</a></h4>
-                                        <p>Gia Graham</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/5.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Hand Lettering in Procreate: Fundamentals to Finishing Touches</a></h4>
-                                        <p>Sean Dalton</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/6.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Customizing Type with Draplin: Creating Wordmarks That Work</a></h4>
-                                        <p>Aaron Draplin</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/7.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
-                                        <p>Emma Gannon</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/8.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
-                                        <p>Amanda Rach Lee</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/9.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
-                                        <p>Thomas Frank</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/10.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Real Productivity: How to Build Habits That Last</a></h4>
-                                        <p>Gia Graham</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
-                                        <p>Emma Gannon</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/2.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
-                                        <p>Amanda Rach Lee</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/3.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Still Life Photography: Capturing Stories of Everyday Objects at Home</a></h4>
-                                        <p>Thomas Frank</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/4.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Real Productivity: How to Build Habits That Last</a></h4>
-                                        <p>Gia Graham</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/5.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Hand Lettering in Procreate: Fundamentals to Finishing Touches</a></h4>
-                                        <p>Sean Dalton</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/6.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Customizing Type with Draplin: Creating Wordmarks That Work</a></h4>
-                                        <p>Aaron Draplin</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/7.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Unlocking Your Potential: 5 Exercises to Build Creative Confidence</a></h4>
-                                        <p>Emma Gannon</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="profBlk">
-                                    <div class="image"><a href="<?= $base_url ?>profile.php"><img src="<?= base_url() ?>assets/images/stars/8.jpg" alt=""></a></div>
-                                    <div class="txt">
-                                        <div class="rateYo"></div>
-                                        <h4><a href="<?= $base_url ?>profile.php">Art Journaling for Self-Care: 3 Exercises for Reflection and Growth</a></h4>
-                                        <p>Amanda Rach Lee</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -500,9 +335,9 @@
                             let data = JSON.parse(rs);
                             $('#model_records').html(data.html);
                             if(data.total < 2)
-                                $('#total_records').html(`${data.total} result Available`);
+                                $('#total_records').html(`${data.total} Result Available`);
                             else
-                                $('#total_records').html(`${data.total} results Available`);
+                                $('#total_records').html(`${data.total} Results Available`);
                         },
                         error: function (data) {
                             console.log(data);

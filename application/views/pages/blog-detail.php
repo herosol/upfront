@@ -43,7 +43,8 @@
                 </div>
                 <div class="blk">
                     <h4>Subscribe for more weekly latest new letters</h4>
-                    <form action="" method="post">
+                    <form action="<?= base_url('newsletter')?>" method="post" autocomplete="off" class="frmAjax" id="newsletterFrm">
+                        <div class="alertMsg" style="display:none"></div>
                         <label for="email">Subscribe for more weekly latest new letters</label>
                         <div class="txtGrp flexGrp">
                             <label for="">@ your email address</label>

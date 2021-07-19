@@ -868,6 +868,21 @@ class Account extends MY_Controller
 
     function my_calender()
     {
+        if($this->input->post())
+        {
+            $data = $this->booking_model->calender_data();
+            $calender_data = [];
+            foreach($data as $row):
+                $calender_data[] = 
+                [
+                    'title' => 'Booking With '.get_mem_name($row->booked_by),
+                    'start' =>  $row->booking_date
+                ];
+            endforeach;
+            echo json_encode(['data'=> $calender_data]);
+            exit;
+        }
+
         $this->isMemLogged($this->session->user_type);
         $this->load->view('artist/calendar');
     }

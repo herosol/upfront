@@ -85,7 +85,7 @@
                     <?php endforeach ?>
                 </tbody>
             </table>
-            <?php if($row->status==0):?>
+            <?php if($row->status == 'pending'):?>
                 <div class="form-group">
                     <div class="col-md-6">
                         <label class="control-label"> Select Bank</label>

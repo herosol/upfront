@@ -24,7 +24,7 @@ class Withdraw_model extends CRUD_Model
     {
         $this->db->select('mem.user_fname as cfname, mem.user_lname as clname, e.*');
         $this->db->from('users mem');
-        $this->db->join('bookings b', 'b.booked_member=mem.user_id');
+        $this->db->join('bookings b', 'b.booked_by=mem.user_id');
         $this->db->join('earnings e', 'e.booking_id=b.id');
         $this->db->where(['b.booked_member'=> $this->session->user_id]);
         $this->db->order_by('e.id', 'DESC');

@@ -27,6 +27,14 @@ class Booking_model extends CRUD_Model
         return $this->db->get()->result();
     }
 
+    function calender_data()
+    {
+        $this->db->select('*');
+        $this->db->from($this->table_name);
+        $this->db->where('booked_member', $this->session->user_id);
+        return $this->db->get()->result();
+    }
+
 }
 ?>
 

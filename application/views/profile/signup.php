@@ -62,10 +62,6 @@
             </div>
         </section>
         <!-- logon -->
-
-
-        <script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
-        <script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
     </main>
     <?php $this->load->view('includes/footer'); ?>
 </body>

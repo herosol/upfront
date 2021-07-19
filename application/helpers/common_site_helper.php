@@ -393,15 +393,18 @@ function count_mem_reviews($mem_id) {
     $total = $query->row()->total;
     return intval($total);
 }
-function get_avg_mem_rating($mem_id) {
+
+function get_avg_mem_rating($mem_id) 
+{
     $CI = get_instance();
     $CI->db->select('AVG(rating) as total')
     ->where('mem_id', $mem_id)
-    ->where('parent_id', NULL);
+    ->where('parent_id', 0);
     $query = $CI->db->get('reviews');
     $total = $query->row()->total;
     return round(floatval($total),1);
 }
+
 function get_mem_rating($mem_id,$ref_id,$ref_type='booking') {
     $CI = get_instance();
     $CI->db->select('*')

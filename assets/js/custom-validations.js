@@ -432,4 +432,16 @@ $(document).ready(function() {
         }
     });
 
+    $('#newsletterFrm').validate({
+        errorElement: 'div',
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {},
+        errorPlacement: function(error, element) {}
+    });
+
 });

@@ -59,9 +59,9 @@ class User_model extends CRUD_Model
     function get_searched_models($post)
     {
         $this->db->from($this->table_name.' mem');
-        $this->db->join('mem_appearance app', 'mem.user_id=app.mem_id');
-        $this->db->join('mem_languages lan', 'mem.user_id=lan.mem_id');
-        $this->db->join('reviews r', 'r.mem_id=mem.user_id');
+        $this->db->join('mem_appearance app', 'mem.user_id=app.mem_id', 'left');
+        $this->db->join('mem_languages lan', 'mem.user_id=lan.mem_id', 'left');
+        $this->db->join('reviews r', 'r.mem_id=mem.user_id', 'left');
         $this->db->select('mem.user_id, mem.mem_image, mem.user_fname, mem.user_lname');
         # IF ZIP
         if(!empty($post['zip']))
@@ -88,16 +88,22 @@ class User_model extends CRUD_Model
         }
 
         # AGE RANGES
-        $ageIndexes = explode(';', $post['age']);
-        $ageStart = $ageIndexes[0];
-        $ageEnd   = $ageIndexes[1];
-        $this->db->where("( mem.mem_age >= $ageStart AND mem.mem_age <= $ageEnd ) ", null, false);
+        if(isset($post['age']))
+        {
+            $ageIndexes = explode(';', $post['age']);
+            $ageStart = $ageIndexes[0];
+            $ageEnd   = $ageIndexes[1];
+            $this->db->where("( TIMESTAMPDIFF(YEAR, mem.mem_dob, CURDATE()) >= $ageStart AND TIMESTAMPDIFF(YEAR, mem.mem_dob, CURDATE()) <= $ageEnd ) ", null, false);
+        }
 
-        # HEIGHT RANGES
-        $heightIndexes = explode(';', $post['height']);
-        $heightStart = $heightIndexes[0];
-        $heightEnd   = $heightIndexes[1];
-        $this->db->where("( app.height >= $heightStart AND app.height <= $heightEnd ) ", null, false);
+        if(isset($post['height']))
+        {
+            # HEIGHT RANGES
+            $heightIndexes = explode(';', $post['height']);
+            $heightStart = $heightIndexes[0];
+            $heightEnd   = $heightIndexes[1];
+            $this->db->where("( app.height >= $heightStart AND app.height <= $heightEnd ) ", null, false);
+        }
 
         # IF GENDER FILTER
         if(isset($post['gender']))

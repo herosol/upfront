@@ -94,12 +94,16 @@ class Index extends MY_Controller {
             $res['frm_reset'] = 0;
             $res['status'] = 0;
 
-            $this->form_validation->set_rules('fname', 'First Name', 'required');
-            $this->form_validation->set_rules('lname', 'Last Name', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            if(empty($this->session->user_id))
+            {
+                $this->form_validation->set_rules('fname', 'First Name', 'required');
+                $this->form_validation->set_rules('lname', 'Last Name', 'required');
+                $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+                $this->form_validation->set_rules('password', 'Password', 'required');
+                $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password]');
+            }
+
             $this->form_validation->set_rules('phone', 'Phone', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required');
-            $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password]');
             $this->form_validation->set_rules('confirm', 'Confirm', 'required', array('required' => 'Please accept our terms and conditions'));
             if($this->form_validation->run() === FALSE)
             {
@@ -108,7 +112,14 @@ class Index extends MY_Controller {
             else
             {
                 $post = html_escape($this->input->post());
-                $user_row = $this->user_model->emailExists($post['email']);
+                if(empty($this->session->user_id))
+                {
+                    $user_row = $this->user_model->emailExists($post['email']);
+                }
+                else
+                {
+                    $user_row = [];
+                }
                 
                 if (count($user_row) == '0')
                 {
@@ -122,20 +133,35 @@ class Index extends MY_Controller {
                     $rando = doEncode(rand(99, 999).'-'.$post['email']);
                     $rando = strlen($rando) > 225 ? substr($rando, 0, 225) : $rando;
 
-                    $save_data = 
-                    [
-                        'user_fname' => ucfirst($post['fname']), 
-                        'user_lname' => ucfirst($post['lname']),
-                        'mem_phone'      => $post['phone'],
-                        'user_email' => $post['email'],
-                        'mem_about'  => $post['bio'],
-                        'user_pswd'  => doEncode($post['password']),
-                        'user_last_login' => date('Y-m-d h:i:s'),
-                        'mem_image'  => $mem_image,
-                        'user_type'  => 'model',
-                        'mem_code' => $rando
-                    ];
-                    $user_id = $this->user_model->save($save_data);
+                    if(empty($this->session->user_id))
+                    {
+                        $save_data = 
+                        [
+                            'user_fname' => ucfirst($post['fname']), 
+                            'user_lname' => ucfirst($post['lname']),
+                            'mem_phone'      => $post['phone'],
+                            'user_email' => $post['email'],
+                            'mem_about'  => $post['bio'],
+                            'user_pswd'  => doEncode($post['password']),
+                            'user_last_login' => date('Y-m-d h:i:s'),
+                            'mem_image'  => $mem_image,
+                            'user_type'  => 'model',
+                            'mem_code' => $rando
+                        ];
+                    }
+                    else
+                    {
+                        $save_data = 
+                        [
+                            'mem_phone'  => $post['phone'],
+                            'mem_about'  => $post['bio'],
+                            'user_last_login' => date('Y-m-d h:i:s'),
+                            'mem_image'  => $mem_image,
+                            'user_type'  => 'model'
+                        ];
+                    }
+
+                    $user_id = $this->user_model->save($save_data, $this->session->user_id);
 
                     if($user_id > 0)
                     {
@@ -170,12 +196,16 @@ class Index extends MY_Controller {
                             }
                         }
                     }
+
                     $this->session->set_userdata('user_id', $user_id);
                     $this->session->set_userdata('user_type', 'model');
 
-                    $verify_link  = site_url('verification/' .$rando);
-                    $user_data    = array('name' => ucfirst($post['fname']).' '.ucfirst($post['lname']), "email" => $post['email'], "link" => $verify_link);
-                    $is_email_send = $this->send_site_email($user_data, 'signup');
+                    if(empty($this->session->user_id))
+                    {
+                        $verify_link  = site_url('verification/' .$rando);
+                        $user_data    = array('name' => ucfirst($post['fname']).' '.ucfirst($post['lname']), "email" => $post['email'], "link" => $verify_link);
+                        $is_email_send = $this->send_site_email($user_data, 'signup');
+                    }
 
                     $res['msg'] = showMsg('success', 'Registered Successfully');
                     $res['redirect_url'] = site_url('dashboard');
@@ -188,7 +218,9 @@ class Index extends MY_Controller {
                 }
             }
             exit(json_encode($res));
-        }else{
+        }
+        else
+        {
             $this->data['site_content'] = $this->master->getRow('sitecontent', array('ckey' => 'signup_model'));
             $this->data['site_content'] = unserialize($this->data['site_content']->code);
             $this->load->view("profile/model-signup", $this->data);
@@ -392,6 +424,36 @@ class Index extends MY_Controller {
             redirect('', 'refresh');
             exit;
         }
+    }
+
+	function newsletter()
+	{
+        $res=array();
+        $res['hide_msg']=0;
+            $res['scroll_to_msg']=1;
+            $res['status'] = 0;
+            $res['frm_reset'] = 0;
+            $res['redirect_url'] = 0;
+
+        $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[newsletter.email]',
+            array(
+                'required'      => 'You have not provided %s.',
+                'is_unique'     => 'This %s already joined.'
+            ));
+        if($this->form_validation->run()===FALSE)
+        {
+            $res['msg'] = validation_errors();
+            $res['status'] = 0;
+        }else{
+            $email=html_escape($this->input->post('email'));
+
+            $this->master->save('newsletter',array('email'=>$email,'mem_id'=>$this->session->mem_id));
+            $res['msg'] = showMsg('success','Joined successful!');
+            $res['status'] = 1;
+            $res['frm_reset'] = 1;
+            $res['hide_msg']=1;
+        }
+        exit(json_encode($res));
     }
 
     function reset($vcode)

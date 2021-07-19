@@ -236,7 +236,19 @@ class Pages extends MY_Controller
         }
         else
         {
-            $this->load->view('pages/search');
+            if($this->input->get())
+            {
+                $this->data['params'] = $get = html_escape($this->input->get());
+                $this->data['records'] = $this->user_model->get_searched_models($get);
+                $this->data['total'] = $total = count($this->data['records']);
+                $this->load->view('pages/search', $this->data);
+            }
+            else
+            {
+                $this->data['records'] = $this->user_model->get_rows(['user_type' => 'model', 'mem_model_application'=> '1', 'mem_verified'=> '1', 'user_status'=> '1']);
+                $this->data['total'] = $total = count($this->data['records']);
+                $this->load->view('pages/search', $this->data);
+            }
         }
     }
 

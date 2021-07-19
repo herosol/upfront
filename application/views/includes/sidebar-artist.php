@@ -1,3 +1,4 @@
+
 <aside>
     <button type="button" class="webBtn blockBtn">
         <em>Dashboard</em>
@@ -44,7 +45,7 @@
                 <em>Earnings</em>
             </a>
         </li>
-        <li class="<?php if ($page == "my-calender") {
+        <li class="<?php if ($page == "" && $this->uri->segment(1) == "my-calender") {
                         echo 'active';
                     } ?>">
             <a href="<?= base_url() ?>my-calender">
@@ -52,7 +53,7 @@
                 <em>My Calendar</em>
             </a>
         </li>
-        <li class="<?php if ($page == "payment-methods") {
+        <li class="hidden <?php if ($page == "payment-methods") {
                         echo 'active';
                     } ?>">
             <a href="<?= base_url() ?>payment-methods">

@@ -5,7 +5,9 @@
                 <h5>Discover</h5>
                 <ul class="lst">
                     <li><a href="<?= base_url() ?>find">Find a Model</a></li>
-                    <li><a href="<?= base_url() ?>become-a-model">Become a Model</a></li>
+                    <?php if($this->session->userdata('user_type') == '' || $this->session->userdata('user_type') != 'model'):?>
+                        <li><a href="<?= base_url() ?>become-a-model">Become a Model</a></li>
+                    <?php endif; ?>
                     <li class="hidden"><a href="<?= base_url() ?>find">Online Auditions</a></li>
                     <li><a href="<?= base_url() ?>affiliates">Affiliates</a></li>
                     <li class="hidden"><a href="#">Learning Resources</a></li>
@@ -45,10 +47,11 @@
             </div>
             <div class="col">
                 <h5>Join our mailing list</h5>
-                <form action="newsletter" method="post" autocomplete="off" class="">
+                <form action="<?= base_url('newsletter')?>" method="post" autocomplete="off" class="frmAjax" id="newsletterFrm">
+                    <div class="alertMsg" style="display:none"></div>
                     <label for="email">Stay up to date with the latest news and deals!</label>
                     <div class="txtGrp relative">
-                        <label for="">@ your email address</label>
+                        <label for="email">@ your email address</label>
                         <input type="email" name="email" id="email" class="txtBox" required="">
                         <button type="submit"><i class="fi-arrow-right fi-2x"></i></button>
                     </div>
@@ -77,7 +80,8 @@
     </div>
 </footer>
 <!-- footer -->
-
+<script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
 
 <!-- Main Js -->
 <script type="text/javascript" src="<?= base_url() ?>assets/js/main.js"></script>

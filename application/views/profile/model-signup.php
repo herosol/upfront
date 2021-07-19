@@ -33,44 +33,55 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
-                                <div class="txtGrp">
-                                    <label for="">First Name</label>
-                                    <input type="text" name="fname" id="first_name" class="txtBox">
+
+                            <?php if(!empty($this->session->user_id)): ?>
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 col-xx-6">
+                                    <div class="txtGrp">
+                                        <div class="alert alert-info">Dear <strong><?=$mem_data->user_fname.' '.$mem_data->user_lname.', '?></strong>Please fill the following info for becoming a model.</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
-                                <div class="txtGrp">
-                                    <label for="">Last Name</label>
-                                    <input type="text" name="lname" id="last_name" class="txtBox">
+                            <?php else: ?>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
+                                    <div class="txtGrp">
+                                        <label for="">First Name</label>
+                                        <input type="text" name="fname" id="first_name" class="txtBox">
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
+                                    <div class="txtGrp">
+                                        <label for="">Last Name</label>
+                                        <input type="text" name="lname" id="last_name" class="txtBox">
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
                                 <div class="txtGrp">
                                     <label for="">Phone Number</label>
-                                    <input type="text" name="phone" id="phone" class="txtBox">
+                                    <input type="text" name="phone" value="" id="phone" class="txtBox">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
                                 <div class="txtGrp">
                                     <label for="">Email Address</label>
-                                    <input type="text" name="email" id="email" class="txtBox">
+                                    <input type="text" name="email" value="<?=$mem_data->user_email?>" id="email" class="txtBox" <?= empty($this->session->user_id) ? '' : 'readonly';  ?>>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
-                                <div class="txtGrp pasDv">
-                                    <label for="">Password</label>
-                                    <input type="password" name="password" id="password" class="txtBox">
-                                    <i class="icon-eye" id="eye"></i>
+                            <?php if(empty($this->session->user_type)): ?>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
+                                    <div class="txtGrp pasDv">
+                                        <label for="">Password</label>
+                                        <input type="password" name="password" id="password" class="txtBox">
+                                        <i class="icon-eye" id="eye"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
-                                <div class="txtGrp pasDv">
-                                    <label for="">Confirm Password</label>
-                                    <input type="password" name="cpassword" id="cpassword" class="txtBox">
-                                    <i class="icon-eye" id="eye"></i>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-xx-6">
+                                    <div class="txtGrp pasDv">
+                                        <label for="">Confirm Password</label>
+                                        <input type="password" name="cpassword" id="cpassword" class="txtBox">
+                                        <i class="icon-eye" id="eye"></i>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xx-12">
                                 <div class="txtGrp">
                                     <label for="" class="move">Gallery Images</label>
@@ -102,7 +113,9 @@
                             </div>
                         </div>
                         <div class="bTn formBtn text-center">
-                            <button type="submit" class="webBtn icoBtn"><img src="<?= base_url() ?>assets/images/icon-pencil.svg" alt=""> Sign up</button>
+                            <button type="submit" class="webBtn icoBtn"><img src="<?= base_url() ?>assets/images/icon-pencil.svg" alt=""> 
+                                <?= empty($this->session->user_id) ? 'Sign Up' : 'Become Model';  ?>
+                            </button>
                         </div>
                     </form>
                     <div class="haveAccount text-center">
@@ -113,10 +126,6 @@
             </div>
         </section>
         <!-- signup -->
-
-
-        <script type="text/javascript" src="<?= base_url('assets/js/custom-validations.js') ?>"></script>
-        <script type="text/javascript" src="<?= base_url('assets/js/custom.js') ?>"></script>
         <script type="text/javascript">
             $(function() {
                 $('.imgLst').sortable();

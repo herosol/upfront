@@ -15,11 +15,11 @@
                         <a href="<?= base_url() ?>">Home</a>
                     </li>
                     <?php if($this->session->userdata('user_type') == '' || $this->session->userdata('user_type') != 'model'):?>
-                    <li class="<?php if ($page == "become-a-model") {
-                                    echo 'active';
-                                } ?>">
-                        <a href="<?= base_url() ?>become-a-model">Become a Model</a>
-                    </li>
+                        <li class="<?php if ($page == "become-a-model") {
+                                        echo 'active';
+                                    } ?>">
+                            <a href="<?= base_url() ?>become-a-model">Become a Model</a>
+                        </li>
                     <?php endif; ?>
                     <li class="<?php if ($page == "help") {
                                     echo 'active';
@@ -52,7 +52,7 @@
                         <li><a href="<?= base_url() ?>bookings">My Bookings <small>View Bookings Details</small></a></li>
                         <li><a href="<?= base_url() ?>earnings">Earnings <small>Status of your Payouts</small></a></li>
                         <li><a href="<?= base_url() ?>my-calender">My Calendar <small>Maintain a regular Schedule</small></a></li>
-                        <li><a href="<?= base_url() ?>payment-methods">Payment Method <small>Credit card or PayPal accounts</small></a></li>
+                        <li class="hidden"><a href="<?= base_url() ?>payment-methods">Payment Method <small>Credit card or PayPal accounts</small></a></li>
                         <li><a href="<?= base_url() ?>index/logout">Sign out</a></li>
                     </ul>
                 </div>

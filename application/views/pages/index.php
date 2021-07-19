@@ -9,23 +9,21 @@
 <body id="home-page">
     <?php $this->load->view('includes/header'); ?>
     <main index>
-
-
         <section id="banner" class="flexBox" style="background-image: url('<?= base_url().UPLOAD_PATH.'pages/home/'.$site_content['image1']?> ');">
             <div class="flexDv">
                 <div class="contain-fluid">
                     <div class="content text-center">
                         <h1><?= $site_content['banner_heading'] ?></h1>
                         <p><?= $site_content['banner_detail'] ?></p>
-                        <form action="" method="post">
+                        <form action="<?=base_url()?>find" method="get">
                             <div class="txtGrp">
-                                <label for="" class="">Search by title, skill or company</label>
-                                <input type="text" name="" id="" class="txtBox">
+                                <label for="" class="">Search by Name</label>
+                                <input type="text" name="model_name" id="model_name" class="txtBox">
                                 <img src="<?= base_url() ?>assets/images/icon-search.svg" alt="">
                             </div>
                             <div class="txtGrp">
-                                <label for="">City, state or zip code</label>
-                                <input type="text" name="" id="" class="txtBox">
+                                <label for="">Zip code</label>
+                                <input type="text" name="zip" id="zip" class="txtBox">
                                 <img src="<?= base_url() ?>assets/images/icon-map-marker.svg" alt="">
                             </div>
                             <div class="bTn">
@@ -37,8 +35,7 @@
             </div>
         </section>
         <!-- banner -->
-        
-
+    
         <section id="guardian">
             <div class="contain-fluid">
                 <div class="content text-center">
@@ -60,7 +57,6 @@
         </section>
         <!-- guardian -->
 
-
         <section id="discover">
             <div class="contain-fluid">
                 <div class="flexRow flex">
@@ -78,7 +74,6 @@
             </div>
         </section>
         <!-- discover -->
-
 
         <section id="category">
             <div class="contain-fluid text-center">
@@ -100,7 +95,6 @@
         </section>
         <!-- category -->
 
-
         <section id="viewing">
             <div class="contain-fluid">
                 <div class="content text-center">
@@ -121,7 +115,6 @@
             </div>
         </section>
         <!-- viewing -->
-
 
         <section id="customer">
             <div class="contain-fluid">
@@ -147,32 +140,6 @@
         </section>
         <!-- customer -->
 
-
-        <!-- <section id="match">
-            <div class="contain-fluid">
-                <div class="flexRow flex">
-                    <div class="col col1">
-                        <div class="member member1">
-                            <div class="ico"><img src="<?= base_url() ?>/assets/images/users/2.jpg" alt=""></div>
-                            <div class="txt">Thanks for inviting me to apply. I'm eager to get started!</div>
-                        </div>
-                        <div class="member member2">
-                            <div class="ico"><img src="<?= base_url() ?>/assets/images/users/3.jpg" alt=""></div>
-                            <div class="txt">Great! That's a fantastic idea.</div>
-                        </div>
-                    </div>
-                    <div class="col col2">
-                        <div class="content">
-                            <h1 class="secHeading">Find the perfect match fast</h1>
-                            <p>Start your job in hours, not weeks. Get a shortlist of skilled freelancers instantly, tapping into our hiring know-how and matching technology. Interview favorites online and hire with the click of a button.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!-- match -->
-
-
         <section id="affiliate">
             <div class="contain text-center">
                 <div class="content">
@@ -195,7 +162,6 @@
             </div>
         </section>
         <!-- affiliate -->
-
 
         <section id="creator">
             <div class="contain-fluid text-center">
@@ -221,7 +187,7 @@
         </section>
         <!-- creator -->
 
-
+        <?php if($this->session->userdata('user_type') == '' || $this->session->userdata('user_type') != 'model'):?>
         <section id="intro">
             <div class="contain-fluid">
                 <div class="flexRow flex">
@@ -238,8 +204,8 @@
                 </div>
             </div>
         </section>
+        <?php endif; ?>
         <!-- intro -->
-
 
         <section id="listing">
             <div class="contain-fluid">
@@ -266,7 +232,6 @@
             </div>
         </section>
         <!-- listing -->
-
 
     </main>
     <?php $this->load->view('includes/footer'); ?>
