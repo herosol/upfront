@@ -19,7 +19,7 @@
     </div>
 </div>
 <div id="New" <?php if($this->session->userdata('contacts-state') != 'New'){ echo 'style="display:none"'; }?>>
-    <table class="table table-bordered datatable" id="table-1">
+    <table class="table table-bordered datatable dtable">
         <thead>
             <tr>
                 <th width="5%" class="text-center">Sr#</th>
@@ -30,7 +30,7 @@
                 <th>Comments</th>
                 <th>Status</th>
                 <th>Message At</th>
-                <th width="12%" class="text-center">Actions</th>
+                <!-- <th width="12%" class="text-center">Actions</th> -->
             </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
                         <td><?= $row->comment ?></td>
                         <td><?= $row->status == 'new' ? '<span class="no-verified">New</span>' : '<span class="Seen">Verified</span>'; ?></td>
                         <td><span ><?= format_date($row->date)?></td>
-                        <td class="text-center">
+                        <!-- <td class="text-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Action <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-primary" role="menu">
@@ -57,7 +57,7 @@
                                     <li><a href="<?= site_url(ADMIN.'/model_applications/delete/'.$row->user_id); ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
                                 </ul>
                             </div>
-                        </td>
+                        </td> -->
                     </tr>
                 <?php 
                 endif;
@@ -67,7 +67,7 @@
     </table>
 </div>
 <div id="Approved" <?php if($this->session->userdata('contacts-state') != 'Seen'){ echo 'style="display:none"'; }?>>
-    <table class="table table-bordered datatable" id="table-1">
+    <table class="table table-bordered datatable dtable">
         <thead>
             <tr>
                 <th width="5%" class="text-center">Sr#</th>

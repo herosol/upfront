@@ -32,7 +32,7 @@
                             <div class="panel-body">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
-                                        <img src="<?= !empty($row->image) ? base_url().UPLOAD_PATH.'model-categories/'.$row->image : 'http://placehold.it/3000x1000' ?>" alt="--">
+                                        <img src="<?= get_site_image_src("model-categories", $row->image, ''); ?>" alt="--">
                                     </div>
                                     <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                     <div>

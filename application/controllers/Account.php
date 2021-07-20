@@ -20,8 +20,9 @@ class Account extends MY_Controller
     function dashboard()
     {
         $this->isMemLogged($this->session->user_type);
-        // $this->data['pkg_row'] = $this->package_model->get_row($this->data['mem_data']->mem_package_id);
-        if ($this->session->user_type == 'user' || $this->session->user_type == 'model') {
+        $this->data['bookings'] = $this->booking_model->get_bookings();
+        if ($this->session->user_type == 'user' || $this->session->user_type == 'model') 
+        {
             $this->load->view("artist/dashboard", $this->data);
         }
     }
@@ -83,7 +84,8 @@ class Account extends MY_Controller
         $this->isMemLogged($this->session->user_type);
         $user_id = $this->session->user_id;
         // $this->load->model('character_model');
-        if ($this->input->post()) {
+        if ($this->input->post())
+        {
             $res = array();
             $res['hide_msg'] = 0;
             $res['scroll_to_msg'] = 1;
@@ -94,34 +96,36 @@ class Account extends MY_Controller
             $post = html_escape($this->input->post());
 
             $this->form_validation->set_message('integer', 'Please select a valid {field}');
+
             $this->form_validation->set_rules('user_fname', 'First Name', 'required|alpha');
             $this->form_validation->set_rules('user_lname', 'Last Name', 'required|alpha');
-            $this->form_validation->set_rules('mem_phone', 'Phone', 'required');
-            $this->form_validation->set_rules('mem_dob', 'Date of Birth', 'required');
-            $this->form_validation->set_rules('mem_rate', 'Rate', 'required|numeric', array('numeric' => '{field} should be numeric'));
-            $this->form_validation->set_rules('mem_about', 'Profile Bio', 'required');
-            $this->form_validation->set_rules('mem_address1', 'Address', 'required');
-            $this->form_validation->set_rules('mem_city', 'City or State', 'required');
-            $this->form_validation->set_rules('mem_zip', 'Zip Code', 'required');
-            $this->form_validation->set_rules('mem_country', 'Country', 'required|integer');
-            $this->form_validation->set_rules('mem_state', 'Country', 'required|integer');
-            $this->form_validation->set_rules('mem_sex', 'Gender', 'required');
-
-            $this->form_validation->set_rules('eye_color', 'Eye Color', 'required');
-            $this->form_validation->set_rules('skin_color', 'Skin Color', 'required');
-            $this->form_validation->set_rules('hair_color', 'Hair Color', 'required');
-            $this->form_validation->set_rules('hair_length', 'Hair Length', 'required');
-            $this->form_validation->set_rules('shoe_size', 'Shoe Size', 'required');
-            $this->form_validation->set_rules('height', 'Height', 'required');
-            $this->form_validation->set_rules('weight', 'Weight', 'required');
-            $this->form_validation->set_rules('chest_bust', 'Chest / Bust', 'required');
-            $this->form_validation->set_rules('cup', 'Cup', 'required');
-            $this->form_validation->set_rules('waist', 'Waist', 'required');
-            $this->form_validation->set_rules('hip_inseam', 'Hip / Inseam', 'required');
-            $this->form_validation->set_rules('ethnicity', 'Ethnicity', 'required');
-            $this->form_validation->set_rules('jacket_size', 'Jacket Size', 'required');
-            $this->form_validation->set_rules('body_type', 'Body Type', 'required');
-
+            if($this->session->user_type == 'model')
+            {
+                $this->form_validation->set_rules('mem_phone', 'Phone', 'required');
+                $this->form_validation->set_rules('mem_dob', 'Date of Birth', 'required');
+                $this->form_validation->set_rules('mem_rate', 'Rate', 'required|numeric', array('numeric' => '{field} should be numeric'));
+                $this->form_validation->set_rules('mem_about', 'Profile Bio', 'required');
+                $this->form_validation->set_rules('mem_address1', 'Address', 'required');
+                $this->form_validation->set_rules('mem_city', 'City or State', 'required');
+                $this->form_validation->set_rules('mem_zip', 'Zip Code', 'required');
+                $this->form_validation->set_rules('mem_country', 'Country', 'required|integer');
+                $this->form_validation->set_rules('mem_state', 'Country', 'required|integer');
+                $this->form_validation->set_rules('mem_sex', 'Gender', 'required');
+                $this->form_validation->set_rules('eye_color', 'Eye Color', 'required');
+                $this->form_validation->set_rules('skin_color', 'Skin Color', 'required');
+                $this->form_validation->set_rules('hair_color', 'Hair Color', 'required');
+                $this->form_validation->set_rules('hair_length', 'Hair Length', 'required');
+                $this->form_validation->set_rules('shoe_size', 'Shoe Size', 'required');
+                $this->form_validation->set_rules('height', 'Height', 'required');
+                $this->form_validation->set_rules('weight', 'Weight', 'required');
+                $this->form_validation->set_rules('chest_bust', 'Chest / Bust', 'required');
+                $this->form_validation->set_rules('cup', 'Cup', 'required');
+                $this->form_validation->set_rules('waist', 'Waist', 'required');
+                $this->form_validation->set_rules('hip_inseam', 'Hip / Inseam', 'required');
+                $this->form_validation->set_rules('ethnicity', 'Ethnicity', 'required');
+                $this->form_validation->set_rules('jacket_size', 'Jacket Size', 'required');
+                $this->form_validation->set_rules('body_type', 'Body Type', 'required');
+            }
 
             if ($this->form_validation->run() === FALSE)
                 $res['msg'] = validation_errors();
@@ -129,11 +133,12 @@ class Account extends MY_Controller
             if (!empty($res['msg']))
                 exit(json_encode($res));
 
-            $user_info =
+            if($this->session->user_type == 'model')
+            {
+                $user_info =
                 [
                     'user_fname'   => trim($post['user_fname']),
                     'user_lname'   => trim($post['user_lname']),
-                    'mem_phone'    => trim($post['mem_phone']),
                     'mem_phone'    => trim($post['mem_phone']),
                     'mem_dob'      => db_format_date($post['mem_dob']),
                     'mem_sex'      => $post['mem_sex'],
@@ -146,6 +151,15 @@ class Account extends MY_Controller
                     'mem_rate'     => trim($post['mem_rate']),
                     'mem_skills'   => trim($post['skills'])
                 ];
+            }
+            else
+            {
+                $user_info =
+                [
+                    'user_fname'   => trim($post['user_fname']),
+                    'user_lname'   => trim($post['user_lname'])
+                ];
+            }
 
 
             if (isset($_FILES["dp_image"]["name"]) && $_FILES["dp_image"]["name"] != "") {
@@ -198,63 +212,68 @@ class Account extends MY_Controller
                 }
             }
 
-            # DELETED IMAGES
-            if(!empty(trim($post['deleted_images'])))
+            if($this->session->user_type == 'model')
             {
-                foreach(explode(',', trim($post['deleted_images'])) as $key => $value)
+                # DELETED IMAGES
+                if(!empty(trim($post['deleted_images'])))
                 {
-                    $this->master->delete_where('mem_gallery_images', ['id'=> $value]);
+                    foreach(explode(',', trim($post['deleted_images'])) as $key => $value)
+                    {
+                        $this->master->delete_where('mem_gallery_images', ['id'=> $value]);
+                    }
                 }
-            }
 
-            # Model Languages
-            $user_languages = [];
-            $this->master->delete_where('mem_languages', ['mem_id' => $user_id]);
-            foreach ($post['languages'] as $key => $value) :
-                $user_languages =
+                # Model Languages
+                $user_languages = [];
+                $this->master->delete_where('mem_languages', ['mem_id' => $user_id]);
+                foreach ($post['languages'] as $key => $value) :
+                    $user_languages =
+                        [
+                            'mem_id'         => $user_id,
+                            'language_id'    => $value,
+                            'language_level' => $post['language_level'][$key]
+                        ];
+                    if (count($this->master->getRow('mem_languages', ['mem_id' => $user_id, 'language_id' => $value])) == '0') :
+                        $this->master->save('mem_languages', $user_languages);
+                    endif;
+                endforeach;
+
+                $user_appearence =
                     [
-                        'mem_id'         => $user_id,
-                        'language_id'    => $value,
-                        'language_level' => $post['language_level'][$key]
+                        'eye_color'  => trim($post['eye_color']),
+                        'skin_color' => trim($post['skin_color']),
+                        'hair_color' => trim($post['hair_color']),
+                        'weight'     => trim($post['weight']),
+                        'chest_bust' => trim($post['chest_bust']),
+                        'cup'        => trim($post['cup']),
+                        'hair_length' => trim($post['hair_length']),
+                        'shoe_size'  => trim($post['shoe_size']),
+                        'height'     => trim($post['height']),
+                        'waist'      => trim($post['waist']),
+                        'hip_inseam' => trim($post['hip_inseam']),
+                        'ethnicity'  => trim($post['ethnicity']),
+                        'body_type'  => trim($post['body_type']),
+                        'jacket_size'=> trim($post['jacket_size']),
+                        'mem_id'     => $user_id
                     ];
-                if (count($this->master->getRow('mem_languages', ['mem_id' => $user_id, 'language_id' => $value])) == '0') :
-                    $this->master->save('mem_languages', $user_languages);
-                endif;
-            endforeach;
 
-            $user_appearence =
-                [
-                    'eye_color'  => trim($post['eye_color']),
-                    'skin_color' => trim($post['skin_color']),
-                    'hair_color' => trim($post['hair_color']),
-                    'weight'     => trim($post['weight']),
-                    'chest_bust' => trim($post['chest_bust']),
-                    'cup'        => trim($post['cup']),
-                    'hair_length' => trim($post['hair_length']),
-                    'shoe_size'  => trim($post['shoe_size']),
-                    'height'     => trim($post['height']),
-                    'waist'      => trim($post['waist']),
-                    'hip_inseam' => trim($post['hip_inseam']),
-                    'ethnicity'  => trim($post['ethnicity']),
-                    'body_type'  => trim($post['body_type']),
-                    'jacket_size'=> trim($post['jacket_size']),
-                    'mem_id'     => $user_id
-                ];
-
-            if (count($this->appearence_model->is_exist(['mem_id' => $user_id])) > 0)
-            {
-                $this->appearence_model->update($user_appearence, ['mem_id' => $user_id]);
-            }
-            else
-            {
-                $this->appearence_model->save($user_appearence);
+                if (count($this->appearence_model->is_exist(['mem_id' => $user_id])) > 0)
+                {
+                    $this->appearence_model->update($user_appearence, ['mem_id' => $user_id]);
+                }
+                else
+                {
+                    $this->appearence_model->save($user_appearence);
+                }
             }
 
             $res['msg'] = showMsg('success', 'Profile update successfully!');
             $res['status'] = 1;
             $res['hide_msg'] = 1;
             exit(json_encode($res));
-        } else {
+        }
+        else
+        {
             $this->data['countries'] = countries();
             $this->data['languages'] = languages();
             $this->data['skills']         = $this->skills_model->get_rows();
@@ -381,15 +400,8 @@ class Account extends MY_Controller
 
     function bookings()
     {
-        if($this->input->post())
-        {
-            
-        }
-        else
-        {
-            $this->data['bookings'] = $this->booking_model->get_bookings();
-            $this->load->view("artist/bookings", $this->data);
-        }
+        $this->data['bookings'] = $this->booking_model->get_bookings();
+        $this->load->view("artist/bookings", $this->data);
     }
 
     function booking_detail($booking_id)
@@ -530,6 +542,13 @@ class Account extends MY_Controller
 
             echo json_encode(['status'=> 'failed']);
         }
+    }
+
+    function client_transactions()
+    {
+        $this->data['transactions'] = $this->booking_model->get_client_transactions();
+        $this->data['totalPayouts'] = $this->booking_model->get_client_total_payouts();
+        $this->load->view('artist/transactions', $this->data);
     }
 
     function review()
@@ -749,8 +768,9 @@ class Account extends MY_Controller
 
     function change_pswd()
     {
-        $this->isMemLogged($this->session->mem_type);
-        if ($this->input->post()) {
+        $this->isMemLogged($this->session->user_type);
+        if ($this->input->post()) 
+        {
             $res = array();
             $res['hide_msg'] = 0;
             $res['scroll_to_msg'] = 1;
@@ -761,14 +781,19 @@ class Account extends MY_Controller
             $this->form_validation->set_rules('pswd', 'Current Password', 'required');
             $this->form_validation->set_rules('npswd', 'New Password', 'required');
             $this->form_validation->set_rules('cpswd', 'Confirm Password', 'required|matches[npswd]');
-            if ($this->form_validation->run() === FALSE) {
+
+            if($this->form_validation->run() === FALSE)
+            {
                 $res['msg'] = validation_errors();
-            } else {
+            }
+            else
+            {
                 $post = html_escape($this->input->post());
-                $row = $this->member_model->oldPswdCheck($this->data['mem_data']->mem_id, $post['pswd']);
-                if (count($row) > 0) {
-                    $ary = array('mem_pswd' => doEncode($post['npswd']));
-                    $this->member_model->save($ary, $this->data['mem_data']->mem_id);
+                $row = $this->user_model->oldPswdCheck($this->data['mem_data']->user_id, $post['pswd']);
+                if (count($row) > 0)
+                {
+                    $ary = array('user_pswd' => doEncode($post['npswd']));
+                    $this->user_model->save($ary, $this->data['mem_data']->user_id);
                     $res['msg'] = showMsg('success', 'Password successfully updated!');
 
                     $res['status'] = 1;
@@ -884,7 +909,7 @@ class Account extends MY_Controller
         }
 
         $this->isMemLogged($this->session->user_type);
-        $this->load->view('artist/calendar');
+        $this->load->view('artist/calendar', $this->data);
     }
 
 }   

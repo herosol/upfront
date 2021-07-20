@@ -20,7 +20,7 @@
     </div>
 </div>
 <div id="New" <?php if($this->session->userdata('model-applications-state') != 'New'){ echo 'style="display:none"'; }?>>
-    <table class="table table-bordered datatable" id="table-1">
+    <table class="table table-bordered datatable dtable">
         <thead>
             <tr>
                 <th width="5%" class="text-center">Sr#</th>
@@ -68,7 +68,7 @@
     </table>
 </div>
 <div id="Approved" <?php if($this->session->userdata('model-applications-state') != 'Approved'){ echo 'style="display:none"'; }?>>
-    <table class="table table-bordered datatable">
+    <table class="table table-bordered datatable dtable">
             <thead>
                 <tr>
                     <th width="5%" class="text-center">Sr#</th>
@@ -115,7 +115,7 @@
         </table>
 </div>
 <div id="Cancelled" <?php if($this->session->userdata('model-applications-state') != 'Cancelled'){ echo 'style="display:none"'; }?>>
-    <table class="table table-bordered datatable">
+    <table class="table table-bordered datatable dtable">
         <thead>
             <tr>
                 <th width="5%" class="text-center">Sr#</th>

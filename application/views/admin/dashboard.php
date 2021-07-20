@@ -5,9 +5,9 @@
         <a href="<?= site_url(ADMIN.'/buyers') ?>">
             <div class="tile-stats tile-white">
                 <div class="icon"><i class="entypo-user"></i></div>
-                <div class="num" data-start="0" data-end="<?=$total_buyers?>" data-postfix="" data-duration="1500" data-delay="0"><?=$total_buyers?></div>
-                <h3>Total Buyers </h3>
-                <p>Total Buyers in our website </p>
+                <div class="num" data-start="0" data-end="<?=$total_users?>" data-postfix="" data-duration="1500" data-delay="0"><?=$total_users?></div>
+                <h3>Total Users </h3>
+                <p>Total Users in our website </p>
             </div>
         </a>
     </div>
@@ -17,9 +17,9 @@
         <a href="<?= site_url(ADMIN.'/players') ?>">
             <div class="tile-stats tile-green">
                 <div class="icon"><i class="entypo-user"></i></div>
-                <div class="num" data-start="0" data-end="<?=$total_players?>" data-postfix="" data-duration="1500" data-delay="0"><?=$total_players?></div>
-                <h3>Total Players </h3>
-                <p>Total Players in our website </p>
+                <div class="num" data-start="0" data-end="<?=$total_models?>" data-postfix="" data-duration="1500" data-delay="0"><?=$total_models?></div>
+                <h3>Total Models </h3>
+                <p>Total Models in our website </p>
             </div>
         </a>
     </div>

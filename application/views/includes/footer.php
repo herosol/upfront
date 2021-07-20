@@ -58,11 +58,11 @@
                 </form>
                 <h5>Follow us</h5>
                 <ul class="social flex">
-                    <li><a href="<?= $site_settings->site_instagram ?>"><img src="<?= base_url() ?>assets/images/social-instagram.svg" alt=""></a></li>
-                    <li><a href="<?= $site_settings->site_facebook ?>"><img src="<?= base_url() ?>assets/images/social-facebook.svg" alt=""></a></li>
-                    <li><a href="<?= $site_settings->site_youtube ?>"><img src="<?= base_url() ?>assets/images/social-youtube.svg" alt=""></a></li>
-                    <li><a href="<?= $site_settings->site_twitter ?>"><img src="<?= base_url() ?>assets/images/social-twitter.svg" alt=""></a></li>
-                    <li><a href="#"><img src="<?= base_url() ?>assets/images/social-email.svg" alt=""></a></li>
+                    <li><a target="_blank" href="<?= $site_settings->site_instagram ?>"><img src="<?= base_url() ?>assets/images/social-instagram.svg" alt=""></a></li>
+                    <li><a target="_blank" href="<?= $site_settings->site_facebook ?>"><img src="<?= base_url() ?>assets/images/social-facebook.svg" alt=""></a></li>
+                    <li><a target="_blank" href="<?= $site_settings->site_youtube ?>"><img src="<?= base_url() ?>assets/images/social-youtube.svg" alt=""></a></li>
+                    <li><a target="_blank" href="<?= $site_settings->site_twitter ?>"><img src="<?= base_url() ?>assets/images/social-twitter.svg" alt=""></a></li>
+                    <li class="hidden"><a href="#"><img src="<?= base_url() ?>assets/images/social-email.svg" alt=""></a></li>
                 </ul>
             </div>
         </div>
@@ -70,7 +70,7 @@
     <div class="copyright relative">
         <div class="contain-fluid">
             <div class="inner">
-                <p>Copyright © 2021 <a href="<?= base_url() ?>">Upfront Worldwide Talent Agency</a>. All rights reserved.</p>
+                <p>Copyright © <?=date('Y')?> <a href="<?= base_url() ?>"> <?= $site_settings->site_name ?></a>. All rights reserved.</p>
                 <ul class="smLst flex">
                     <li><a href="<?= base_url() ?>privacy-policy">Privacy Policy</a></li>
                     <li><a href="<?= base_url() ?>terms-and-conditions">Terms & Conditions</a></li>

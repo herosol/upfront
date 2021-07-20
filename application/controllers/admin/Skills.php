@@ -43,15 +43,9 @@ class Skills extends Admin_Controller
     function delete_skill($id)
     {
         $id = intval($id);
-        if ($this->skills_model->get_row_where(array('cat_id' => $id)))
-        {
-            setMsg('error',"Category has related blog, It can't be deleted");
-            redirect(ADMIN . '/topics/categories', 'refresh');
-            exit;
-        }
         $this->skills_model->delete($id);
-        setMsg('success', 'Category has been deleted successfully.');
-        redirect(ADMIN . '/topics/categories', 'refresh');
+        setMsg('success', 'Skill has been deleted successfully.');
+        redirect(ADMIN . '/skills', 'refresh');
         exit;
     }
 }

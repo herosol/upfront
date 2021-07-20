@@ -35,6 +35,26 @@ class Booking_model extends CRUD_Model
         return $this->db->get()->result();
     }
 
+    function get_client_transactions()
+    {
+        $this->db->from('earnings e');
+        $this->db->join('bookings b', 'e.booking_id=b.id');
+        $this->db->select('e.*, b.booked_member, b.amount as paidAmount');
+        $this->db->where(['b.booked_by'=> $this->session->user_id]);
+        $this->db->order_by('e.id', 'DESC');
+        return $this->db->get()->result();
+    }
+
+    function get_client_total_payouts()
+    {
+        $this->db->from('earnings e');
+        $this->db->join('bookings b', 'e.booking_id=b.id');
+        $this->db->select('SUM(b.amount) as totalPayout');
+        $this->db->where(['b.booked_by'=> $this->session->user_id]);
+        return $this->db->get()->row()->totalPayout;
+    }
+    
+
 }
 ?>
 

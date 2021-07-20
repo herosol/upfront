@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="detail" class="control-label"> Detail <span class="symbol required">*</span></label>
-                        <textarea  name="detail" id="detail" rows="8" class="form-control ckeditor" required><?php if (isset($row->detail)) echo $row->detail; ?></textarea>
+                        <textarea  name="detail" id="detail" rows="8" class="form-control ckeditor" required=""><?php if (isset($row->detail)) echo trim($row->detail); ?></textarea>
                     </div>
                 </div>
                 <div class="col-md-12">

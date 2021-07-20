@@ -63,142 +63,40 @@
                 </div>
                 <?php if ($this->session->user_type != 'user') : ?>
                     <h4>Upcoming Bookings</h4>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/1.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>Educated is even better than you’ve heard</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$250</li>
-                        </ul>
-                    </div>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/2.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>How to handle a national crisis</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$220</li>
-                        </ul>
-                    </div>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/3.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>This partnership helped prevent 13 million deaths</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$150</li>
-                        </ul>
-                    </div>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/4.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>What you can do to fight climate change</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$250</li>
-                        </ul>
-                    </div>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/5.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>How do we move around in a zero-carbon world?</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$220</li>
-                        </ul>
-                    </div>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/6.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>5 good books for a lousy year</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$150</li>
-                        </ul>
-                    </div>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/7.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>Mealtime Conversations – Bangladesh</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$250</li>
-                        </ul>
-                    </div>
-                    <div class="bookBlk">
-                        <ul class="lst">
-                            <li>
-                                <div class="icoBlk">
-                                    <div class="ico"><img src="<?= base_url() ?>assets/images/stars/8.jpg" alt=""></div>
-                                    <div class="txt">
-                                        <h5>Here’s a way you can help fight Alzheimer’s</h5>
-                                        <p>214243</p>
-                                    </div>
-                                    <a href="<?= $base_url ?>artist/booking-detail.php"></a>
-                                </div>
-                            </li>
-                            <li class="date">March 20, 2019 - 5:20 pm</li>
-                            <li><span class="badge yellow">Pending</span></li>
-                            <li class="price">$220</li>
-                        </ul>
-                    </div>
+                    <?php
+                    if(check_bookings_counter($bookings, 'Pending') == 0 && check_bookings_counter($bookings, 'In Progress') == 0)
+                    {
+                    ?>
+                        <div class="alert alert-info">No Upcoming Booking.</div>
+                    <?php
+                    }
+                    else
+                    {
+                        foreach($bookings as $key => $booking):
+                            if($booking->booking_status == 'Pending' || $booking->booking_status == 'In Progress'):
+                        ?>
+                            <div class="bookBlk">
+                                <ul class="lst">
+                                    <li>
+                                        <div class="icoBlk">
+                                            <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($booking->booked_by), ''); ?>" alt=""></div>
+                                            <div class="txt">
+                                                <h5>Educated is even better than you’ve heard</h5>
+                                                <p>214243</p>
+                                            </div>
+                                            <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
+                                        </div>
+                                    </li>
+                                    <li class="date">March 20, 2019 - 5:20 pm</li>
+                                    <li><span class="badge yellow">Pending</span></li>
+                                    <li class="price">$<?=$booking->amount?></li>
+                                </ul>
+                            </div>
+                        <?php
+                            endif;
+                        endforeach;
+                    }
+                    ?>
                 <?php endif; ?>
             </div>
         </section>

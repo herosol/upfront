@@ -41,7 +41,7 @@ class Model_applications extends Admin_Controller
         if($user_id > 0)
         {
             $row = $this->user_model->get_row($user_id, 'user_id');
-            if($action)
+            if($action == 'approve')
             {
                 $data = 
                 [

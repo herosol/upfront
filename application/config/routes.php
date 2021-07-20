@@ -96,6 +96,7 @@ $route['booking-detail/(:any)'] = 'account/booking_detail/$1';
 $route['toggleChatroom']   = 'account/toggle_chatroom';
 $route['download-file/(:any)'] = 'downloadfile/index/$1';
 $route['earnings']       = 'earnings/index';
+$route['transactions']   = 'account/client_transactions';
 $route['my-calender']    = 'account/my_calender';
 $route['payment-methods']= 'paymentmethods/index';
 

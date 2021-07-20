@@ -35,7 +35,7 @@
                             </div>
                             <div class="txt">
                                 <h4>Personal Info</h4>
-                                <?php echo $model_data->mem_about; ?>
+                                <?php echo $model_data->mem_about?>
                                 <ul class="lst">
                                     <li>
                                         <strong>Speaks:</strong>

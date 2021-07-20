@@ -6,7 +6,7 @@
         <h2 class="no-margin"><i class="fa fa-cogs"></i> Site <strong>Settings</strong></h2>
     </div>
     <div class="col-md-6 text-right">
-        <a href="<?= site_url(ADMIN . '/settings/clear-cashe'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-refresh"></i> Clear Cache</a>
+        <a href="<?= site_url(ADMIN . '/settings/clear_cashe'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-refresh"></i> Clear Cache</a>
     </div>
 </div>
 <hr>

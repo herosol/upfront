@@ -52,7 +52,7 @@ class Topics extends Admin_Controller
         $this->remove_file($id);
         $this->topic_model->delete($id);
         setMsg('success', 'Blog Article has been deleted successfully.');
-        redirect(ADMIN . '/blog', 'refresh');
+        redirect(ADMIN . '/topics', 'refresh');
         exit;
     }
 

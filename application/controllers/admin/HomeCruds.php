@@ -71,18 +71,20 @@ class HomeCruds extends Admin_Controller
         $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
     }
 
-    function delete_skill($id)
+    function delete_crud($id)
     {
         $id = intval($id);
-        if ($this->homec_model->get_row_where(array('cat_id' => $id)))
-        {
-            setMsg('error',"Category has related blog, It can't be deleted");
-            redirect(ADMIN . '/topics/categories', 'refresh');
-            exit;
-        }
+        $row = $this->homec_model->get_row($id);
         $this->homec_model->delete($id);
-        setMsg('success', 'Category has been deleted successfully.');
-        redirect(ADMIN . '/topics/categories', 'refresh');
+        setMsg('success', 'Home content has been deleted successfully.');
+        if($row->section_type == 'fascinates')
+        {
+            redirect(ADMIN . '/homecruds', 'refresh');   
+        }
+        else
+        {
+            redirect(ADMIN . '/homecruds/star_viewing', 'refresh');   
+        }
         exit;
     }
 }

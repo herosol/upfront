@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2021 at 04:19 PM
+-- Generation Time: Jul 20, 2021 at 04:28 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -46,7 +46,7 @@ INSERT INTO `tbl_affiliates_cards` (`id`, `image`, `heading`, `description`, `cr
 (4, '19b650660b253761af189682e03501dd_1624886363_6649.svg', 'Exclusive Offers', 'Share special promotions we rotate every month.', '2021-06-28 13:19:23'),
 (5, '4f6ffe13a5d75b2d6a3923922b3922e5_1624886404_4558.svg', 'Real-Time Tracking', 'Track all your traffic, referrals, and payouts with a personalized dashboard.', '2021-06-28 13:20:04'),
 (6, '087408522c31eeb1f982bc0eaf81d35f_1624886451_9994.svg', 'Monthly Payouts', 'Get paid each month for every new customer you refer.', '2021-06-28 13:20:51'),
-(7, 'b7bb35b9c6ca2aee2df08cf09d7016c2_1624886995_4304.png', 'TEST', 'Custom Added Card For Testing', '2021-06-28 13:29:55');
+(8, '72da7fd6d1302c0a159f6436d01e9eb0_1626770912_7103.svg', 'TEST HERE EDITED', 'Find the best classes and video lessons for your audience.	EDITED', '2021-07-20 08:48:11');
 
 -- --------------------------------------------------------
 
@@ -76,13 +76,11 @@ INSERT INTO `tbl_blogs` (`id`, `cat_id`, `title`, `slug`, `detail`, `image`, `me
 (4, 3, 'Blog SEO: How to optimize the search engines for your blog content', 'blog-seo-how-to-optimize-the-search-engines-for-your-blog-content', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', '2a084e55c87b1ebcdaad1f62fdbbac8e_1624965219_5389.jpg', 'Test', 'Test', '2021-06-29 04:13:40'),
 (5, 5, 'Email forwarding tips you must know by 2020', 'email-forwarding-tips-you-must-know-by-2020', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', '37f0e884fbad9667e38940169d0a3c95_1624965286_6580.jpg', 'Test', 'Test', '2021-06-29 04:14:47'),
 (6, 6, 'The best newsletter templates and resources for download right now', 'the-best-newsletter-templates-and-resources-for-download-right-now', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', 'a0a080f42e6f13b3a2df133f073095dd_1624965325_7224.jpg', 'Test', 'Test', '2021-06-29 04:15:25'),
-(7, 2, 'Google Doc features you didn\'t know existed (but absolutely needed)', 'google-doc-features-you-didnt-know-existed-but-absolutely-needed', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', '7eabe3a1649ffa2b3ff8c02ebfd5659f_1624965351_6844.jpg', 'Test', 'Test', '2021-06-29 04:15:52'),
 (8, 4, 'Spoken and repeated jokes to satisfy your inner grammar', 'spoken-and-repeated-jokes-to-satisfy-your-inner-grammar', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', '2b24d495052a8ce66358eb576b8912c8_1624965380_6595.jpg', 'Test', 'Test', '2021-06-29 04:16:20'),
 (9, 5, '9 of the best professional biological examples we have ever seen [+ biological patterns]', '9-of-the-best-professional-biological-examples-we-have-ever-seen-biological-patterns', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', 'acc3e0404646c57502b480dc052c4fe1_1624965411_4741.jpg', 'Test', 'Test', '2021-06-29 04:16:51'),
 (10, 2, 'Blog SEO: How to optimize the search engines for your blog content', 'blog-seo-how-to-optimize-the-search-engines-for-your-blog-content', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', '08419be897405321542838d77f855226_1624965445_8365.jpg', 'Test', 'Test', '2021-06-29 04:17:25'),
 (11, 5, 'How to optimize the search engines for your blog content', 'how-to-optimize-the-search-engines-for-your-blog-content', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', 'a4300b002bcfb71f291dac175d52df94_1624965506_9429.jpg', 'Test', 'Test', '2021-06-29 04:18:27'),
-(12, 6, '5 products from ES that will change your PC experience', '5-products-from-es-that-will-change-your-pc-experience', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', '68264bdb65b97eeae6788aa3348e553c_1624965535_9890.jpg', 'Test', 'Test', '2021-06-29 04:18:55'),
-(13, 1, 'Holiday peripherals stocking stuffers gift guide', 'holiday-peripherals-stocking-stuffers-gift-guide', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', 'c3c59e5f8b3e9753913f4d435b53c308_1624967683_9063.jpg', 'Test', 'Test', '2021-06-29 04:19:35');
+(12, 6, '5 products from ES that will change your PC experience', '5-products-from-es-that-will-change-your-pc-experience', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ducimus molestiae nemo ad iste quidem natus, soluta deserunt aliquid similique quia hic quisquam tenetur, veritatis fuga quaerat sed est quod.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam perferendis sed iste quia, necessitatibus neque qui perspiciatis alias eius dolor nobis, odit voluptas ab obcaecati nostrum sapiente adipisci excepturi laboriosam?</p>\r\n\r\n<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eum deleniti tempora laboriosam minus. Consequatur magnam asperiores libero fuga, incidunt officiis eius veniam, repudiandae laborum fugiat, aliquam dignissimos soluta illo!</p>\r\n', '68264bdb65b97eeae6788aa3348e553c_1624965535_9890.jpg', 'Test', 'Test', '2021-06-29 04:18:55');
 
 -- --------------------------------------------------------
 
@@ -138,8 +136,8 @@ CREATE TABLE `tbl_bookings` (
 --
 
 INSERT INTO `tbl_bookings` (`id`, `booked_by`, `booked_member`, `amount`, `duration`, `detail`, `booking_status`, `complete_request`, `cancel_request`, `cancel_request_by`, `cancel_request_reason`, `cancel_request_description`, `cancel_on`, `site_percentage`, `booking_date`) VALUES
-(1, 1, 2, 1000, 10, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged', 'Cancelled', NULL, 'accept', 1, 'I am not able to attend this meeting due to conflict with another meeting.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged', '2021-07-19 10:23:07', 5, '2021-07-19 10:07:29'),
-(2, 1, 2, 1200, 12, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged', 'Completed', NULL, NULL, NULL, NULL, NULL, '2021-07-19 10:13:28', 5, '2021-07-19 10:11:37');
+(1, 3, 2, 1000, 10, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged', 'Cancelled', NULL, 'accept', 1, 'I am not able to attend this meeting due to conflict with another meeting.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged', '2021-07-20 11:28:48', 5, '2021-07-19 10:07:29'),
+(2, 3, 2, 1200, 12, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged', 'Completed', NULL, NULL, NULL, NULL, NULL, '2021-07-20 11:28:50', 5, '2021-07-19 10:11:37');
 
 -- --------------------------------------------------------
 
@@ -699,8 +697,8 @@ CREATE TABLE `tbl_mem_languages` (
 --
 
 INSERT INTO `tbl_mem_languages` (`id`, `mem_id`, `language_id`, `language_level`, `status`) VALUES
-(3, 2, 1, 'Fluent', 1),
-(4, 2, 7, 'Native', 1);
+(17, 2, 1, 'Fluent', 1),
+(18, 2, 7, 'Native', 1);
 
 -- --------------------------------------------------------
 
@@ -752,7 +750,8 @@ INSERT INTO `tbl_model_categories` (`id`, `name`, `image`, `is_featured`, `statu
 (5, 'Modeling', '9f396fe44e7c05c16873b05ec425cbad_1626428353_7897.jpg', 1, 1),
 (6, 'Tv', '33e8075e9970de0cfea955afd4644bb2_1626428370_2499.jpg', 1, 1),
 (7, 'Music', 'fccb3cdc9acc14a6e70a12f74560c026_1626428382_6124.jpg', 1, 1),
-(8, 'Kids', '069059b7ef840f0c74a814ec9237b6ec_1626428392_3126.jpg', 0, 1);
+(8, 'Kids', '069059b7ef840f0c74a814ec9237b6ec_1626428392_3126.jpg', 0, 1),
+(9, 'test Title  deited', 'd240e3d38a8882ecad8633c8f9c78c9b_1626768225_9251.jpg', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -780,7 +779,8 @@ INSERT INTO `tbl_motivational_videos` (`id`, `title`, `thumb`, `youtube_string`,
 (3, 'Blog SEO: How to optimize the search engines for your blog content', '8f7d807e1f53eff5f9efbe5cb81090fb_1624974395_1775.jpg', 'https://www.youtube.com/watch?v=BXFlpwfSVVY', 'BXFlpwfSVVY', 'Test', 'Test', '2021-06-29 06:46:35'),
 (4, 'Email forwarding tips you must know by 2020', 'fccb60fb512d13df5083790d64c4d5dd_1624974445_7293.jpg', 'https://www.youtube.com/watch?v=EzYqVzogO98', 'EzYqVzogO98', 'Test', 'Test', '2021-06-29 06:47:25'),
 (5, 'Blog SEO: How to optimize the search engines for your blog content', '8f7d807e1f53eff5f9efbe5cb81090fb_1624974395_1775.jpg', 'https://www.youtube.com/watch?v=BXFlpwfSVVY', 'BXFlpwfSVVY', 'Test', 'Test', '2021-06-29 06:46:35'),
-(6, 'The best newsletter templates and resources for download right now', '4b0250793549726d5c1ea3906726ebfe_1624975312_8239.jpg', 'https://www.youtube.com/watch?v=ehnqmGcrgyM', 'ehnqmGcrgyM', 'Test', 'Test', '2021-06-29 07:01:52');
+(6, 'The best newsletter templates and resources for download right now', '4b0250793549726d5c1ea3906726ebfe_1624975312_8239.jpg', 'https://www.youtube.com/watch?v=ehnqmGcrgyM', 'ehnqmGcrgyM', 'Test', 'Test', '2021-06-29 07:01:52'),
+(9, 'TEST VIDEO TITLE', '5737c6ec2e0716f3d8a7a5c4e0de0d9a_1626767379_6326.jpg', 'https://www.youtube.com/watch?v=s-bZD3O3P80', 's-bZD3O3P80', 'Test', 'Test', '2021-07-20 00:48:15');
 
 -- --------------------------------------------------------
 
@@ -910,7 +910,7 @@ CREATE TABLE `tbl_siteadmin` (
 --
 
 INSERT INTO `tbl_siteadmin` (`site_id`, `site_username`, `site_password`, `site_admin_name`, `site_admin_type`, `site_domain`, `site_name`, `site_email`, `site_noreply_email`, `site_phone`, `site_fax`, `site_paypal_sandox`, `site_sandbox_paypal`, `site_live_paypal`, `site_ip`, `site_logo`, `site_icon`, `site_thumb`, `site_address`, `site_about`, `site_city`, `site_state`, `site_zip`, `site_country`, `site_lastlogindate`, `site_copyright`, `site_facebook`, `site_twitter`, `site_google`, `site_instagram`, `site_linkedin`, `site_youtube`, `site_contact_map`, `site_google_ad`, `site_meta_desc`, `site_meta_keyword`, `site_meta_copyright`, `site_meta_author`, `site_how_to_pay`, `site_status`, `sub_location`, `site_chat`, `sub_featured`, `site_version`, `site_percentage`, `site_hold_payment`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'cosplay-cosmos-logo1.png', 'cosplay-cosmos-icon1.png', 'cosplay-cosmos-thumb.jpg', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-07-19 12:37:48', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/', 'https://twitter.com/', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 29, 5, 5),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administration', 'admin', 'www.upfront.com', 'Upfront Worldwide Talent Agency', 'info@upfront.com', 'no-reply@upfront.com', '+254-775-050-697', '', 1, 'mehdiabedin@gmail.com', 'mehdiabedin@gmail.com', '::1', 'upfront-worldwide-talent-agency-logo.png', 'upfront-worldwide-talent-agency-icon.png', 'upfront-worldwide-talent-agency-thumb.png', '10100 West Sample Road, <br>\r\nThird Floor, Coral Springs, <br>\r\nFL 33065', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'New York', 'WA', '75350', 'USA', '2021-07-20 11:42:47', 'Copyright © 2018. All Rights Reserved', 'https://www.facebook.com/', 'https://twitter.com/', 'https://plus.google.com/mrservicecard', 'https://www.instagram.com/', 'https://www.linkedin.com/pfsc', 'https://www.youtube.com/', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.7250567536676!2d-84.34897039425!3d33.71606266992961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f501790d22f717%3A0x7ff91decdaf344dc!2s1264+Custer+Ave+SE%2C+Atlanta%2C+GA+30316!5e0!3m2!1sen!2s!4v1493122321821', '', 'We are creating a cosplay marketplace to connect endclients ( conventions, businesses, eventplanners ) with cosplayers.', 'HTML, CSS, XML, JavaScript', 'New Admin &copy; 2018 All Rights Reserved.', 'Administration', '', 1, 20, 'window.fcWidget.init({\r\ntoken: \"89884c16-15cc-484d-926f-ec74202a584d\",\r\nhost: \"https://wchat.freshchat.com\"\r\n});', 30, 8, 5, 5),
 (2, 'ajay', '098f6bcd4621d373cade4e832627b4f6', 'Malik Ajay Jones', 'subadmin', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-03-06 15:00:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -6058,9 +6058,9 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_remember`, `user_token`, `user_type`, `mem_social_type`, `mem_social_id`, `user_fname`, `user_lname`, `user_email`, `user_pswd`, `mem_code`, `mem_phone`, `mem_sex`, `mem_dob`, `mem_skills`, `mem_company`, `mem_website`, `mem_about`, `mem_profile_heading`, `mem_availability`, `mem_video`, `mem_image`, `mem_cover_image`, `mem_street`, `mem_address1`, `mem_address2`, `mem_city`, `mem_state`, `mem_zip`, `mem_country_id`, `mem_rate`, `mem_characters`, `mem_ssn`, `mem_dln`, `mem_travel_radius`, `mem_ip`, `mem_note`, `mem_referral_code`, `mem_fb_link`, `mem_instagram_link`, `mem_twitter_link`, `mem_linkedin_link`, `mem_youtube_link`, `mem_paypal`, `mem_stripe_id`, `mem_map_lat`, `mem_map_lng`, `mem_hear_about`, `mem_model_application`, `mem_become_buyer`, `mem_phone_code`, `mem_phone_verified`, `mem_player_verified`, `mem_verified`, `user_status`, `mem_featured`, `mem_date`, `user_last_login`) VALUES
-(1, 'g5', '86qcvgkc7a873bmfjv6ctti10g8mhugh', 'model', 'website', NULL, 'Demo', 'Model', 'demouser1@gmail.com', '05c3u3l4649465x4b5a5s493x4u31313', 'v4o3t2c4y39554t4l5a5w4g4j5j4a35304q2v2l51475t4p424x2y2m4', '03000000001', NULL, NULL, '', NULL, '', 'From User To A Model Description here. From User To A Model Description here. From User To A Model Description here. From User To A Model Description here. From User To A Model Description here. ', NULL, NULL, NULL, 'b83aac23b9528732c23cc7352950e880_1626696634_1308.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-07-19 09:39:32', '2021-07-19 15:10:34'),
-(2, 'g5', 'df2f1aqf54i3bcl0u95hj692gjci1d2e', 'model', 'website', NULL, 'Gigi', 'Model', 'demomodel1@gmail.com', '05c3u3l4648454t4b5t445n415h39313', 'w493h3s2k39525j4j595b4o4i5z2m3c48483g3i4u364v2c4a4y3o4n4654463o4', '03000000000', 'Female', '1998-07-14', 'Screenwriting, Martial Arts: Fencing, Acting Techniques, Modeling, Athletic, Sketchwriting', NULL, '', '&lt;p&gt;This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description.&lt;/p&gt;', NULL, NULL, '043c3d7e489c69b48737cc0c92d0f3a2_1626688846_6775.mp4', '82161242827b703e6acf9c726942a1e4_1626688217_4305.jpg', '9b698eb3105bd82528f23d0c92dedfc0_1626688846_3776.jpg', NULL, 'House #12, Down Street.', '', 'Log Angeles', 1416, '90001', 233, 50, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '33.96967', '-118.24993', NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-07-19 09:50:17', '2021-07-19 13:05:44'),
-(3, NULL, NULL, 'user', 'website', NULL, 'Test', 'User', 'testuser@gmail.com', '45c3u3r484u465x4b5a5s493x4u31313', 'x4p374q2k3a525j4k59405t2j5z2q3p4r3b3a4x5t375i4n4p3k4j3o4f5z4a353', NULL, NULL, NULL, '', NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 0, 1, 0, '2021-07-19 12:17:40', '2021-07-19 15:17:40');
+(1, 'g5', 'jm8puq0568qmii4rhchnkb3lhfn764ov', 'model', 'website', NULL, 'Demo', 'Model', 'demouser1@gmail.com', '05c3u3l4649465x4b5a5s493x4u31313', 'v4o3t2c4y39554t4l5a5w4g4j5j4a35304q2v2l51475t4p424x2y2m4', '03000000001', NULL, NULL, '', NULL, '', 'From User To A Model Description here. From User To A Model Description here. From User To A Model Description here. From User To A Model Description here. From User To A Model Description here. ', NULL, NULL, NULL, 'b83aac23b9528732c23cc7352950e880_1626696634_1308.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-07-19 09:39:32', '2021-07-20 15:17:02'),
+(2, 'g5', '7d33mqelijh6fcv25ug4bd5gqp5v4e53', 'model', 'website', NULL, 'Gigi', 'Model', 'demomodel1@gmail.com', '05c3u3l4649465x4b5a5s493x4u31313', 'w493h3s2k39525j4j595b4o4i5z2m3c48483g3i4u364v2c4a4y3o4n4654463o4', '03000000000', 'Female', '1969-12-31', 'Screenwriting, Martial Arts: Fencing, Acting Techniques, Modeling, Athletic, Sketchwriting', NULL, '', '&lt;p&gt;This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description. This is a test description.&lt;/p&gt;', NULL, NULL, '043c3d7e489c69b48737cc0c92d0f3a2_1626688846_6775.mp4', '82161242827b703e6acf9c726942a1e4_1626688217_4305.jpg', '9b698eb3105bd82528f23d0c92dedfc0_1626688846_3776.jpg', NULL, 'House #12, Down Street.', '', 'Log Angeles', 1416, '90001', 233, 50, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '33.96967', '-118.24993', NULL, '1', 0, NULL, 0, 0, 1, 1, 0, '2021-07-19 09:50:17', '2021-07-20 15:50:56'),
+(3, 'g5', 'jm8puq0568qmii4rhchnkb3lhfn764ov', 'user', 'website', NULL, 'Testt', 'Userr', 'testuser@gmail.com', '05c3u3l4649465x4b5a5s493x4u31313', 'x4p374q2k3a525j4k59405t2j5z2q3p4r3b3a4x5t375i4n4p3k4j3o4f5z4a353', NULL, NULL, NULL, '', NULL, '', NULL, NULL, NULL, NULL, '2723d092b63885e0d7c260cc007e8b9d_1626774247_5721.jpg', '', NULL, '', '', '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, NULL, 0, 0, 1, 1, 0, '2021-07-19 12:17:40', '2021-07-20 15:18:22');
 
 -- --------------------------------------------------------
 
@@ -6291,19 +6291,19 @@ ALTER TABLE `tbl_withdraws`
 -- AUTO_INCREMENT for table `tbl_affiliates_cards`
 --
 ALTER TABLE `tbl_affiliates_cards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_blogs`
 --
 ALTER TABLE `tbl_blogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_blog_categories`
 --
 ALTER TABLE `tbl_blog_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_bookings`
@@ -6345,13 +6345,13 @@ ALTER TABLE `tbl_countries`
 -- AUTO_INCREMENT for table `tbl_earnings`
 --
 ALTER TABLE `tbl_earnings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_home_cruds`
 --
 ALTER TABLE `tbl_home_cruds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_languages`
@@ -6375,7 +6375,7 @@ ALTER TABLE `tbl_mem_gallery_images`
 -- AUTO_INCREMENT for table `tbl_mem_languages`
 --
 ALTER TABLE `tbl_mem_languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_mem_skills`
@@ -6387,13 +6387,13 @@ ALTER TABLE `tbl_mem_skills`
 -- AUTO_INCREMENT for table `tbl_model_categories`
 --
 ALTER TABLE `tbl_model_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_motivational_videos`
 --
 ALTER TABLE `tbl_motivational_videos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_newsletter`
@@ -6429,7 +6429,7 @@ ALTER TABLE `tbl_site_texts`
 -- AUTO_INCREMENT for table `tbl_skills`
 --
 ALTER TABLE `tbl_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_states`
@@ -6441,13 +6441,13 @@ ALTER TABLE `tbl_states`
 -- AUTO_INCREMENT for table `tbl_topics`
 --
 ALTER TABLE `tbl_topics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_topics_categories`
 --
 ALTER TABLE `tbl_topics_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`

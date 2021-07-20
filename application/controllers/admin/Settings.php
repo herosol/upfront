@@ -14,9 +14,11 @@ class Settings extends Admin_Controller {
         has_access();
         if ($vals = $this->input->post())
         {
-            if (($_FILES["logo_image"]["name"] != "")) {
+            if (($_FILES["logo_image"]["name"] != "")) 
+            {
                 $image = upload_file(UPLOAD_PATH . "images/", 'logo_image','image',toSlugUrl($vals['site_name']).'-logo');
-                if (!empty($image['file_name'])) {
+                if (!empty($image['file_name']))
+                {
                     if (!empty($this->data['adminsite_setting']->site_logo))
                         $this->remove_file($this->data['adminsite_setting']->site_logo);
                     $vals['site_logo'] = $image['file_name'];

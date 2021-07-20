@@ -37,15 +37,27 @@
                 <em>My Bookings</em>
             </a>
         </li>
-        <li class="<?php if ($page == "earnings") {
-                        echo 'active';
-                    } ?>">
-            <a href="<?= base_url() ?>earnings">
-                <img src="<?= base_url() ?>assets/images/icon-earnings.svg" alt="">
-                <em>Earnings</em>
-            </a>
-        </li>
-        <li class="<?php if ($page == "" && $this->uri->segment(1) == "my-calender") {
+        <?php if($this->session->user_type == 'model'): ?>
+            <li class="<?php if ($page == "earnings") {
+                            echo 'active';
+                        } ?>">
+                <a href="<?= base_url() ?>earnings">
+                    <img src="<?= base_url() ?>assets/images/icon-earnings.svg" alt="">
+                    <em>Earnings</em>
+                </a>
+            </li>
+        <?php endif; ?>
+        <?php if($this->session->user_type == 'user'): ?>
+            <li class="<?php if ($page == "transactions") {
+                            echo 'active';
+                        } ?>">
+                <a href="<?= base_url() ?>transactions">
+                    <img src="<?= base_url() ?>assets/images/icon-earnings.svg" alt="">
+                    <em>Transactions</em>
+                </a>
+            </li>
+        <?php endif; ?>
+        <li class="<?php if ($page == "my-calender") {
                         echo 'active';
                     } ?>">
             <a href="<?= base_url() ?>my-calender">

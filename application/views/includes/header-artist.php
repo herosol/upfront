@@ -2,7 +2,7 @@
     <div class="contain-fluid">
         <div class="logo">
             <a href="<?= base_url() ?>">
-                <img src="<?= base_url() ?>assets/images/logo.png" alt="">
+                <img src="<?= get_site_image_src("images", $site_settings->site_logo, ''); ?>" alt="">
             </a>
         </div>
         <div class="toggle"><span></span></div>

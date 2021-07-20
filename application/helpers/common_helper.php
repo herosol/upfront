@@ -89,6 +89,22 @@ function sort_chat_participants($user_id, $receiver_id)
         return  $user_id.','.$receiver_id;
 }
 
+function check_bookings_counter($arr, $type)
+{
+    if(count($arr) > 0)
+    {
+        $count = 0;
+        foreach($arr as $key => $row)
+        {
+            if($row->booking_status == $type)
+                $count++;
+        }
+        return $count;
+    }
+    else
+        return 0;
+}
+
 function booking_status_badge($val)
 {
     if($val == 'Pending' || $val == 'In Progress')

@@ -149,4 +149,5 @@
 
 
 <!-- Favicon -->
-<link type="image/png" rel="icon" href="<?= base_url() ?>assets/images/favicon.png">
+
+<link type="image/png" rel="icon" href="<?= get_site_image_src("images", $site_settings->site_icon, ''); ?>">

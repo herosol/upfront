@@ -135,7 +135,7 @@
                                         <ul class="dropdown-menu dropdown-primary" role="menu">
                                                 <li><a href="<?= site_url(ADMIN); ?>/sitecontent/affiliates/<?= $row->id; ?>">Edit</a></li>
                                                 <?php if(access(10)):?>
-                                                    <li><a href="<?= site_url(ADMIN); ?>/buyers/delete/<?= $row->mem_id; ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
+                                                    <li><a href="<?= site_url(ADMIN); ?>/sitecontent/delete_affiliates/<?= $row->id; ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
                                                 <?php endif?>
                                     </ul>
                                 </div>  

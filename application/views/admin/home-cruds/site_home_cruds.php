@@ -3,7 +3,7 @@
     <?= getBredcrum(ADMIN, array('#' => 'Add/Update Home Crud')); ?>
     <div class="row margin-bottom-10">
         <div class="col-md-6">
-            <h2 class="no-margin"><i class="entypo-users"></i> Add/Update <strong>Model Category</strong></h2>
+            <h2 class="no-margin"><i class="entypo-users"></i> Add/Update <strong>Home Crud</strong></h2>
         </div>
         <div class="col-md-6 text-right">
             <a href="<?= site_url(ADMIN . '/homecruds'); ?>" class="btn btn-lg btn-default"><i class="fa fa-arrow-left"></i> Cancel</a>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="short_desc" class="control-label"> Short Description <span class="symbol required">*</span></label>
-                        <textarea name="short_desc" id="short_desc" rows="2" class="form-control" required=""><?= $row['short_desc'] ?></textarea>
+                        <textarea name="short_desc" id="short_desc" rows="2" class="form-control" required=""><?= $row->short_desc ?></textarea>
                     </div>
                     <div class="col-md-12">
                         <label for="rating" class="control-label"> Rating <span class="symbol required">*</span></label>
@@ -40,7 +40,7 @@
                             <div class="panel-body">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
-                                        <img src="<?= get_site_image_src("pages/home/", $row->image)?>" alt="--">
+                                        <img src="<?= get_site_image_src("home-cruds", $row->image)?>" alt="--">
                                     </div>
                                     <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
                                     <div>
@@ -58,7 +58,7 @@
                     <div class="col-md-4">
                         <label for="section_type" class="control-label"> Belongs To <span class="symbol required">*</span></label>
                         <input type="radio" name="section_type" value="fascinates" <?=$row->section_type == 'fascinates' ? 'checked' : '';?> required autofocus> Fascinates
-                        <input type="radio" name="section_type" value="star_viewing" <?=$row->section_type == 'star_viewing' ? 'checked' : '';?> required autofocus> star_viewing
+                        <input type="radio" name="section_type" value="star_viewing" <?=$row->section_type == 'star_viewing' ? 'checked' : '';?> required autofocus> Star viewing
                     </div>
                 </div>
                 <hr>
@@ -109,9 +109,9 @@
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Action <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-primary" role="menu">
                                     <li><a href="<?= site_url(ADMIN.'/homecruds/manage_crud/'.$row->id); ?>">Edit</a></li>
-                                    <!-- <?php if(access(10)):?>
-                                        <li><a href="<?= site_url(ADMIN.'/skills/delete_skill/'.$row->id); ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
-                                    <?php endif?> -->
+                                    <?php if(access(10)):?>
+                                        <li><a href="<?= site_url(ADMIN.'/homecruds/delete_crud/'.$row->id); ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
+                                    <?php endif?>
                                 </ul>
                             </div>
                         </td>

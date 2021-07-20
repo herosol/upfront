@@ -58,7 +58,7 @@ class MotivationalVideos extends Admin_Controller
         }
 
 
-        $this->data['row'] = $this->blog_model->get_row($this->uri->segment('4'));
+        $this->data['row'] = $this->mvideo_model->get_row($this->uri->segment('4'));
 
         $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
     }
@@ -67,19 +67,19 @@ class MotivationalVideos extends Admin_Controller
     {
         $id = intval($id);
         $this->remove_file($id);
-        $this->blog_model->delete($id);
-        setMsg('success', 'Blog Article has been deleted successfully.');
-        redirect(ADMIN . '/blog', 'refresh');
+        $this->mvideo_model->delete($id);
+        setMsg('success', 'Video has been deleted successfully.');
+        redirect(ADMIN . '/motivationalvideos', 'refresh');
         exit;
     }
 
     private function remove_file($id, $type = '')
     {
-        $arr = $this->blog_model->get_row($id);
+        $arr = $this->mvideo_model->get_row($id);
 
-        $filepath = UPLOAD_PATH . "/blog/" . $arr->image;
-        $filepath_thumb = UPLOAD_PATH . "/blog/thumb_" . $arr->image;
-        $filepath_300p = UPLOAD_PATH . "/blog/300p_" . $arr->image;
+        $filepath = UPLOAD_PATH . "/motivational-videos" . $arr->image;
+        $filepath_thumb = UPLOAD_PATH . "/motivational-videosthumb_" . $arr->image;
+        $filepath_300p = UPLOAD_PATH . "/motivational-videos300p_" . $arr->image;
         if (is_file($filepath)) {
             unlink($filepath);
         }
@@ -90,47 +90,6 @@ class MotivationalVideos extends Admin_Controller
         return;
     }
 
-    /*** categories ***/
-
-    function categories()
-    {
-        $this->data['enable_datatable'] = TRUE;
-        $this->data['pageView'] = ADMIN . '/blog/categories';
-        
-        $this->data['rows'] = $this->bcategory_model->get_rows();
-        $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
-    }
-
-    function manage_category()
-    {
-        $this->data['enable_editor'] = TRUE;
-        $this->data['pageView'] = ADMIN . '/blog/categories';
-        if ($this->input->post()) {
-            $vals = $this->input->post();
-
-            $this->bcategory_model->save($vals, $this->uri->segment(4));
-            setMsg('success', 'Category has been saved successfully.');
-            redirect(ADMIN . '/blog/categories', 'refresh');
-            exit;
-        }
-
-        $this->data['row'] = $this->bcategory_model->get_row($this->uri->segment('4'));
-        $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
-    }
-
-    function delete_category($id)
-    {
-        $id = intval($id);
-        if ($this->blog_model->get_row_where(array('cat_id' => $id))) {
-            setMsg('error',"Category has related blog, It can't be deleted");
-            redirect(ADMIN . '/blog/categories', 'refresh');
-            exit;
-        }
-        $this->bcategory_model->delete($id);
-        setMsg('success', 'Category has been deleted successfully.');
-        redirect(ADMIN . '/blog/categories', 'refresh');
-        exit;
-    }
 }
 
 ?>

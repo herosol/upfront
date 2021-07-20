@@ -49,6 +49,7 @@ class Members extends MY_Controller {
 
     function manage_model()
     {
+        $this->data['enable_editor'] = TRUE;
         $this->data['pageView'] = ADMIN . '/members/models';
         $this->data['row'] = $this->user_model->getMember($this->uri->segment('4'));
         $this->data['appearence'] = $this->master->getRow('mem_appearance', ['mem_id' => $this->uri->segment('4')]);

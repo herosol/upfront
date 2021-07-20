@@ -2,11 +2,11 @@ $(document).ready(function() {
     $(document).on('submit', '.frmAjax', function(e) {
         e.preventDefault();
         var frmbtn = $(this).find("button[type='submit']");
-        // var frmIcon = $(this).find("button[type='submit'] i.spinner");
+        var frmIcon = $(this).find("button[type='submit'] i.spinner");
         var frmMsg = $(this).find("div.alertMsg:first");
         var frm = this;
 
-        // frmbtn.attr("disabled", true);
+        frmbtn.attr("disabled", true);
         frmMsg.hide();
         // frmIcon.removeClass("hidden");
         $.ajax({

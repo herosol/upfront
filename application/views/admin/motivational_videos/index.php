@@ -6,7 +6,7 @@
             <h2 class="no-margin"><i class="entypo-users"></i> Add/Update <strong>Video</strong></h2>
         </div>
         <div class="col-md-6 text-right">
-            <a href="<?php echo base_url(ADMIN . '/mptivationalvideos'); ?>" class="btn btn-lg btn-default"><i class="fa fa-arrow-left"></i> Cancel</a>
+            <a href="<?php echo base_url(ADMIN . '/motivationalvideos'); ?>" class="btn btn-lg btn-default"><i class="fa fa-arrow-left"></i> Cancel</a>
         </div>
     </div>
     <div>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="youtube_string" class="control-label"> Youtube Link <span class="symbol required">*</span></label>
-                        <input type="text" name="youtube_string" id="youtube_string" value="<?php if (isset($row->youtube_string)) echo $row->title; ?>" class="form-control" required autofocus>
+                        <input type="text" name="youtube_string" id="youtube_string" value="<?php if (isset($row->youtube_string)) echo $row->youtube_string; ?>" class="form-control" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <div class = "col-md-12">
                     <label for="meta_keywords" class="control-label"> Video Thumb <span class="symbol required">*</span></label><br>
-                        <img src = "<?=  get_site_image_src("blog",$row->image,'thumb_'); ?>" height = "80"><br>
+                        <img src = "<?=  get_site_image_src("motivational-videos", $row->thumb, ''); ?>" height = "80"><br>
                         <input type = "file" name = "image" id = "image" class="form-control file2 inline btn btn-primary" data-label = "<i class='fa fa-upload'></i> Browse" />
                         <div><br />
                             <small style = "color:#F00;">* Best resolution is <strong>600 x 600</strong>.</small><br />
@@ -59,13 +59,13 @@
     </div>
 <?php else: ?>
     <?php echo showMsg(); ?>
-    <?php echo getBredcrum(ADMIN, array('#' => 'Manage Blog Articles')); ?>
+    <?php echo getBredcrum(ADMIN, array('#' => 'Manage Educational Videos')); ?>
     <div class="row margin-bottom-10">
         <div class="col-md-6">
-            <h2 class="no-margin"><i class="entypo-users"></i> Manage <strong>Blog Articles</strong></h2>
+            <h2 class="no-margin"><i class="entypo-users"></i> Manage <strong>Educational Videos</strong></h2>
         </div>
         <div class="col-md-6 text-right">
-            <a href="<?php echo base_url(ADMIN . '/blog/manage'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
+            <a href="<?php echo base_url(ADMIN . '/motivationalvideos/manage'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
         </div>
     </div>
     <table class="table table-bordered datatable" id="table-1">

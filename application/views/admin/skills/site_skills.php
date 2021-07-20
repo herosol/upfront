@@ -33,10 +33,10 @@
     </div>
 <?php else: ?>
     <?= showMsg(); ?>
-    <?= getBredcrum(ADMIN, array('#' => 'Manage Categories')); ?>
+    <?= getBredcrum(ADMIN, array('#' => 'Manage Models Skills')); ?>
     <div class="row margin-bottom-10">
         <div class="col-md-6">
-            <h2 class="no-margin"><i class="entypo-users"></i> Manage <strong>Categories</strong></h2>
+            <h2 class="no-margin"><i class="entypo-users"></i> Manage <strong>Skills</strong></h2>
         </div>
         <div class="col-md-6 text-right">
             <a href="<?= site_url(ADMIN . '/skills/manage_skills'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
@@ -61,9 +61,9 @@
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Action <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-primary" role="menu">
                                     <li><a href="<?= site_url(ADMIN.'/skills/manage_skills/'.$row->id); ?>">Edit</a></li>
-                                    <!-- <?php if(access(10)):?>
+                                    <?php if(access(10)):?>
                                         <li><a href="<?= site_url(ADMIN.'/skills/delete_skill/'.$row->id); ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
-                                    <?php endif?> -->
+                                    <?php endif?>
                                 </ul>
                             </div>
                         </td>

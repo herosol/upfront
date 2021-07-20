@@ -1109,6 +1109,15 @@ class Sitecontent extends Admin_Controller
         $this->load->view(ADMIN . '/includes/siteMaster', $this->data);
     }
 
+    function delete_affiliates($id)
+    {
+        $id = intval($id);
+        $this->master->delete_where('affiliates_cards', ['id'=> $id]);
+        setMsg('success', 'Affiliate card has been deleted successfully.');
+        redirect(ADMIN . "/sitecontent/affiliates");
+        exit;
+    }
+
     public function save_affiliate()
     {
         if ($vals = $this->input->post())

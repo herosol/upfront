@@ -25,83 +25,110 @@
                 <div class="tab-content">
                     <div id="Upcoming" class="tab-pane fade in active">
                     <?php
-                    foreach($bookings as $key => $booking):
-                        if($booking->booking_status == 'Pending' || $booking->booking_status == 'In Progress'):
+                    if(check_bookings_counter($bookings, 'Pending') == 0 && check_bookings_counter($bookings, 'In Progress') == 0)
+                    {
                     ?>
-                        <div class="bookBlk">
-                            <ul class="lst">
-                                <li>
-                                    <div class="icoBlk">
-                                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($booking->booked_by), ''); ?>" alt=""></div>
-                                        <div class="txt">
-                                            <h5>Educated is even better than you’ve heard</h5>
-                                            <p>214243</p>
-                                        </div>
-                                        <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
-                                    </div>
-                                </li>
-                                <li class="date">March 20, 2019 - 5:20 pm</li>
-                                <li><span class="badge yellow">Pending</span></li>
-                                <li class="price">$250</li>
-                            </ul>
-                        </div>
+                        <div class="alert alert-info">No Upcoming Booking.</div>
                     <?php
-                        endif;
-                    endforeach;
+                    }
+                    else
+                    {
+                        foreach($bookings as $key => $booking):
+                            if($booking->booking_status == 'Pending' || $booking->booking_status == 'In Progress'):
+                        ?>
+                            <div class="bookBlk">
+                                <ul class="lst">
+                                    <li>
+                                        <div class="icoBlk">
+                                            <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($booking->booked_by), ''); ?>" alt=""></div>
+                                            <div class="txt">
+                                                <h5>Educated is even better than you’ve heard</h5>
+                                                <p>214243</p>
+                                            </div>
+                                            <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
+                                        </div>
+                                    </li>
+                                    <li class="date">March 20, 2019 - 5:20 pm</li>
+                                    <li><span class="badge yellow">Pending</span></li>
+                                    <li class="price">$<?=$booking->amount?></li>
+                                </ul>
+                            </div>
+                        <?php
+                            endif;
+                        endforeach;
+                    }
                     ?>
                     </div>
                     <div id="Completed" class="tab-pane fade">
                     <?php
-                    foreach($bookings as $key => $booking):
-                        if($booking->booking_status == 'Completed'):
+                    if(check_bookings_counter($bookings, 'Completed') == 0)
+                    {
                     ?>
-                        <div class="bookBlk">
-                            <ul class="lst">
-                                <li>
-                                    <div class="icoBlk">
-                                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($booking->booked_by), ''); ?>" alt=""></div>
-                                        <div class="txt">
-                                            <h5>Educated is even better than you’ve heard</h5>
-                                            <p>214243</p>
+                        <div class="alert alert-info">No Completed Booking.</div>
+                    <?php
+                    }
+                    else
+                    {
+                        foreach($bookings as $key => $booking):
+                            if($booking->booking_status == 'Completed'):
+                        ?>
+                            <div class="bookBlk">
+                                <ul class="lst">
+                                    <li>
+                                        <div class="icoBlk">
+                                            <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($booking->booked_by), ''); ?>" alt=""></div>
+                                            <div class="txt">
+                                                <h5>Educated is even better than you’ve heard</h5>
+                                                <p>214243</p>
+                                            </div>
+                                            <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
                                         </div>
-                                        <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
-                                    </div>
-                                </li>
-                                <li class="date">March 20, 2019 - 5:20 pm</li>
-                                <li><span class="badge green">Complete</span></li>
-                                <li class="price">$250</li>
-                            </ul>
-                        </div>
-                        <?php
-                        endif;
-                    endforeach;
+                                    </li>
+                                    <li class="date">March 20, 2019 - 5:20 pm</li>
+                                    <li><span class="badge green">Complete</span></li>
+                                    <li class="price">$250</li>
+                                </ul>
+                            </div>
+                            <?php
+                            endif;
+                        endforeach;
+                    }
                     ?>
                     </div>
                     <div id="Cancelled" class="tab-pane fade">
                     <?php
-                    foreach($bookings as $key => $booking):
-                        if($booking->booking_status == 'Cancelled'):
+                    if(check_bookings_counter($bookings, 'Cancelled') == 0)
+                    {
                     ?>
-                        <div class="bookBlk">
-                            <ul class="lst">
-                                <li>
-                                    <div class="icoBlk">
-                                        <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($booking->booked_by), ''); ?>" alt=""></div>
-                                        <div class="txt">
-                                            <h5>Educated is even better than you’ve heard</h5>
-                                            <p>214243</p>
+                        <div class="alert alert-info">No Cancelled Booking.</div>
+                    <?php
+                    }
+                    else
+                    {
+                        foreach($bookings as $key => $booking):
+                            if($booking->booking_status == 'Cancelled'):
+                        ?>
+                            <div class="bookBlk">
+                                <ul class="lst">
+                                    <li>
+                                        <div class="icoBlk">
+                                            <div class="ico"><img src="<?= get_site_image_src("members", get_image_of_member($booking->booked_by), ''); ?>" alt=""></div>
+                                            <div class="txt">
+                                                <h5>Educated is even better than you’ve heard</h5>
+                                                <p>214243</p>
+                                            </div>
+                                            <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
                                         </div>
-                                        <a href="<?= base_url() ?>booking-detail/<?=doEncode($booking->id)?>"></a>
-                                    </div>
-                                </li>
-                                <li class="date">March 20, 2019 - 5:20 pm</li>
-                                <li><span class="badge red">Cancel</span></li>
-                                <li class="price">$250</li>
-                            </ul>
-                        </div>
-                        <?php
-                        endif;
-                    endforeach;
+                                    </li>
+                                    <li class="date">March 20, 2019 - 5:20 pm</li>
+                                    <li><span class="badge red">Cancel</span></li>
+                                    <li class="price">$250</li>
+                                </ul>
+                            </div>
+                            <?php
+                            endif;
+                        endforeach;
+                    }
                     ?>
                     </div>
                 </div>

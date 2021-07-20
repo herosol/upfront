@@ -444,4 +444,42 @@ $(document).ready(function() {
         errorPlacement: function(error, element) {}
     });
 
+    $('#chnagePasswordForm').validate({
+        errorElement: 'div',
+        rules: {
+            pswd: {
+                required: true
+            },
+            npswd: {
+                required: true,
+                minlength: 8,
+                pwcheck: true
+            },
+            cpswd: {
+                required: true,
+                minlength: 8,
+                pwcheck: true,
+                equalTo: '#password'
+            }
+        },
+        messages: {
+            pswd: {
+                required: "Password required!",
+                minlength: "Password must be at least 8 characters.",
+            },
+            cpswd: {
+                required: "Confirm password required!",
+                equalTo: "Confirm password must be the same as the password!"
+            }
+        },
+        errorPlacement: function(error, element) {
+            if ($.inArray(element.attr('id'), ['password', 'cpassword']) !== -1 && error.text() != 'This field is required.') {
+                error.addClass('alert alert-danger alert-sm')
+                error.appendTo(element.parents('form').find("div.alertMsg:first").show());
+                $("html, body").animate({ scrollTop: (element.parents('form').find("div.alertMsg:first").offset().top - 300) }, "slow");
+            }
+            return false;
+        }
+    });
+
 });

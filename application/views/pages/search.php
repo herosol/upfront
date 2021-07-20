@@ -59,7 +59,7 @@
                                     <ul class="ctgLst">
                                     <?php foreach(genders() as $key => $val): ?>
                                         <li>
-                                            <input class="clicked" type="checkbox" id="gender<?=$key?>" name="gender[]" value="<?=$val?>">
+                                            <input class="searchCall" type="checkbox" id="gender<?=$key?>" name="gender[]" value="<?=$val?>">
                                             <label for="gender<?=$key?>"><?=$val?></label>
                                         </li>
                                     <?php endforeach; ?>
@@ -69,22 +69,22 @@
                                     <h6>Rating <button type="reset">Clear</button></h6>
                                     <ul class="ctgLst ratingLst">
                                         <li>
-                                            <input type="radio" id="star_four_five" name="star_rating" value="4.5">
+                                            <input type="radio" id="star_four_five" class="searchCall" name="star_rating" value="4.5">
                                             <div class="rateYo" data-rateyo-rating="4.5" data-rateyo-star-width="16px"></div>
                                             <label for="star_four_five">4.5 & up</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="star_four" name="star_rating" value="4">
+                                            <input type="radio" id="star_four" class="searchCall" name="star_rating" value="4">
                                             <div class="rateYo" data-rateyo-rating="4" data-rateyo-star-width="16px"></div>
                                             <label for="star_four">4.0 & up</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="star_three_five" name="star_rating" value="3.5">
+                                            <input type="radio" id="star_three_five" class="searchCall" name="star_rating" value="3.5">
                                             <div class="rateYo" data-rateyo-rating="3.5" data-rateyo-star-width="16px"></div>
                                             <label for="star_three_five">3.5 & up</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="star_three" name="star_rating" value="3">
+                                            <input type="radio" id="star_three" class="searchCall" name="star_rating" value="3">
                                             <div class="rateYo" data-rateyo-rating="3" data-rateyo-star-width="16px"></div>
                                             <label for="star_three">3.0 & up</label>
                                         </li>
@@ -95,7 +95,7 @@
                                     <ul class="ctgLst moreLst">
                                     <?php foreach(languages() as $language): ?>
                                         <li>
-                                            <input class="clicked" type="checkbox" id="language<?=$language->name?>" name="language[]" value="<?=$language->id?>">
+                                            <input class="searchCall" type="checkbox" id="language<?=$language->name?>" name="language[]" value="<?=$language->id?>">
                                             <label for="language<?=$language->name?>"><?=$language->name?></label>
                                         </li>
                                     <?php endforeach; ?>
@@ -145,7 +145,7 @@
                                     <ul class="ctgLst moreLst">
                                     <?php foreach(ethnicity() as $key => $val): ?>
                                         <li>
-                                            <input class="clicked" type="checkbox" id="ethnicity<?=$key?>" name="ethnicity[]" value="<?=$val?>">
+                                            <input class="searchCall" type="checkbox" id="ethnicity<?=$key?>" name="ethnicity[]" value="<?=$val?>">
                                             <label for="ethnicity<?=$key?>"><?=$val?></label>
                                         </li>
                                     <?php endforeach; ?>
@@ -157,7 +157,7 @@
                                     <ul class="ctgLst moreLst">
                                     <?php foreach(hair_colors() as $key => $val): ?>
                                         <li>
-                                            <input class="clicked" type="checkbox" id="hair<?=$key?>" name="hair[]" value="<?=$val?>">
+                                            <input class="searchCall" type="checkbox" id="hair<?=$key?>" name="hair[]" value="<?=$val?>">
                                             <label for="hair<?=$key?>"><?=$val?></label>
                                         </li>
                                     <?php endforeach; ?>
@@ -169,7 +169,7 @@
                                     <ul class="ctgLst moreLst">
                                     <?php foreach(eye_colors() as $key => $val): ?>
                                         <li>
-                                            <input class="clicked" type="checkbox" id="eye<?=$key?>" name="eye[]" value="<?=$val?>">
+                                            <input class="searchCall" type="checkbox" id="eye<?=$key?>" name="eye[]" value="<?=$val?>">
                                             <label for="eye<?=$key?>"><?=$val?></label>
                                         </li>
                                     <?php endforeach; ?>
@@ -181,7 +181,7 @@
                                     <ul class="ctgLst moreLst">
                                     <?php foreach(body_types() as $key => $val): ?>
                                         <li>
-                                            <input class="clicked" type="checkbox" id="body<?=$key?>" name="body_type[]" value="<?=$val?>">
+                                            <input class="searchCall" type="checkbox" id="body<?=$key?>" name="body_type[]" value="<?=$val?>">
                                             <label for="body<?=$key?>"><?=$val?></label>
                                         </li>
                                     <?php endforeach; ?>
@@ -309,9 +309,9 @@
                     search();
                 });
 
-                $(document).on('click', '.clicked, input[name="star_rating"]', function(e) 
+                $(document).on('click', '.searchCall', function(e) 
                 {
-                    e.preventDefault();
+                    // e.preventDefault();
                     search();
                 });
 
