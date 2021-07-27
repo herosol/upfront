@@ -115,16 +115,6 @@
                             <input name="skills" id="skills" class="form-control" value="<?= $row->mem_skills ?>" placeholder="Type something here">
                         </div>
                     </div>
-                    <!-- tagify -->
-                    <link type="text/css" rel="stylesheet" href="<?= base_url('assets/css/tagify.css') ?>">
-                    <script type="text/javascript" src="<?= base_url('assets/js/tagify.js') ?>"></script>
-                    <script type="text/javascript">
-                        $(function() {
-                            $('[name="skills"]').tagify({
-                                // focusableskills: false,
-                            });
-                        });
-                    </script>
                     <h3><i class="fa fa-bars"></i> Appearence</h3>
                     <hr class="hr-short">
                     <div class="form-group">
@@ -294,7 +284,6 @@
                             </div>
                         </div>
                     </div>
-                    <?php if(access(9)):?>
                     <div class="col-md-12">
                         <h3><i class="fa fa-lock"></i> Login Credentials</h3>
                         <hr class="hr-short">
@@ -311,7 +300,175 @@
                             </div>
                         </div>
                     </div>
-                    <?php endif?>
+                    <div class="col-md-12">
+                        <h3><i class="fa fa-bars"></i> Picture And Gallery Images</h3>
+                        <hr class="hr-short">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary" data-collapsed="0">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Profile Image
+                                        </div>
+                                        <div class="panel-options">
+                                            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
+                                                <img src="<?= get_site_image_src("members", $row->mem_image, ''); ?>" alt="--">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
+                                            <div>
+                                                <span class="btn btn-white btn-file">
+                                                    <span class="fileinput-new">Select image</span>
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="dp_image" accept="image/*" <?php if(empty($row->mem_image)){echo 'required=""';}?>>
+                                                </span>
+                                                <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary" data-collapsed="0">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Cover Image
+                                        </div>
+                                        <div class="panel-options">
+                                            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail" style="max-width: 310px; height: 110px;" data-trigger="fileinput">
+                                                <img src="<?= get_site_image_src("members", $row->mem_cover_image, ''); ?>" alt="--">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 320px; max-height: 160px; line-height: 6px;"></div>
+                                            <div>
+                                                <span class="btn btn-white btn-file">
+                                                    <span class="fileinput-new">Select image</span>
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="cover_photo" accept="image/*" <?php if(empty($row->mem_image)){echo 'required=""';}?>>
+                                                </span>
+                                                <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h3><i class="fa fa-lock"></i> Intro Video</h3>
+                        <hr class="hr-short">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label">Intro Video <span class="symbol required">*</span></label>
+                                <input type="file" name="intro_video" id="intro_video">
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <div class="vidBlk">
+                                    <video controls="">
+                                        <source src="<?= get_site_image_src("members", $mem_data->mem_video, ''); ?>" alt="" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h3><i class="fa fa-lock"></i> Gallery Images</h3>
+                        <hr class="hr-short">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="file" name="gallery_images[]" id="intro_video" multiple>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <div class="upLoadBlk txtBox">
+                                    <ul class="imgLst flex">
+                                        <?php foreach ($gallery_images as $image) : ?>
+                                            <li>
+                                                <div class="icon">
+                                                    <img src="<?= get_site_image_src("members", $image->image, ''); ?>" alt="" style="height: 200px">
+                                                    <div class="crosBtn" data-id="<?= $image->id ?>" onclick="deleteGalleryImage(this)"></div>
+                                                </div>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h3><i class="fa fa-lock"></i> Languages</h3>
+                        <hr class="hr-short">
+                        <?php
+                        if (count($mem_languages) > 0) :
+                            foreach ($mem_languages as $key => $value) :
+                        ?>
+                            <div class="form-group" id="languages_box">
+                                <div class="col-md-<?=$key == '0' ? '6' : '5';?>">
+                                <label class="control-label">Langauge</label>
+                                <select name="languages[<?= $key ?>]" id="languages<?= $key ?>" class="form-control">
+                                    <option value="">Select</option>
+                                    <?php foreach (languages() as $language) : ?>
+                                        <option value="<?= $language->id ?>" <?= $value->language_id == $language->id ? 'selected' : '' ?>><?= $language->name ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                </div>
+                                <div class="col-md-<?=$key == '0' ? '6' : '5';?>">
+                                    <label class="control-label">Langauge Level</label>
+                                    <select name="language_level[<?= $key ?>]" id="language_level<?= $key ?>" class="form-control">
+                                        <option value="">Select</option>
+                                        <?php foreach (language_level() as $level) : ?>
+                                            <option value="<?= $level ?>" <?= $value->language_level == $level ? 'selected' : '' ?>><?= $level ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <?php if($key != '0'): ?>
+                                    <button type="button" class="rmvBtn" data-row-no="<?=$key?>" onclick="delete_language_row(this)">Delete</button>
+                                <?php endif; ?>
+                            </div>
+                    <?php
+                        endforeach;
+                    else:
+                    ?>
+                        <div class="form-group" id="languages_box">
+                            <div class="col-md-6">
+                                <label class="control-label">Langauge</label>
+                                <select name="languages[0]" id="languages0" class="form-control">
+                                    <option value="">Select</option>
+                                    <?php foreach (languages() as $language) : ?>
+                                        <option value="<?= $language->id ?>"><?= $language->name ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                 <label class="control-label">Langauge Level</label>
+                                <select name="language_level[0]" id="language_level0" class="form-control">
+                                    <option value="">Select</option>
+                                    <?php foreach (language_level() as $level) : ?>
+                                        <option value="<?= $level ?>"><?= $level ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    <?php
+                    endif;
+                    ?>
+                        <div class="bTn formBtn">
+                            <button type="button" class="webBtn labelBtn" onclick="addLanguageNewRow()"><i class="fi-plus fi-2x"></i> Add New</button>
+                        </div>
+                    </div>
 
                     <div class="clearfix"></div>
                     <div class="col-md-12">                
@@ -394,3 +551,26 @@
             </tbody>
         </table>
         <?php endif; ?>
+        <!-- tagify -->
+        <link type="text/css" rel="stylesheet" href="<?= base_url('assets/css/tagify.css') ?>">
+        <script type="text/javascript" src="<?= base_url('assets/js/tagify.js') ?>"></script>
+        <script type="text/javascript">
+            var number = '<?= count($mem_languages) == '0' ? '1' : count($mem_languages); ?>';
+            const addLanguageNewRow = () => {
+                jQuery.ajax({
+                    url: base_url + 'account/new_langugae_row',
+                    data: {
+                        'number': number
+                    },
+                    dataType: 'JSON',
+                    method: 'POST',
+                    success: function(rs) {
+                        number++;
+                        jQuery('#languages_box').append(rs.html);
+                    },
+                    complete: function() {
+
+                    }
+                })
+            }
+        </script>

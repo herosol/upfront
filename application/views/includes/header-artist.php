@@ -30,12 +30,12 @@
             </div>
             <ul id="iconBtn">
                 <li id="chatBtn">
-                    <a href="<?= $base_url ?>artist/messages.php" class="iconBtn">
+                    <a href="<?= base_url() ?>inbox" class="iconBtn">
                         <img src="<?= base_url() ?>assets/images/icon-envelope.svg" alt="">
                         <em class="miniLbl green">0</em>
                     </a>
                 </li>
-                <li id="likeBtn">
+                <li id="likeBtn" class="hidden">
                     <a href="<?= $base_url ?>artist/notifications.php" class="iconBtn">
                         <img src="<?= base_url() ?>assets/images/icon-bell.svg" alt="">
                         <em class="miniLbl yellow">0</em>

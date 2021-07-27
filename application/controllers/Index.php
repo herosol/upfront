@@ -88,6 +88,7 @@ class Index extends MY_Controller {
     {
         if($this->input->post())
         {
+            die('ENTERED');
             $res = array();
             $res['hide_msg'] = 0;
             $res['scroll_to_msg'] = 0;
@@ -184,6 +185,8 @@ class Index extends MY_Controller {
                                 if (isset($_FILES["file".$i]["name"]) && $_FILES["file".$i]["name"] != "") 
                                 {
                                     $image = upload_file(UPLOAD_PATH.'members', 'file'.$i);
+                                    generate_thumb(UPLOAD_PATH . "members/", UPLOAD_PATH . "members/", $image['file_name'],100,'thumb_');
+                                    generate_thumb(UPLOAD_PATH . "members/", UPLOAD_PATH . "members/", $image['file_name'],300,'300p_');
                                     $gallery_record = 
                                     [
                                         'mem_id' => $user_id,
@@ -230,7 +233,7 @@ class Index extends MY_Controller {
 
     function login()
     {
-        // $this->MemLogged();
+        $this->MemLogged();
         if($this->input->post()) 
         {
             $res = array();
@@ -266,7 +269,7 @@ class Index extends MY_Controller {
                     if(isset($data['remeberMe']))
                     {
                         $remember_token = doEncode('member-'.$row->user_id);
-                        $cookie= array('name'   => 'remember', 'value'  => $remember_token, 'expire' => (86400*7));
+                        $cookie = array('name'   => 'remember', 'value'  => $remember_token, 'expire' => (86400*7));
                         $this->input->set_cookie($cookie);
                     }
 

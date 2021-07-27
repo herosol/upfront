@@ -201,6 +201,8 @@ class Account extends MY_Controller
                 for ($i = 0; $i < $count; $i++) {
                     if (isset($_FILES["file" . $i]["name"]) && $_FILES["file" . $i]["name"] != "") {
                         $image = upload_file(UPLOAD_PATH . 'members', 'file' . $i);
+                        generate_thumb(UPLOAD_PATH . "members/", UPLOAD_PATH . "members/", $image['file_name'],100,'thumb_');
+                        generate_thumb(UPLOAD_PATH . "members/", UPLOAD_PATH . "members/", $image['file_name'],300,'300p_');
                         $gallery_record =
                             [
                                 'mem_id' => $user_id,
@@ -329,8 +331,7 @@ class Account extends MY_Controller
                 $chat_id = $this->chat_model->save($data);
             }
 
-            
-            # Gallery Images
+        
             if (isset($_FILES['attachments']) && is_array($_FILES['attachments']['name'])) 
             {
                 $image_path = array();

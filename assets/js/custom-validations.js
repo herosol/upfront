@@ -92,6 +92,7 @@ $(document).ready(function() {
         rules: {
             dp_image: {
                 required: true,
+                extension: "png|jpe?g"
             },
             fname: {
                 required: true,
@@ -104,7 +105,8 @@ $(document).ready(function() {
                 email: true
             },
             phone: {
-                required: true
+                required: true,
+                digits: true
             },
             password: {
                 required: true,
@@ -133,10 +135,14 @@ $(document).ready(function() {
             cpassword: {
                 required: "Confirm password required!",
                 equalTo: "Confirm password must be the as the password!"
+            },
+            dp_image: {
+                required: "Please upload profile picture",
+                extension: "Only png, jpg, and jpeg Allowed"
             }
         },
         errorPlacement: function(error, element) {
-            if ($.inArray(element.attr('id'), ['password', 'cpassword']) !== -1 && error.text() != 'This field is required.') {
+            if ($.inArray(element.attr('id'), ['password', 'cpassword', 'dp_image']) !== -1 && error.text() != 'This field is required.') {
                 error.addClass('alert alert-danger alert-sm')
                 error.appendTo(element.parents('form').find("div.alertMsg:first").show());
                 $("html, body").animate({ scrollTop: (element.parents('form').find("div.alertMsg:first").offset().top - 300) }, "slow");

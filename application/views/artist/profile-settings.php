@@ -238,11 +238,13 @@
                                         <button type="button" class="txtBox uploadImg" data-upload="intro_thumbnail" data-text="Intro Video"></button>
                                         <input type="file" name="intro_video" id="intro_video" class="uploadFile" data-upload="intro_thumbnail">
                                     </div>
-                                    <div class="vidBlk">
-                                        <video controls="">
-                                            <source src="<?= get_site_image_src("members", $mem_data->mem_video, ''); ?>" alt="" type="video/mp4">
-                                        </video>
-                                    </div>
+                                    <?php if(!empty($mem_data->mem_video)): ?>
+                                        <div class="vidBlk">
+                                            <video controls="">
+                                                <source src="<?= get_site_image_src("members", $mem_data->mem_video, ''); ?>" alt="" type="video/mp4">
+                                            </video>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <hr>
