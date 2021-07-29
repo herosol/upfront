@@ -71,44 +71,42 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | the query builder class.
 */
 $active_group = 'default';
-$query_builder = TRUE;
-if ($_SERVER['HTTP_HOST'] != 'localhost') {
-	$db['default'] = array(
-		'dsn'	=> '',
-		'hostname' => '',
-		'username' => '',
-		'password' => '',
-		'database' => ''
-	);
-} else {
-	$db['default'] = array(
-		'dsn'	=> '',
-		'hostname' => 'localhost',
-		'username' => 'root',
-		'password' => '',
-		'database' => 'herosols_upfront'
-	);
-}
 
-// $active_group = 'default';
-// $query_builder = TRUE;
-// if ($_SERVER['HTTP_HOST'] != 'localhost') {
-// 	$db['default'] = array(
-// 		'dsn'	=> '',
-// 		'hostname' => '',
-// 		'username' => '',
-// 		'password' => '',
-// 		'database' => ''
-// 	);
-// } else {
-// 	$db['default'] = array(
-// 		'dsn'	=> '',
-// 		'hostname' => 'localhost',
-// 		'username' => 'root',
-// 		'password' => '',
-// 		'database' => 'upfront-master'
-// 	);
-// }
+$query_builder = TRUE;
+
+if ($_SERVER['HTTP_HOST'] != 'localhost') {
+
+	$db['default'] = array(
+
+		'dsn'	=> '',
+
+		'hostname' => 'mysql1003.mochahost.com',
+
+		'username' => 'herosol_saad',
+
+		'password' => 'k4J!a7O4~l4Y',
+
+		'database' => 'herosol_upfront'
+
+	);
+
+} else {
+
+	$db['default'] = array(
+
+		'dsn'	=> '',
+
+		'hostname' => 'localhost',
+
+		'username' => 'root',
+
+		'password' => '',
+
+		'database' => 'herosols_upfront'
+
+	);
+
+}
 
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = 'tbl_';

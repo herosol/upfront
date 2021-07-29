@@ -30,12 +30,9 @@ date_default_timezone_set('America/New_York');
 // error_reporting(E_ALL);
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 // ini_set('display errors', E_ALL);
-if ($_SERVER['HTTP_HOST'] == 'localhost')
-	$config['base_url'] = "http://localhost/work/upfront/";
-
-// if ($_SERVER['HTTP_HOST'] == 'localhost')
-// 	$config['base_url'] = "http://localhost/herosolutions/upfront-master";
-
+$root = "http://".$_SERVER['HTTP_HOST'];
+$root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$config['base_url']    = "$root";
 /*
 |--------------------------------------------------------------------------
 | Index File
