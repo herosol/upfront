@@ -1,4 +1,4 @@
-<?php if ($this->uri->segment(3) == 'manage_model'): ?>
+<?php if ($this->uri->segment(3) == 'manage_model') : ?>
     <?= showMsg(); ?>
     <?= getBredcrum(ADMIN, array('#' => 'Add/Update Model')); ?>
     <div class="row margin-bottom-10">
@@ -12,7 +12,7 @@
     <div>
         <hr>
         <div class="row col-md-12">
-            <form action=""  role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <form action="" role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
 
                 <div class="col-md-6">
                     <h3><i class="fa fa-bars"></i> Profile Detail</h3>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                        <label class="control-label"> Gender <span class="symbol required">*</span></label>
+                            <label class="control-label"> Gender <span class="symbol required">*</span></label>
                             <select name="mem_sex" id="mem_sex" class="form-control">
                                 <option value="">Select</option>
                                 <?php foreach (genders() as $gender) : ?>
@@ -56,7 +56,7 @@
                     <hr class="hr-short">
                     <div class="form-group">
                         <div class="col-md-12">
-                        <label class="control-label"> Country <span class="symbol required">*</span></label>
+                            <label class="control-label"> Country <span class="symbol required">*</span></label>
                             <select name="mem_country" id="mem_country" class="form-control">
                                 <option value="">Select</option>
                                 <?php foreach (countries() as $country) : ?>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                        <label class="control-label"> State <span class="symbol required">*</span></label>
+                            <label class="control-label"> State <span class="symbol required">*</span></label>
                             <select name="mem_state" id="mem_state" class="form-control">
                                 <option value="">Select</option>
                                 <?php foreach (states_by_country($row->mem_country_id) as $state) : ?>
@@ -99,7 +99,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="control-label"> About <span class="symbol required">*</span></label>
-                            <textarea  name="mem_about" id="mem_about" rows="8" class="form-control ckeditor" required><?php if (isset($row->mem_about)) echo $row->mem_about; ?></textarea>
+                            <textarea name="mem_about" id="mem_about" rows="8" class="form-control ckeditor" required><?php if (isset($row->mem_about)) echo $row->mem_about; ?></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -112,7 +112,7 @@
                     <hr class="hr-short">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input name="skills" id="skills" class="form-control" value="<?= $row->mem_skills ?>" placeholder="Type something here">
+                            <input type="text" name="skills" id="skills" class="form-control" value="<?= $row->mem_skills ?>" placeholder="Type something here">
                         </div>
                     </div>
                     <h3><i class="fa fa-bars"></i> Appearence</h3>
@@ -241,45 +241,45 @@
                             <input type="text" id="jacket_size" name="jacket_size" value="<?= $appearence->jacket_size ?>" class="form-control">
                         </div>
                     </div>
-                </div>    
+                </div>
 
                 <div class="col-md-6">
                     <div class="col-md-12">
                         <h3><i class="fa fa-bars"></i> Account Detail</h3>
                         <hr class="hr-short">
-                        <?php if (isset($row->user_fname)):?>
+                        <?php if (isset($row->user_fname)) : ?>
                             <div style="font-size: 13px"><b>Member Since:</b> <small> <?= format_date($row->mem_date); ?></small></div>
-                            <div style="font-size: 13px"><b>Last Login:</b> <small> <?= format_date($row->user_last_login,'M d Y h:i:s A'); ?></small></div>
-                        <?php endif?>
+                            <div style="font-size: 13px"><b>Last Login:</b> <small> <?= format_date($row->user_last_login, 'M d Y h:i:s A'); ?></small></div>
+                        <?php endif ?>
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label class="control-label"> Status</label>
                                 <select name="user_status" id="user_status" class="form-control">
                                     <option value="0" <?php
-                                    if (isset($row->user_status) && '0' == $row->user_status) {
-                                        echo 'selected';
-                                    }
-                                    ?>>InActive</option>
+                                                        if (isset($row->user_status) && '0' == $row->user_status) {
+                                                            echo 'selected';
+                                                        }
+                                                        ?>>InActive</option>
                                     <option value="1" <?php
-                                    if (isset($row->user_status) && '1' == $row->user_status) {
-                                        echo 'selected';
-                                    }
-                                    ?>>Active</option>
+                                                        if (isset($row->user_status) && '1' == $row->user_status) {
+                                                            echo 'selected';
+                                                        }
+                                                        ?>>Active</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label class="control-label"> Verified</label>
                                 <select name="mem_verified" id="mem_verified" class="form-control">
                                     <option value="0" <?php
-                                    if (isset($row->mem_verified) && '0' == $row->mem_verified) {
-                                        echo 'selected';
-                                    }
-                                    ?>>No</option>
+                                                        if (isset($row->mem_verified) && '0' == $row->mem_verified) {
+                                                            echo 'selected';
+                                                        }
+                                                        ?>>No</option>
                                     <option value="1" <?php
-                                    if (isset($row->mem_verified) && '1' == $row->mem_verified) {
-                                        echo 'selected';
-                                    }
-                                    ?>>Yes</option>
+                                                        if (isset($row->mem_verified) && '1' == $row->mem_verified) {
+                                                            echo 'selected';
+                                                        }
+                                                        ?>>Yes</option>
                                 </select>
                             </div>
                         </div>
@@ -290,13 +290,13 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label class="control-label">Email <span class="symbol required">*</span></label>
-                                <input type="text" name="user_email" value="<?php if (isset($row->user_email)) echo $row->user_email; ?>"  class="form-control" required>
+                                <input type="text" name="user_email" value="<?php if (isset($row->user_email)) echo $row->user_email; ?>" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label class="control-label">Password </label>
-                                <input type="text"  name="user_pswd" value="<?php  if (isset($row->user_pswd)) echo doDecode($row->user_pswd);  ?>" class="form-control" autocomplete="off" placeholder="password" <?php  if (!empty($row->mem_pswd)) echo 'required';  ?> >
+                                <input type="text" name="user_pswd" value="<?php if (isset($row->user_pswd)) echo doDecode($row->user_pswd);  ?>" class="form-control" autocomplete="off" placeholder="password" <?php if (!empty($row->mem_pswd)) echo 'required';  ?>>
                             </div>
                         </div>
                     </div>
@@ -324,7 +324,9 @@
                                                 <span class="btn btn-white btn-file">
                                                     <span class="fileinput-new">Select image</span>
                                                     <span class="fileinput-exists">Change</span>
-                                                    <input type="file" name="dp_image" accept="image/*" <?php if(empty($row->mem_image)){echo 'required=""';}?>>
+                                                    <input type="file" name="dp_image" accept="image/*" <?php if (empty($row->mem_image)) {
+                                                                                                            echo 'required=""';
+                                                                                                        } ?>>
                                                 </span>
                                                 <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
                                             </div>
@@ -354,7 +356,9 @@
                                                 <span class="btn btn-white btn-file">
                                                     <span class="fileinput-new">Select image</span>
                                                     <span class="fileinput-exists">Change</span>
-                                                    <input type="file" name="cover_photo" accept="image/*" <?php if(empty($row->mem_image)){echo 'required=""';}?>>
+                                                    <input type="file" name="cover_photo" accept="image/*" <?php if (empty($row->mem_image)) {
+                                                                                                                echo 'required=""';
+                                                                                                            } ?>>
                                                 </span>
                                                 <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
                                             </div>
@@ -392,7 +396,7 @@
                             </div>
                             <br>
                             <div class="col-md-12">
-                                <div class="upLoadBlk txtBox">
+                                <div class="upLoadBlk form-control">
                                     <ul class="imgLst flex">
                                         <?php foreach ($gallery_images as $image) : ?>
                                             <li>
@@ -409,69 +413,72 @@
                     </div>
 
                     <div class="col-md-12">
-                        <h3><i class="fa fa-lock"></i> Languages</h3>
+                        <h3><i class="fa fa-book"></i> Languages</h3>
                         <hr class="hr-short">
                         <?php
                         if (count($mem_languages) > 0) :
                             foreach ($mem_languages as $key => $value) :
                         ?>
-                            <div class="form-group" id="languages_box">
-                                <div class="col-md-<?=$key == '0' ? '6' : '5';?>">
-                                <label class="control-label">Langauge</label>
-                                <select name="languages[<?= $key ?>]" id="languages<?= $key ?>" class="form-control">
-                                    <option value="">Select</option>
-                                    <?php foreach (languages() as $language) : ?>
-                                        <option value="<?= $language->id ?>" <?= $value->language_id == $language->id ? 'selected' : '' ?>><?= $language->name ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <div class="form-group" id="languages_box">
+                                    <div class="col-md-<?= $key == '0' ? '6' : '6'; ?>">
+                                        <label class="control-label">Langauge</label>
+                                        <select name="languages[<?= $key ?>]" id="languages<?= $key ?>" class="form-control">
+                                            <option value="">Select</option>
+                                            <?php foreach (languages() as $language) : ?>
+                                                <option value="<?= $language->id ?>" <?= $value->language_id == $language->id ? 'selected' : '' ?>><?= $language->name ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-<?= $key == '0' ? '6' : '6'; ?>">
+                                        <label class="control-label">Langauge Level</label>
+                                        <select name="language_level[<?= $key ?>]" id="language_level<?= $key ?>" class="form-control">
+                                            <option value="">Select</option>
+                                            <?php foreach (language_level() as $level) : ?>
+                                                <option value="<?= $level ?>" <?= $value->language_level == $level ? 'selected' : '' ?>><?= $level ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 text-right">&nbsp;</div>
+                                    <div class="col-md-12 text-right">
+                                        <?php if ($key != '0') : ?>
+                                            <button type="button" class="rmvBtn btn btn-danger btn-sm" data-row-no="<?= $key ?>" onclick="delete_language_row(this)">Delete</button>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                                <div class="col-md-<?=$key == '0' ? '6' : '5';?>">
-                                    <label class="control-label">Langauge Level</label>
-                                    <select name="language_level[<?= $key ?>]" id="language_level<?= $key ?>" class="form-control">
+                            <?php
+                            endforeach;
+                        else :
+                            ?>
+                            <div class="form-group" id="languages_box">
+                                <div class="col-md-6">
+                                    <label class="control-label">Langauge</label>
+                                    <select name="languages[0]" id="languages0" class="form-control">
                                         <option value="">Select</option>
-                                        <?php foreach (language_level() as $level) : ?>
-                                            <option value="<?= $level ?>" <?= $value->language_level == $level ? 'selected' : '' ?>><?= $level ?></option>
+                                        <?php foreach (languages() as $language) : ?>
+                                            <option value="<?= $language->id ?>"><?= $language->name ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <?php if($key != '0'): ?>
-                                    <button type="button" class="rmvBtn" data-row-no="<?=$key?>" onclick="delete_language_row(this)">Delete</button>
-                                <?php endif; ?>
+                                <div class="col-md-6">
+                                    <label class="control-label">Langauge Level</label>
+                                    <select name="language_level[0]" id="language_level0" class="form-control">
+                                        <option value="">Select</option>
+                                        <?php foreach (language_level() as $level) : ?>
+                                            <option value="<?= $level ?>"><?= $level ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
-                    <?php
-                        endforeach;
-                    else:
-                    ?>
-                        <div class="form-group" id="languages_box">
-                            <div class="col-md-6">
-                                <label class="control-label">Langauge</label>
-                                <select name="languages[0]" id="languages0" class="form-control">
-                                    <option value="">Select</option>
-                                    <?php foreach (languages() as $language) : ?>
-                                        <option value="<?= $language->id ?>"><?= $language->name ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                 <label class="control-label">Langauge Level</label>
-                                <select name="language_level[0]" id="language_level0" class="form-control">
-                                    <option value="">Select</option>
-                                    <?php foreach (language_level() as $level) : ?>
-                                        <option value="<?= $level ?>"><?= $level ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                    <?php
-                    endif;
-                    ?>
+                        <?php
+                        endif;
+                        ?>
                         <div class="bTn formBtn">
-                            <button type="button" class="webBtn labelBtn" onclick="addLanguageNewRow()"><i class="fi-plus fi-2x"></i> Add New</button>
+                            <button type="button" class="btn btn-info btn-sm" onclick="addLanguageNewRow()"><i class="fi-plus fi-2x"></i> Add New</button>
                         </div>
                     </div>
 
                     <div class="clearfix"></div>
-                    <div class="col-md-12">                
+                    <div class="col-md-12">
                         <hr class="hr-short">
                         <div class="form-group text-right">
                             <div class="col-md-12">
@@ -485,92 +492,99 @@
             <input type="file" id="uploadFile" name="uploadFile" accept="image/*" class="uploadFile" data-file="">
             <div class="clearfix"></div>
         </div>
-        <?php else: ?>
-            <?= showMsg(); ?>
-            <?= getBredcrum(ADMIN, array('#' => 'Manage Models')); ?>
-            <div class="row margin-bottom-10">
-                <div class="col-md-6">
-                    <h2 class="no-margin"><i class="entypo-users"></i> Manage <strong>Models</strong></h2>
-                </div>
-                <div class="col-md-6 text-right">
-                    <a href="<?= site_url(ADMIN . '/members/manage_model'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
-                </div>
+    <?php else : ?>
+        <?= showMsg(); ?>
+        <?= getBredcrum(ADMIN, array('#' => 'Manage Models')); ?>
+        <div class="row margin-bottom-10">
+            <div class="col-md-6">
+                <h2 class="no-margin"><i class="entypo-users"></i> Manage <strong>Models</strong></h2>
             </div>
-            <table class="table table-bordered datatable" id="table-1">
-                <thead>
-                    <tr>
-                        <th width="5%" class="text-center">Sr#</th>
-                        <th width="60px">Photo</th>
-                        <th width="20%">Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Last Login</th>
-                        <th width="8%" class="text-center">Verified</th>
-                        <th width="8%" class="text-center">Status</th>
-                        <th width="12%" class="text-center">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (count($rows) > 0): $count = 0; ?>
-                        <?php foreach ($rows as $row): ?>
-                            <tr class="odd gradeX">
-                                <td class="text-center"><?= ++$count; ?></td>
-                                <td class="text-center">
-                                    <div class="icoRound">
-                                        <img src = "<?= get_site_image_src("members", $row->mem_image, ''); ?>" height = "60">
-                                    </div>
-                                </td>
-                                <td><b><?= $row->user_fname . ' ' . $row->user_lname; ?></b></td>
-                                <td><?= $row->user_email; ?></td>
-                                <td><?= $row->mem_phone; ?></td>
-                                <td><?= format_date($row->user_last_login,'M d Y h:i:s A'); ?></td>
-                                <td class="text-center"><?= verified_status($row->mem_verified); ?></td>
-                                <td class="text-center"><?= getStatus($row->user_status); ?></td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Action <span class="caret"></span></button>
-                                        <ul class="dropdown-menu dropdown-primary" role="menu">
-                                            <?php if ($row->user_status == '0'): ?>
-                                                <li><a href="<?= site_url(ADMIN); ?>/members/active_model/<?= $row->user_id; ?>">Active</a></li>
-                                                <?php else: ?>
-                                                    <li><a href="<?= site_url(ADMIN); ?>/members/inactive_model/<?= $row->user_id; ?>">Inactive</a></li>
-                                                <?php endif; ?>
+            <div class="col-md-6 text-right">
+                <a href="<?= site_url(ADMIN . '/members/manage_model'); ?>" class="btn btn-lg btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
+            </div>
+        </div>
+        <table class="table table-bordered datatable" id="table-1">
+            <thead>
+                <tr>
+                    <th width="5%" class="text-center">Sr#</th>
+                    <th width="60px">Photo</th>
+                    <th width="20%">Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Last Login</th>
+                    <th width="8%" class="text-center">Verified</th>
+                    <th width="8%" class="text-center">Status</th>
+                    <th width="12%" class="text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (count($rows) > 0) : $count = 0; ?>
+                    <?php foreach ($rows as $row) : ?>
+                        <tr class="odd gradeX">
+                            <td class="text-center"><?= ++$count; ?></td>
+                            <td class="text-center">
+                                <div class="icoRound">
+                                    <img src="<?= get_site_image_src("members", $row->mem_image, ''); ?>" height="60">
+                                </div>
+                            </td>
+                            <td><b><?= $row->user_fname . ' ' . $row->user_lname; ?></b></td>
+                            <td><?= $row->user_email; ?></td>
+                            <td><?= $row->mem_phone; ?></td>
+                            <td><?= format_date($row->user_last_login, 'M d Y h:i:s A'); ?></td>
+                            <td class="text-center"><?= verified_status($row->mem_verified); ?></td>
+                            <td class="text-center"><?= getStatus($row->user_status); ?></td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Action <span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-primary" role="menu">
+                                        <?php if ($row->user_status == '0') : ?>
+                                            <li><a href="<?= site_url(ADMIN); ?>/members/active_model/<?= $row->user_id; ?>">Active</a></li>
+                                        <?php else : ?>
+                                            <li><a href="<?= site_url(ADMIN); ?>/members/inactive_model/<?= $row->user_id; ?>">Inactive</a></li>
+                                        <?php endif; ?>
 
-                                                <li><a href="<?= site_url(ADMIN); ?>/members/manage_model/<?= $row->user_id; ?>">Edit</a></li>
-                                                <?php if(access(10)):?>
-                                                    <li><a href="<?= site_url(ADMIN); ?>/members/delete_model/<?= $row->user_id; ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
-                                                <?php endif?>
+                                        <li><a href="<?= site_url(ADMIN); ?>/members/manage_model/<?= $row->user_id; ?>">Edit</a></li>
+                                        <?php if (access(10)) : ?>
+                                            <li><a href="<?= site_url(ADMIN); ?>/members/delete_model/<?= $row->user_id; ?>" onclick="return confirm('Are you sure?');">Delete</a></li>
+                                        <?php endif ?>
                                         <li class="divider"></li>
-                                        <li><a href="#" >Payment Methods</a></li>
+                                        <li><a href="#">Payment Methods</a></li>
                                     </ul>
-                                </div>  
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </tbody>
         </table>
-        <?php endif; ?>
-        <!-- tagify -->
-        <link type="text/css" rel="stylesheet" href="<?= base_url('assets/css/tagify.css') ?>">
-        <script type="text/javascript" src="<?= base_url('assets/js/tagify.js') ?>"></script>
-        <script type="text/javascript">
-            var number = '<?= count($mem_languages) == '0' ? '1' : count($mem_languages); ?>';
-            const addLanguageNewRow = () => {
-                jQuery.ajax({
-                    url: base_url + 'account/new_langugae_row',
-                    data: {
-                        'number': number
-                    },
-                    dataType: 'JSON',
-                    method: 'POST',
-                    success: function(rs) {
-                        number++;
-                        jQuery('#languages_box').append(rs.html);
-                    },
-                    complete: function() {
+    <?php endif; ?>
+    <script type="text/javascript">
+        var number = '<?= count($mem_languages) == '0' ? '1' : count($mem_languages); ?>';
+        const addLanguageNewRow = () => {
+            jQuery.ajax({
+                url: base_url + 'account/new_langugae_row',
+                data: {
+                    'number': number
+                },
+                dataType: 'JSON',
+                method: 'POST',
+                success: function(rs) {
+                    number++;
+                    jQuery('#languages_box').append(rs.html);
+                },
+                complete: function() {
 
-                    }
-                })
-            }
-        </script>
+                }
+            })
+        }
+    </script>
+
+    <!-- tagify -->
+    <link type="text/css" rel="stylesheet" href="<?= base_url('adminassets/assets/css/tagify.min.css') ?>">
+    <script type="text/javascript" src="<?= base_url('adminassets/assets/js/tagify.min.js') ?>"></script>
+    <script type="text/javascript">
+        jQuery(function() {
+            var input = document.querySelector('input[name=skills]');
+            new Tagify(input)
+        });
+    </script>
