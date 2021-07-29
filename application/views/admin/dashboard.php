@@ -2,7 +2,7 @@
 <div class="row">
     <?php if(access(1)):?>
     <div class="col-md-3 col-sm-3 col-xs-6">
-        <a href="<?= site_url(ADMIN.'/buyers') ?>">
+        <a href="<?= site_url(ADMIN.'/members/clients') ?>">
             <div class="tile-stats tile-white">
                 <div class="icon"><i class="entypo-user"></i></div>
                 <div class="num" data-start="0" data-end="<?=$total_users?>" data-postfix="" data-duration="1500" data-delay="0"><?=$total_users?></div>
@@ -14,7 +14,7 @@
     <?php endif?>
     <?php if(access(2)):?>
     <div class="col-md-3 col-sm-3 col-xs-6">
-        <a href="<?= site_url(ADMIN.'/players') ?>">
+        <a href="<?= site_url(ADMIN.'/members/models') ?>">
             <div class="tile-stats tile-green">
                 <div class="icon"><i class="entypo-user"></i></div>
                 <div class="num" data-start="0" data-end="<?=$total_models?>" data-postfix="" data-duration="1500" data-delay="0"><?=$total_models?></div>
