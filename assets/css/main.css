@@ -3471,6 +3471,42 @@ footer .social>li>a>img {
     opacity: 1;
 }
 
+.vidBlk-without-icon {
+    position: relative;
+    display: block;
+    background: #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 56%;
+    cursor: pointer;
+    border-radius: 7px;
+    box-shadow: 0 5px 20px rgb(18 15 56 / 7%);
+    overflow: hidden;
+}
+
+.vidBlk-without-icon:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 14%;
+    min-width: 36px;
+    max-width: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+    opacity: 0.9;
+    transition: all linear 0.5s;
+}
+
+.vidBlk-without-icon:hover:before {
+    opacity: 1;
+}
+
 .vidBlk video,
 .vidBlk iframe {
     position: absolute;
@@ -6257,16 +6293,16 @@ ul.pagination>li>a.active {
 */
 
 tags.tagify.txtBox {
-	display: flex;
+    display: flex;
     flex-flow: wrap;
     align-content: flex-start;
-	gap: 0 5px;
-	height: auto;
-	min-height: 140px;
+    gap: 0 5px;
+    height: auto;
+    min-height: 140px;
 }
 
-tags.tagify.txtBox > * {
-	margin: 5px 0 0;
+tags.tagify.txtBox>* {
+    margin: 5px 0 0;
 }
 
 .ivoice-lbl p {

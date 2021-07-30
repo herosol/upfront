@@ -469,7 +469,7 @@ $(document).ready(function() {
             }
         },
         messages: {
-            pswd: {
+            npswd: {
                 required: "Password required!",
                 minlength: "Password must be at least 8 characters.",
             },

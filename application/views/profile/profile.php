@@ -36,21 +36,25 @@
                             <div class="txt">
                                 <h4>Personal Info</h4>
                                 <?php echo $model_data->mem_about?>
-                                <ul class="lst">
-                                    <li>
-                                        <strong>Speaks:</strong>
-                                        <?php foreach($mem_languages as $language): ?>
-                                            <?=language_name($language->language_id)?>
-                                            <span><?=$language->language_level?></span>
-                                        <?php endforeach; ?>
-                                    </li>
-                                </ul>
-                                <h4>Skills</h4>
-                                <ul class="skillLst flex">
-                                <?php foreach(explode(',', $model_data->mem_skills) as $skill): ?>
-                                    <li><span><?=ucfirst($skill)?></span></li>
-                                <?php endforeach; ?>
-                                </ul>
+                                <?php if(count($mem_languages) > 0): ?>
+                                    <ul class="lst">
+                                        <li>
+                                            <strong>Speaks:</strong>
+                                            <?php foreach($mem_languages as $language): ?>
+                                                <?=language_name($language->language_id)?>
+                                                <span><?=$language->language_level?></span>
+                                            <?php endforeach; ?>
+                                        </li>
+                                    </ul>
+                                <?php endif; ?>
+                                <?php if(!empty($model_data->mem_skills)): ?>
+                                    <h4>Skills</h4>
+                                    <ul class="skillLst flex">
+                                    <?php foreach(explode(',', $model_data->mem_skills) as $skill): ?>
+                                        <li><span><?=ucfirst($skill)?></span></li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="blk">
@@ -108,70 +112,78 @@
                         </div>
                     </div>
                     <div class="col col2">
-                        <div class="vidBlk blk" style="background-image: url('<?= base_url() ?>assets/images/portfolio-02.jpg')"></div>
-                        <div class="blk">
-                            <div class="_header">
-                                <h4>Appearance</h4>
+                        <?php if(!empty($model_data->mem_video)): ?>
+                            <div class="vidBlk blk">
+                                <video controls="">
+                                    <source src="<?= get_site_image_src("members", $model_data->mem_video, ''); ?>" alt="" type="video/mp4">
+                                </video>
                             </div>
-                            <ul class="list">
-                                <li>
-                                    <div>Body Type</div>
-                                    <div><?= $appearence->body_type ?></div>
-                                </li>
-                                <li>
-                                    <div>Eye Color</div>
-                                    <div><?= $appearence->eye_color ?></div>
-                                </li>
-                                <li>
-                                    <div>Skin Color</div>
-                                    <div><?= $appearence->skin_color ?></div>
-                                </li>
-                                <li>
-                                    <div>Hair Color</div>
-                                    <div><?= $appearence->hair_color ?></div>
-                                </li>
-                                <li>
-                                    <div>Hair Length</div>
-                                    <div><?= $appearence->hair_length ?></div>
-                                </li>
-                                <li>
-                                    <div>Shoe Size</div>
-                                    <div><?= $appearence->shoe_size ?></div>
-                                </li>
-                                <li>
-                                    <div>Jacket Size</div>
-                                    <div><?= $appearence->jacket_size ?></div>
-                                </li>
-                                <li>
-                                    <div>Height</div>
-                                    <div><?= $appearence->height ?></div>
-                                </li>
-                                <li>
-                                    <div>Weight</div>
-                                    <div><?= $appearence->weight ?></div>
-                                </li>
-                                <li>
-                                    <div>Chest/Bust</div>
-                                    <div><?= $appearence->chest_bust ?></div>
-                                </li>
-                                <li>
-                                    <div>Cup</div>
-                                    <div><?= $appearence->cup ?></div>
-                                </li>
-                                <li>
-                                    <div>Waist</div>
-                                    <div><?= $appearence->waist ?></div>
-                                </li>
-                                <li>
-                                    <div>Hip/Inseam</div>
-                                    <div><?= $appearence->hip_inseam ?></div>
-                                </li>
-                                <li>
-                                    <div>Ethnicity</div>
-                                    <div><?= $appearence->ethnicity ?></div>
-                                </li>
-                            </ul>
-                        </div>
+                        <?php endif; ?>
+                        <?php if(!empty($appearence)): ?>
+                            <div class="blk">
+                                <div class="_header">
+                                    <h4>Appearance</h4>
+                                </div>
+                                <ul class="list">
+                                    <li>
+                                        <div>Body Type</div>
+                                        <div><?= $appearence->body_type ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Eye Color</div>
+                                        <div><?= $appearence->eye_color ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Skin Color</div>
+                                        <div><?= $appearence->skin_color ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Hair Color</div>
+                                        <div><?= $appearence->hair_color ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Hair Length</div>
+                                        <div><?= $appearence->hair_length ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Shoe Size</div>
+                                        <div><?= $appearence->shoe_size ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Jacket Size</div>
+                                        <div><?= $appearence->jacket_size ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Height</div>
+                                        <div><?= $appearence->height ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Weight</div>
+                                        <div><?= $appearence->weight ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Chest/Bust</div>
+                                        <div><?= $appearence->chest_bust ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Cup</div>
+                                        <div><?= $appearence->cup ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Waist</div>
+                                        <div><?= $appearence->waist ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Hip/Inseam</div>
+                                        <div><?= $appearence->hip_inseam ?></div>
+                                    </li>
+                                    <li>
+                                        <div>Ethnicity</div>
+                                        <div><?= $appearence->ethnicity ?></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

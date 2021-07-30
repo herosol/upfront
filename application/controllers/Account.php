@@ -19,7 +19,7 @@ class Account extends MY_Controller
 
     function dashboard()
     {
-        $this->isMemLogged($this->session->user_type);
+        $this->isMemLogged($this->session->user_type, false);
         $this->data['bookings'] = $this->booking_model->get_bookings();
         if ($this->session->user_type == 'user' || $this->session->user_type == 'model') 
         {
@@ -401,12 +401,14 @@ class Account extends MY_Controller
 
     function bookings()
     {
+        $this->isMemLogged($this->session->user_type);
         $this->data['bookings'] = $this->booking_model->get_bookings();
         $this->load->view("artist/bookings", $this->data);
     }
 
     function booking_detail($booking_id)
     {
+        $this->isMemLogged($this->session->user_type);
         $booking_id = doDecode($booking_id);
         if($this->input->post())
         {
@@ -547,6 +549,7 @@ class Account extends MY_Controller
 
     function client_transactions()
     {
+        $this->isMemLogged($this->session->user_type);
         $this->data['transactions'] = $this->booking_model->get_client_transactions();
         $this->data['totalPayouts'] = $this->booking_model->get_client_total_payouts();
         $this->load->view('artist/transactions', $this->data);

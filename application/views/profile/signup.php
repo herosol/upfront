@@ -14,7 +14,7 @@
         <section id="logon">
             <div class="contain">
                 <div class="logBlk">
-                    <form action="" method="post" id="frmSignup" class="frmAjax">
+                    <form action="" method="post" id="frmSignup" class="frmAjax" autocomplete="off">
                         <div class="alertMsg" style="display:none"></div>
                         <h3><?= $site_content['heading'] ?></h3>
                         <p><?= $site_content['short_desc'] ?></p>

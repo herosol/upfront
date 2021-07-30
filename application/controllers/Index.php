@@ -22,6 +22,7 @@ class Index extends MY_Controller {
 
     public function register()
     {
+        $this->MemLogged();
         if($this->input->post()) {
             $res = array();
             $res['hide_msg'] = 0;
@@ -88,7 +89,6 @@ class Index extends MY_Controller {
     {
         if($this->input->post())
         {
-            die('ENTERED');
             $res = array();
             $res['hide_msg'] = 0;
             $res['scroll_to_msg'] = 0;
@@ -307,7 +307,7 @@ class Index extends MY_Controller {
 
     function verification($vcode = '')
     {
-        // $this->MemLogged();
+        $this->MemLogged();
         if ($row = $this->user_model->getMemCode($vcode, intval($this->session->user_id)))
         {
             if($this->session->has_userdata('user_id') && $this->session->user_id != $row->user_id)

@@ -21,7 +21,11 @@
                         <li>Payouts: <span class="price">$<?=round($payouts, 1)?></span></li>
                         <li>Current Balance: <span class="price">$<?=round($availBalance, 1)?></span></li>
                         <li>Requested Balance: <span class="price">$<?=round($requested, 1)?></span></li>
-                        <li><button type="button" class="webBtn smBtn popBtn" data-popup="withdraw-funds">Withdraw Funds</button></li>
+                        <?php if(round($availBalance, 1) == 0): ?>
+                            <li><button type="button" class="webBtn smBtn popBtn" data-popup="withdraw-funds" title="No Available balance" disabled>Withdraw Funds</button></li>
+                        <?php else: ?>
+                            <li><button type="button" class="webBtn smBtn popBtn" data-popup="withdraw-funds">Withdraw Funds</button></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <div class="blk blockLst">

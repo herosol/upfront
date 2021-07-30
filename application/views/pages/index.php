@@ -44,10 +44,10 @@
                 <div id="owl-guardian" class="owl-carousel owl-theme owl-guardian">
                 <?php foreach($fascinates as $key => $row): ?>
                     <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= get_site_image_src("home-cruds", $row->image, ''); ?>" alt=""></a></div>
+                        <div class="image"><a><img src="<?= get_site_image_src("home-cruds", $row->image, ''); ?>" alt=""></a></div>
                         <div class="txt">
                             <div class="rateYo" data-rateyo-rating="<?=$row->rating?>"></div>
-                            <h4><a href="?"><?=$row->short_desc?></a></h4>
+                            <h4><a><?=$row->short_desc?></a></h4>
                             <p><?=$row->name?></p>
                         </div>
                     </div>
@@ -64,11 +64,11 @@
                         <div class="content">
                             <h1 class="heading"><?= $site_content['instant_help_heading'] ?></h1>
                             <p><?= $site_content['instant_help_short_desc'] ?></p>
-                            <div class="bTn"><a href="?" class="webBtn">Browse Classes</a></div>
+                            <div class="bTn"><a href="<?=base_url()?>educational-videos" class="webBtn">Browse Classes</a></div>
                         </div>
                     </div>
                     <div class="col col2">
-                        <div class="vidBlk" style="background-image: url('<?= get_site_image_src("pages/home", $site_content['instant_help_image'], ''); ?>')"></div>
+                        <div class="vidBlk-without-icon" style="background-image: url('<?= get_site_image_src("pages/home", $site_content['instant_help_image'], ''); ?>')"></div>
                     </div>
                 </div>
             </div>
@@ -103,10 +103,10 @@
                 <div id="owl-viewing" class="owl-carousel owl-theme owl-guardian">
                 <?php foreach($stars as $key => $row): ?>
                     <div class="profBlk">
-                        <div class="image"><a href="?"><img src="<?= get_site_image_src("home-cruds", $row->image, ''); ?>" alt=""></a></div>
+                        <div class="image"><a><img src="<?= get_site_image_src("home-cruds", $row->image, ''); ?>" alt=""></a></div>
                         <div class="txt">
                             <div class="rateYo" data-rateyo-rating="<?=$row->rating?>"></div>
-                            <h4><a href="?"><?=$row->short_desc?></a></h4>
+                            <h4><a><?=$row->short_desc?></a></h4>
                             <p><?=$row->name?></p>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                 <?php for($i=1; $i<=5; $i++):?>
                     <div class="col">
                         <div class="profBlk">
-                            <div class="ico"><a href="?"><img src="<?=get_site_image_src("pages/home", $site_content['real_creators_image'.$i]) ?>" alt=""></a></div>
+                            <div class="ico"><a><img src="<?=get_site_image_src("pages/home", $site_content['real_creators_image'.$i]) ?>" alt=""></a></div>
                             <div class="txt">
                                 <div class="rateYo" data-rateyo-rating="<?=$site_content['real_creator_rating'.$i]?>"></div>
                                 <h4><a><?=$site_content['real_creator_name'.$i]?></a></h4>

@@ -12,11 +12,11 @@ class MY_Controller extends CI_Controller {
         $this->data['page'] = $this->uri->segment(1);
     }
 
-    public function isMemLogged($type, $is_verified = true, $player_check = true, $type_arr = array('buyer', 'player'), $memberhsip_check = true)
+    public function isMemLogged($type, $is_verified = true, $player_check = true, $type_arr = array('user', 'model'), $memberhsip_check = true)
     {
-        if (intval($this->session->user_id)<1 || !$this->session->has_userdata('user_type') || $this->session->user_type != $type) 
+        if (intval($this->session->user_id ) < 1 || !$this->session->has_userdata('user_type') || $this->session->user_type != $type) 
         {
-            $remember_cookie = $this->input->cookie('cosmos_remember');
+            $remember_cookie = $this->input->cookie('upfront_remember');
             if($remember_cookie && $row = $this->master->getRow('users', array('user_remember' => $remember_cookie)))
             {
                 $this->session->set_userdata('user_id', $row->user_id);
@@ -31,49 +31,39 @@ class MY_Controller extends CI_Controller {
 
         }
         $this->type_logged_checked($type_arr);
-        // if($is_verified)
-        //     $this->is_verified();
-        // if($player_check && $this->session->mem_type=='player' && $this->data['mem_data']->mem_player_application==0) {
-        //     redirect('become-a-player', 'refresh');
-        //         exit;
-        // }
-        /*if($player_check && $this->session->mem_type=='buyer' && $this->data['mem_data']->mem_become_buyer==0){
-            redirect('become-buyer', 'refresh');
-                exit;
-        }
-        if($this->session->mem_type=='buyer' && $this->data['mem_data']->mem_verified==1 && empty($this->data['mem_data']->mem_package_id) && $memberhsip_check){
-            redirect('membership', 'refresh');
-                exit;
-        }*/
+        if($is_verified)
+            $this->is_verified();
     }
 
-    public function type_logged_checked($type_arr) {
-        if ($this->session->mem_type && !in_array($this->session->mem_type, $type_arr)) 
+    public function type_logged_checked($type_arr) 
+    {
+        if ($this->session->user_type && !in_array($this->session->user_type, $type_arr)) 
         {
-            redirect('login', 'refresh');
+            redirect('signin', 'refresh');
             exit;
         }
     }
 
     function is_verified()
     {
-        if(empty($this->data['mem_data']->user_verified) || $this->data['mem_data']->user_verified == 0) {
-            redirect('email-verification', 'refresh');
+        if(empty($this->data['mem_data']->mem_verified) || $this->data['mem_data']->mem_verified == 0)
+        {
+            redirect('dashboard', 'refresh');
             exit;
         }
     }
 
     public function MemLogged()
     {
-        $remember_cookie = $this->input->cookie('cosmos_remember');
+        $remember_cookie = $this->input->cookie('upfront_remember');
         if($remember_cookie && $row = $this->master->getRow('members', array('mem_remember' => $remember_cookie))) 
         {
-            $this->session->set_userdata('mem_id', $row->mem_id);
+            $this->session->set_userdata('user_id', $row->user_id);
             $this->session->set_userdata('mem_type', $row->mem_type);
             redirect('dashboard', 'refresh');
             exit;
         }
-        elseif (($this->session->mem_id > 0) && $this->session->has_userdata('mem_type')) 
+        elseif (($this->session->user_id > 0) && $this->session->has_userdata('user_type')) 
         {
             redirect('dashboard', 'refresh');
             exit;

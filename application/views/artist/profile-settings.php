@@ -85,7 +85,7 @@
                             <?php endif; ?>
                         </div>
                         <hr>
-                        <?php if ($this->session->user_type == 'model') { ?>
+                        <?php if ($this->session->user_type == 'model'): ?>
                             <h5>Address Information</h5>
                             <div class="row formRow">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-xx-4">
@@ -401,8 +401,8 @@
                                 </div>
                             </div>
                         </div>
+                    <?php endif; ?>
                     </div>
-                <?php } ?>
                 <div class="bTn formBtn text-center">
                     <button type="submit" class="webBtn">Save</button>
                 </div>

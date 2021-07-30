@@ -14,6 +14,7 @@
 <meta property="twitter:image" content="<?= base_url() ?>assets/images/thumbnail.jpg">
 
 
+
 <!-- Css files -->
 <!-- Bootstrap Css -->
 <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap.min.css">

@@ -374,6 +374,25 @@ function get_avg_rating($ref_id,$ref_type='booking') {
     return round(floatval($total),1);
 }
 
+function get_last_chat_message($room_id)
+{
+    $CI = get_instance();
+    $CI->db->select('message, message_type')
+    ->where('room_id', $room_id)
+    ->order_by('id', 'DESC');
+    $query = $CI->db->get('chatrooms_chat');
+    $row = $query->row();
+
+    if($row->message_type == 'invoice')
+    {
+        return 'invoice';
+    }
+    else
+    {
+        return $row->message;
+    }
+}
+
 function get_mem_reviews($mem_id) {
     $CI = get_instance();
     $CI->db->select("r.*, mem_image, concat(mem_fname,' ',mem_lname) as mem_name")

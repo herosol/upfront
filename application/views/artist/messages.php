@@ -27,7 +27,7 @@
                                 <div class="ico"><img src="<?= get_site_image_src("members", $chat['member']->mem_image, ''); ?>" alt=""></div>
                                 <div class="txt">
                                     <h5><?= $chat['member']->user_fname.' '.$chat['member']->user_lname; ?></h5>
-                                    <p>Welcome to Upfront Worldwide Talent Agency</p>
+                                    <p><?=get_last_chat_message($chat['room_id'])?></p>
                                 </div>
                             </div>
                         </li>
@@ -120,21 +120,23 @@
                 </div>
                 <div class="write">
                     <div class="file-upload-box">
-                        <div class="image-blk">
+                        <!-- <div class="image-blk">
                             <img src="<?= base_url().'assets/images/file-dummy.png' ?>" alt="">
                             <span><i class="fi-cross"></i></span>
                         </div>
                         <div class="image-blk">
                            <img src="<?= get_site_image_src("members", get_image_of_member($chat->sender_id), ''); ?>" alt="">
                            <span><i class="fi-cross"></i></span>
-                        </div>
+                        </div> -->
                     </div>
                     <form class="relative" id="sendMessageForm" action="" method="post">
                         <textarea class="txtBox" name="message" placeholder="Type a message" id="msgText" onkeypress="textAreaAdjust(this)"></textarea>
                         <div class="btm">
                             <button type="button" class="webBtn smBtn labelBtn arrowBtn upBtn" title="Upload Files"><img src="<?= base_url() ?>assets/images/icon-clip.svg" alt=""></button>
                             <input type="file" name="attachments[]" id="attachments" multiple>
-                            <a href="javascript:void(0)" class="popBtn webBtn smBtn" data-popup="invoice">Make Invoice</a>
+                            <?php if($this->session->user_type == 'model'): ?>
+                                <a href="javascript:void(0)" class="popBtn webBtn smBtn" data-popup="invoice">Make Invoice</a>
+                            <?php endif; ?>
                             <input type="hidden" name="sender_id" id="sender_id" value="<?= $this->session->user_id ?>">
                             <input type="hidden" name="receiver_id" id="receiver_id" value="<?= $receiver_id ?>">
                             <button type="submit" class="webBtn smBtn labelBtn icoBtn">Send <img src="<?= base_url() ?>assets/images/icon-send.svg" alt=""></button>
@@ -255,6 +257,12 @@
             $(document).on('submit', '#sendMessageForm', function(e) 
             {
                 e.preventDefault();
+                var msg = $.trim($('#msgText').val());
+                var reciever_id = $('#reciever_id').val();
+
+                if(msg == '' || reciever_id == '')
+                    return false;
+
                 let form = this;
                 $.ajax({
                     url: base_url+'inbox',
